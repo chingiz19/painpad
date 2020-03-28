@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.body-div{
+  position: relative; 
+  left: 15%; 
+  width: 70%; 
+  height: 100%; 
+  background-color: rgb(255,255,255); 
+  border: 1px solid rgb(216,216,216);
+}

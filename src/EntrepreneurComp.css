@@ -1,0 +1,40 @@
+.entrepreneur-comp{
+        margin-top: 30px;
+}
+
+.entrepreneur-comp .comp-body{
+        display: flex;
+        margin: 3%;
+}
+
+.entrepreneur-comp .comp-body p{
+        margin: 2% 4%;
+        font-size: 22px;
+        font-family: Courier New;
+}
+
+.entrepreneur-comp .comp-header{
+        display: flex;
+        height: 40px;
+}
+
+.entrepreneur-comp .comp-header text{
+        position: relative;
+        margin: auto;
+        padding: 7px;
+        background-color: white;
+        font-size: 22px;
+        font-weight: 700;
+        z-index: 1;
+}
+
+.entrepreneur-comp .comp-header div{
+        width: 94%;
+        height: 1px;
+        margin-top: 19px;
+        margin-left: 3%;
+        position: absolute;
+        background-color: rgb(198, 241, 231);
+        z-index: 0;
+}
+
