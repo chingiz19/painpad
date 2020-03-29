@@ -9,7 +9,8 @@ export default function OurSolution() {
     return (
         <div className="OurSolution-comp">
             <ScrollAnimation animateIn="fadeIn">
-                <ComponentHeader contentText="PainPad is the Solution" />
+                {/* <ComponentHeader contentText="PainPad is the Solution" /> */}
+                <ComponentHeader contentText="Here is the solution to the problem" />
             </ScrollAnimation>
             <ScrollAnimation animateIn="fadeIn">
                 <h1>PainPad is a “Hello World” of a business!</h1>

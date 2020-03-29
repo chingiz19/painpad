@@ -12,7 +12,7 @@ export default function PeoplesChallange() {
     return (
         <div className="PeoplesChallage-comp">
             <ScrollAnimation animateIn="fadeIn">
-                <ComponentHeader contentText="Problems all over the place" />
+                <ComponentHeader contentText="Problems are all over the place" />
             </ScrollAnimation>
             <ScrollAnimation animateIn="bounceInLeft" animateOut='bounceOutRight'>
                 <div className='quora'>
