@@ -5,24 +5,35 @@ import problemHackerNews from './images/pages/problem_hacker_news.jpg'
 import problemMedium from './images/pages/problem_medium.jpg'
 import problemReddit from './images/pages/problem_reddit.jpg'
 import ComponentHeader from './ComponentHeader';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 
 export default function PeoplesChallange() {
     return (
         <div className="PeoplesChallage-comp">
-            <ComponentHeader contentText="People with Challanges"/>
-            <div className='quora'>
-                <img src={probelemQuora}/>
-            </div>
-            <div className='hacker-news'>
-                <img src={problemHackerNews}/>
-            </div>
-            <div className='medium'>
-                <img src={problemMedium}/>
-            </div>
-            <div className='reddit'>
-                <img src={problemReddit}/>
-            </div>
+            <ScrollAnimation animateIn="fadeIn">
+                <ComponentHeader contentText="Problems all over the place" />
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="bounceInLeft" animateOut='bounceOutRight'>
+                <div className='quora'>
+                    <img src={probelemQuora} />
+                </div>
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="fadeIn">
+                <div className='hacker-news'>
+                    <img src={problemHackerNews} />
+                </div>
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="bounceInRight" animateOut='bounceOutLeft'>
+                <div className='medium'>
+                    <img src={problemMedium} />
+                </div>
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="bounceInLeft" animateOut='bounceOutRight'>
+                <div className='reddit'>
+                    <img src={problemReddit} />
+                </div>
+            </ScrollAnimation>
         </div>
     );
 }
