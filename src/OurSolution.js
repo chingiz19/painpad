@@ -15,8 +15,10 @@ export default function OurSolution() {
                 <h1>PainPad is a “Hello World” of a business!</h1>
             </ScrollAnimation>
             <ScrollAnimation animateIn="fadeIn">
-                <p>In other words, PainPad is platform where problem miners can share a ‘headache’ (that can’t be solved on their own),
-                and where the problem will be exposed to a crowd full of entrepreneurs looking for real problems worth solving!</p>
+                <p>
+                    In other words, PainPad is a platform where people share daily experiences that drive them crazy or inject inefficiency or needless complication into their lives that can’t be solved on their own.
+                    Consequently, problems will be exposed to a crowd full of entrepreneurs looking for real problems worth solving!
+                </p>
             </ScrollAnimation>
             <ScrollAnimation animateIn="fadeIn">
                 <h2>Benefits you get if you are:</h2>
