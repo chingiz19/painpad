@@ -9,10 +9,9 @@ export default function OurProblem() {
         <Fade opposite>
             <div className="OurProblem-comp">
                 <p>
-                    We are typical engineers (i.e. introverts), who always dreamed about building a scalable business that tackles problems 
+                    So, we are typical engineers (i.e. introverts), who always dreamed about building a scalable business that tackles problems 
                     worth solving. However, the challenge was to find a validated problem without working in a particular industry for years. 
-                    So we thought, what if we could talk to experienced individuals from all industries and pick up a problem and its scale 
-                    matches our skillsets and resources?
+                    So we thought, what if we could talk to experienced individuals from all industries and pick up a problem that matches our ability and passion?
                 </p>
                 <div></div>
                 <text>After a quick research...</text>

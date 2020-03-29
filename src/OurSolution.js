@@ -29,7 +29,7 @@ export default function OurSolution() {
             <div className="benefits">
                 <div className="vant-garde">
                     <ScrollAnimation animateIn="fadeIn">
-                        <h3>Problem Miner (Avant-garde)</h3>
+                        <h3>Problem Owner (Avant-garde)</h3>
                     </ScrollAnimation>
                     <ul>
                         <ScrollAnimation animateIn="fadeIn">

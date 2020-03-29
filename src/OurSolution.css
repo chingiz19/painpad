@@ -48,6 +48,7 @@
 
 .inventor{
     margin-right: 3%;
+    padding-bottom: 20px;
 }
 
 .OurSolution-comp .or-div{
@@ -57,15 +58,16 @@
 }
 
 .OurSolution-comp .benefits li{
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 2px;
 }
 
 .benefits ul {
     list-style: none;
+    padding-left: 20px;
   }
   
-  .benefits ul li:before {
+.benefits ul li:before {
     content: '✓';
     color: rgb(0, 176, 80);
     font-size: 26px;

@@ -1,8 +1,8 @@
 body {
+  width: 100%;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background-color: #e8e8e8;  
+  font-family: 'Muli', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -50,6 +50,15 @@ code {
   align-items: center; 
   margin-top: 18px; 
   color: #5a5555;
+}
+
+#mc_embed_signup_scroll label{
+  color: #5a5555;
+}
+
+#mc_embed_signup_scroll .innput-div{
+  display: flex; 
+  justify-content: center;
 }
 
 #mc_embed_signup_scroll a{
