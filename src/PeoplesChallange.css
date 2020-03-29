@@ -1,0 +1,28 @@
+.PeoplesChallage-comp{
+    width: 100%;
+    margin-top: 30px;
+}
+
+.PeoplesChallage-comp .quora{
+    display: flex;
+    justify-content: flex-start;
+    padding: 3% 3% 0 3%;
+}
+
+.PeoplesChallage-comp .hacker-news{
+    display: flex;
+    justify-content: center;
+    padding: 3% 3% 0 3%;
+}
+
+.PeoplesChallage-comp .medium{
+    display: flex;
+    justify-content: flex-end;
+    padding: 3% 3% 0 3%;
+}
+
+.PeoplesChallage-comp .reddit{
+    display: flex;
+    justify-content: flex-start;
+    padding: 3% 3% 0 3%;
+}
