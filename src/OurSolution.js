@@ -9,7 +9,7 @@ export default function OurSolution() {
     return (
         <div className="OurSolution-comp">
             <ScrollAnimation animateIn="fadeIn">
-                <ComponentHeader contentText="Solution to Our Own Problem" />
+                <ComponentHeader contentText="PainPad is the Solution" />
             </ScrollAnimation>
             <ScrollAnimation animateIn="fadeIn">
                 <h1>PainPad is a “Hello World” of a business!</h1>
@@ -50,7 +50,7 @@ export default function OurSolution() {
                     </ScrollAnimation>
                     <ul>
                         <ScrollAnimation animateIn="fadeIn">
-                            <li>Access to pool of real existing ‘pains’ (problems)</li>
+                            <li>Access to pool of real and existing ‘pains’ (problems)</li>
                         </ScrollAnimation>
                         <ScrollAnimation animateIn="fadeIn">
                             <li>Crowdsourced problem validation</li>
