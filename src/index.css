@@ -1,25 +1,35 @@
 body {
   width: 100% !important;
   margin: 0 !important;
-  background-color: #e8e8e8 !important;  
+  background-color: #e8e8e8 !important;
   font-family: 'Muli', sans-serif !important;
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.body-div{
+.body-div {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 900px; 
-  height: 100%; 
-  background-color: rgb(255,255,255); 
-  border: 1px solid rgb(216,216,216);
+  width: 900px;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(216, 216, 216);
+}
+
+@media screen and (max-width: 900px) {
+  .body-div {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  body {
+    width: 100%;
+  }
 }
 
 #footer {
@@ -37,22 +47,22 @@ code {
   color: #5a5555;
 }
 
-#footer a{
+#footer a {
   text-decoration: none !important;
   font-size: 18px;
   color: #5a5555;
   margin-left: 3px;
 }
 
-#footer .email-div{
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  margin-top: 18px; 
+#footer .email-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
   color: #5a5555;
 }
 
-#footer button{
+#footer button {
   width: 60px;
   font-size: 13px;
   border: none;
@@ -71,19 +81,19 @@ code {
   transition: all 0.23s ease-in-out 0s;
 }
 
-#footer button:hover{
+#footer button:hover {
   cursor: pointer;
   background-color: #5a5555;
 }
 
 #footer button:focus {
-  outline:0;
+  outline: 0;
 }
 
-#mc_embed_signup .button{
+#mc_embed_signup .button {
   border-radius: 0 3px 3px 0 !important;
 }
 
-#mc_embed_signup input.email{
+#mc_embed_signup input.email {
   border-radius: 3px 0 0 3px !important;
 }

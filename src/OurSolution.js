@@ -25,7 +25,7 @@ export default function OurSolution() {
                 <h2>Benefits you get if you are:</h2>
             </ScrollAnimation>
             <ScrollAnimation animateIn="fadeIn">
-                <img src={solutionArrows} className="solution-arrows" />
+                <img src={solutionArrows} className="solution-arrows" alt='solution arrows'/>
             </ScrollAnimation>
             <div className="avant-garde">
                 <ScrollAnimation animateIn="fadeIn">
@@ -44,7 +44,7 @@ export default function OurSolution() {
                 </ul>
             </div>
             <ScrollAnimation animateIn="fadeIn">
-                <img src={solutionArrows} className="solution-arrows" />
+                <img src={solutionArrows} className="solution-arrows" alt='solution arrows'/>
             </ScrollAnimation>
             <div className="inventor">
                 <ScrollAnimation animateIn="fadeIn">

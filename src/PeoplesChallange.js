@@ -16,22 +16,22 @@ export default function PeoplesChallange() {
             </ScrollAnimation>
             <ScrollAnimation animateIn="bounceInLeft" animateOut='bounceOutRight'>
                 <div className='quora'>
-                    <img src={probelemQuora} />
+                    <img src={probelemQuora} alt='quora problem'/>
                 </div>
             </ScrollAnimation>
             <ScrollAnimation animateIn="fadeIn">
                 <div className='hacker-news'>
-                    <img src={problemHackerNews} />
+                    <img src={problemHackerNews} alt='hacker news problem'/>
                 </div>
             </ScrollAnimation>
             <ScrollAnimation animateIn="bounceInRight" animateOut='bounceOutLeft'>
                 <div className='medium'>
-                    <img src={problemMedium} />
+                    <img src={problemMedium} alt='medium problem'/>
                 </div>
             </ScrollAnimation>
             <ScrollAnimation animateIn="bounceInLeft" animateOut='bounceOutRight'>
                 <div className='reddit'>
-                    <img src={problemReddit} />
+                    <img src={problemReddit} alt='problem reddit'/>
                 </div>
             </ScrollAnimation>
         </div>

@@ -1,7 +1,6 @@
 
 import React from 'react';
 import './OurProblem.css';
-import ScrollAnimation from 'react-animate-on-scroll';
 import Fade from 'react-reveal/Fade';
 
 export default function OurProblem() {
