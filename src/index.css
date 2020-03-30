@@ -97,3 +97,47 @@ code {
 #mc_embed_signup input.email {
   border-radius: 3px 0 0 3px !important;
 }
+
+@media screen and (max-width: 900px) and (min-width: 750px) {
+  .body-div{
+      width: 100%;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .body-div{
+    width: 100%;
+  }
+
+  .entrepreneur-comp .comp-body {
+    flex-direction: column;  
+  }
+
+  .KS-div{
+    flex-direction: column-reverse !important;
+  }
+  
+  .entrepreneur-comp .comp-body img{
+    max-width: 275px;
+    height: auto;
+    margin: auto;
+  }
+
+  .PeoplesChallage-comp .hacker-news{
+    display: none;
+  }
+
+  #footer {
+    height: 190px;
+  }
+
+  #footer h3{
+    text-align: center;
+  }
+
+  #footer button{
+    width: 80px;
+    font-size: 16px;
+  }
+
+}

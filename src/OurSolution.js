@@ -29,7 +29,7 @@ export default function OurSolution() {
             </ScrollAnimation>
             <div className="avant-garde">
                 <ScrollAnimation animateIn="fadeIn">
-                    <h3>Problem Owner (Avant-garde)</h3>
+                    <h3><b>Problem Owner (Avant-garde)</b></h3>
                 </ScrollAnimation>
                 <ul>
                     <ScrollAnimation animateIn="fadeIn">
@@ -48,7 +48,7 @@ export default function OurSolution() {
             </ScrollAnimation>
             <div className="inventor">
                 <ScrollAnimation animateIn="fadeIn">
-                    <h3>Entrepreneur (Inventor)</h3>
+                    <h3><b>Entrepreneur (Inventor)</b></h3>
                 </ScrollAnimation>
                 <ul>
                     <ScrollAnimation animateIn="fadeIn">
