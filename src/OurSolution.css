@@ -15,12 +15,13 @@
     width: 80%;
     margin: 30px 0 0 10%;
     text-align: center;
-    font-size: 22px;
+    font-size: 24px;
 }
 
 .OurSolution-comp h2{
-    margin: 30px 3% 0 3%;
+    margin: 50px 3% 0 3%;
     text-align: center;
+    font-size: 24px;
 }
 
 .solution-arrows{
@@ -31,18 +32,23 @@
 .OurSolution-comp .benefits{
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.vant-garde h3, .inventor h3{
-    font-size: 22px;
+.vant-garde{
+    display: flex;
+    flex-direction: row;
+}
+
+.avant-garde h3, .inventor h3{
+    font-size: 24px;
     text-align: center;
     margin-bottom: 10px;
 }
 
-.vant-garde{
+.vant-garde div{
     margin-left: 3%;
 }
 
@@ -57,20 +63,27 @@
     font-weight: bold;
 }
 
-.OurSolution-comp .benefits li{
-    font-size: 16px;
-    margin-bottom: 2px;
+.avant-garde li, .inventor li{
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
-.benefits ul {
+
+.avant-garde, .inventor{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avant-garde ul , .inventor ul{
     list-style: none;
-    padding-left: 20px;
+    padding-left: 0px;
+    width: 74%;
   }
   
-.benefits ul li:before {
-    content: '✓';
-    color: rgb(0, 176, 80);
-    font-size: 26px;
-    font-weight: bold;
-    padding-right: 6px;
+  .avant-garde ul i , .inventor ul i{
+      font-size: 40px;
+      margin-right: 10px;
   }

@@ -17,7 +17,7 @@ export default function OurSolution() {
             </ScrollAnimation>
             <ScrollAnimation animateIn="fadeIn">
                 <p>
-                    In other words, PainPad is a platform where people share daily experiences that drive them crazy or inject inefficiency or needless complication into their lives that can’t be solved on their own.
+                    In other words, PainPad is a platform where people share <b><i>daily experiences</i></b> that drive them crazy or inject inefficiency or needless complication into their <b><i>everyday lives</i></b> that can’t be solved on their own.
                     Consequently, problems will be exposed to a crowd full of entrepreneurs looking for real problems worth solving!
                 </p>
             </ScrollAnimation>
@@ -27,42 +27,40 @@ export default function OurSolution() {
             <ScrollAnimation animateIn="fadeIn">
                 <img src={solutionArrows} className="solution-arrows" />
             </ScrollAnimation>
-            <div className="benefits">
-                <div className="vant-garde">
-                    <ScrollAnimation animateIn="fadeIn">
-                        <h3>Problem Owner (Avant-garde)</h3>
-                    </ScrollAnimation>
-                    <ul>
-                        <ScrollAnimation animateIn="fadeIn">
-                            <li>Solution to your problem in a long term</li>
-                        </ScrollAnimation>
-                        <ScrollAnimation animateIn="fadeIn">
-                            <li>Opportunity to be part of future unicorn start-up</li>
-                        </ScrollAnimation>
-                        <ScrollAnimation animateIn="fadeIn">
-                            <li>Rewards through “partner program” in a short term</li>
-                        </ScrollAnimation>
-                    </ul>
-                </div>
+            <div className="avant-garde">
                 <ScrollAnimation animateIn="fadeIn">
-                    <div className="or-div">OR</div>
+                    <h3>Problem Owner (Avant-garde)</h3>
                 </ScrollAnimation>
-                <div className="inventor">
+                <ul>
                     <ScrollAnimation animateIn="fadeIn">
-                        <h3>Entrepreneur (Inventor)</h3>
+                        <li><i class="fas fa-award"></i>Potential earnings provided by PainPad for active and upvoted posts</li>
                     </ScrollAnimation>
-                    <ul>
-                        <ScrollAnimation animateIn="fadeIn">
-                            <li>Access to pool of real and existing ‘pains’ (problems)</li>
-                        </ScrollAnimation>
-                        <ScrollAnimation animateIn="fadeIn">
-                            <li>Crowdsourced problem validation</li>
-                        </ScrollAnimation>
-                        <ScrollAnimation animateIn="fadeIn">
-                            <li>Continuous customer validation for product</li>
-                        </ScrollAnimation>
-                    </ul>
-                </div>
+                    <ScrollAnimation animateIn="fadeIn">
+                        <li><i class="far fa-handshake"></i>Opportunity to be part of future unicorn start-up</li>
+                    </ScrollAnimation>
+                    <ScrollAnimation animateIn="fadeIn">
+                        <li><i class="far fa-laugh-beam"></i>Solution to your problem in a long term</li>
+                    </ScrollAnimation>
+                </ul>
+            </div>
+            <ScrollAnimation animateIn="fadeIn">
+                <img src={solutionArrows} className="solution-arrows" />
+            </ScrollAnimation>
+            <div className="inventor">
+                <ScrollAnimation animateIn="fadeIn">
+                    <h3>Entrepreneur (Inventor)</h3>
+                </ScrollAnimation>
+                <ul>
+                    <ScrollAnimation animateIn="fadeIn">
+                        <li><i class="fas fa-users"></i>Access to pool of real and existing ‘pains’ (problems)</li>
+                    </ScrollAnimation>
+                    <ScrollAnimation animateIn="fadeIn">
+                        <li><i class="far fa-thumbs-up"></i>Crowdsourced problem validation</li>
+                    </ScrollAnimation>
+                    <ScrollAnimation animateIn="fadeIn">
+                        <li><i class="fas fa-comment-medical"></i>Continuous customer validation for product</li>
+                    </ScrollAnimation>
+                </ul>
             </div>
         </div>
     );
