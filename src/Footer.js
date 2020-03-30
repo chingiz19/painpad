@@ -5,12 +5,14 @@ import mixpanel from 'mixpanel-browser';
 export default function Footer() {
     const [show, setShow] = useState(false);
 
-    const handleClose = () => {
+    const handleClose = () => setShow(false);
+
+    const handleShow = () => {
         mixpanel.track('YES clicked', { data: 'custom' });
-        setShow(false);
+        setShow(true);
     }
-    const handleShow = () => setShow(true);
-    const handleNo = () =>  mixpanel.track('NO clicked', { data: 'custom' });
+
+    const handleNo = () => mixpanel.track('NO clicked', { data: 'custom' });
 
     return (
         <>
@@ -37,7 +39,7 @@ export default function Footer() {
                             novalidate>
                             <div id="mc_embed_signup_scroll">
                                 <div className="innput-div">
-                                    <input type="email"  name="EMAIL" className="email" id="mce-EMAIL" placeholder="email address" required />
+                                    <input type="email" name="EMAIL" className="email" id="mce-EMAIL" placeholder="email address" required />
                                     <div className="clear">
                                         <input type="submit" value="Join" name="subscribe" id="mc-embedded-subscribe" className="button" />
                                     </div>

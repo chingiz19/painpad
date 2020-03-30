@@ -7,7 +7,6 @@ import problemReddit from './images/pages/problem_reddit.jpg'
 import ComponentHeader from './ComponentHeader';
 import ScrollAnimation from 'react-animate-on-scroll';
 
-
 export default function PeoplesChallange() {
     return (
         <div className="PeoplesChallage-comp">
