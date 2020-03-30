@@ -26,3 +26,22 @@
     justify-content: flex-start;
     padding: 3% 3% 0 3%;
 }
+
+@media screen and (max-width: 749px) {
+    .PeoplesChallage-comp .hacker-news{
+      display: none;
+    }
+    .invento{
+        margin-right: 0 !important;
+    }
+    .avant-garde ul, .inventor ul{
+        width: 96% !important;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .PeoplesChallage-comp img{
+      width: 100% !important;
+      height: auto !important;
+    }
+}

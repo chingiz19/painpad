@@ -87,3 +87,13 @@
       font-size: 40px;
       margin-right: 10px;
   }
+
+  @media screen and (max-width: 749px) {
+    .avant-garde h3, .inventor h3{
+        margin-bottom: 18px;
+    }
+
+    .avant-garde li, .inventor li{
+        margin-bottom: 15px;
+    }
+}
