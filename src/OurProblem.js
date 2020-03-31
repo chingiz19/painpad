@@ -13,7 +13,7 @@ export default function OurProblem() {
                     So we thought, what if we could talk to experienced individuals from all industries and pick up a problem that matches our abilities and passion?
                 </p>
                 <div></div>
-                <text>After a quick research, we found there is no need for a talk...</text>
+                <span>After a quick research, we found there is no need for a talk...</span>
             </div>
         </Fade>
     );

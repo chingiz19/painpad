@@ -4,12 +4,10 @@ import solutionArrows from './images/pages/solution_arrows.jpg'
 import ComponentHeader from './ComponentHeader';
 import ScrollAnimation from 'react-animate-on-scroll';
 
-
 export default function OurSolution() {
     return (
         <div className="OurSolution-comp">
             <ScrollAnimation animateIn="fadeIn">
-                {/* <ComponentHeader contentText="PainPad is the Solution" /> */}
                 <ComponentHeader contentText="Here is the solution to the problem" />
             </ScrollAnimation>
             <ScrollAnimation animateIn="fadeIn">
@@ -33,13 +31,13 @@ export default function OurSolution() {
                 </ScrollAnimation>
                 <ul>
                     <ScrollAnimation animateIn="fadeIn">
-                        <li><i class="fas fa-award"></i>Potential earnings provided by PainPad for active and upvoted posts</li>
+                        <li><i className="fas fa-award"></i>Potential earnings provided by PainPad for active and upvoted posts</li>
                     </ScrollAnimation>
                     <ScrollAnimation animateIn="fadeIn">
-                        <li><i class="far fa-handshake"></i>Opportunity to be part of future unicorn start-up</li>
+                        <li><i className="far fa-handshake"></i>Opportunity to be part of future unicorn start-up</li>
                     </ScrollAnimation>
                     <ScrollAnimation animateIn="fadeIn">
-                        <li><i class="far fa-laugh-beam"></i>Solution to your problem in a long term</li>
+                        <li><i className="far fa-laugh-beam"></i>Solution to your problem in a long term</li>
                     </ScrollAnimation>
                 </ul>
             </div>
@@ -52,13 +50,13 @@ export default function OurSolution() {
                 </ScrollAnimation>
                 <ul>
                     <ScrollAnimation animateIn="fadeIn">
-                        <li><i class="fas fa-users"></i>Access to pool of real and existing ‘pains’ (problems)</li>
+                        <li><i className="fas fa-users"></i>Access to pool of real and existing ‘pains’ (problems)</li>
                     </ScrollAnimation>
                     <ScrollAnimation animateIn="fadeIn">
-                        <li><i class="far fa-thumbs-up"></i>Crowdsourced problem validation</li>
+                        <li><i className="far fa-thumbs-up"></i>Crowdsourced problem validation</li>
                     </ScrollAnimation>
                     <ScrollAnimation animateIn="fadeIn">
-                        <li><i class="fas fa-comment-medical"></i>Continuous customer validation for product</li>
+                        <li><i className="fas fa-comment-medical"></i>Continuous customer validation for product</li>
                     </ScrollAnimation>
                 </ul>
             </div>

@@ -6,10 +6,9 @@ const Tracker = (props) => {
     mixpanel.init("c4db1142f0a03880749300f3dff497dd");
 
     //tracking for the only event
-    mixpanel.track('Page visit', { identifier: uuidv4() });
+    mixpanel.track(`Page visit -> ${props.info}`, { identifier: uuidv4() });
 
     return (<></>);
-
 };
 
 export default Tracker;
