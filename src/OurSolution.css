@@ -24,6 +24,11 @@
     font-size: 24px;
 }
 
+.OurProblem-comp span{
+    font-size: 22px;
+}
+
+
 .solution-arrows{
     display: flex;
     margin: 20px auto;
