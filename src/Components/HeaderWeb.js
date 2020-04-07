@@ -1,19 +1,16 @@
 import React from 'react';
 import './HeaderWeb.css';
 import LogoTransperent from '../images/logos/logo_transparent.png';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import { Link } from 'react-router-dom';
+import UserSignInUp from '../Modals/UserSignInUp';
 
 export default function HeaderWeb() {
     return (
         <>
             <div className="header-div">
-                <img src={LogoTransperent} className="header-logo"/>
+                <img src={LogoTransperent} className="header-logo" alt="Transperent Logo"/>
                 <ul>
                     <li>
-                        <div>Sign in / Sign up</div>
+                        <UserSignInUp name="Sign in / Sign up"/>
                     </li>
                     <li>
                         <a href="/about">
