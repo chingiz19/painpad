@@ -16,9 +16,9 @@ export default function HeaderWeb() {
                         <div>Sign in / Sign up</div>
                     </li>
                     <li>
-                        <div>
-                            <Link to="/about">About</Link>
-                        </div>                      
+                        <a href="/about">
+                            <div>About</div>
+                        </a>
                     </li>
                 </ul>
             </div>
