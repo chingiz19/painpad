@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import HeaderWeb from '../../Components/HeaderWeb'
+import WriteReport from '../../Components/WriteReport';
 
 export default function Home() {
     return (
@@ -15,7 +16,9 @@ export default function Home() {
                             <HeaderWeb/>
                         </Col>
                         <Col sm={8} md={9} className="main-cont">
-                            <div className="main"></div>
+                            <div className="main">
+                                <WriteReport/>
+                            </div>
                         </Col>
                     </Row>
                 </Container>
