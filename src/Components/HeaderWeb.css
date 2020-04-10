@@ -1,48 +1,80 @@
+/*wh - web-header*/
+
 .header-logo{
     width: 100px;
 }
 
-.header-div ul{
+.guest-user-ul, 
+.user-ul{
     list-style: none;
     margin-top: 50px;
     padding-left: 20px;
     font-size: 19px;
-    font-weight: 800;
+    font-weight: 700;
+    color: rgb(100,100,100);
 }
 
-.header-div ul li{
+.wh-li{
     padding: 2px 0;
 }
 
-.header-div ul li:hover{
+.wh-li:hover{
     cursor: pointer;
 }
 
-.header-div ul li a, .user-sign-div{
+.wh-li-a, 
+.wh-li-div{
     display: block; 
     width: 100%; 
     height: 100%;
 }
 
-.header-div ul li a{
+.wh-li-a{
     outline: none;
-    color: #212529;
+    color: rgb(100,100,100);
+    /* color: #212529; */
 }
 
-.header-div ul li a:hover{
+.wh-li-a:hover{
     border: none;
     outline: none;
     text-decoration: none;
     color: inherit;
 }
 
-.header-div ul li a div, .user-sign-div span{
+.wh-li-a-div, 
+.wh-li-div-span{
     display: inline-block;
     padding: 10px 20px;
 }
 
-.header-div ul li:hover > div span, .header-div ul li:hover > a div{
+.wh-li:hover > .wh-li-div .wh-li-div-span, 
+.wh-li:hover > .wh-li-a .wh-li-a-div{
     border-radius: 15px;
     background-color: rgba(198, 241, 231, 0.6);
-    transition: background-color .3s;
+    color: #212529;
+    font-weight: bold;
+    transition: background-color, color, font-weight .3s;
+}
+
+.wh-li-div-span-div,
+.wh-li-a-div-div{
+    display: flex;
+    align-items: center;
+}
+
+.wh-li-div-span-div i,
+.wh-li-a-div-div i{
+    width: 26px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+.wh-li:hover > .wh-li-div .wh-li-div-span div i,
+.wh-li:hover > .wh-li-a .wh-li-a-div div i{
+    color: rgb(9, 151, 118);
 }

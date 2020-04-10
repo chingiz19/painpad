@@ -27,8 +27,12 @@ export default function UserSignUpIn(props) {
 
     return (
         <>
-            <div onClick={handleYes} className="user-sign-div">
-                <span>{props.name}</span>
+            <div onClick={handleYes} className="wh-li-div">
+                <span className="wh-li-div-span">
+                    <div className="wh-li-div-span-div">
+                        <i class="fas fa-user-plus"></i>{props.name}
+                    </div>
+                </span>
             </div>
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
