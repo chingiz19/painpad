@@ -16,6 +16,7 @@
 
 .wh-li{
     padding: 2px 0;
+    letter-spacing: 0.03em;
 }
 
 .wh-li:hover{
@@ -32,7 +33,6 @@
 .wh-li-a{
     outline: none;
     color: rgb(100,100,100);
-    /* color: #212529; */
 }
 
 .wh-li-a:hover{

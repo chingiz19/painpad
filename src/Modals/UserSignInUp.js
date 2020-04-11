@@ -30,7 +30,7 @@ export default function UserSignUpIn(props) {
             <div onClick={handleYes} className="wh-li-div">
                 <span className="wh-li-div-span">
                     <div className="wh-li-div-span-div">
-                        <i class="fas fa-user-plus"></i>{props.name}
+                        <i className="fas fa-user-plus"></i>{props.name}
                     </div>
                 </span>
             </div>

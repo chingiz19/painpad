@@ -14,7 +14,7 @@ export default function SignUp() {
 
     //worldJobTitleList and worldIndustryList should be supplied by BE
     //TODO: find source for "Wold Job Title" list
-    const worldJobTitleList = [
+    const jobTitleList = [
         { title: 'President of Sales' },
         { title: 'Dog Trainer' },
         { title: 'Librarian' }
@@ -132,9 +132,9 @@ export default function SignUp() {
 
                 <Autocomplete
                     id="combo-job-title"
-                    options={worldJobTitleList}
+                    options={jobTitleList}
                     getOptionLabel={(option) => option.title}
-                    style={{ width: 300 }}
+                    style={{ width: 200 }}
                     size="small"
                     renderInput={(params) => <TextField {...params} error={stateObj.jobTitleMessage != null} inputRef={jobTitle} label="Job title" variant="outlined" />}
                 />
@@ -143,7 +143,7 @@ export default function SignUp() {
                     id="combo-industry"
                     options={worldIndustryList}
                     getOptionLabel={(option) => option.title}
-                    style={{ width: 300 }}
+                    style={{ width: 200 }}
                     size="small"
                     renderInput={(params) => <TextField {...params} error={stateObj.industryMessage != null} inputRef={industry} label="Industry" variant="outlined" />}
                 />
