@@ -2,6 +2,8 @@ import React, { useRef, useState } from 'react';
 import Validate from 'validate.js';
 import './SignIn.css';
 import TextField from '@material-ui/core/TextField';
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
 
 export default function SignIn() {
     const username = useRef(null);
@@ -17,11 +19,19 @@ export default function SignIn() {
         },
         password: {
             length: {
-                minimum: 6,
+                minimum: 4,
                 tooShort: "Minimum %{count} characters or more",
             }
         }
     };
+
+    const USER_SIGN_IN = gql`
+        mutation LogIn($username: String!, $pwd: String!){
+            login(username: $username, pwd: $pwd)
+        }
+    `;
+
+    const [callUserSignIn, { loading, error, data }] = useMutation(USER_SIGN_IN);
 
     const submitInput = e => {
         let check = Validate({
@@ -36,6 +46,15 @@ export default function SignIn() {
                 passMessage: check && check.password ? check.password[0] : null
             }
         });
+
+        if (!check) {
+            callUserSignIn({
+                variables: {
+                    username: username.current.value,
+                    pwd: password.current.value
+                }
+            });
+        }
     }
 
     return (
@@ -62,6 +81,12 @@ export default function SignIn() {
                     type="password" />
 
                 <button onClick={submitInput}>Submit</button>
+                <br/>
+                <div>
+                    {loading && <p>Loading...</p>}
+                    {error && <p>Error :( Please try again</p>}
+                    {data && <p>Data is here {JSON.stringify(data.login)}</p>}
+                </div>
             </div>
         </>
     );

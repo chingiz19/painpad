@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import HeaderWeb from '../../Components/HeaderWeb'
 import WriteReport from '../../Components/WriteReport';
+import ProblemFeed from '../../Components/ProblemFeed'
 
 export default function Home() {
     return (
@@ -17,7 +18,11 @@ export default function Home() {
                         </Col>
                         <Col sm={8} md={9} className="main-cont">
                             <div className="main">
-                                <WriteReport/>
+                                <div className="problems-div">
+                                    <WriteReport/>
+                                    <div className="wr-feed-seperator"></div>
+                                    <ProblemFeed/>
+                                </div>
                             </div>
                         </Col>
                     </Row>
