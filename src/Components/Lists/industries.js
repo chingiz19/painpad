@@ -4,10 +4,11 @@ import TextField from '@material-ui/core/TextField';
 
 export default function JobTitles(props) {
     //TODO: find source for "Wold Job Title" list
-    const jobTitleList = [
-        { title: 'President of Sales' },
-        { title: 'Dog Trainer' },
-        { title: 'Librarian' }
+    // List of industries. https://www.ibisworld.com/canada/list-of-industries/
+    const industryList = [
+        { title: 'Coal Mining' },
+        { title: 'Candy & Chocolate Manufacturing' },
+        { title: 'Internet Service Providers' }
     ];
 
     function handleChange(event) {
@@ -17,12 +18,12 @@ export default function JobTitles(props) {
     return (
         <>
             <Autocomplete
-                id="combo-job-title"
-                options={jobTitleList}
+                id="combo-industry"
+                options={industryList}
                 getOptionLabel={(option) => option.title}
                 style={{ width: 200 }}
                 size="small"
-                renderInput={(params) => <TextField {...params} error={props.errorMessage != null} onChange={handleChange} label="Job title" variant="outlined" />}
+                renderInput={(params) => <TextField {...params} error={props.errorMessage != null} onChange={handleChange} label="Industry" variant="outlined" />}
             />
         </>
     );

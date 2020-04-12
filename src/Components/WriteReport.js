@@ -1,15 +1,14 @@
 import React, { useRef, useState } from 'react';
 import './WriteReport.css';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import Validate from 'validate.js';
+import Cities from './Lists/cities'
+import Indsutries from './Lists/industries'
 
 export default function WriteReport() {
     const reportText = useRef(null);
-    const industry = useRef(null);
-    const city = useRef(null);
+    let industry = null;
+    let city = null;
 
-    // List of industries. https://www.ibisworld.com/canada/list-of-industries/
     const [stateObj, setMessage] = useState({
         industryMessage: null,
         cityMessage: null,
@@ -32,8 +31,8 @@ export default function WriteReport() {
 
     const sendReport = e => {
         let check = Validate({
-            industry: industry.current.value,
-            city: city.current.value,
+            industry: industry,
+            city: city,
             reportText: reportText.current.value
         }, constraints);
 
@@ -47,7 +46,7 @@ export default function WriteReport() {
         });
 
         //This implemented as there is no error attribute for TextArea
-        if (check && check.reportText != null){
+        if (check && check.reportText != null) {
             alert("Ups..Doesn't look like a valid report.")
         }
 
@@ -55,17 +54,13 @@ export default function WriteReport() {
 
     }
 
-    const industryList = [
-        { title: 'Newspaper Publishing' },
-        { title: 'Moving Services' },
-        { title: 'Construction Machinery' }
-    ];
+    function handleChangeIndustry(newValue) {
+        industry = newValue;
+    }
 
-    const cityList = [
-        { title: 'Lodndon, ON' },
-        { title: 'Calgary, AB' },
-        { title: 'New York' }
-    ];
+    function handleChangeCity(newValue) {
+        city = newValue;
+    }
 
     return (
         <>
@@ -74,24 +69,10 @@ export default function WriteReport() {
                 <div className="wr-ln-2">
                     <div className="wr-list-div">
                         <div className="combo-industry">
-                            <Autocomplete
-                                id="combo-industry"
-                                options={industryList}
-                                getOptionLabel={(option) => option.title}
-                                style={{ width: 200 }}
-                                size="small"
-                                renderInput={(params) => <TextField {...params} error={stateObj.industryMessage != null} inputRef={industry} label="Industry" variant="outlined" />}
-                            />
+                            <Indsutries errorMessage={stateObj.industryMessage} onChange={handleChangeIndustry} />
                         </div>
                         <div className="combo-city">
-                            <Autocomplete
-                                id="combo-city"
-                                options={cityList}
-                                getOptionLabel={(option) => option.title}
-                                style={{ width: 200 }}
-                                size="small"
-                                renderInput={(params) => <TextField {...params} error={stateObj.cityMessage != null} inputRef={city} label="Industry" variant="outlined" />}
-                            />
+                            <Cities errorMessage={stateObj.cityMessage} onChange={handleChangeCity} />
                         </div>
                     </div>
                     <button className="btn-send-report" onClick={sendReport}>Report</button>

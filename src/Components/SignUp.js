@@ -2,32 +2,18 @@ import React, { useRef, useState } from 'react';
 import './SignUp.css';
 import Validate from 'validate.js';
 import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
+import JobTitles from './Lists/jobTitles'
+import Indsutries from './Lists/industries'
 
 export default function SignUp() {
     const firstName = useRef(null);
     const lastName = useRef(null);
     const username = useRef(null);
-    const jobTitle = useRef(null);
-    const industry = useRef(null);
     const password = useRef(null);
-
-    //worldJobTitleList and worldIndustryList should be supplied by BE
-    //TODO: find source for "Wold Job Title" list
-    const jobTitleList = [
-        { title: 'President of Sales' },
-        { title: 'Dog Trainer' },
-        { title: 'Librarian' }
-    ];
-
-    // List of industries. https://www.ibisworld.com/canada/list-of-industries/
-    const worldIndustryList = [
-        { title: 'Newspaper Publishing' },
-        { title: 'Moving Services' },
-        { title: 'Construction Machinery' }
-    ];
+    let jobTitle = null;
+    let industry = null;
 
     const [stateObj, setMessage] = useState({
         firstNameMessage: null,
@@ -70,6 +56,14 @@ export default function SignUp() {
         }
     };
 
+    function handleChangeJobTitle(newValue) {
+        jobTitle = newValue;
+    }
+
+    function handleChangeIndustry(newValue) {
+        industry = newValue;
+    }
+
     const USER_SIGN_UP = gql`
         mutation SignUp($username: String!, $pwd: String!){
             signup(username: $username, pwd: $pwd)
@@ -83,8 +77,8 @@ export default function SignUp() {
         let check = Validate({
             firstName: firstName.current.value,
             lastName: lastName.current.value,
-            jobTitle: jobTitle.current.value,
-            industry: industry.current.value,
+            jobTitle: jobTitle,
+            industry: industry,
             username: username.current.value,
             password: password.current.value
         }, constraints);
@@ -146,21 +140,9 @@ export default function SignUp() {
                     size="small"
                     type="email" />
 
-                <Autocomplete
-                    options={jobTitleList}
-                    getOptionLabel={(option) => option.title}
-                    style={{ width: 200 }}
-                    size="small"
-                    renderInput={(params) => <TextField {...params} error={stateObj.jobTitleMessage != null} inputRef={jobTitle} label="Job title" variant="outlined" />}
-                />
+                <JobTitles errorMessage={stateObj.jobTitleMessage} onChange={handleChangeJobTitle}/>
 
-                <Autocomplete
-                    options={worldIndustryList}
-                    getOptionLabel={(option) => option.title}
-                    style={{ width: 200 }}
-                    size="small"
-                    renderInput={(params) => <TextField {...params} error={stateObj.industryMessage != null} inputRef={industry} label="Industry" variant="outlined" />}
-                />
+                <Indsutries errorMessage={stateObj.industryMessage} onChange={handleChangeIndustry} />
 
                 <TextField required
                     error={stateObj.passMessage != null}
@@ -178,7 +160,7 @@ export default function SignUp() {
                 <div>
                     {loading && <p>Loading...</p>}
                     {error && <p>Error :( Please try again</p>}
-                    {data && <p>Data is here { JSON.stringify(data.signup)}</p>}
+                    {data && <p>Data is here {JSON.stringify(data.signup)}</p>}
                 </div>
             </div>
         </>
