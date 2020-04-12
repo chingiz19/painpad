@@ -3,6 +3,8 @@ import './SignUp.css';
 import Validate from 'validate.js';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
 
 export default function SignUp() {
     const firstName = useRef(null);
@@ -33,7 +35,10 @@ export default function SignUp() {
         usernameMessage: null,
         jobTitleMessage: null,
         industryMessage: null,
-        passMessage: null
+        passMessage: null,
+        signUpLoading: false,
+        signUpError: false,
+        signUpData: false
     });
 
     const constraints = {
@@ -48,9 +53,7 @@ export default function SignUp() {
             }
         },
         jobTitle: {
-            format: {
-                pattern: "[a-zA-Z]+"
-            }
+            presence: { allowEmpty: false }
         },
         industry: {
             presence: { allowEmpty: false }
@@ -67,7 +70,16 @@ export default function SignUp() {
         }
     };
 
+    const USER_SIGN_UP = gql`
+        mutation SignUp($username: String!, $pwd: String!){
+            signup(username: $username, pwd: $pwd)
+        }
+    `;
+
+    const [callUserSignUp, { loading, error, data }] = useMutation(USER_SIGN_UP);
+
     const submitInput = e => {
+
         let check = Validate({
             firstName: firstName.current.value,
             lastName: lastName.current.value,
@@ -89,7 +101,14 @@ export default function SignUp() {
             }
         });
 
-        //API call to BE goes here
+        if (!check) {
+            callUserSignUp({
+                variables: {
+                    username: username.current.value,
+                    pwd: password.current.value
+                }
+            });
+        }
 
     }
 
@@ -99,7 +118,6 @@ export default function SignUp() {
 
                 <TextField required
                     error={stateObj.firstNameMessage != null}
-                    id="signup-first-name"
                     label="First name"
                     name="first-name"
                     inputRef={firstName}
@@ -110,7 +128,6 @@ export default function SignUp() {
 
                 <TextField required
                     error={stateObj.lastNameMessage != null}
-                    id="signup-last-name"
                     label="Last name"
                     name="last-name"
                     inputRef={lastName}
@@ -121,7 +138,6 @@ export default function SignUp() {
 
                 <TextField required
                     error={stateObj.usernameMessage != null}
-                    id="signup-email"
                     label="Email"
                     name="email"
                     inputRef={username}
@@ -131,7 +147,6 @@ export default function SignUp() {
                     type="email" />
 
                 <Autocomplete
-                    id="combo-job-title"
                     options={jobTitleList}
                     getOptionLabel={(option) => option.title}
                     style={{ width: 200 }}
@@ -140,7 +155,6 @@ export default function SignUp() {
                 />
 
                 <Autocomplete
-                    id="combo-industry"
                     options={worldIndustryList}
                     getOptionLabel={(option) => option.title}
                     style={{ width: 200 }}
@@ -160,6 +174,12 @@ export default function SignUp() {
                     type="password" />
 
                 <button onClick={submitInput}>Submit</button>
+
+                <div>
+                    {loading && <p>Loading...</p>}
+                    {error && <p>Error :( Please try again</p>}
+                    {data && <p>Data is here { JSON.stringify(data.signup)}</p>}
+                </div>
             </div>
         </>
     );

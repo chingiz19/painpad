@@ -43,7 +43,6 @@ export default function SignIn() {
             <div className="signin-main-div">
                 <TextField required
                     error={stateObj.emailMessage != null}
-                    id="signin-email"
                     label="Email"
                     name="email"
                     inputRef={username}
@@ -54,7 +53,6 @@ export default function SignIn() {
 
                 <TextField required
                     error={stateObj.passMessage != null}
-                    id="signin-password"
                     label="Password"
                     name="password"
                     inputRef={password}
