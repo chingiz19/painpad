@@ -1,4 +1,8 @@
 /*wh - web-header*/
+.a-logo-hdr-web{
+    width: 100%;
+    display: flex;
+}
 
 .header-logo{
     width: 110px;

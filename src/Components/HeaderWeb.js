@@ -13,7 +13,9 @@ export default function HeaderWeb() {
     return (
         <>
             <div className="header-div">
-                <img src={LogoTransperent} className="header-logo" alt="Transperent Logo" />
+                <a href="/" className="a-logo-hdr-web">
+                    <img src={LogoTransperent} className="header-logo" alt="Transperent Logo" />
+                </a>
                 <ul className="guest-user-ul" style={{ display: !userSignedIn ? '' : 'none' }}>
                     <li className="wh-li">
                         <UserSignInUp name="Sign in / Sign up" />
@@ -30,7 +32,7 @@ export default function HeaderWeb() {
                 </ul>
                 <ul className="user-ul" style={{ display: userSignedIn ? '' : 'none' }}>
                     <li className="wh-li">
-                        <a href="/myprofile" className="wh-li-a">
+                        <a href="/users/elnarsharifli" className="wh-li-a">
                             <div className="wh-li-a-div">
                                 <div className="wh-li-a-div-div">
                                     <i className="far fa-user"></i>Profile

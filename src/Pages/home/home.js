@@ -13,10 +13,10 @@ export default function Home() {
             <Container className="view-port">
                 <Container fluid="lg">
                     <Row>
-                        <Col sm={4} md={3} className="header-cont">
+                        <Col sm={4} md={3} className="header-comp">
                             <HeaderWeb/>
                         </Col>
-                        <Col sm={8} md={9} className="main-cont">
+                        <Col sm={8} md={9} className="main-comp">
                             <div className="main">
                                 <div className="problems-div">
                                     <WriteReport/>
