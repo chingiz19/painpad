@@ -11,7 +11,7 @@ export default function ProblemFeed() {
             industry: "Investment Management"
         },
         problem: {
-            id: 123423,
+            id: "123423",
             body: "Phone charger cable not being able to reach your bed. You may rearrange bed, or lie on floor, so you can scroll through Facebook or some other website.",
             same_here_count: 8,
             problem_what: "parking"
@@ -25,7 +25,7 @@ export default function ProblemFeed() {
             industry: "Investment Management"
         },
         problem: {
-            id: 225,
+            id: "225",
             body: "Having to give your friends your WiFi code. Made even worse when one of your friends isn't listening or arrives late, and you have to give it out again.",
             same_here_count: 23,
             problem_what: "wi-fi"
@@ -36,7 +36,7 @@ export default function ProblemFeed() {
     const problems = problem_tmp.current;
 
     const listProblems = problems.map((problem) =>
-        <Problem problemObj={problem}/>
+        <Problem key={problem.problem.id} problemObj={problem}/>
     );
 
     return (

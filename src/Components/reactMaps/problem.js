@@ -6,7 +6,7 @@ import UserProfPic from '../../images/users/profile-pictures/elnarsharifli.jpg'
 export default function Problems(props) {
 
     return (
-        <div key={props.problemObj.problem.id} className="problem-div">
+        <div className="problem-div">
             <div className="problem-hdr">
                 <img src={UserProfPic} className="user-prof-pic" alt="User Profile" />
                 <ul>

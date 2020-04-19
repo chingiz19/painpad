@@ -13,10 +13,20 @@ export default function HeaderWeb() {
     return (
         <>
             <div className="header-div">
+                {/* TODO make li as a seperate component - repeats */}
                 <a href="/" className="a-logo-hdr-web">
                     <img src={LogoTransperent} className="header-logo" alt="Transperent Logo" />
                 </a>
                 <ul className="guest-user-ul" style={{ display: !userSignedIn ? '' : 'none' }}>
+                    <li className="wh-li">
+                        <a href="/" className="wh-li-a">
+                            <div className="wh-li-a-div">
+                                <div className="wh-li-a-div-div">
+                                    <i className="fas fa-home"></i>Home
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     <li className="wh-li">
                         <UserSignInUp name="Sign in / Sign up" />
                     </li>
@@ -31,6 +41,15 @@ export default function HeaderWeb() {
                     </li>
                 </ul>
                 <ul className="user-ul" style={{ display: userSignedIn ? '' : 'none' }}>
+                    <li className="wh-li">
+                        <a href="/" className="wh-li-a">
+                            <div className="wh-li-a-div">
+                                <div className="wh-li-a-div-div">
+                                    <i className="fas fa-home"></i>Home
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                     <li className="wh-li">
                         <a href="/users/elnarsharifli" className="wh-li-a">
                             <div className="wh-li-a-div">
