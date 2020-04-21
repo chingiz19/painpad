@@ -69,10 +69,14 @@ export default function WriteReport() {
                 <div className="wr-ln-2">
                     <div className="wr-list-div">
                         <div className="combo-industry">
-                            <Indsutries errorMessage={stateObj.industryMessage} onChange={handleChangeIndustry} />
+                            <Indsutries thisVariant="outlined" 
+                                errorMessage={stateObj.industryMessage} 
+                                onChange={handleChangeIndustry} />
                         </div>
                         <div className="combo-city">
-                            <Cities errorMessage={stateObj.cityMessage} onChange={handleChangeCity} />
+                            <Cities thisVariant="outlined" 
+                                errorMessage={stateObj.cityMessage} 
+                                onChange={handleChangeCity} />
                         </div>
                     </div>
                     <button className="btn-send-report" onClick={sendReport}>Report</button>

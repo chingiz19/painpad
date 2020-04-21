@@ -22,7 +22,7 @@ export default function JobTitles(props) {
                 getOptionLabel={(option) => option.title}
                 style={{ width: 200 }}
                 size="small"
-                renderInput={(params) => <TextField {...params} error={props.errorMessage != null} onChange={handleChange} label="City" variant="outlined" />}
+                renderInput={(params) => <TextField {...params} error={props.errorMessage != null} onChange={handleChange} label="City" variant={props.thisVariant} />}
             />
         </>
     );

@@ -1,3 +1,11 @@
+.main-comp{
+    overflow-y: auto;
+}
+
+.main-comp .div-1{
+    width: 100%;
+}
+
 .info-reports-seperator{
     position: relative;
     display: flex;
