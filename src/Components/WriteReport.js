@@ -69,7 +69,8 @@ export default function WriteReport() {
                 <div className="wr-ln-2">
                     <div className="wr-list-div">
                         <div className="combo-industry">
-                            <Indsutries thisVariant="outlined" 
+                            <Indsutries thisVariant="outlined"
+                                thisWidth={200}
                                 errorMessage={stateObj.industryMessage} 
                                 onChange={handleChangeIndustry} />
                         </div>

@@ -3,8 +3,9 @@ import './HeaderWeb.css';
 import LogoTransperent from '../images/logos/logo_transparent.png';
 import UserSignInUp from '../Modals/UserSignInUp';
 
-export default function HeaderWeb() {
+export default function HeaderWeb(props) {
     const [userSignedIn, setUserSignedIn] = useState(true);
+    let currentPage = props.currentPage;
 
     const userSignOut = () => {
         setUserSignedIn(false);
@@ -44,7 +45,7 @@ export default function HeaderWeb() {
                     <li className="wh-li">
                         <a href="/" className="wh-li-a">
                             <div className="wh-li-a-div">
-                                <div className="wh-li-a-div-div">
+                                <div className={(props.currentPage === 'home' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
                                     <i className="fas fa-home"></i>Home
                                 </div>
                             </div>
@@ -53,7 +54,7 @@ export default function HeaderWeb() {
                     <li className="wh-li">
                         <a href="/users/elnarsharifli" className="wh-li-a">
                             <div className="wh-li-a-div">
-                                <div className="wh-li-a-div-div">
+                                <div className={(props.currentPage === 'profile' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
                                     <i className="far fa-user"></i>Profile
                                 </div>
                             </div>
@@ -80,7 +81,7 @@ export default function HeaderWeb() {
                     <li className="wh-li">
                         <a href="/about" className="wh-li-a">
                             <div className="wh-li-a-div">
-                                <div className="wh-li-a-div-div">
+                                <div className={(props.currentPage === 'about' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
                                     <i className="far fa-comment"></i>About
                                 </div>
                             </div>

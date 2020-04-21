@@ -79,6 +79,7 @@
 }
 
 .wh-li:hover > .wh-li-div .wh-li-div-span div i,
-.wh-li:hover > .wh-li-a .wh-li-a-div div i{
+.wh-li:hover > .wh-li-a .wh-li-a-div div i,
+.li-selected{
     color: rgb(9, 151, 118);
 }

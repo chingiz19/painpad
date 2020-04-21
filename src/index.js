@@ -25,10 +25,10 @@ export default function App() {
     <ApolloProvider client={client}>
       <Router>
         <Switch>
-          <Route exact path="/about" component={About} />
-          <Route path="/topics/:topic" component={Topic} />
-          <Route path="/users/:userId" component={Profile} />
-          <Route exact path="/" component={Home} />
+          <Route exact path="/about" render={(props) => <About {...props} pageName="about" />}/>
+          <Route path="/topics/:topic" render={(props) => <Topic {...props} pageName="topic" />}/>
+          <Route path="/users/:userId" render={(props) => <Profile {...props} pageName="profile" />}/>
+          <Route exact path="/" render={(props) => <Home {...props} pageName="home" />}/>
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

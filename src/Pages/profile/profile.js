@@ -7,16 +7,16 @@ import HeaderWeb from '../../Components/HeaderWeb'
 import ProfileUserInfo from '../../Components/ProfileUserInfo'
 import ProblemFeed from '../../Components/ProblemFeed'
 
-export default function Profile() {
+export default function Profile(props) {
     return (
         <>
             <Container className="view-port">
                 <Container fluid="lg">
                     <Row>
-                        <Col sm={4} md={4} className="header-comp">
-                            <HeaderWeb/>
+                        <Col sm={4} md={3} className="header-comp">
+                            <HeaderWeb currentPage={props.pageName}/>
                         </Col>
-                        <Col sm={8} md={8} className="main-comp">
+                        <Col sm={8} md={9} className="main-comp">
                             <div className="div-1">
                                 <ProfileUserInfo/>
                                 <div className="info-reports-seperator">
