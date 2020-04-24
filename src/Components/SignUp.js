@@ -4,22 +4,22 @@ import Validate from 'validate.js';
 import TextField from '@material-ui/core/TextField';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import JobTitles from './Lists/jobTitles'
+import Cities from './Lists/cities'
 import Indsutries from './Lists/industries'
 
 export default function SignUp() {
     const firstName = useRef(null);
     const lastName = useRef(null);
-    const username = useRef(null);
+    const email = useRef(null);
     const password = useRef(null);
-    let jobTitle = null;
+    let city = null;
     let industry = null;
 
     const [stateObj, setMessage] = useState({
         firstNameMessage: null,
         lastNameMessage: null,
-        usernameMessage: null,
-        jobTitleMessage: null,
+        emailMessage: null,
+        cityMessage: null,
         industryMessage: null,
         passMessage: null,
         signUpLoading: false,
@@ -38,13 +38,13 @@ export default function SignUp() {
                 pattern: "[a-zA-Z]+"
             }
         },
-        jobTitle: {
+        city: {
             presence: { allowEmpty: false }
         },
         industry: {
             presence: { allowEmpty: false }
         },
-        username: {
+        email: {
             email: {
                 message: "Please enter valid email"
             }
@@ -56,17 +56,17 @@ export default function SignUp() {
         }
     };
 
-    function handleChangeJobTitle(newValue) {
-        jobTitle = newValue;
-    }
-
     function handleChangeIndustry(newValue) {
         industry = newValue;
     }
 
+    function handleChangeCity(newValue) {
+        city = newValue;
+    }
+
     const USER_SIGN_UP = gql`
-        mutation SignUp($username: String!, $pwd: String!){
-            signup(username: $username, pwd: $pwd)
+        mutation SignUp($email: String!, $pwd: String!){
+            signup(email: $email, pwd: $pwd)
         }
     `;
 
@@ -77,9 +77,9 @@ export default function SignUp() {
         let check = Validate({
             firstName: firstName.current.value,
             lastName: lastName.current.value,
-            jobTitle: jobTitle,
+            city: city,
             industry: industry,
-            username: username.current.value,
+            email: email.current.value,
             password: password.current.value
         }, constraints);
 
@@ -88,8 +88,8 @@ export default function SignUp() {
                 ...prevState,
                 firstNameMessage: check && check.firstName ? "Can only contain letters" : null,
                 lastNameMessage: check && check.lastName ? "Can only contain letters" : null,
-                usernameMessage: check && check.username ? "Please enter valid email" : null,
-                jobTitleMessage: check && check.jobTitle ? "Can only contain letters" : null,
+                emailMessage: check && check.email ? "Please enter valid email" : null,
+                cityMessage: check && check.city ? "Can only contain letters" : null,
                 industryMessage: check && check.industry ? "Required" : null,
                 passMessage: check && check.password ? "Minimum 6 characters or more" : null
             }
@@ -98,7 +98,7 @@ export default function SignUp() {
         if (!check) {
             callUserSignUp({
                 variables: {
-                    username: username.current.value,
+                    email: email.current.value,
                     pwd: password.current.value
                 }
             });
@@ -131,18 +131,24 @@ export default function SignUp() {
                     type="text" />
 
                 <TextField required
-                    error={stateObj.usernameMessage != null}
+                    error={stateObj.emailMessage != null}
                     label="Email"
                     name="email"
-                    inputRef={username}
-                    helperText={stateObj.usernameMessage}
+                    inputRef={email}
+                    helperText={stateObj.emailMessage}
                     variant="outlined"
                     size="small"
                     type="email" />
 
-                <JobTitles errorMessage={stateObj.jobTitleMessage} onChange={handleChangeJobTitle}/>
+                <Indsutries thisVariant="outlined" 
+                    thisWidth={194} 
+                    errorMessage={stateObj.industryMessage} 
+                    onChange={handleChangeIndustry}/>
 
-                <Indsutries errorMessage={stateObj.industryMessage} onChange={handleChangeIndustry} />
+                <Cities thisVariant="outlined" 
+                    thisWidth={194} 
+                    errorMessage={stateObj.cityMessage} 
+                    onChange={handleChangeCity}/>
 
                 <TextField required
                     error={stateObj.passMessage != null}

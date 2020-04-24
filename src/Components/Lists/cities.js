@@ -20,7 +20,7 @@ export default function JobTitles(props) {
                 id="combo-city"
                 options={cityList}
                 getOptionLabel={(option) => option.title}
-                style={{ width: 200 }}
+                style={{ width: props.thisWidth }}
                 size="small"
                 renderInput={(params) => <TextField {...params} error={props.errorMessage != null} onChange={handleChange} label="City" variant={props.thisVariant} />}
             />

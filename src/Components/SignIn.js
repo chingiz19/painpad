@@ -6,13 +6,13 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 
 export default function SignIn() {
-    const username = useRef(null);
+    const email = useRef(null);
     const password = useRef(null);
 
     const [stateObj, setMessage] = useState({ emailMessage: null, passMessage: null });
 
     const constraints = {
-        username: {
+        email: {
             email: {
                 message: "Please enter valid email"
             }
@@ -26,8 +26,8 @@ export default function SignIn() {
     };
 
     const USER_SIGN_IN = gql`
-        mutation LogIn($username: String!, $pwd: String!){
-            login(username: $username, pwd: $pwd)
+        mutation LogIn($email: String!, $pwd: String!){
+            login(email: $email, pwd: $pwd)
         }
     `;
 
@@ -35,14 +35,14 @@ export default function SignIn() {
 
     const submitInput = e => {
         let check = Validate({
-            username: username.current.value,
+            email: email.current.value,
             password: password.current.value
         }, constraints);
 
         setMessage(prevState => {
             return {
                 ...prevState,
-                emailMessage: check && check.username ? check.username[0] : null,
+                emailMessage: check && check.email ? check.email[0] : null,
                 passMessage: check && check.password ? check.password[0] : null
             }
         });
@@ -50,7 +50,7 @@ export default function SignIn() {
         if (!check) {
             callUserSignIn({
                 variables: {
-                    username: username.current.value,
+                    email: email.current.value,
                     pwd: password.current.value
                 }
             });
@@ -64,7 +64,7 @@ export default function SignIn() {
                     error={stateObj.emailMessage != null}
                     label="Email"
                     name="email"
-                    inputRef={username}
+                    inputRef={email}
                     helperText={stateObj.emailMessage}
                     variant="outlined"
                     size="small"

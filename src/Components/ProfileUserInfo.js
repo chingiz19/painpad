@@ -17,7 +17,7 @@ export default function ProfileUserInfo() {
 
     let firstName = useRef(null);
     let lastName = useRef(null);
-    let username = useRef(null);
+    let email = useRef(null);
     let password = useRef(null);
     let jobTitle = null;
     let industry = null;
@@ -29,7 +29,7 @@ export default function ProfileUserInfo() {
         userInfo = {
             firstName: "Elnar",
             lastName: "Sharifli",
-            username: "elnarsharifli@gmail.com",
+            email: "elnarsharifli@gmail.com",
             jobTitle: "Reporting Analyst",
             industry: "Investment Management"
         }
@@ -58,7 +58,7 @@ export default function ProfileUserInfo() {
         industry: {
             presence: { allowEmpty: false }
         },
-        username: {
+        email: {
             email: {
                 message: "Please enter valid email"
             }
@@ -94,7 +94,7 @@ export default function ProfileUserInfo() {
             lastName: lastName.current.value,
             jobTitle: jobTitle,
             industry: industry,
-            username: username.current.value,
+            email: email.current.value,
             password: password.current.value
         }, constraints);
 
@@ -103,7 +103,7 @@ export default function ProfileUserInfo() {
                 ...prevState,
                 firstNameMessage: check && check.firstName ? "Can only contain letters" : null,
                 lastNameMessage: check && check.lastName ? "Can only contain letters" : null,
-                usernameMessage: check && check.username ? "Please enter valid email" : null,
+                usernameMessage: check && check.email ? "Please enter valid email" : null,
                 jobTitleMessage: check && check.jobTitle ? "Can only contain letters" : null,
                 industryMessage: check && check.industry ? "Required" : null,
                 passMessage: check && check.password ? "Minimum 6 characters or more" : null
@@ -113,7 +113,7 @@ export default function ProfileUserInfo() {
         if (!check) {
             // callUpdateUserInfo({
             //     variables: {
-            //         username: username.current.value,
+            //         email: email.current.value,
             //         pwd: password.current.value
             //     }
             // });
@@ -181,8 +181,8 @@ export default function ProfileUserInfo() {
                                 error={stateObj.usernameMessage != null}
                                 label="Email"
                                 name="email"
-                                inputRef={username}
-                                value={userInfo.username}
+                                inputRef={email}
+                                value={userInfo.email}
                                 helperText={stateObj.usernameMessage}
                                 className="text-field"
                                 size="small"
