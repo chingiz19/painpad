@@ -6,9 +6,9 @@ import TextField from '@material-ui/core/TextField';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import JobTitles from './Lists/jobTitles'
-import Indsutries from './Lists/industries'
-import UserStats from './userStats'
+import JobTitles from './Lists/JobTitles'
+import Indsutries from './Lists/Industries'
+import UserStats from './UserStats'
 
 import UserProfPic from '../images/users/profile-pictures/elnarsharifli.jpg'
 
@@ -25,7 +25,7 @@ export default function ProfileUserInfo() {
     let userInfo = {};
 
     // check session and retrieve user info
-    if (1 == 1) {
+    if (true) {
         userInfo = {
             firstName: "Elnar",
             lastName: "Sharifli",
@@ -84,6 +84,7 @@ export default function ProfileUserInfo() {
 
     function handleShowEditInfo() {
         setEditInfo(false);
+        updateUserInfo();
     }
 
     // const [callUpdateUserInfo, { loading, error, data }] = useMutation(USER_UPDATE_INFO);
@@ -154,10 +155,9 @@ export default function ProfileUserInfo() {
                                     inputRef={lastName}
                                     value={userInfo.lastName}
                                     helperText={stateObj.lastNameMessage}
-                                    className="text-field"
+                                    className="text-field last-name"
                                     size="small"
-                                    type="text"
-                                    className="last-name" />
+                                    type="text"/>
                             </div>
 
                             <Indsutries thisDisabled={!editInfo}

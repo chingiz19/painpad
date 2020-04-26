@@ -5,9 +5,9 @@ import TextField from '@material-ui/core/TextField';
 export default function JobTitles(props) {
     //TODO: find source for "Wold Job Title" list
     const cityList = [
-        { title: 'Lodndon, ON' },
-        { title: 'Calgary, AB' },
-        { title: 'New York' }
+        { title: 'Lodndon, CAD' },
+        { title: 'Calgary, CAD' },
+        { title: 'New York, USA' }
     ];
 
     function handleChange(event) {

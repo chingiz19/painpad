@@ -4,8 +4,8 @@ import Validate from 'validate.js';
 import TextField from '@material-ui/core/TextField';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import Cities from './Lists/cities'
-import Indsutries from './Lists/industries'
+import Cities from './Lists/Cities'
+import Indsutries from './Lists/Industries'
 
 export default function SignUp() {
     const firstName = useRef(null);

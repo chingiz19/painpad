@@ -13,6 +13,7 @@ export default function Problems(props) {
                     <li className="user-name-li">{props.problemObj.poster.firstName + " " + props.problemObj.poster.lastName}</li>
                     <li className="user-industry-li">{props.problemObj.poster.industry}</li>
                 </ul>
+                <span>{props.problemObj.problem.location}</span>
             </div>
             <p className="problem-body">
                 {props.problemObj.problem.body}
@@ -23,7 +24,9 @@ export default function Problems(props) {
                     <span className="sh-emoji" role="img" aria-label="Raising hands">🙌🏼</span>
                     <span className="sh-txt">Same-Here</span>
                 </button>
-                <div className="problem-what">{props.problemObj.problem.problem_what} related</div>
+                <a className="problem-what" 
+                    href={'/topics/' + props.problemObj.problem.topic_id}>
+                        {props.problemObj.problem.problem_what} related</a>
             </div>
         </div>
     );

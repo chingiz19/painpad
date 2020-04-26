@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import './WriteReport.css';
 import Validate from 'validate.js';
-import Cities from './Lists/cities'
-import Indsutries from './Lists/industries'
+import Cities from './Lists/Cities'
+import Indsutries from './Lists/Industries'
 
 export default function WriteReport() {
     const reportText = useRef(null);
@@ -76,6 +76,7 @@ export default function WriteReport() {
                         </div>
                         <div className="combo-city">
                             <Cities thisVariant="outlined" 
+                                thisWidth={200}
                                 errorMessage={stateObj.cityMessage} 
                                 onChange={handleChangeCity} />
                         </div>

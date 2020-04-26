@@ -5,7 +5,6 @@ import UserSignInUp from '../Modals/UserSignInUp';
 
 export default function HeaderWeb(props) {
     const [userSignedIn, setUserSignedIn] = useState(true);
-    let currentPage = props.currentPage;
 
     const userSignOut = () => {
         setUserSignedIn(false);
