@@ -1,0 +1,32 @@
+.header-btn-div{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.header-btn-div button{
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    color: rgb(60,60,60);
+    transition: 0.2s;
+}
+
+.header-btn-div button:focus {
+    outline:0;
+}
+
+.header-btn-div .selected{
+    font-size: 19px;
+    font-weight: 800;
+    color: rgb(0,0,0);
+}
+
+.header-btn-div span{
+    font-size: 25px;
+    margin: 0 7px;
+}
+
+.sign-comp-div{
+    width: 100%;
+}

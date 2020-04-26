@@ -1,0 +1,28 @@
+.user-stats-div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: space-around;
+}
+
+.user-stats-div li{
+    text-align: center;
+}
+
+.user-stats-div ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.user-stats-div .li-num{
+    font-size: 16px;
+}
+
+.user-stats-div .li-text{
+    font-size: 10px;
+    text-transform: capitalize;
+    color: rgba(80, 80, 80,1);
+}
+

@@ -1,0 +1,11 @@
+.main-comp{
+    overflow-y: auto;
+}
+
+.main-comp .div-1{
+    width: 100%;
+}
+
+.line-seperator{
+    margin-top: 0px !important;
+}

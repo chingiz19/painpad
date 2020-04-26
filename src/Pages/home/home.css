@@ -1,0 +1,25 @@
+.view-port{
+    background-color: rgb(254,254,254);
+    padding: 0;
+}
+
+.header-comp{
+    height: 100vh;
+    border-right: 1px solid rgba(180,180,180, 0.6);
+    padding-right: 0;
+}
+
+.main-comp{
+    height: 100vh;
+    padding: 0;
+}
+
+.problems-div{
+    width: 670px;
+}
+
+.wr-feed-seperator{
+    height: 1px;
+    margin: 20px 0;
+    background-color: rgba(180, 180, 180,0.6);
+}
