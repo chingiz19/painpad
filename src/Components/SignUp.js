@@ -65,22 +65,21 @@ export default function SignUp() {
     }
 
     const USER_SIGN_UP = gql`
-        mutation SignUp($email: String!, $pwd: String!){
-            signup(email: $email, pwd: $pwd)
+        mutation SignUp($firstName: String!, $lastName: String!, $email: String!, $pwd: String!, $cityId: ID!, $industryId: ID!){
+            signup(firstName: $firstName, lastName: $lastName, email: $email, pwd: $pwd, cityId: $cityId, industryId: $industryId)
         }
     `;
 
     const [callUserSignUp, { loading, error, data }] = useMutation(USER_SIGN_UP);
 
     const submitInput = e => {
-
         let check = Validate({
             firstName: firstName.current.value,
             lastName: lastName.current.value,
-            city: city,
-            industry: industry,
             email: email.current.value,
-            password: password.current.value
+            password: password.current.value,
+            city: city.value,
+            industry: industry.value
         }, constraints);
 
         setMessage(prevState => {
@@ -89,17 +88,21 @@ export default function SignUp() {
                 firstNameMessage: check && check.firstName ? "Can only contain letters" : null,
                 lastNameMessage: check && check.lastName ? "Can only contain letters" : null,
                 emailMessage: check && check.email ? "Please enter valid email" : null,
-                cityMessage: check && check.city ? "Can only contain letters" : null,
-                industryMessage: check && check.industry ? "Required" : null,
-                passMessage: check && check.password ? "Minimum 6 characters or more" : null
+                passMessage: check && check.password ? "Minimum 6 characters or more" : null,
+                cityMessage: check && check.city ? "Required" : null,
+                industryMessage: check && check.industry ? "Required" : null
             }
         });
 
         if (!check) {
             callUserSignUp({
                 variables: {
+                    firstName: firstName.current.value,
+                    lastName: lastName.current.value,
                     email: email.current.value,
-                    pwd: password.current.value
+                    pwd: password.current.value,
+                    cityId: parseInt(city.id),
+                    industryId: parseInt(industry.id)
                 }
             });
         }

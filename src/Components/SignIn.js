@@ -3,13 +3,16 @@ import Validate from 'validate.js';
 import './SignIn.css';
 import TextField from '@material-ui/core/TextField';
 import { gql } from 'apollo-boost';
-import { useMutation } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 
 export default function SignIn() {
     const email = useRef(null);
     const password = useRef(null);
 
-    const [stateObj, setMessage] = useState({ emailMessage: null, passMessage: null });
+    const [stateObj, setMessage] = useState({ 
+        emailMessage: null, 
+        passMessage: null 
+    });
 
     const constraints = {
         email: {
@@ -19,19 +22,18 @@ export default function SignIn() {
         },
         password: {
             length: {
-                minimum: 4,
-                tooShort: "Minimum %{count} characters or more",
+                minimum: 4
             }
         }
     };
 
     const USER_SIGN_IN = gql`
-        mutation LogIn($email: String!, $pwd: String!){
-            login(email: $email, pwd: $pwd)
+        query signin($email: String!, $pwd: String!){
+            signin(email: $email, pwd: $pwd)
         }
     `;
 
-    const [callUserSignIn, { loading, error, data }] = useMutation(USER_SIGN_IN);
+    const [callUserSignIn, { loading, error, data }] = useLazyQuery(USER_SIGN_IN);
 
     const submitInput = e => {
         let check = Validate({
@@ -42,8 +44,8 @@ export default function SignIn() {
         setMessage(prevState => {
             return {
                 ...prevState,
-                emailMessage: check && check.email ? check.email[0] : null,
-                passMessage: check && check.password ? check.password[0] : null
+                emailMessage: check && check.email ? "Please enter valid email" : null,
+                passMessage: check && check.password ? "Minimum 6 characters or more" : null,
             }
         });
 

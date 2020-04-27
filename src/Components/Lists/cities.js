@@ -1,28 +1,45 @@
 import React from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+import gql from 'graphql-tag';
+import { useLazyQuery } from '@apollo/react-hooks';
 
 export default function JobTitles(props) {
-    //TODO: find source for "Wold Job Title" list
-    const cityList = [
-        { title: 'Lodndon, CAD' },
-        { title: 'Calgary, CAD' },
-        { title: 'New York, USA' }
-    ];
+    const GET_CITIES = gql`
+            query locations($text: String!, $limit: Int!) {
+                locations(
+                    text: $text, 
+                    limit: $limit)
+                {id, value}
+            }
+        `;
+
+    const [callGetCities, { data: dataGetCities }] = useLazyQuery(GET_CITIES);
 
     function handleChange(event) {
-        props.onChange(event.target.value);
-    }
+        callGetCities({
+            variables: {
+                text: event.target.value,
+                limit: 5
+            }
+        });
+    };
 
     return (
         <>
             <Autocomplete
-                id="combo-city"
-                options={cityList}
-                getOptionLabel={(option) => option.title}
+                options={dataGetCities ? dataGetCities.locations : []}
+                getOptionLabel={(option) => option.value}
+                onChange={(event, option) => {
+                    props.onChange(option);
+                  }}
                 style={{ width: props.thisWidth }}
                 size="small"
-                renderInput={(params) => <TextField {...params} error={props.errorMessage != null} onChange={handleChange} label="City" variant={props.thisVariant} />}
+                renderInput={(params) => <TextField {...params} 
+                    error={props.errorMessage != null} 
+                    onChange={handleChange} 
+                    label="City" 
+                    variant={props.thisVariant} />}
             />
         </>
     );
