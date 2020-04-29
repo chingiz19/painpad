@@ -18,6 +18,7 @@
     "react": "^16.13.1",
     "react-animate-on-scroll": "^2.1.5",
     "react-bootstrap": "^1.0.0",
+    "react-bootstrap-typeahead": "^4.2.2",
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
     "react-fade-in": "^0.1.8",

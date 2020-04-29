@@ -1,24 +1,23 @@
 import React from 'react';
-import './Industries.css';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
-export default function Industries(props) {
+export default function Occupations(props) {
 
-    const GET_INDUSTRIES = gql`
-            query industries($text: String!, $limit: Int!) {
-                industries(
+    const GET_OCCUPATIONS = gql`
+            query occupations($text: String!, $limit: Int!) {
+                occupations(
                     text: $text, 
                     limit: $limit)
                 {id, value}
             }
         `;
 
-    let [callGetIndustries, { data }] = useLazyQuery(GET_INDUSTRIES);
+    let [callGetOccupations, { data }] = useLazyQuery(GET_OCCUPATIONS);
 
     function handleInputChange(value, event) {
-        callGetIndustries({
+        callGetOccupations({
             variables: {
                 text: event.target.value,
                 limit: 5
@@ -33,14 +32,14 @@ export default function Industries(props) {
     return (
         <>
             <Typeahead
-                id="industries-list"
+                id="occupations-list"
                 labelKey="value"
                 defaultSelected={props.thisValue ? [props.thisValue] : []}
-                options={(data && data.industries) || [props.thisValue]}
+                options={(data && data.occupations) || [props.thisValue]}
                 onInputChange={handleInputChange}
                 onChange={handleChange}
                 disabled={props.thisDisabled}
-                placeholder="Industries"
+                placeholder="Occupations"
             />
         </>
     );

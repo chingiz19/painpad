@@ -4,7 +4,7 @@ import Validate from 'validate.js';
 import TextField from '@material-ui/core/TextField';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import Cities from './Lists/Cities'
+import Locations from './Lists/Locations'
 import Indsutries from './Lists/Industries'
 
 export default function SignUp() {
@@ -148,7 +148,7 @@ export default function SignUp() {
                     errorMessage={stateObj.industryMessage} 
                     onChange={handleChangeIndustry}/>
 
-                <Cities thisVariant="outlined" 
+                <Locations thisVariant="outlined" 
                     thisWidth={194} 
                     errorMessage={stateObj.cityMessage} 
                     onChange={handleChangeCity}/>

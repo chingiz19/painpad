@@ -6,9 +6,10 @@ import TextField from '@material-ui/core/TextField';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import JobTitles from './Lists/JobTitles'
+import Occupations from './Lists/Occupations'
 import Indsutries from './Lists/Industries'
 import UserStats from './UserStats'
+import Locations from './Lists/Locations'
 
 import UserProfPic from '../images/users/profile-pictures/elnarsharifli.jpg'
 
@@ -21,6 +22,7 @@ export default function ProfileUserInfo() {
     let password = useRef(null);
     let jobTitle = null;
     let industry = null;
+    let location = null;
 
     let userInfo = {};
 
@@ -31,9 +33,14 @@ export default function ProfileUserInfo() {
             lastName: "Sharifli",
             email: "elnarsharifli@gmail.com",
             jobTitle: "Reporting Analyst",
+            location: {
+                "id": "1",
+                "value": "Calgary, Canada"
+            },
             industry: {
                 "id": "2",
-                "value": "Investment Management"
+                "value": "Investment Management",
+                "__typename": "Pair"
             }
         }
 
@@ -61,6 +68,9 @@ export default function ProfileUserInfo() {
         industry: {
             presence: { allowEmpty: false }
         },
+        location: {
+            presence: { allowEmpty: false }
+        },
         email: {
             email: {
                 message: "Please enter valid email"
@@ -81,6 +91,10 @@ export default function ProfileUserInfo() {
         industry = newValue;
     }
 
+    function handleChangeLocation(newValue) {
+        location = newValue;
+    }
+
     function handleHideEditInfo() {
         setEditInfo(true);
     }
@@ -98,6 +112,7 @@ export default function ProfileUserInfo() {
             lastName: lastName.current.value,
             jobTitle: jobTitle,
             industry: industry,
+            location: location,
             email: email.current.value,
             password: password.current.value
         }, constraints);
@@ -110,6 +125,7 @@ export default function ProfileUserInfo() {
                 usernameMessage: check && check.email ? "Please enter valid email" : null,
                 jobTitleMessage: check && check.jobTitle ? "Can only contain letters" : null,
                 industryMessage: check && check.industry ? "Required" : null,
+                locationMessage: check && check.location ? "Required" : null,
                 passMessage: check && check.password ? "Minimum 6 characters or more" : null
             }
         });
@@ -165,18 +181,26 @@ export default function ProfileUserInfo() {
 
                             <Indsutries thisDisabled={!editInfo}
                                 thisVariant="standard"
-                                thisValue={userInfo.industry}
+                                // thisValue={userInfo.industry}
                                 thisWidth={230}
                                 errorMessage={stateObj.industryMessage}
                                 onChange={handleChangeIndustry}
                                 thisClassName="autocomplete" />
 
-                            <JobTitles thisDisabled={!editInfo}
+                            <Occupations thisDisabled={!editInfo}
                                 thisVariant="standard"
-                                thisValue={userInfo.jobTitle}
+                                // thisValue={userInfo.jobTitle}
                                 thisWidth={230}
                                 errorMessage={stateObj.jobTitleMessage}
                                 onChange={handleChangeJobTitle}
+                                thisClassName="autocomplete" />
+
+                            <Locations thisDisabled={!editInfo}
+                                thisVariant="standard"
+                                // thisValue={userInfo.location}
+                                thisWidth={230}
+                                errorMessage={stateObj.locationMessage}
+                                onChange={handleChangeLocation}
                                 thisClassName="autocomplete" />
 
                             <TextField required

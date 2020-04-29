@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import './WriteReport.css';
 import Validate from 'validate.js';
-import Cities from './Lists/Cities'
+import Locations from './Lists/Locations'
 import Indsutries from './Lists/Industries'
 
 export default function WriteReport() {
@@ -75,7 +75,7 @@ export default function WriteReport() {
                                 onChange={handleChangeIndustry} />
                         </div>
                         <div className="combo-city">
-                            <Cities thisVariant="outlined" 
+                            <Locations thisVariant="outlined" 
                                 thisWidth={200}
                                 errorMessage={stateObj.cityMessage} 
                                 onChange={handleChangeCity} />
