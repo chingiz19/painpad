@@ -18,6 +18,7 @@ import {
 
 const client = new ApolloClient({
   uri: 'https://api.painpad.co/graphql',
+  credentials: 'include'
 });
 
 export default function App() {

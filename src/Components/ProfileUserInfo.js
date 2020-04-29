@@ -31,7 +31,10 @@ export default function ProfileUserInfo() {
             lastName: "Sharifli",
             email: "elnarsharifli@gmail.com",
             jobTitle: "Reporting Analyst",
-            industry: "Investment Management"
+            industry: {
+                "id": "2",
+                "value": "Investment Management"
+            }
         }
 
     }
@@ -127,7 +130,7 @@ export default function ProfileUserInfo() {
             <Row>
                 <Col sm={3} className="img-col">
                     <img src={UserProfPic} className="user-prof-pic" alt="User Profile" />
-                    <UserStats/>
+                    <UserStats />
                     <button className="pic-btn user-prof-btn">Edit</button>
                 </Col>
                 <Col sm={9} className="info-col">
@@ -157,7 +160,7 @@ export default function ProfileUserInfo() {
                                     helperText={stateObj.lastNameMessage}
                                     className="text-field last-name"
                                     size="small"
-                                    type="text"/>
+                                    type="text" />
                             </div>
 
                             <Indsutries thisDisabled={!editInfo}
@@ -165,16 +168,16 @@ export default function ProfileUserInfo() {
                                 thisValue={userInfo.industry}
                                 thisWidth={230}
                                 errorMessage={stateObj.industryMessage}
-                                onChange={handleChangeIndustry} 
-                                thisClassName="autocomplete"/>
+                                onChange={handleChangeIndustry}
+                                thisClassName="autocomplete" />
 
                             <JobTitles thisDisabled={!editInfo}
                                 thisVariant="standard"
                                 thisValue={userInfo.jobTitle}
                                 thisWidth={230}
                                 errorMessage={stateObj.jobTitleMessage}
-                                onChange={handleChangeJobTitle} 
-                                thisClassName="autocomplete"/>
+                                onChange={handleChangeJobTitle}
+                                thisClassName="autocomplete" />
 
                             <TextField required
                                 disabled={!editInfo}

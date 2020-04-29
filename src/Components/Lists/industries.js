@@ -3,9 +3,10 @@ import './Industries.css';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import gql from 'graphql-tag';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 
 export default function Industries(props) {
+
     const GET_INDUSTRIES = gql`
             query industries($text: String!, $limit: Int!) {
                 industries(
@@ -14,46 +15,37 @@ export default function Industries(props) {
                 {id, value}
             }
         `;
-    
-    const [callGetIndustries, { data: dataIndustries }] = useLazyQuery(GET_INDUSTRIES);
 
-    function handleChange(event) {
+    const [callGetIndustries, { data: Industries_1 }] = useLazyQuery(GET_INDUSTRIES);
+
+    const { data: Industries_0 } = useQuery(GET_INDUSTRIES, {
+        variables: {
+            text: props.thisValue ? props.thisValue.value : '',
+            limit: 5
+        }
+    });
+
+    function handleChange(event, value) {
         callGetIndustries({
             variables: {
-                text: event.target.value,
+                text: event ? event.target.value : value,
                 limit: 5
             }
         });
     };
 
-
-    // let selectedIndustry = 0;
-
-    // for (let i = 0; i < industryList.length; i++) {
-    //     if (industryList[i].title === props.thisValue) {
-    //         selectedIndustry = i;
-    //     }
-    // };
-
     return (
         <>
-            {/* <Autocomplete
-                className={(props.thisValue ? props.thisClassName : 'none')}
-                value={industryList[selectedIndustry]}
-                disabled={props.thisDisabled}
-                options={data ? data.industries : []}
-                getOptionLabel={(option) => option.value}
-                style={{ width: props.thisWidth }}
-                size="small"
-                renderInput={(params) => <TextField {...params} error={props.errorMessage != null} onChange={handleChange} label="Industry" variant={props.thisVariant} />}
-            /> */}
             <Autocomplete
-                options={dataIndustries ? dataIndustries.industries : []}
+                value={props.thisValue.value}
+                options={Industries_1 ? Industries_1.industries : (Industries_0 ? Industries_0.industries : [])}
                 getOptionLabel={(option) => option.value}
+                getOptionSelected={(option, value) => {
+                    return option.title === value.value;
+                 }}
                 onChange={(event, option) => {
                     props.onChange(option);
-                  }}
-                className={(!props.thisValue ? props.thisClassName : 'none')}
+                }}
                 style={{ width: props.thisWidth }}
                 size="small"
                 disabled={props.thisDisabled}

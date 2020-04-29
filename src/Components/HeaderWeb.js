@@ -1,13 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './HeaderWeb.css';
 import LogoTransperent from '../images/logos/logo_transparent.png';
 import UserSignInUp from '../Modals/UserSignInUp';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 
 export default function HeaderWeb(props) {
-    const [userSignedIn, setUserSignedIn] = useState(true);
+    
+    const IS_USER_SIGNED_IN = gql`
+        query isLogin{
+            isLogin
+        }
+    `;
 
-    const userSignOut = () => {
-        setUserSignedIn(false);
+    const {data: isUserSignedIn} = useQuery(IS_USER_SIGNED_IN);
+
+    const USER_SIGN_OUT = gql`
+        query signout{
+            signout
+        }
+    `;
+
+    const [callUserSignOut, { data: userSignOut }] = useLazyQuery(USER_SIGN_OUT);
+
+    if(userSignOut){
+        window.location.reload();
     }
 
     return (
@@ -17,11 +35,11 @@ export default function HeaderWeb(props) {
                 <a href="/" className="a-logo-hdr-web">
                     <img src={LogoTransperent} className="header-logo" alt="Transperent Logo" />
                 </a>
-                <ul className="guest-user-ul" style={{ display: !userSignedIn ? '' : 'none' }}>
+                <ul className="guest-user-ul" style={{ display: !(isUserSignedIn && isUserSignedIn.isLogin) ? '' : 'none' }}>
                     <li className="wh-li">
                         <a href="/" className="wh-li-a">
                             <div className="wh-li-a-div">
-                                <div className="wh-li-a-div-div">
+                                <div className={(props.currentPage === 'home' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
                                     <i className="fas fa-home"></i>Home
                                 </div>
                             </div>
@@ -33,14 +51,14 @@ export default function HeaderWeb(props) {
                     <li className="wh-li">
                         <a href="/about" className="wh-li-a">
                             <div className="wh-li-a-div">
-                                <div className="wh-li-a-div-div">
+                                <div className={(props.currentPage === 'about' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
                                     <i className="far fa-comment"></i>About
                                 </div>
                             </div>
                         </a>
                     </li>
                 </ul>
-                <ul className="user-ul" style={{ display: userSignedIn ? '' : 'none' }}>
+                <ul className="user-ul" style={{ display: (isUserSignedIn && isUserSignedIn.isLogin) ? '' : 'none' }}>
                     <li className="wh-li">
                         <a href="/" className="wh-li-a">
                             <div className="wh-li-a-div">
@@ -87,7 +105,7 @@ export default function HeaderWeb(props) {
                         </a>
                     </li>
                     <br />
-                    <li className="wh-li log-out" onClick={userSignOut}>
+                    <li className="wh-li log-out" onClick={callUserSignOut}>
                         <div className="wh-li-div">
                             <span className="wh-li-div-span">
                                 <div className="wh-li-div-span-div">

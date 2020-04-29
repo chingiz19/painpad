@@ -33,7 +33,11 @@ export default function SignIn() {
         }
     `;
 
-    const [callUserSignIn, { loading, error, data }] = useLazyQuery(USER_SIGN_IN);
+    const [callUserSignIn, { loading, error, data: userSignIn }] = useLazyQuery(USER_SIGN_IN);
+
+    if(userSignIn){
+        window.location.reload();
+    }
 
     const submitInput = e => {
         let check = Validate({
@@ -57,6 +61,7 @@ export default function SignIn() {
                 }
             });
         }
+
     }
 
     return (
@@ -87,7 +92,7 @@ export default function SignIn() {
                 <div>
                     {loading && <p>Loading...</p>}
                     {error && <p>Error :( Please try again</p>}
-                    {data && <p>Data is here {JSON.stringify(data.login)}</p>}
+                    {userSignIn && <p>Data is here {JSON.stringify(userSignIn.login)}</p>}
                 </div>
             </div>
         </>
