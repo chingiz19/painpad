@@ -1,5 +1,5 @@
 import React from 'react';
-import './Industries.css';
+import './Lists.css';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { Typeahead } from 'react-bootstrap-typeahead';
@@ -20,28 +20,32 @@ export default function Industries(props) {
     function handleInputChange(value, event) {
         callGetIndustries({
             variables: {
-                text: event.target.value,
+                text: event ? event.target.value : '',
                 limit: 5
             }
         });
     };
 
-    function handleChange(value){
+    function handleChange(value) {
         props.onChange(value);
     }
 
     return (
-        <>
+        <div className={props.thisValue ? 'combo-box margin-20' : 'combo-box margin-10'}>
+            <span className="industry-span">Industry</span>
             <Typeahead
                 id="industries-list"
+                className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
                 labelKey="value"
                 defaultSelected={props.thisValue ? [props.thisValue] : []}
-                options={(data && data.industries) || [props.thisValue]}
+                options={(data && data.industries) || (props.thisValue && [props.thisValue]) || []}
                 onInputChange={handleInputChange}
                 onChange={handleChange}
                 disabled={props.thisDisabled}
                 placeholder="Industries"
+                emptyLabel="No such industry.."
             />
-        </>
+            <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
+        </div>
     );
 }

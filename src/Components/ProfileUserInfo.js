@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import './ProfileUserInfo.css';
 import Validate from 'validate.js';
 // import { useMutation } from '@apollo/react-hooks';
-import TextField from '@material-ui/core/TextField';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -147,85 +146,71 @@ export default function ProfileUserInfo() {
                 <Col sm={3} className="img-col">
                     <img src={UserProfPic} className="user-prof-pic" alt="User Profile" />
                     <UserStats />
-                    <button className="pic-btn user-prof-btn">Edit</button>
+                    <button className="user-prof-btn picture-btn">Edit</button>
                 </Col>
                 <Col sm={9} className="info-col">
                     <div className="input-btn-section">
                         <button className={(!editInfo ? 'user-prof-btn info-edit-btn' : 'hide')} onClick={handleHideEditInfo}>Edit</button>
                         <div className="input-section">
                             <div className="user-names-div">
-                                <TextField required
-                                    disabled={!editInfo}
-                                    error={stateObj.firstNameMessage != null}
-                                    label="First name"
-                                    name="first-name"
-                                    inputRef={firstName}
-                                    value={userInfo.firstName}
-                                    helperText={stateObj.firstNameMessage}
-                                    className="text-field"
-                                    size="small"
-                                    type="text" />
 
-                                <TextField required
-                                    disabled={!editInfo}
-                                    error={stateObj.lastNameMessage != null}
-                                    label="Last name"
-                                    name="last-name"
-                                    inputRef={lastName}
-                                    value={userInfo.lastName}
-                                    helperText={stateObj.lastNameMessage}
-                                    className="text-field last-name"
-                                    size="small"
-                                    type="text" />
+                                <div className={(!stateObj.firstNameMessage ? 'user-input' : 'user-input error')}>
+                                    <label>First Name</label>
+                                    <input name="first-name"
+                                        value={userInfo.firstName}
+                                        ref={firstName}
+                                        disabled={!editInfo}
+                                        type="text" />
+                                    <span className="helper-txt">{stateObj.firstNameMessage}</span>
+                                </div>
+
+                                <div className={(!stateObj.firstNameMessage ? 'user-input lname' : 'user-input error lname')}>
+                                    <label>Last Name</label>
+                                    <input name="first-name"
+                                        value={userInfo.lastName}
+                                        ref={lastName}
+                                        disabled={!editInfo}
+                                        type="text" />
+                                    <span className="helper-txt">{stateObj.lastNameMessage}</span>
+                                </div>
                             </div>
 
                             <Indsutries thisDisabled={!editInfo}
-                                thisVariant="standard"
-                                // thisValue={userInfo.industry}
-                                thisWidth={230}
-                                errorMessage={stateObj.industryMessage}
+                                thisValue={userInfo.industry}
+                                helperText={stateObj.industryMessage}
                                 onChange={handleChangeIndustry}
                                 thisClassName="autocomplete" />
 
                             <Occupations thisDisabled={!editInfo}
-                                thisVariant="standard"
-                                // thisValue={userInfo.jobTitle}
-                                thisWidth={230}
-                                errorMessage={stateObj.jobTitleMessage}
+                                thisValue={userInfo.jobTitle}
+                                helperText={stateObj.jobTitleMessage}
                                 onChange={handleChangeJobTitle}
                                 thisClassName="autocomplete" />
 
                             <Locations thisDisabled={!editInfo}
-                                thisVariant="standard"
-                                // thisValue={userInfo.location}
-                                thisWidth={230}
-                                errorMessage={stateObj.locationMessage}
+                                thisValue={userInfo.location}
+                                helperText={stateObj.locationMessage}
                                 onChange={handleChangeLocation}
                                 thisClassName="autocomplete" />
 
-                            <TextField required
-                                disabled={!editInfo}
-                                error={stateObj.usernameMessage != null}
-                                label="Email"
-                                name="email"
-                                inputRef={email}
-                                value={userInfo.email}
-                                helperText={stateObj.usernameMessage}
-                                className="text-field"
-                                size="small"
-                                type="email" />
+                            <div className={(!stateObj.usernameMessage ? 'user-input email' : 'user-input error email')}>
+                                <label>Email</label>
+                                <input name="user-email"
+                                    value={userInfo.email}
+                                    ref={email}
+                                    disabled={!editInfo}
+                                    type="email" />
+                                <span className="helper-txt">{stateObj.usernameMessage}</span>
+                            </div>
 
-                            <TextField required
-                                disabled={!editInfo}
-                                error={stateObj.passMessage != null}
-                                id="signin-password"
-                                label="Password"
-                                name="password"
-                                inputRef={password}
-                                helperText={stateObj.passMessage}
-                                className="text-field"
-                                size="small"
-                                type="password" />
+                            <div className={(!stateObj.passMessage ? 'user-input password' : 'user-input error password')}>
+                                <input name="user-email"
+                                    ref={password}
+                                    disabled={!editInfo}
+                                    placeholder="Password"
+                                    type="password" />
+                                <span className="helper-txt">{stateObj.passMessage}</span>
+                            </div>
                         </div>
                         <button className={(!editInfo ? 'hide' : 'user-prof-btn info-update-btn')} onClick={handleShowEditInfo}>Update</button>
                     </div>

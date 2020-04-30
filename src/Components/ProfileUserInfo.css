@@ -36,7 +36,7 @@
 .input-section{
     display: flex;
     flex-direction: column;
-    padding: 30px 0 50px 0;
+    padding: 35px 0 70px 0;
 }
 
 .user-points{
@@ -52,12 +52,13 @@
     border-radius: 8px;
     background-color: rgb(198 , 241, 231);
     color: rgb(100,100,100);
-    font-weight: 700;
+    font-weight: 600;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
 
-.pic-btn{
+.picture-btn{
     position: absolute;
-    top: 28%;
+    top: 21%;
     right: 4%;
 }
 
@@ -75,7 +76,86 @@
 .user-prof-btn:hover{
     background-color: rgb(126, 218, 196);
     color: rgb(30,30,30);
-    transition: background-color 0.1s;
+    /* transition: background-color 0.1s; */
+}
+
+
+.user-input{
+    position: relative;
+    height: 38px;
+    width: 250px;
+    margin-bottom: 12px;
+}
+
+.user-input input:disabled{
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+.user-input label{
+    position: absolute;
+    bottom: 29px;
+    color: #959595;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.user-input .helper-txt{
+    display: none;
+}
+
+.user-input.error .helper-txt{
+    position: absolute;
+    display: flex !important;
+    top: 36px;
+    color: #e70000;
+    float: left;
+    font-size: 12px;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.user-input input{
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.user-input.error input{
+    border-color: #e70000 !important;
+}
+
+.user-input input:focus{
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.user-input.lname{
+    margin-left: 5px;
+}
+
+.user-input.email{
+    top: 20px;
+}
+
+.user-input.password{
+    top: 30px;
 }
 
 .user-names-div{

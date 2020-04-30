@@ -1,0 +1,51 @@
+.none{
+    display: none !important;
+}
+
+.margin-20{
+    margin-top: 20px;
+}
+
+.margin-10{
+    margin-top: 10px;
+}
+
+.combo-box{
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.combo-box-lists.error input{
+    border-color: #e70000;
+}
+
+.combo-box .helper-txt-error{
+    position: absolute;
+    top: 36px;
+    color: #e70000;
+    float: left;
+    font-size: 12px;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.margin-10 .industry-span{
+    display: none;
+}
+
+.industry-span,
+.occupation-span,
+.location-span{
+    position: absolute;
+    bottom: 37px;
+    color: #959595;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.combo-box-lists{
+    width: 250px;
+}
