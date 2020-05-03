@@ -10,6 +10,7 @@ import Occupations from './Lists/Occupations'
 import Indsutries from './Lists/Industries'
 import UserStats from './UserStats'
 import Locations from './Lists/Locations'
+import ChangePassword from '../Modals/ChangePassword'
 
 export default function ProfileUserInfo() {
     let userInfoBE = {};
@@ -153,11 +154,11 @@ export default function ProfileUserInfo() {
                 <Col sm={3} className="img-col">
                     <img src={userInfoBE.profileImg} className="user-prof-pic" alt="User Profile" />
                     <UserStats />
-                    <button className="user-prof-btn picture-btn">Edit</button>
+                    <button className="btn-user-prof picture-btn">Edit</button>
                 </Col>
                 <Col sm={9} className="info-col">
                     <div className="input-btn-section">
-                        <button className="user-prof-btn info-edit-btn"
+                        <button className="btn-user-prof info-edit-btn"
                             onClick={handleHideEditInfo}>{!editInfo ? 'Edit' : 'Cancel'}</button>
                         <div className="input-section">
                             <div className="user-names-div">
@@ -201,7 +202,9 @@ export default function ProfileUserInfo() {
                                 onChange={handleChangeLocation}
                                 thisClassName="autocomplete" />
 
-                            <div className={(!stateObj.usernameMessage ? 'user-input email' : 'user-input error email')}>
+                            <ChangePassword showEdit={editInfo}/>
+
+                            {/* <div className={(!stateObj.usernameMessage ? 'user-input email' : 'user-input error email')}>
                                 <label>Email</label>
                                 <input name="user-email"
                                     defaultValue={userInfoBE.email}
@@ -209,18 +212,18 @@ export default function ProfileUserInfo() {
                                     disabled={!editInfo}
                                     type="email" />
                                 <span className="helper-txt">{stateObj.usernameMessage}</span>
-                            </div>
+                            </div> */}
 
-                            <div className={(!stateObj.passMessage ? 'user-input password' : 'user-input error password')}>
+                            {/* <div className={(!stateObj.passMessage ? 'user-input password' : 'user-input error password')}>
                                 <input name="user-email"
                                     ref={password}
                                     disabled={!editInfo}
                                     placeholder="Password"
                                     type="password" />
                                 <span className="helper-txt">{stateObj.passMessage}</span>
-                            </div>
+                            </div> */}
                         </div>
-                        <button className={(!editInfo ? 'hide' : 'user-prof-btn info-update-btn')} 
+                        <button className={(!editInfo ? 'hide' : 'btn-user-prof btn-info-update')} 
                             onClick={updateUserInfo}>Update</button>
                     </div>
                 </Col>

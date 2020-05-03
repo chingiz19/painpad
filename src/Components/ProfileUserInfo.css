@@ -44,7 +44,7 @@
     top: 20px;
 }
 
-.user-prof-btn{
+.btn-user-prof{
     outline: none !important;
     height: 30px;
     width: 75px;
@@ -54,6 +54,11 @@
     color: rgb(100,100,100);
     font-weight: 600;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+
+.btn-user-prof:hover{
+    background-color: rgb(126, 218, 196);
+    color: rgb(30,30,30);
 }
 
 .picture-btn{
@@ -67,17 +72,12 @@
     right: 0;
 }
 
-.info-update-btn{
+.btn-info-update{
     position: absolute;
     bottom: 0;
+    margin: 20px 0;
     width: calc(100% - 20px);
 }
-
-.user-prof-btn:hover{
-    background-color: rgb(126, 218, 196);
-    color: rgb(30,30,30);
-}
-
 
 .user-input{
     position: relative;
@@ -108,10 +108,6 @@
 
 .user-input.email{
     top: 20px;
-}
-
-.user-input.password{
-    top: 30px;
 }
 
 .user-names-div{

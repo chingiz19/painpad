@@ -1,8 +1,6 @@
 import React from 'react'
 import './problem.css'
 
-import UserProfPic from '../../images/users/profile-pictures/elnarsharifli.jpg'
-
 export default function Problems(props) {
 
     return (
