@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import './ProfileUserInfo.css';
+import './UserInput.css';
 import Validate from 'validate.js';
 // import { useMutation } from '@apollo/react-hooks';
 import Container from 'react-bootstrap/Container';

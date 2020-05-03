@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 import Validate from 'validate.js';
 import './SignIn.css';
-import TextField from '@material-ui/core/TextField';
+import './UserInput.css';
+import Loading from './Loading'
 import { gql } from 'apollo-boost';
 import { useLazyQuery } from '@apollo/react-hooks';
 
@@ -9,9 +10,9 @@ export default function SignIn() {
     const email = useRef(null);
     const password = useRef(null);
 
-    const [stateObj, setMessage] = useState({ 
-        emailMessage: null, 
-        passMessage: null 
+    const [stateObj, setMessage] = useState({
+        emailMessage: null,
+        passMessage: null
     });
 
     const constraints = {
@@ -35,8 +36,10 @@ export default function SignIn() {
 
     const [callUserSignIn, { loading, error, data: userSignIn }] = useLazyQuery(USER_SIGN_IN);
 
-    if(userSignIn){
-        window.location.reload();
+    if (userSignIn) {
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
     }
 
     const submitInput = e => {
@@ -67,33 +70,29 @@ export default function SignIn() {
     return (
         <>
             <div className="signin-main-div">
-                <TextField required
-                    error={stateObj.emailMessage != null}
-                    label="Email"
-                    name="email"
-                    inputRef={email}
-                    helperText={stateObj.emailMessage}
-                    variant="outlined"
-                    size="small"
-                    type="email" />
 
-                <TextField required
-                    error={stateObj.passMessage != null}
-                    label="Password"
-                    name="password"
-                    inputRef={password}
-                    helperText={stateObj.passMessage}
-                    variant="outlined"
-                    size="small"
-                    type="password" />
-
-                <button onClick={submitInput}>Submit</button>
-                <br/>
-                <div>
-                    {loading && <p>Loading...</p>}
-                    {error && <p>Error :( Please try again</p>}
-                    {userSignIn && <p>Data is here {JSON.stringify(userSignIn.login)}</p>}
+                <div className={(!stateObj.emailMessage ? 'user-input' : 'user-input error')}>
+                    <label>Email</label>
+                    <input name="firstName"
+                        ref={email}
+                        type="text" />
+                    <span className="helper-txt">{stateObj.emailMessage}</span>
                 </div>
+
+                <div className={(!stateObj.passMessage ? 'user-input pass' : 'user-input error pass')}>
+                    <label>Password</label>
+                    <input name="password"
+                        ref={password}
+                        type="password" />
+                    <span className="helper-txt">{stateObj.passMessage}</span>
+                </div>
+
+                {(loading || userSignIn)
+                    ? <Loading done={userSignIn} loading={loading} />
+                    : <button className="submit-btn" onClick={submitInput}>Sign In</button>}
+
+                {error && <Loading error={error} />}
+
             </div>
         </>
     );
