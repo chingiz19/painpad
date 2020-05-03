@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 import HeaderWeb from '../../Components/HeaderWeb'
 import WriteReport from '../../Components/WriteReport';
 import ProblemFeed from '../../Components/ProblemFeed'
+import SeperatorLine from '../../Components/SeperatorLine'
 
 export default function Home(props) {
 
@@ -14,7 +15,8 @@ export default function Home(props) {
             firstName: "Elnar",
             lastName: "Sharifli",
             profilePic: "../images/users/profile-pictures/elnarsharifli.jpg",
-            industry: "Investment Management"
+            industry: "Investment Management",
+            profileImg: "https://www.telegraph.co.uk/content/dam/technology/2017/11/01/emoji_update_2017_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.png?imwidth=450"
         },
         problem: {
             id: "123423",
@@ -30,7 +32,8 @@ export default function Home(props) {
             firstName: "Elnar",
             lastName: "Sharifli",
             profilePic: "../images/users/profile-pictures/elnarsharifli.jpg",
-            industry: "Investment Management"
+            industry: "Investment Management",
+            profileImg: "https://www.telegraph.co.uk/content/dam/technology/2017/11/01/emoji_update_2017_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.png?imwidth=450"
         },
         problem: {
             id: "225",
@@ -55,7 +58,7 @@ export default function Home(props) {
                             <div className="main">
                                 <div className="problems-div">
                                     <WriteReport />
-                                    <div className="wr-feed-seperator"></div>
+                                    <SeperatorLine thisValue="Reports feed" />
                                     <ProblemFeed thisPosts={posts_tmp}/>
                                 </div>
                             </div>

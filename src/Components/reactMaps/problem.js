@@ -8,7 +8,7 @@ export default function Problems(props) {
     return (
         <div className="problem-div">
             <div className="problem-hdr">
-                <img src={UserProfPic} className="user-prof-pic" alt="User Profile" />
+                <img src={props.problemObj.poster.profileImg} className="user-prof-pic" alt="User Profile" />
                 <ul>
                     <li className="user-name-li">{props.problemObj.poster.firstName + " " + props.problemObj.poster.lastName}</li>
                     <li className="user-industry-li">{props.problemObj.poster.industry}</li>

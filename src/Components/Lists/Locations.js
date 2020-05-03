@@ -31,8 +31,8 @@ export default function Locations(props) {
     }
 
     return (
-        <div className={props.thisValue ? 'combo-box margin-20' : 'combo-box margin-10'}>
-            <span className="location-span">Location</span>
+        <div className="combo-box">
+            <span className={!props.thisPlaceholder ? 'location-span' : 'none'}>Location</span>
             <Typeahead
                 id="locations-list"
                 className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
@@ -42,7 +42,7 @@ export default function Locations(props) {
                 onInputChange={handleInputChange}
                 onChange={handleChange}
                 disabled={props.thisDisabled}
-                placeholder="Locations"
+                placeholder={props.thisPlaceholder}
             />
             <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
         </div>

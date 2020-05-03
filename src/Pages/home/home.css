@@ -11,15 +11,9 @@
 
 .main-comp{
     height: 100vh;
-    padding: 0;
+    padding: 0 !important;
 }
 
 .problems-div{
     width: 670px;
-}
-
-.wr-feed-seperator{
-    height: 1px;
-    margin: 20px 0;
-    background-color: rgba(180, 180, 180,0.6);
 }

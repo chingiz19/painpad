@@ -15,7 +15,8 @@ export default function Profile(props) {
             firstName: "Elnar",
             lastName: "Sharifli",
             profilePic: "../images/users/profile-pictures/elnarsharifli.jpg",
-            industry: "Investment Management"
+            industry: "Investment Management",
+            profileImg: "https://www.telegraph.co.uk/content/dam/technology/2017/11/01/emoji_update_2017_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.png?imwidth=450"
         },
         problem: {
             id: "123423",
@@ -31,7 +32,8 @@ export default function Profile(props) {
             firstName: "Elnar",
             lastName: "Sharifli",
             profilePic: "../images/users/profile-pictures/elnarsharifli.jpg",
-            industry: "Investment Management"
+            industry: "Investment Management",
+            profileImg: "https://www.telegraph.co.uk/content/dam/technology/2017/11/01/emoji_update_2017_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.png?imwidth=450"
         },
         problem: {
             id: "225",

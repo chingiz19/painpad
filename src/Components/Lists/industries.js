@@ -31,8 +31,8 @@ export default function Industries(props) {
     }
 
     return (
-        <div className={props.thisValue ? 'combo-box margin-20' : 'combo-box margin-10'}>
-            <span className="industry-span">Industry</span>
+        <div className="combo-box">
+            <span className={!props.thisPlaceholder ? 'industry-span' : 'none'}>Industry</span>
             <Typeahead
                 id="industries-list"
                 className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
@@ -42,8 +42,8 @@ export default function Industries(props) {
                 onInputChange={handleInputChange}
                 onChange={handleChange}
                 disabled={props.thisDisabled}
-                placeholder="Industries"
                 emptyLabel="No such industry.."
+                placeholder={props.thisPlaceholder}
             />
             <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
         </div>

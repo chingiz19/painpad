@@ -11,8 +11,6 @@ import Indsutries from './Lists/Industries'
 import UserStats from './UserStats'
 import Locations from './Lists/Locations'
 
-// import UserProfPic from '../images/users/profile-pictures/elnarsharifli.jpg'
-
 export default function ProfileUserInfo() {
     let userInfoBE = {};
 
@@ -129,7 +127,7 @@ export default function ProfileUserInfo() {
                 ...prevState,
                 firstNameMessage: check && check.firstName ? "Can only contain letters" : null,
                 lastNameMessage: check && check.lastName ? "Can only contain letters" : null,
-                usernameMessage: check && check.email[0] ? "Please enter valid email" : null,
+                usernameMessage: check && check.email && check.email[0] ? "Please enter valid email" : null,
                 jobTitleMessage: check && check.jobTitle ? "Can only contain letters" : null,
                 industryMessage: check && check.industry ? "Required" : null,
                 locationMessage: check && check.location ? "Required" : null,

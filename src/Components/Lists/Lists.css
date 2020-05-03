@@ -2,17 +2,9 @@
     display: none !important;
 }
 
-.margin-20{
-    margin-top: 20px;
-}
-
-.margin-10{
-    margin-top: 10px;
-}
-
 .combo-box{
     position: relative;
-    margin-bottom: 12px;
+    margin: 20px 0 12px 0;
 }
 
 .combo-box-lists.error input{

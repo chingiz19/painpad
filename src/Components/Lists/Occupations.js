@@ -31,7 +31,7 @@ export default function Occupations(props) {
     }
 
     return (
-        <div className={props.thisValue ? 'combo-box margin-20' : 'combo-box margin-10'}>
+        <div className="combo-box">
             <span className="occupation-span">Occupation</span>
             <Typeahead
                 id="occupations-list"
@@ -42,7 +42,6 @@ export default function Occupations(props) {
                 onInputChange={handleInputChange}
                 onChange={handleChange}
                 disabled={props.thisDisabled}
-                placeholder="Occupations"
             />
             <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
         </div>

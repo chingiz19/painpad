@@ -73,7 +73,7 @@ export default function SignIn() {
 
                 <div className={(!stateObj.emailMessage ? 'user-input' : 'user-input error')}>
                     <label>Email</label>
-                    <input name="firstName"
+                    <input name="email"
                         ref={email}
                         type="text" />
                     <span className="helper-txt">{stateObj.emailMessage}</span>

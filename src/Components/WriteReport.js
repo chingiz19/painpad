@@ -6,8 +6,9 @@ import Indsutries from './Lists/Industries'
 
 export default function WriteReport() {
     const reportText = useRef(null);
-    let industry = null;
-    let city = null;
+
+    const [industry, setIndustry] = useState(null);
+    const [city, setCity] = useState(null)
 
     const [stateObj, setMessage] = useState({
         industryMessage: null,
@@ -24,7 +25,7 @@ export default function WriteReport() {
         },
         reportText: {
             format: {
-                pattern: "[a-zA-Z]+"
+                pattern: "[a-zA-Z0-9.:);+-?! ]+"
             }
         }
     };
@@ -41,47 +42,55 @@ export default function WriteReport() {
                 ...prevState,
                 industryMessage: check && check.industry ? "Required" : null,
                 cityMessage: check && check.city ? "Required" : null,
-                reportTextMessage: check && check.reportText ? "Ups..Doesn't look like a valid report." : null
+                reportTextMessage: check && check.reportText ? "Ups..Doesn't look like a valid report text" : null
             }
         });
 
         //This implemented as there is no error attribute for TextArea
-        if (check && check.reportText != null) {
-            alert("Ups..Doesn't look like a valid report.")
-        }
+        // if (check && check.reportText != null) {
+        //     alert("Ups..Doesn't look like a valid report.")
+        // }
 
         //API call to BE goes here
 
     }
 
     function handleChangeIndustry(newValue) {
-        industry = newValue;
+        setIndustry(newValue[0]);
     }
 
     function handleChangeCity(newValue) {
-        city = newValue;
+        setCity(newValue[0]);
     }
 
     return (
         <>
             <div className="write-report-main">
-                <textarea className="wr-textarea" maxLength="160" cols="52" rows="3" placeholder="What needs a fix?" ref={reportText}></textarea>
+                <div className="wr-ln-1">
+                    <textarea className="wr-textarea" 
+                        maxLength="160" 
+                        cols="52" 
+                        rows="3" 
+                        placeholder="What needs a fix?" 
+                        ref={reportText}></textarea>
+                    <span className={stateObj.reportTextMessage ? 'show-error' : 'hide-error'}>{stateObj.reportTextMessage}</span>
+                </div>
                 <div className="wr-ln-2">
                     <div className="wr-list-div">
                         <div className="combo-industry">
-                            <Indsutries thisVariant="outlined"
-                                thisWidth={200}
-                                errorMessage={stateObj.industryMessage} 
-                                onChange={handleChangeIndustry} />
+                            <Indsutries helperText={stateObj.industryMessage}
+                                onChange={handleChangeIndustry}
+                                thisClassName="autocomplete" 
+                                thisPlaceholder="Industry"/>
                         </div>
                         <div className="combo-city">
-                            <Locations thisVariant="outlined" 
-                                thisWidth={200}
-                                errorMessage={stateObj.cityMessage} 
-                                onChange={handleChangeCity} />
+                            <Locations helperText={stateObj.cityMessage}
+                                onChange={handleChangeCity}
+                                thisClassName="autocomplete" 
+                                thisPlaceholder="Location"/>
                         </div>
                     </div>
-                    <button className="btn-send-report" onClick={sendReport}>Report</button>
+                    <button className="btn-report" onClick={sendReport}>Report</button>
                 </div>
             </div>
         </>
