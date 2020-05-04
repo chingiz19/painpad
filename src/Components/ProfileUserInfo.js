@@ -220,8 +220,6 @@ export default function ProfileUserInfo() {
                             <ChangePassword showEdit={editInfo} />
 
                         </div>
-                        {/* <button className={(!editInfo ? 'hide' : 'btn-user-prof btn-info-update')}
-                            onClick={updateUserInfo}>Update</button> */}
 
                         {(loadingPostUserInfo || dataPostUserInfo)
                             ? <Loading done={dataPostUserInfo} loading={loadingPostUserInfo} thisClass="loadding-user-info"/>

@@ -1,5 +1,8 @@
 import React, { useState, useRef } from 'react';
 import './ChangePassword.css';
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+import Loading from '../Components/Loading'
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Validate from 'validate.js';
@@ -34,6 +37,23 @@ export default function ChangePassword(props) {
             }
         }
     };
+
+    const POST_USER_PWD = gql`
+        mutation changePwd($oldPwd: String!, $newPwd: String!){
+            changePwd(
+                oldPwd: $oldPwd,
+                newPwd: $newPwd
+            )
+        }
+    `;
+
+    const [callPostUserPwd, { data: dataPostUserPwd, loading: loadingPostUserPwd, error: errorPostUserPwd}] = useMutation(POST_USER_PWD);
+
+    if (dataPostUserPwd && dataPostUserPwd.changePwd) {
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
+    }
 
     const handleClose = () => {
         setShow(false);
@@ -73,7 +93,12 @@ export default function ChangePassword(props) {
         });
 
         if (!check) {
-            //BE call goes here
+            callPostUserPwd({
+                variables: {
+                    oldPwd: oldPassword.current.value,
+                    newPwd: newPassword.current.value
+                }
+            });
         }
 
     };
@@ -115,7 +140,11 @@ export default function ChangePassword(props) {
                             <span className="helper-txt">{stateObj.newPass2Message}</span>
                         </div>
 
-                        <button className="submit-btn" onClick={updatePassword}>Update</button>
+                        {(loadingPostUserPwd || dataPostUserPwd)
+                            ? <Loading done={dataPostUserPwd} loading={loadingPostUserPwd}/>
+                            : <button className="submit-btn" onClick={updatePassword}>Update</button>}
+
+                        {errorPostUserPwd && <Loading error={errorPostUserPwd} />}
 
                     </InputGroup>
                 </Modal.Body>
