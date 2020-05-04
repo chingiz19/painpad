@@ -95,7 +95,6 @@ export default function ChangePassword(props) {
                             <label>Old password</label>
                             <input name="user-email"
                                 ref={oldPassword}
-                                placeholder="Password"
                                 type="password" />
                             <span className="helper-txt">{stateObj.oldPassMessage}</span>
                         </div>
@@ -104,7 +103,6 @@ export default function ChangePassword(props) {
                             <label>New password</label>
                             <input name="user-email"
                                 ref={newPassword}
-                                placeholder="Password"
                                 type="password" />
                             <span className="helper-txt">{stateObj.newPassMessage}</span>
                         </div>
@@ -113,7 +111,6 @@ export default function ChangePassword(props) {
                             <label>Confirm password</label>
                             <input name="user-email"
                                 ref={newPassword2}
-                                placeholder="Password"
                                 type="password" />
                             <span className="helper-txt">{stateObj.newPass2Message}</span>
                         </div>

@@ -5,13 +5,12 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 export default function Locations(props) {
-
     const GET_LOCATIONS = gql`
             query locations($text: String!, $limit: Int!) {
                 locations(
                     text: $text, 
                     limit: $limit)
-                {id, value}
+                {locationId: id, location: value}
             }
         `;
 
@@ -31,20 +30,23 @@ export default function Locations(props) {
     }
 
     return (
-        <div className="combo-box">
-            <span className={!props.thisPlaceholder ? 'location-span' : 'none'}>Location</span>
-            <Typeahead
-                id="locations-list"
-                className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
-                labelKey="value"
-                defaultSelected={props.thisValue ? [props.thisValue] : []}
-                options={(data && data.locations) || (props.thisValue && [props.thisValue]) || []}
-                onInputChange={handleInputChange}
-                onChange={handleChange}
-                disabled={props.thisDisabled}
-                placeholder={props.thisPlaceholder}
-            />
-            <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
-        </div>
+
+        props.thisLoading ? '' :
+
+            (<div className="combo-box">
+                <span className={!props.thisPlaceholder ? 'location-span' : 'none'}>Location</span>
+                <Typeahead
+                    id="locations-list"
+                    className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
+                    labelKey="location"
+                    defaultSelected={props.thisValue ? [props.thisValue] : []}
+                    options={(data && data.locations) || (props.thisValue && [props.thisValue]) || []}
+                    onInputChange={handleInputChange}
+                    onChange={handleChange}
+                    disabled={props.thisDisabled}
+                    placeholder={props.thisPlaceholder}
+                />
+                <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
+            </div>)
     );
 }

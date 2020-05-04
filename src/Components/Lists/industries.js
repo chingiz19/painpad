@@ -11,7 +11,7 @@ export default function Industries(props) {
                 industries(
                     text: $text, 
                     limit: $limit)
-                {id, value}
+                {industryId: id, industry: value}
             }
         `;
 
@@ -31,21 +31,24 @@ export default function Industries(props) {
     }
 
     return (
-        <div className="combo-box">
-            <span className={!props.thisPlaceholder ? 'industry-span' : 'none'}>Industry</span>
-            <Typeahead
-                id="industries-list"
-                className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
-                labelKey="value"
-                defaultSelected={props.thisValue ? [props.thisValue] : []}
-                options={(data && data.industries) || (props.thisValue && [props.thisValue]) || []}
-                onInputChange={handleInputChange}
-                onChange={handleChange}
-                disabled={props.thisDisabled}
-                emptyLabel="No such industry.."
-                placeholder={props.thisPlaceholder}
-            />
-            <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
-        </div>
+
+        props.thisLoading ? '' :
+
+            (<div className="combo-box">
+                <span className={!props.thisPlaceholder ? 'industry-span' : 'none'}>Industry</span>
+                <Typeahead
+                    id="industries-list"
+                    className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
+                    labelKey="industry"
+                    defaultSelected={props.thisValue ? [props.thisValue] : []}
+                    options={(data && data.industries) || (props.thisValue && [props.thisValue]) || []}
+                    onInputChange={handleInputChange}
+                    onChange={handleChange}
+                    disabled={props.thisDisabled}
+                    emptyLabel="No such industry.."
+                    placeholder={props.thisPlaceholder}
+                />
+                <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
+            </div>)
     );
 }

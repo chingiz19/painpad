@@ -11,7 +11,7 @@ export default function Occupations(props) {
                 occupations(
                     text: $text, 
                     limit: $limit)
-                {id, value}
+                {occupationId: id, occupation: value}
             }
         `;
 
@@ -31,19 +31,22 @@ export default function Occupations(props) {
     }
 
     return (
-        <div className="combo-box">
-            <span className="occupation-span">Occupation</span>
-            <Typeahead
-                id="occupations-list"
-                className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
-                labelKey="value"
-                defaultSelected={props.thisValue ? [props.thisValue] : []}
-                options={(data && data.occupations) || (props.thisValue && [props.thisValue]) || []}
-                onInputChange={handleInputChange}
-                onChange={handleChange}
-                disabled={props.thisDisabled}
-            />
-            <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
-        </div>
+
+        props.thisLoading ? '' :
+
+            (<div className="combo-box">
+                <span className="occupation-span">Occupation</span>
+                <Typeahead
+                    id="occupations-list"
+                    className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
+                    labelKey="occupation"
+                    defaultSelected={props.thisValue ? [props.thisValue] : []}
+                    options={(data && data.occupations) || (props.thisValue && [props.thisValue]) || []}
+                    onInputChange={handleInputChange}
+                    onChange={handleChange}
+                    disabled={props.thisDisabled}
+                />
+                <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
+            </div>)
     );
 }

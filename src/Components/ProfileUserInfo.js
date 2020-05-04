@@ -3,6 +3,8 @@ import './ProfileUserInfo.css';
 import './UserInput.css';
 import Validate from 'validate.js';
 // import { useMutation } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -13,13 +15,13 @@ import Locations from './Lists/Locations'
 import ChangePassword from '../Modals/ChangePassword'
 
 export default function ProfileUserInfo() {
-    let userInfoBE = {};
+    let userId = parseInt(window.location.href.split("users/")[1]);
 
     let firstName = useRef(null);
     let lastName = useRef(null);
     let email = useRef(null);
     let password = useRef(null);
-    let jobTitle = null;
+    let occupation = null;
     let industry = null;
     let location = null;
 
@@ -46,7 +48,7 @@ export default function ProfileUserInfo() {
                 pattern: "[a-zA-Z]+"
             }
         },
-        jobTitle: {
+        occupation: {
             presence: { allowEmpty: false }
         },
         industry: {
@@ -66,29 +68,32 @@ export default function ProfileUserInfo() {
         }
     };
 
-    // check session and retrieve user info
-    if (true) {
-        userInfoBE = {
-            firstName: "Elnar",
-            lastName: "Sharifli",
-            email: "elnarsharifli@gmail.com",
-            jobTitle: "Reporting Analyst",
-            profileImg: "https://www.telegraph.co.uk/content/dam/technology/2017/11/01/emoji_update_2017_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.png?imwidth=450",
-            location: {
-                "id": "1",
-                "value": "Calgary, Canada"
-            },
-            industry: {
-                "id": "2",
-                "value": "Investment Management",
-                "__typename": "Pair"
+    const GET_USER_INFO = gql`
+        query userProfile($userId: ID!){
+            userProfile(userId: $userId) {
+            self, user{
+                id, firstName, lastName, email, emailVerified, profilePic, 
+                occupation {occupationId: id, occupation: value}, 
+                industry {industryId: id, industry: value}, 
+                location {locationId: id, location: value}, 
+                since, score 
+            }
             }
         }
+    `;
 
-    }
+    const {data: dataUserInfoBE, loading: loadingUserInfoBE} = useQuery(GET_USER_INFO, {
+        variables: { 
+            userId: userId
+         },
+      });
+
+
+    let userInfoBE = dataUserInfoBE ? dataUserInfoBE.userProfile.user : {};
+
 
     function handleChangeJobTitle(newValue) {
-        jobTitle = newValue;
+        occupation = newValue;
     }
 
     function handleChangeIndustry(newValue) {
@@ -116,7 +121,7 @@ export default function ProfileUserInfo() {
         let check = Validate({
             firstName: (firstName.current.value || firstName.current.value === '') ? firstName.current.value : userInfoBE.firstName,
             lastName: (lastName.current.value || lastName.current.value === '') ? lastName.current.value : userInfoBE.lastName,
-            jobTitle: jobTitle ? jobTitle : userInfoBE.jobTitle,
+            occupation: occupation ? occupation : userInfoBE.occupation,
             industry: industry ? industry : userInfoBE.industry,
             location: location ? location : userInfoBE.location,
             email: (email.current.value || email.current.value === '') ? email.current.value : userInfoBE.email,
@@ -129,7 +134,7 @@ export default function ProfileUserInfo() {
                 firstNameMessage: check && check.firstName ? "Can only contain letters" : null,
                 lastNameMessage: check && check.lastName ? "Can only contain letters" : null,
                 usernameMessage: check && check.email && check.email[0] ? "Please enter valid email" : null,
-                jobTitleMessage: check && check.jobTitle ? "Can only contain letters" : null,
+                jobTitleMessage: check && check.occupation ? "Can only contain letters" : null,
                 industryMessage: check && check.industry ? "Required" : null,
                 locationMessage: check && check.location ? "Required" : null,
                 passMessage: check && check.password ? "Minimum 6 characters or more" : null
@@ -152,7 +157,7 @@ export default function ProfileUserInfo() {
         <Container fluid className="user-info-container">
             <Row>
                 <Col sm={3} className="img-col">
-                    <img src={userInfoBE.profileImg} className="user-prof-pic" alt="User Profile" />
+                    <img src={userInfoBE.profilePic} className="user-prof-pic" alt="User Profile" />
                     <UserStats />
                     <button className="btn-user-prof picture-btn">Edit</button>
                 </Col>
@@ -187,41 +192,26 @@ export default function ProfileUserInfo() {
                             <Indsutries thisDisabled={!editInfo}
                                 thisValue={userInfoBE.industry}
                                 helperText={stateObj.industryMessage}
+                                thisLoading={loadingUserInfoBE}
                                 onChange={handleChangeIndustry}
                                 thisClassName="autocomplete" />
 
                             <Occupations thisDisabled={!editInfo}
-                                thisValue={userInfoBE.jobTitle}
+                                thisValue={userInfoBE.occupation}
                                 helperText={stateObj.jobTitleMessage}
+                                thisLoading={loadingUserInfoBE}
                                 onChange={handleChangeJobTitle}
                                 thisClassName="autocomplete" />
 
                             <Locations thisDisabled={!editInfo}
                                 thisValue={userInfoBE.location}
                                 helperText={stateObj.locationMessage}
+                                thisLoading={loadingUserInfoBE}
                                 onChange={handleChangeLocation}
                                 thisClassName="autocomplete" />
 
                             <ChangePassword showEdit={editInfo}/>
 
-                            {/* <div className={(!stateObj.usernameMessage ? 'user-input email' : 'user-input error email')}>
-                                <label>Email</label>
-                                <input name="user-email"
-                                    defaultValue={userInfoBE.email}
-                                    ref={email}
-                                    disabled={!editInfo}
-                                    type="email" />
-                                <span className="helper-txt">{stateObj.usernameMessage}</span>
-                            </div> */}
-
-                            {/* <div className={(!stateObj.passMessage ? 'user-input password' : 'user-input error password')}>
-                                <input name="user-email"
-                                    ref={password}
-                                    disabled={!editInfo}
-                                    placeholder="Password"
-                                    type="password" />
-                                <span className="helper-txt">{stateObj.passMessage}</span>
-                            </div> */}
                         </div>
                         <button className={(!editInfo ? 'hide' : 'btn-user-prof btn-info-update')} 
                             onClick={updateUserInfo}>Update</button>

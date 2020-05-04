@@ -10,7 +10,7 @@ export default function HeaderWeb(props) {
     
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
-            isLogin
+            isLogin {success, id}
         }
     `;
 
@@ -35,7 +35,7 @@ export default function HeaderWeb(props) {
                 <a href="/" className="a-logo-hdr-web">
                     <img src={LogoTransperent} className="header-logo" alt="Transperent Logo" />
                 </a>
-                <ul className="guest-user-ul" style={{ display: !(isUserSignedIn && isUserSignedIn.isLogin) ? '' : 'none' }}>
+                <ul className="guest-user-ul" style={{ display: !(isUserSignedIn && isUserSignedIn.isLogin.success) ? '' : 'none' }}>
                     <li className="wh-li">
                         <a href="/" className="wh-li-a">
                             <div className="wh-li-a-div">
@@ -69,7 +69,7 @@ export default function HeaderWeb(props) {
                         </a>
                     </li>
                     <li className="wh-li">
-                        <a href="/users/elnarsharifli" className="wh-li-a">
+                        <a href="/users/1" className="wh-li-a">
                             <div className="wh-li-a-div">
                                 <div className={(props.currentPage === 'profile' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
                                     <i className="far fa-user"></i>Profile
