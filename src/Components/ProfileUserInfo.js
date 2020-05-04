@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react';
 import './ProfileUserInfo.css';
 import './UserInput.css';
 import Validate from 'validate.js';
-// import { useMutation } from '@apollo/react-hooks';
+import Loading from './Loading'
+import { useMutation } from '@apollo/react-hooks';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import Container from 'react-bootstrap/Container';
@@ -19,8 +20,6 @@ export default function ProfileUserInfo() {
 
     let firstName = useRef(null);
     let lastName = useRef(null);
-    let email = useRef(null);
-    let password = useRef(null);
     let occupation = null;
     let industry = null;
     let location = null;
@@ -56,17 +55,21 @@ export default function ProfileUserInfo() {
         },
         location: {
             presence: { allowEmpty: false }
-        },
-        email: {
-            email: true,
-            presence: { allowEmpty: false }
-        },
-        password: {
-            length: {
-                minimum: 6
-            }
         }
     };
+
+    const POST_USER_INFO = gql`
+            mutation changeprofile($firstName: String!, $lastName: String!, $occupationId: ID!, $locationId: ID!, $industryId: ID!, $profilePic: String!){
+            changeProfile(
+                firstName: $firstName,
+                lastName: $lastName,
+                occupationId: $occupationId,
+                locationId: $locationId,
+                industryId: $industryId,
+                profilePic: $profilePic
+              )
+        }
+    `;
 
     const GET_USER_INFO = gql`
         query userProfile($userId: ID!){
@@ -82,50 +85,53 @@ export default function ProfileUserInfo() {
         }
     `;
 
-    const {data: dataUserInfoBE, loading: loadingUserInfoBE} = useQuery(GET_USER_INFO, {
-        variables: { 
+    const { data: dataGetUserInfo, loading: loadingUserInfoBE } = useQuery(GET_USER_INFO, {
+        variables: {
             userId: userId
-         },
-      });
+        },
+    });
 
+    const [callPostUserInfo, { data: dataPostUserInfo, loading: loadingPostUserInfo, error: errorPostUserInfo}] = useMutation(POST_USER_INFO);
 
-    let userInfoBE = dataUserInfoBE ? dataUserInfoBE.userProfile.user : {};
+    let userInfoBE = dataGetUserInfo ? dataGetUserInfo.userProfile.user : {};
 
+    if (dataPostUserInfo) {
+        reloadApp(2000);
+    }
+
+    function reloadApp(newValue) {
+        setTimeout(() => {
+            window.location.reload();
+        }, newValue);
+    }
 
     function handleChangeJobTitle(newValue) {
-        occupation = newValue;
+        occupation = newValue[0];
     }
 
     function handleChangeIndustry(newValue) {
-        industry = newValue;
+        industry = newValue[0];
     }
 
     function handleChangeLocation(newValue) {
-        location = newValue;
+        location = newValue[0];
     }
 
     function handleHideEditInfo() {
         if (editInfo) {
-            window.location.reload();
+            reloadApp(0);
         }
         setEditInfo(!editInfo);
     }
 
-    function handleShowEditInfo() {
-        setEditInfo(false);
-    }
-
-    // const [callUpdateUserInfo, { loading, error, data }] = useMutation(USER_UPDATE_INFO);
-
     const updateUserInfo = e => {
+
         let check = Validate({
             firstName: (firstName.current.value || firstName.current.value === '') ? firstName.current.value : userInfoBE.firstName,
             lastName: (lastName.current.value || lastName.current.value === '') ? lastName.current.value : userInfoBE.lastName,
             occupation: occupation ? occupation : userInfoBE.occupation,
             industry: industry ? industry : userInfoBE.industry,
-            location: location ? location : userInfoBE.location,
-            email: (email.current.value || email.current.value === '') ? email.current.value : userInfoBE.email,
-            password: password.current.value
+            location: location ? location : userInfoBE.location
         }, constraints);
 
         setMessage(prevState => {
@@ -133,22 +139,23 @@ export default function ProfileUserInfo() {
                 ...prevState,
                 firstNameMessage: check && check.firstName ? "Can only contain letters" : null,
                 lastNameMessage: check && check.lastName ? "Can only contain letters" : null,
-                usernameMessage: check && check.email && check.email[0] ? "Please enter valid email" : null,
                 jobTitleMessage: check && check.occupation ? "Can only contain letters" : null,
                 industryMessage: check && check.industry ? "Required" : null,
-                locationMessage: check && check.location ? "Required" : null,
-                passMessage: check && check.password ? "Minimum 6 characters or more" : null
+                locationMessage: check && check.location ? "Required" : null
             }
         });
 
         if (!check) {
-            // callUpdateUserInfo({
-            //     variables: {
-            //         email: email.current.value,
-            //         pwd: password.current.value
-            //     }
-            // });
-            handleShowEditInfo();
+            callPostUserInfo({
+                variables: {
+                    firstName: firstName ? firstName.current.value : userInfoBE.firstName,
+                    lastName: lastName ? lastName.current.value : userInfoBE.lastName,
+                    occupationId: parseInt(occupation ? occupation.occupationId : userInfoBE.occupation.occupationId),
+                    locationId: parseInt(location ? location.locationId : userInfoBE.location.locationId),
+                    industryId: parseInt(industry ? industry.industryId : userInfoBE.industry.industryId),
+                    profilePic: userInfoBE.profilePic
+                }
+            });
         }
 
     };
@@ -210,11 +217,17 @@ export default function ProfileUserInfo() {
                                 onChange={handleChangeLocation}
                                 thisClassName="autocomplete" />
 
-                            <ChangePassword showEdit={editInfo}/>
+                            <ChangePassword showEdit={editInfo} />
 
                         </div>
-                        <button className={(!editInfo ? 'hide' : 'btn-user-prof btn-info-update')} 
-                            onClick={updateUserInfo}>Update</button>
+                        {/* <button className={(!editInfo ? 'hide' : 'btn-user-prof btn-info-update')}
+                            onClick={updateUserInfo}>Update</button> */}
+
+                        {(loadingPostUserInfo || dataPostUserInfo)
+                            ? <Loading done={dataPostUserInfo} loading={loadingPostUserInfo} thisClass="loadding-user-info"/>
+                            : <button className={(!editInfo ? 'hide' : 'btn-user-prof btn-info-update')} onClick={updateUserInfo}>Update</button>}
+
+                        {errorPostUserInfo && <Loading error={errorPostUserInfo} />}
                     </div>
                 </Col>
             </Row>

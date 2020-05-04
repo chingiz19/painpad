@@ -117,3 +117,9 @@
 .user-names-div .last-name{
     margin-left: 20px;
 }
+
+.loadding-user-info{
+    position: absolute;
+    bottom: -10px;
+    left: 40%;
+}

@@ -37,7 +37,7 @@ export default function Loading(props) {
     };
 
     return (
-        <div>
+        <div className={props.thisClass}>
             <FadeIn>
                 <div className="d-flex justify-content-center align-items-center">
                     {props.loading && <Lottie options={loadingOptions} height={90} width={90} />}
