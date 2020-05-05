@@ -14,6 +14,7 @@ import Indsutries from './Lists/Industries'
 import UserStats from './UserStats'
 import Locations from './Lists/Locations'
 import ChangePassword from '../Modals/ChangePassword'
+import ChangeUserPic from '../Modals/ChangeUserPic'
 
 export default function ProfileUserInfo() {
     let userId = parseInt(window.location.href.split("users/")[1]);
@@ -166,7 +167,8 @@ export default function ProfileUserInfo() {
                 <Col sm={3} className="img-col">
                     <img src={userInfoBE.profilePic} className="user-prof-pic" alt="User Profile" />
                     <UserStats userScore={userInfoBE.score} userId={userId}/>
-                    <button className="btn-user-prof picture-btn">Edit</button>
+                    {/* <button className="btn-user-prof picture-btn">Edit</button> */}
+                    <ChangeUserPic userId={userId} userPic={userInfoBE.profilePic}/>
                 </Col>
                 <Col sm={9} className="info-col">
                     <div className="input-btn-section">
