@@ -167,7 +167,6 @@ export default function ProfileUserInfo() {
                 <Col sm={3} className="img-col">
                     <img src={userInfoBE.profilePic} className="user-prof-pic" alt="User Profile" />
                     <UserStats userScore={userInfoBE.score} userId={userId}/>
-                    {/* <button className="btn-user-prof picture-btn">Edit</button> */}
                     <ChangeUserPic userId={userId} userPic={userInfoBE.profilePic}/>
                 </Col>
                 <Col sm={9} className="info-col">

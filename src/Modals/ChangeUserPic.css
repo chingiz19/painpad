@@ -54,8 +54,8 @@
 
 .btn-remove{
     position: absolute;
-    top: -5px;
-    right: 26%;
+    top: -4px;
+    right: -3%;
     height: 30px;
     width: 40px;
     border: none;
@@ -71,13 +71,7 @@
     background-color: #e81f6acf;
 }
 
-.user-photo{
-    width: 150px;
-    height: 150px;
-    border-radius: 75px;
-}
-
-.div-uploaded{
+.div-current{
     height: 142px;
     width: 142px;
     background-color: #e0e0e0;
@@ -85,9 +79,20 @@
     border-radius: 71px;
 }
 
-.div-uploaded img{
+.div-current img{
     width: calc(100% - 1px);
     height: calc(100% - 1px);
     border-radius: 70px;
     border: 1px solid #e0e0e0;
+}
+
+.div-crop .css-1dkwqii{
+    position: relative;
+    height: 286px;
+    width: 466px;
+}
+
+.tst{
+    height: 200px;
+    width: auto;
 }
