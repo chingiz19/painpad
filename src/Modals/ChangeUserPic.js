@@ -9,6 +9,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Cropper from 'react-easy-crop'
 import getCroppedImg from '../Components/Helpers/CropImage'
 import axios from 'axios';
+import imageCompression from 'browser-image-compression';
 
 export default function ChangePassword(props) {
 
@@ -59,6 +60,7 @@ export default function ChangePassword(props) {
 
     const [callGetSignS3] = useLazyQuery(GET_SIGNS3, {
         onCompleted: data => {
+            //Step 6 - initiate upload to AWS
             var options = {
                 headers: {
                     'Content-Type': imageType
@@ -66,6 +68,7 @@ export default function ChangePassword(props) {
             };
             axios.put(data.signS3.uploadUrl, croppedImage, options)
                 .then(result => {
+                    //Step 7 - update stored user photo URL in BE 
                     callPostUserInfo({
                         variables: {
                             profilePic: data.signS3.fileUrl
@@ -110,19 +113,36 @@ export default function ChangePassword(props) {
     };
 
     const uploadPhoto = async () => {
+        
+        const compressOptions = {
+            maxSizeMB: 0.05,
+            maxWidthOrHeight: 150,
+            useWebWorker: true,
+            onProgress: (() => setImageLoading(true))
+        }
+
         try {
             setImageLoading(true);
+            //Step 3 - initiate upload by cropping image
             const croppedImage = await getCroppedImg(
                 cropObj.image,
                 croppedAreaPixels
             )
-            setCroppedImage(croppedImage);
-            callGetSignS3({
-                variables: {
-                    fileName: imageName,
-                    fileType: imageType
-                }
-            });
+            try {
+                //Step 4 - compress cropped image
+                const compressedFile = await imageCompression(croppedImage, compressOptions);
+                setCroppedImage(compressedFile);
+                //Step 5 - call BE to get Upload URL to AWS
+                callGetSignS3({
+                    variables: {
+                        fileName: imageName,
+                        fileType: imageType
+                    }
+                });
+                
+            } catch (error) {
+                console.log(error);
+            }
 
         } catch (e) {
             console.error(e)
@@ -131,10 +151,11 @@ export default function ChangePassword(props) {
 
     const handleImageUpload = e => {
         const [file] = e.target.files;
-        
+
         setImageType(file.name.split('.')[1]);
         setImageName((props.userId * 583).toString());
 
+        //Step 1 - check if image size smaller than 2MB
         if (file.size > 2000000) {
             setImageUploadMsg("Maxium file size 2 MB.");
             return;
@@ -144,6 +165,7 @@ export default function ChangePassword(props) {
 
         if (file) {
             const reader = new FileReader();
+            //Step 2 - load image
             reader.onload = e => {
                 setCropObj({
                     ...cropObj,
