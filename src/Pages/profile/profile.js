@@ -7,8 +7,18 @@ import HeaderWeb from '../../Components/HeaderWeb'
 import ProfileUserInfo from '../../Components/ProfileUserInfo'
 import ProblemFeed from '../../Components/ProblemFeed'
 import SeperatorLine from '../../Components/SeperatorLine'
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 
 export default function Profile(props) {
+
+    const IS_USER_SIGNED_IN = gql`
+        query isLogin{
+            isLogin {success, id}
+        }
+    `;
+
+    const {data: isUserSignedIn} = useQuery(IS_USER_SIGNED_IN);
 
     let posts_tmp = [{
         poster: {
@@ -52,11 +62,11 @@ export default function Profile(props) {
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} />
+                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn}/>
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
                             <div className="div-1">
-                                <ProfileUserInfo />
+                                <ProfileUserInfo isUserSignedIn={isUserSignedIn}/>
                                 <SeperatorLine thisValue="My reports" />
                                 <ProblemFeed thisPosts={posts_tmp} />
                             </div>

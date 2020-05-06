@@ -180,7 +180,8 @@ export default function ChangePassword(props) {
 
     return (
         <>
-            <button className="btn-edit-pic picture-btn" onClick={handleYes}>Edit</button>
+            <button className={(props.isMyProfile ? 'btn-edit-pic picture-btn' : 'none')} 
+                onClick={handleYes}>Edit</button>
             <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <h3>Change photo</h3>

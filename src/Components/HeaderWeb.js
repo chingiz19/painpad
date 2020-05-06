@@ -3,18 +3,10 @@ import './HeaderWeb.css';
 import LogoTransperent from '../images/logos/logo_transparent.png';
 import UserSignInUp from '../Modals/UserSignInUp';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 import { useLazyQuery } from '@apollo/react-hooks';
 
 export default function HeaderWeb(props) {
-    
-    const IS_USER_SIGNED_IN = gql`
-        query isLogin{
-            isLogin {success, id}
-        }
-    `;
-
-    const {data: isUserSignedIn} = useQuery(IS_USER_SIGNED_IN);
+    let isUserSignedIn = props.isUserSignedIn;
 
     const USER_SIGN_OUT = gql`
         query signout{

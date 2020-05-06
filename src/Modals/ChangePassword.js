@@ -105,7 +105,7 @@ export default function ChangePassword(props) {
 
     return (
         <>
-            <div onClick={handleYes} className={(props.showEdit ? 'CP edit-false' : 'CP edit-true')}>
+            <div onClick={handleYes} className={(props.isMyProfile ? (props.showEdit ? 'CP edit-false' : 'CP edit-true') : 'none')}>
                 <i className="fas fa-lock"></i>
                 <span>Change password</span>
             </div>

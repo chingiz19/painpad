@@ -16,7 +16,7 @@ import Locations from './Lists/Locations'
 import ChangePassword from '../Modals/ChangePassword'
 import ChangeUserPic from '../Modals/ChangeUserPic'
 
-export default function ProfileUserInfo() {
+export default function ProfileUserInfo(props) {
     let userId = parseInt(window.location.href.split("users/")[1]);
 
     let firstName = useRef(null);
@@ -89,12 +89,14 @@ export default function ProfileUserInfo() {
     const { data: dataGetUserInfo, loading: loadingUserInfoBE } = useQuery(GET_USER_INFO, {
         variables: {
             userId: userId
-        },
+        }
     });
 
     const [callPostUserInfo, { data: dataPostUserInfo, loading: loadingPostUserInfo, error: errorPostUserInfo}] = useMutation(POST_USER_INFO);
 
     let userInfoBE = dataGetUserInfo ? dataGetUserInfo.userProfile.user : {};
+    let isMyProfile = dataGetUserInfo ? dataGetUserInfo.userProfile.self : false;
+
 
     if (dataPostUserInfo) {
         reloadApp(2000);
@@ -166,14 +168,19 @@ export default function ProfileUserInfo() {
             <Row>
                 <Col sm={3} className="img-col">
                     <img src={userInfoBE.profilePic} className="user-prof-pic" alt="User Profile" />
-                    <UserStats userScore={userInfoBE.score} userId={userId}/>
-                    <ChangeUserPic userId={userId} userPic={userInfoBE.profilePic}/>
+                    <UserStats isMyProfile={isMyProfile} 
+                        userId={userId} 
+                        userScore={userInfoBE.score} 
+                        isUserSignedIn={props.isUserSignedIn}/>
+                    <ChangeUserPic userId={userId} 
+                        userPic={userInfoBE.profilePic} 
+                        isMyProfile={isMyProfile}/>
                 </Col>
                 <Col sm={9} className="info-col">
                     <div className="input-btn-section">
-                        <button className="btn-user-prof info-edit-btn"
+                        <button className={(isMyProfile ? 'btn-user-prof info-edit-btn' : 'none')}
                             onClick={handleHideEditInfo}>{!editInfo ? 'Edit' : 'Cancel'}</button>
-                        <div className="input-section">
+                        <div className="input-section" style={{ paddingBottom : (isMyProfile && editInfo) ? '70px': '0px'}}>
                             <div className="user-names-div">
 
                                 <div className={(!stateObj.firstNameMessage ? 'user-input' : 'user-input error')}>
@@ -218,7 +225,7 @@ export default function ProfileUserInfo() {
                                 onChange={handleChangeLocation}
                                 thisClassName="autocomplete" />
 
-                            <ChangePassword showEdit={editInfo} />
+                            <ChangePassword showEdit={editInfo} isMyProfile={isMyProfile}/>
 
                         </div>
 
