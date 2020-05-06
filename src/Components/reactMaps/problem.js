@@ -1,5 +1,5 @@
 import React from 'react'
-import './problem.css'
+import './Maps.css'
 
 export default function Problems(props) {
 

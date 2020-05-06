@@ -12,26 +12,31 @@
     border-radius: 10px;
 }
 
-.problem-hdr{
+.problem-hdr,
+.user-short-info{
     display: flex;
     flex-direction: row;
     width: 100%;
+    color: #212529;
 }
 
-.problem-hdr img{
+.problem-hdr img,
+.user-short-info img{
     height: 30px;
     width: 30px;
     border-radius: 15px;
 }
 
-.problem-hdr ul{
+.problem-hdr ul,
+.user-short-info ul{
     list-style: none;
     padding-left: 5px;
     margin-bottom: 5px;
     letter-spacing: 0.025em;
 }
 
-.problem-hdr span{
+.problem-hdr span,
+.user-short-info span{
     display: flex;
     margin-left: auto;
     margin-right: 10px;
@@ -100,9 +105,30 @@
     color: rgb(0,0,0);
 }
 
-.problem-what:hover{
+.problem-what:hover,
+.user-short-info:hover{
     border: none;
     outline: none;
     text-decoration: none;
     color: inherit;
+}
+
+.div-user-short{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    height: 60px;
+    border: 1px solid grey;
+    outline: none;
+}
+
+.div-user-short img{
+    width: 40px;
+    height: 40px;
+}
+
+.div-user-short .li{
+    list-style: none;
 }

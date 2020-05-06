@@ -6,6 +6,10 @@
     justify-content: space-around;
 }
 
+.modal-body{
+    overflow-y: scroll;
+}
+
 .user-stats-div li{
     text-align: center;
 }
@@ -13,7 +17,7 @@
 .user-stats-div ul{
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 5px;
 }
 
 .user-stats-div .li-num{
