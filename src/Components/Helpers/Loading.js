@@ -2,9 +2,9 @@ import React from "react";
 import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import "bootstrap/dist/css/bootstrap.css";
-import * as loadingData from "../lottie/loading.json";
-import * as doneData from "../lottie/doneloading.json";
-import * as errorData from "../lottie/errorloading.json";
+import * as loadingData from "../../lottie/loading.json";
+import * as doneData from "../../lottie/doneloading.json";
+import * as errorData from "../../lottie/errorloading.json";
 
 
 export default function Loading(props) {

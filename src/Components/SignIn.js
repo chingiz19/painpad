@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import Validate from 'validate.js';
 import './SignIn.css';
 import './UserInput.css';
-import Loading from './Loading'
+import Loading from '../Components/Helpers/Loading'
 import { gql } from 'apollo-boost';
 import { useLazyQuery } from '@apollo/react-hooks';
 

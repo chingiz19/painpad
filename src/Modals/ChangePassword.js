@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import './ChangePassword.css';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import Loading from '../Components/Loading'
+import Loading from '../Components/Helpers/Loading'
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Validate from 'validate.js';

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import './FollowList.css';
+import './UserFollow.css';
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import UserFollow from '../Components/Lists/UserFollow'
+import UserFollowList from '../Components/Lists/UserFollowList'
+import DynamicIcon from "../Components/Helpers/DynamicIcon"
 
 export default function FollowList(props) {
     const [showModal, setShow] = useState(false);
@@ -80,11 +81,25 @@ export default function FollowList(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <InputGroup className="FL-body">
-
-                        <UserFollow userList={showFollower ? followerList : followingList}/>
-
-                        {/* {showFollower ? 'Followers' : 'Following'} */}
-
+                        {
+                            (followerList.length === 0 && showFollower)
+                                ? (
+                                    <div className="div-icon">
+                                        <DynamicIcon type="noFollow" width="160" height="160" />
+                                        <span>Followers list empty..</span>
+                                    </div>
+                                )
+                                : (
+                                    (followingList.length === 0 && showFollowing)
+                                        ? (
+                                            <div className="div-icon">
+                                                <DynamicIcon type="noFollow" width="160" height="160" />
+                                                <span >Following list empty..</span>
+                                            </div>
+                                        )
+                                        : <UserFollowList userList={showFollower ? followerList : followingList} />
+                                )
+                        }
                     </InputGroup>
                 </Modal.Body>
             </Modal>

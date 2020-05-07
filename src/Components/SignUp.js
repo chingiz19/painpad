@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import './SignUp.css';
 import './UserInput.css';
-import Loading from './Loading'
+import Loading from '../Components/Helpers/Loading'
 import Validate from 'validate.js';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';

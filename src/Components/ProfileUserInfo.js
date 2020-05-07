@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import './ProfileUserInfo.css';
 import './UserInput.css';
 import Validate from 'validate.js';
-import Loading from './Loading'
+import Loading from './Helpers/Loading'
 import { useMutation } from '@apollo/react-hooks';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';

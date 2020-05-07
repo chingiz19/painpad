@@ -3,7 +3,7 @@
     justify-content: flex-start;
     align-items: center !important;
     flex-wrap: nowrap;
-    height: 200px;
+    height: 250px;
 }
 
 .FL-body .user-short-info{
@@ -17,4 +17,18 @@
     background-color: rgb(240,240,240);
     border-radius: 5px;
     transition: all .15s ease-in-out;
+}
+
+.FL-body .div-icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.FL-body span{
+    position: relative;
+    top: 15px;
+    color: #3f4257;
+    font-size: 15px;
 }

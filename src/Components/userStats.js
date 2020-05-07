@@ -3,7 +3,7 @@ import './UserStats.css'
 import { useQuery } from '@apollo/react-hooks';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import FollowList from '../Modals/FollowList'
+import UserFollow from '../Modals/UserFollow'
 
 export default function UserStats(props) {
     let pageUserId = parseInt(window.location.href.split("users/")[1]);
@@ -91,16 +91,9 @@ export default function UserStats(props) {
                     <li className="li-num">{props.userScore}</li>
                     <li className="li-text">points</li>
                 </ul>
-                <FollowList followerCount={followerCount} followingCount={followingCount} userId={props.userId}/>
-                {/* <ul>
-                    <li className="li-num">{followerCount}</li>
-                    <li className="li-text">followers</li>
-                </ul>
-                <ul>
-                    <li className="li-num">{followingCount}</li>
-                    <li className="li-text">following</li>
-                </ul> */}
-
+                <UserFollow followerCount={followerCount}
+                    followingCount={followingCount}
+                    userId={props.userId} />
             </div>
 
             <button className={(!props.isMyProfile ? 'btn-follow' : 'none')} onClick={handleFollow}>{iFollow ? "Unfollow" : "Follow"}</button>
