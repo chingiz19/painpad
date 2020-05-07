@@ -63,7 +63,7 @@ export default function HeaderWeb(props) {
                     <li className="wh-li">
                         <a href={'/users/' + (isUserSignedIn && isUserSignedIn.isLogin.id)} className="wh-li-a">
                             <div className="wh-li-a-div">
-                                <div className={(props.currentPage === 'profile' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
+                                <div className={((props.currentPage === 'profile' && props.isSelf) ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
                                     <i className="far fa-user"></i>Profile
                                 </div>
                             </div>
