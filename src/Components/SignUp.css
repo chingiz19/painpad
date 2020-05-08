@@ -21,23 +21,23 @@
     margin: 10px 5px 0 5px !important;
 }
 
-.submit-btn{
+.signup-main .submit-btn{
     outline: none !important;
     height: 40px;
-    width: 85px;
+    width: 250px;
     border: none;
-    border-radius: 12px;
+    border-radius: 7px;
     background-color: rgb(198 , 241, 231);
     color: rgb(100,100,100);
     font-weight: 600;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    transition: all .15s;
 }
 
 .signup-main .submit-btn{
     margin: 20px 0;
 }
 
-.submit-btn:hover{
+.signup-main .submit-btn:hover{
     background-color: rgb(126, 218, 196);
     color: rgb(30,30,30);
 }

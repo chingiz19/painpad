@@ -28,7 +28,13 @@
 
 .FL-body span{
     position: relative;
-    top: 15px;
+    top: 16px;
     color: #3f4257;
-    font-size: 15px;
+    width: 80%;
+    font-size: 17px;
+    text-align: center;
+    margin-bottom: 30px;
+    background-color: rgb(244,244,244);
+    padding: 10px 20px;
+    border-radius: 8px;
 }

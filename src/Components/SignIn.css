@@ -17,20 +17,58 @@
     align-items: center !important;
 }
 
-.submit-btn{
+.signin-main-div .submit-btn{
     outline: none !important;
     height: 40px;
-    width: 85px;
+    width: 250px;
+    margin-top: 15px;
     border: none;
-    margin-top: 5px;
-    border-radius: 12px;
+    border-radius: 7px;
     background-color: rgb(198 , 241, 231);
     color: rgb(100,100,100);
     font-weight: 600;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    transition: all 0.15s;
 }
 
-.submit-btn:hover{
+.signin-main-div .submit-btn:hover{
     background-color: rgb(126, 218, 196);
     color: rgb(30,30,30);
+}
+
+.btn-forgot-pass{
+    margin-top: 15px;
+    font-size: 14px;
+    color: #757786;
+    transition: all 0.15s;
+}
+
+.btn-forgot-pass:hover{
+    cursor: pointer;
+    color: #3f4257;
+}
+
+.margin-fp{
+    margin-left: 133px;
+}
+
+.margin-cancel{
+    margin-left: 200px;
+}
+
+.div-forgot-pass{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.15s;
+}
+
+.div-forgot-pass span{
+    position: relative;
+    top: 16px;
+    color: #3f4257;
+    width: 70%;
+    font-size: 17px;
+    text-align: center;
+    margin-bottom: 30px;
 }

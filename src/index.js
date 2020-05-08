@@ -6,6 +6,7 @@ import Home from './Pages/home/Home';
 import About from './Pages/about/About';
 import Profile from './Pages/profile/Profile';
 import Topic from './Pages/topic/Topic';
+import ResetPass from './Pages/resetPass/ResetPass';
 import NotFound from './Pages/404/404';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
@@ -29,6 +30,7 @@ export default function App() {
           <Route exact path="/about" render={(props) => <About {...props} pageName="about" />}/>
           <Route path="/topics/:topic" render={(props) => <Topic {...props} pageName="topic" />}/>
           <Route path="/users/:userId" render={(props) => <Profile {...props} pageName="profile" />}/>
+          <Route path="/resetPass/:token" render={(props) => <ResetPass {...props} pageName="resetPass" />}/>
           <Route exact path="/" render={(props) => <Home {...props} pageName="home" />}/>
           <Route path="*" component={NotFound} />
         </Switch>

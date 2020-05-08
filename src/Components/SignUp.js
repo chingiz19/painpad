@@ -84,8 +84,8 @@ export default function SignUp() {
             lastName: lastName.current.value,
             email: email.current.value,
             pass: pass.current.value,
-            city: city.value,
-            industry: industry.value
+            city: city.location,
+            industry: industry.industry
         }, constraints);
 
         setMessage(prevState => {
@@ -107,8 +107,8 @@ export default function SignUp() {
                     lastName: lastName.current.value,
                     email: email.current.value,
                     pwd: pass.current.value,
-                    cityId: parseInt(city.id),
-                    industryId: parseInt(industry.id)
+                    cityId: parseInt(city.locationId),
+                    industryId: parseInt(industry.industryId)
                 }
             });
         }

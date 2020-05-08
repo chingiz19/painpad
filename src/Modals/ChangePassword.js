@@ -47,7 +47,7 @@ export default function ChangePassword(props) {
         }
     `;
 
-    const [callPostUserPwd, { data: dataPostUserPwd, loading: loadingPostUserPwd, error: errorPostUserPwd}] = useMutation(POST_USER_PWD);
+    const [callPostUserPwd, { data: dataPostUserPwd, loading: loadingPostUserPwd, error: errorPostUserPwd }] = useMutation(POST_USER_PWD);
 
     if (dataPostUserPwd && dataPostUserPwd.changePwd) {
         setTimeout(() => {
@@ -66,17 +66,6 @@ export default function ChangePassword(props) {
     }
 
     const updatePassword = e => {
-
-        if(newPassword.current.value !== newPassword2.current.value){
-            setMessage(prevState => {
-                return {
-                    ...prevState,
-                    newPass2Message: "New passwords don't match"
-                }
-            });
-            return;
-        }
-
         let check = Validate({
             oldPassword: oldPassword.current.value,
             newPassword: newPassword.current.value,
@@ -91,6 +80,16 @@ export default function ChangePassword(props) {
                 newPass2Message: check && check.newPassword2 ? "Minimum 6 characters or more" : null
             }
         });
+
+        if (newPassword.current.value !== newPassword2.current.value) {
+            setMessage(prevState => {
+                return {
+                    ...prevState,
+                    newPass2Message: "New passwords don't match"
+                }
+            });
+            return;
+        }
 
         if (!check) {
             callPostUserPwd({
@@ -141,7 +140,7 @@ export default function ChangePassword(props) {
                         </div>
 
                         {(loadingPostUserPwd || dataPostUserPwd)
-                            ? <Loading done={dataPostUserPwd} loading={loadingPostUserPwd}/>
+                            ? <Loading done={dataPostUserPwd} loading={loadingPostUserPwd} />
                             : <button className="submit-btn" onClick={updatePassword}>Update</button>}
 
                         {errorPostUserPwd && <Loading error={errorPostUserPwd} />}

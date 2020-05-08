@@ -1,0 +1,41 @@
+.reset-pass-main{
+    padding: 40px;
+}
+
+.reset-pass-main .div-icon,
+.reset-pass-main .div-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-icon span{
+    color: #3f4257;
+    width: 40%;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px 0 40px 0;
+}
+
+.reset-pass-main .password{
+    margin-bottom: 30px;
+}
+
+.reset-pass-main .submit-btn{
+    outline: none !important;
+    height: 40px;
+    width: 250px;
+    border: none;
+    border-radius: 7px;
+    background-color: rgb(198 , 241, 231);
+    color: rgb(100,100,100);
+    font-weight: 600;
+    transition: all 0.15s;
+}
+
+.reset-pass-main .submit-btn:hover{
+    background-color: rgb(126, 218, 196);
+    color: rgb(30,30,30);
+}
