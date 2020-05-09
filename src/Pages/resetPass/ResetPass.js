@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import HeaderWeb from '../../Components/HeaderWeb'
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 import { useMutation } from '@apollo/react-hooks';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon'
 import Validate from 'validate.js';
@@ -19,7 +18,8 @@ export default function ResetPass(props) {
 
     const [stateObj, setMessage] = useState({
         newPassMessage: null,
-        newPass2Message: null
+        newPass2Message: null,
+        errorMessage: null
     });
 
     const constraints = {
@@ -35,14 +35,6 @@ export default function ResetPass(props) {
         }
     };
 
-    const IS_USER_SIGNED_IN = gql`
-        query isLogin{
-            isLogin {success, id}
-        }
-    `;
-
-    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
-
     const POST_RESET_PWD = gql`
         mutation resetPwd($newPwd: String!, $token: String!){
             resetPwd(
@@ -52,15 +44,24 @@ export default function ResetPass(props) {
         }
     `;
 
-    const [callPostResetPwd, { data: dataPostResetPwd, loading: loadingPostResetPwd, error: errorPostResetPwd }] = useMutation(POST_RESET_PWD, {
+    const [callPostResetPwd, { data: dataPostResetPwd, loading: loadingPostResetPwd }] = useMutation(POST_RESET_PWD, {
         onCompleted: data => {
-            if(data && data.resetPwd){
+            if (data && data.resetPwd) {
                 setTimeout(() => {
                     window.location.href = "/";
                 }, 2000);
             }
+        },
+        onError: ({ graphQLErrors }) => {
+            if (graphQLErrors) {
+                setMessage({
+                    ...stateObj,
+                    errorMessage: graphQLErrors[0].message,
+                });
+            }
         }
     });
+
 
     const resetPassword = e => {
         let check = Validate({
@@ -103,13 +104,15 @@ export default function ResetPass(props) {
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn} />
+                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={false} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
                             <div className="main reset-pass-main">
                                 <div className="div-icon">
-                                    <DynamicIcon type="resetPass" width="220" height="220" />
-                                    <span>Reset Password</span>
+                                    {stateObj.errorMessage
+                                        ? <Loading error={stateObj.errorMessage} width="220" height="220" />
+                                        : <DynamicIcon type="resetPass" width="220" height="220" />}
+                                    <span>{stateObj.errorMessage ? stateObj.errorMessage : 'Reset Password'}</span>
                                 </div>
                                 <div className="div-input">
                                     <div className={(!stateObj.newPassMessage ? 'user-input password' : 'user-input error password')}>
@@ -129,10 +132,8 @@ export default function ResetPass(props) {
                                     </div>
 
                                     {(loadingPostResetPwd || dataPostResetPwd)
-                                        ? <Loading loading={loadingPostResetPwd} done={dataPostResetPwd} error={errorPostResetPwd}/>
+                                        ? <Loading loading={loadingPostResetPwd} done={dataPostResetPwd} />
                                         : <button className="submit-btn" onClick={resetPassword}>Reset password</button>}
-
-                                    {/* <button className="submit-btn" onClick={resetPassword}>Reset password</button> */}
                                 </div>
                             </div>
                         </Col>

@@ -40,9 +40,9 @@ export default function Loading(props) {
         <div className={props.thisClass}>
             <FadeIn>
                 <div className="d-flex justify-content-center align-items-center">
-                    {props.loading && <Lottie options={loadingOptions} height={90} width={90} />}
-                    {props.done && <Lottie options={doneOptions} height={90} width={90} />}
-                    {props.error && <Lottie options={errorOptions} height={90} width={90} />}
+                    {props.loading && <Lottie options={loadingOptions} height={props.height ? parseInt(props.height) : 90} width={props.width ? parseInt(props.width) : 90} />}
+                    {props.done && <Lottie options={doneOptions} height={props.height ? parseInt(props.height) : 90} width={props.width ? parseInt(props.width) : 90} />}
+                    {props.error && <Lottie options={errorOptions} height={props.height ? parseInt(props.height) : 90} width={props.width ? parseInt(props.width) : 90} />}
                 </div>
             </FadeIn>
         </div>
