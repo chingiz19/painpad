@@ -81,7 +81,7 @@ export default function ProfileUserInfo(props) {
                 industry {industryId: id, industry: value}, 
                 location {locationId: id, location: value}, 
                 since, score 
-            }
+                }
             }
         }
     `;

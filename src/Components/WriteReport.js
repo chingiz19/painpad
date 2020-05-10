@@ -52,7 +52,6 @@ export default function WriteReport() {
         },
         onError: ({ graphQLErrors }) => {
             setSignModal(true);
-            console.log("graphQLErrors ", graphQLErrors);
         }
     });
 

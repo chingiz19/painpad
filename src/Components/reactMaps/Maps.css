@@ -78,38 +78,8 @@
     justify-content: space-between;
 }
 
-.samehere{
-    border: none;
-    background-color: transparent;
-    margin: 0 25px 0 10px;
-}
-
-.samehere:focus{
-    outline:none;
-}
-
-.samehere:hover,
-.problem-what:hover{
-    border-radius: 5px;
-    background-color: rgb(198 , 241, 231);
-    transition: background-color 0.2s;
-}
-
-.sh-cnt{
-    font-weight: 600;
-}
-
-.sh-emoji{
-    margin: 0 5px 0 10px;
-}
-
-.sh-txt{
-    font-size: 16px;
-    color: rgb(150,150,150);
-}
-
 .problem-what{
-    padding: 0 10px;
+    padding: 3px 10px;
     text-transform: capitalize;
     font-weight: 600;
     outline: none;
