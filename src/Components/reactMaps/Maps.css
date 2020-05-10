@@ -12,11 +12,14 @@
     border-radius: 10px;
 }
 
+.problem-hdr{
+    width: 100%;
+}
+
 .problem-hdr,
 .user-short-info{
     display: flex;
     flex-direction: row;
-    width: 100%;
     color: #212529;
 }
 
@@ -35,12 +38,20 @@
     letter-spacing: 0.025em;
 }
 
-.problem-hdr span,
-.user-short-info span{
-    display: flex;
+.problem-hdr .ul-loc-date{
     margin-left: auto;
     margin-right: 10px;
     color: rgb(150,150,150);
+}
+
+.ul-loc-date .li-loc{
+    font-size: 14px;
+    height: 1em;
+}
+
+.ul-loc-date .li-date{
+    font-size: 12px;
+    text-align: end;
 }
 
 .user-name-li{

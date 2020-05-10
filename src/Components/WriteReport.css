@@ -82,7 +82,8 @@
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
 
-.btn-report:hover{
+.btn-report:hover,
+.btn-report:disabled{
     background-color: rgb(126, 218, 196);
     color: rgb(30,30,30);
 }

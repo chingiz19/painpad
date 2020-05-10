@@ -18,43 +18,24 @@ export default function Home(props) {
         }
     `;
 
-    const {data: isUserSignedIn} = useQuery(IS_USER_SIGNED_IN);
+    const GET_USER_FEED = gql`
+        query userFeed { 
+            userFeed{
+                id, description, 
+                postedBy{
+                    id, firstName, lastName, profilePic, industry, occupation
+                }, 
+                created, industry, location, approved, topic{
+                    id, name
+                },
+                sameHere
+                }
+        }
+    `;
 
-    let posts_tmp = [{
-        poster: {
-            firstName: "Elnar",
-            lastName: "Sharifli",
-            profilePic: "../images/users/profile-pictures/elnarsharifli.jpg",
-            industry: "Investment Management",
-            profileImg: "https://www.telegraph.co.uk/content/dam/technology/2017/11/01/emoji_update_2017_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.png?imwidth=450"
-        },
-        problem: {
-            id: "123423",
-            topic_id: "121a81ua",
-            body: "Phone charger cable not being able to reach your bed. You may rearrange bed, or lie on floor, so you can scroll through Facebook or some other website.",
-            same_here_count: 8,
-            problem_what: "parking",
-            location: "Calgary, CAD"
-        }
-    },
-    {
-        poster: {
-            firstName: "Elnar",
-            lastName: "Sharifli",
-            profilePic: "../images/users/profile-pictures/elnarsharifli.jpg",
-            industry: "Investment Management",
-            profileImg: "https://www.telegraph.co.uk/content/dam/technology/2017/11/01/emoji_update_2017_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.png?imwidth=450"
-        },
-        problem: {
-            id: "225",
-            topic_id: "312b81uc",
-            body: "Having to give your friends your WiFi code. Made even worse when one of your friends isn't listening or arrives late, and you have to give it out again.",
-            same_here_count: 23,
-            problem_what: "wi-fi",
-            location: "Vancouver, CAD"
-        }
-    }
-    ];
+    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
+
+    const { data: dataGetUserFeed } = useQuery(GET_USER_FEED);
 
     return (
         <>
@@ -62,14 +43,14 @@ export default function Home(props) {
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn}/>
+                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
                             <div className="main">
                                 <div className="problems-div">
                                     <WriteReport />
                                     <SeperatorLine thisValue="Reports feed" />
-                                    <ProblemFeed thisPosts={posts_tmp}/>
+                                    <ProblemFeed thisPosts={dataGetUserFeed || {userFeed: []}} />
                                 </div>
                             </div>
                         </Col>

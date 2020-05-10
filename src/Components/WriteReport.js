@@ -12,8 +12,9 @@ export default function WriteReport() {
     const reportText = useRef(null);
 
     const [showSignModal, setSignModal] = useState(false);
+    const [postSent, setPostSent] = useState(false);
     const [industry, setIndustry] = useState(null);
-    const [city, setCity] = useState(null)
+    const [city, setCity] = useState(null);
 
     const [stateObj, setMessage] = useState({
         industryMessage: null,
@@ -45,9 +46,13 @@ export default function WriteReport() {
         }
     `;
 
-    const [callNewPost, { loading: loadingNewPost, error: errorNewPost, data: dataNewPost }] = useMutation(USER_NEW_POST, {
+    const [callNewPost, { loading: loadingNewPost, error: errorNewPost }] = useMutation(USER_NEW_POST, {
+        onCompleted: data => {
+            setPostSent(true);
+        },
         onError: ({ graphQLErrors }) => {
             setSignModal(true);
+            console.log("graphQLErrors ", graphQLErrors);
         }
     });
 
@@ -121,10 +126,10 @@ export default function WriteReport() {
                     <UserSignInUp withButton={false} 
                         showModal={showSignModal} 
                         handleCloseModal={handleCloseModal}/>
-                    {/* <button className="btn-report" onClick={sendReport}>Report</button> */}
-                    {(dataNewPost || loadingNewPost || errorNewPost)
-                    ? <Loading done={dataNewPost} loading={loadingNewPost} error={errorNewPost} width="50" height="50"/>
-                    : <button className="btn-report" onClick={sendReport}>Report</button>}
+                        
+                    {( loadingNewPost || errorNewPost)
+                    ? <Loading loading={loadingNewPost} error={errorNewPost} width="50" height="50"/>
+                    : <button className="btn-report" onClick={sendReport} disabled={postSent}>{postSent ? "Posted" : "Post"}</button>}
                 </div>
             </div>
         </>
