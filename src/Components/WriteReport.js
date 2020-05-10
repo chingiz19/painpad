@@ -3,10 +3,15 @@ import './WriteReport.css';
 import Validate from 'validate.js';
 import Locations from './Lists/Locations'
 import Indsutries from './Lists/Industries'
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
+import Loading from '../Components/Helpers/Loading';
+import UserSignInUp from '../Modals/SignInUp/SignInUp';
 
 export default function WriteReport() {
     const reportText = useRef(null);
 
+    const [showSignModal, setSignModal] = useState(false);
     const [industry, setIndustry] = useState(null);
     const [city, setCity] = useState(null)
 
@@ -30,6 +35,22 @@ export default function WriteReport() {
         }
     };
 
+    const USER_NEW_POST = gql`
+        mutation post($description: String!, $cityId: ID!, $industryId: ID!){
+            post(
+                description: $description,
+                cityId: $cityId,
+                industryId: $industryId
+            )
+        }
+    `;
+
+    const [callNewPost, { loading: loadingNewPost, error: errorNewPost, data: dataNewPost }] = useMutation(USER_NEW_POST, {
+        onError: ({ graphQLErrors }) => {
+            setSignModal(true);
+        }
+    });
+
     const sendReport = e => {
         let check = Validate({
             industry: industry,
@@ -46,12 +67,15 @@ export default function WriteReport() {
             }
         });
 
-        //This implemented as there is no error attribute for TextArea
-        // if (check && check.reportText != null) {
-        //     alert("Ups..Doesn't look like a valid report.")
-        // }
-
-        //API call to BE goes here
+        if (!check) {
+            callNewPost({
+                variables: {
+                    description: reportText.current.value,
+                    cityId: parseInt(city.locationId),
+                    industryId: parseInt(industry.industryId)
+                }
+            });
+        }
 
     }
 
@@ -61,6 +85,10 @@ export default function WriteReport() {
 
     function handleChangeCity(newValue) {
         setCity(newValue[0]);
+    }
+
+    function handleCloseModal() {
+        setSignModal(false);
     }
 
     return (
@@ -90,7 +118,13 @@ export default function WriteReport() {
                                 thisPlaceholder="Location"/>
                         </div>
                     </div>
-                    <button className="btn-report" onClick={sendReport}>Report</button>
+                    <UserSignInUp withButton={false} 
+                        showModal={showSignModal} 
+                        handleCloseModal={handleCloseModal}/>
+                    {/* <button className="btn-report" onClick={sendReport}>Report</button> */}
+                    {(dataNewPost || loadingNewPost || errorNewPost)
+                    ? <Loading done={dataNewPost} loading={loadingNewPost} error={errorNewPost} width="50" height="50"/>
+                    : <button className="btn-report" onClick={sendReport}>Report</button>}
                 </div>
             </div>
         </>

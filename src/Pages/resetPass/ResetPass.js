@@ -56,7 +56,7 @@ export default function ResetPass(props) {
             if (graphQLErrors) {
                 setMessage({
                     ...stateObj,
-                    errorMessage: graphQLErrors[0].message,
+                    errorMessage: graphQLErrors[0].message
                 });
             }
         }

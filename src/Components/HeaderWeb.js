@@ -1,7 +1,7 @@
 import React from 'react';
 import './HeaderWeb.css';
 import LogoTransperent from '../images/logos/logo_transparent.png';
-import UserSignInUp from '../Modals/UserSignInUp';
+import UserSignInUp from '../Modals/SignInUp/SignInUp';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
 
@@ -38,7 +38,7 @@ export default function HeaderWeb(props) {
                         </a>
                     </li>
                     <li className="wh-li">
-                        <UserSignInUp name="Sign in / Sign up" />
+                        <UserSignInUp name="Sign in / Sign up" withButton={true}/>
                     </li>
                     <li className="wh-li">
                         <a href="/about" className="wh-li-a">
