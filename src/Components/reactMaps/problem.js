@@ -5,7 +5,6 @@ import UserShortInfo from './UserShortInfo';
 import SameHere from '../SameHere';
 
 export default function Problems(props) {
-
     return (
         <div className="problem-div">
             <div className="problem-hdr">
@@ -20,7 +19,7 @@ export default function Problems(props) {
                 {props.problemObj.description}
             </p>
             <div className="problem-footer">
-                <SameHere count={props.problemObj.sameHere} probelmId={props.problemObj.id}/>
+                <SameHere count={props.problemObj.sameHere} probelmId={props.problemObj.id} sameHered={props.problemObj.sameHered}/>
                 <a className="problem-what"
                     href={'/topics/' + props.problemObj.topic.name}>
                     {props.problemObj.topic.name} related</a>

@@ -28,7 +28,8 @@ export default function Home(props) {
                 created, industry, location, approved, topic{
                     id, name
                 },
-                sameHere
+                sameHere,
+                sameHered
                 }
         }
     `;

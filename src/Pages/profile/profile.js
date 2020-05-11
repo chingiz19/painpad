@@ -46,7 +46,8 @@ export default function Profile(props) {
                 created, industry, location, approved, topic{
                     id, name
                 },
-                sameHere
+                sameHere,
+                sameHered
                 }
         }
     `;
