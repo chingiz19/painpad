@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet'
 import './Home.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -40,6 +41,9 @@ export default function Home(props) {
 
     return (
         <>
+            <Helmet>
+                <title>PainPad | Home</title>
+            </Helmet>
             <Container className="view-port">
                 <Container fluid="lg">
                     <Row>
@@ -51,7 +55,7 @@ export default function Home(props) {
                                 <div className="problems-div">
                                     <WriteReport />
                                     <SeperatorLine thisValue="Reports feed" />
-                                    <ProblemFeed thisPosts={dataGetUserFeed || {userFeed: []}} />
+                                    <ProblemFeed thisPosts={(dataGetUserFeed && dataGetUserFeed.userFeed) || []} />
                                 </div>
                             </div>
                         </Col>

@@ -1,5 +1,17 @@
 .none{
     display: none !important;
+    opacity: 0;
+    animation: fadeout 0.15s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
 }
 
 .combo-box{

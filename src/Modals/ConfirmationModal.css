@@ -1,0 +1,32 @@
+/* CM - confirmation modal */
+
+.CM-header{
+    color: #3f4257;
+}
+
+.CM-body{
+    flex-direction: column;
+    align-items: center !important;
+}
+
+.btn-remove-post{
+    position: absolute;
+    top: -14px;
+    right: -18px;
+    height: 30px;
+    width: 40px;
+    border: none;
+    outline: none !important;
+    border-radius: 20px;
+    font-size: 20px;
+    background-color: rgb(253, 253, 253);
+    color: #3f4257;
+    font-weight: bold;
+    transition: all 0.15s ease-in-out;
+    animation: fadein 0.15s;
+}
+
+.btn-remove-post:hover{
+    background-color: #e81f6acf;
+    color: rgb(253, 253, 253);
+}

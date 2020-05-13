@@ -1,14 +1,73 @@
 import React from 'react'
+import { Helmet } from 'react-helmet';
 import './Topic.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import HeaderWeb from '../../Components/HeaderWeb'
 import { Pie } from 'react-chartjs-2';
-import SeperatorLine from '../../Components/SeperatorLine'
+import SeperatorLine from '../../Components/SeperatorLine';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 import ProblemFeed from '../../Components/ProblemFeed'
 
 export default function Topic(props) {
+
+    const IS_USER_SIGNED_IN = gql`
+        query isLogin{
+            isLogin {success, id}
+        }
+    `;
+
+    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
+
+    const reports = {
+        "userFeed": [
+            {
+                "id": "20",
+                "description": "Phone charger cable not being able to reach your bed. You may rearrange bed, or lie on floor, so you can scroll through Facebook or some other website.",
+                "postedBy": {
+                    "id": "1",
+                    "firstName": "Elnar",
+                    "lastName": "Sharifli",
+                    "profilePic": "https://painpad-profile-pictures.s3.amazonaws.com/painpad_default",
+                    "industry": "Investment Management",
+                    "occupation": null
+                },
+                "created": 1589095042859.294,
+                "industry": "Dentistry",
+                "location": "Calgary, Canada",
+                "approved": 1589095297509.958,
+                "topic": {
+                    "id": "1",
+                    "name": "Parking"
+                },
+                "sameHere": 0,
+                "sameHered": false
+            },
+            {
+                "id": "19",
+                "description": "Having to give your friends your WiFi code. Made even worse when one of your friends isn't listening or arrives late, and you have to give it out again.",
+                "postedBy": {
+                    "id": "1",
+                    "firstName": "Elnar",
+                    "lastName": "Sharifli",
+                    "profilePic": "https://painpad-profile-pictures.s3.amazonaws.com/painpad_default",
+                    "industry": "Investment Management",
+                    "occupation": null
+                },
+                "created": 1589092585500.736,
+                "industry": "Real Esate",
+                "location": "Calgary, Canada",
+                "approved": 1589095297509.958,
+                "topic": {
+                    "id": "1",
+                    "name": "Parking"
+                },
+                "sameHere": 1,
+                "sameHered": true
+            }]
+    };
 
     let topic_obj = {
         header: "Wi-Fi",
@@ -37,51 +96,19 @@ export default function Topic(props) {
                     ]
                 }]
             }
-        },
-        reports: [{
-            poster: {
-                firstName: "Elnar",
-                lastName: "Sharifli",
-                profilePic: "../images/users/profile-pictures/elnarsharifli.jpg",
-                industry: "Investment Management",
-                profileImg: "https://www.telegraph.co.uk/content/dam/technology/2017/11/01/emoji_update_2017_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.png?imwidth=450"
-            },
-            problem: {
-                id: "123423",
-                topic_id: "121a81ua",
-                body: "Phone charger cable not being able to reach your bed. You may rearrange bed, or lie on floor, so you can scroll through Facebook or some other website.",
-                same_here_count: 8,
-                problem_what: "wi-fi",
-                location: "Calgary, CAD"
-            }
-        },
-        {
-            poster: {
-                firstName: "Elnar",
-                lastName: "Sharifli",
-                profilePic: "../images/users/profile-pictures/elnarsharifli.jpg",
-                industry: "Investment Management",
-                profileImg: "https://www.telegraph.co.uk/content/dam/technology/2017/11/01/emoji_update_2017_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwfSVWeZ_vEN7c6bHu2jJnT8.png?imwidth=450"
-            },
-            problem: {
-                id: "225",
-                topic_id: "312b81uc",
-                body: "Having to give your friends your WiFi code. Made even worse when one of your friends isn't listening or arrives late, and you have to give it out again.",
-                same_here_count: 23,
-                problem_what: "wi-fi",
-                location: "Vancouver, CAD"
-            }
         }
-        ]
     };
 
     return (
         <>
+            <Helmet>
+                <title>PainPad | Topic</title>
+            </Helmet>
             <Container className="view-port">
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} />
+                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
                             <div className="main-topic-page">
@@ -99,8 +126,8 @@ export default function Topic(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <SeperatorLine thisValue="Topic posts"/>
-                                <ProblemFeed thisPosts={topic_obj.reports}/>
+                                <SeperatorLine thisValue="Topic posts" />
+                                <ProblemFeed thisPosts={reports} />
                             </div>
                         </Col>
                     </Row>

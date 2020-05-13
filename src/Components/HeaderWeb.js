@@ -73,7 +73,7 @@ export default function HeaderWeb(props) {
                         <div className="wh-li-div">
                             <span className="wh-li-div-span">
                                 <div className="wh-li-div-span-div">
-                                    <i className="far fa-bell"></i>Notification
+                                    <i className="far fa-bell"></i>Notifications
                                 </div>
                             </span>
                         </div>

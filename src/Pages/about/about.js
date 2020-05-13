@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import './About.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -15,22 +16,27 @@ export default function About(props) {
         }
     `;
 
-    const {data: isUserSignedIn} = useQuery(IS_USER_SIGNED_IN);
+    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
 
     return (
-        <Container className="view-port">
-            <Container fluid="lg">
-                <Row>
-                    <Col sm={4} md={3} className="header-comp">
-                        <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn}/>
-                    </Col>
-                    <Col sm={8} md={9} className="main-comp">
-                        <div className="main">
-                            <h3>Our story goes here bro..</h3>
-                        </div>
-                    </Col>
-                </Row>
+        <>
+            <Helmet>
+                <title>PainPad | About</title>
+            </Helmet>
+            <Container className="view-port">
+                <Container fluid="lg">
+                    <Row>
+                        <Col sm={4} md={3} className="header-comp">
+                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn} />
+                        </Col>
+                        <Col sm={8} md={9} className="main-comp">
+                            <div className="main">
+                                <h3>Our story goes here bro..</h3>
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
             </Container>
-        </Container>
+        </>
     );
 }

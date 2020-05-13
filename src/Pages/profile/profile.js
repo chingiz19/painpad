@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import './Profile.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -15,6 +16,8 @@ export default function Profile(props) {
 
     const [isSelf, setIsSelf] = useState('');
     const [sepLineValue, setSepLineValue] = useState('');
+    const [pageTitle, setPageTitle] = useState('PainPad | Profile');
+    const [editPosts, setEditPosts] = useState(false);
 
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
@@ -36,9 +39,9 @@ export default function Profile(props) {
         }
     `;
 
-    const GET_USER_FEED = gql`
-        query userFeed { 
-            userFeed{
+    const GET_USER_POSTS = gql`
+        query userPosts ($userId: ID!){ 
+            userPosts (userId: $userId){
                 id, description, 
                 postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
@@ -52,40 +55,55 @@ export default function Profile(props) {
         }
     `;
 
-    const {data: dataGetUserInfo}  = useQuery(GET_USER_INFO, {
+    const { data: dataGetUserInfo } = useQuery(GET_USER_INFO, {
         variables: {
             userId: userId
         },
         onCompleted: data => {
             setIsSelf(dataGetUserInfo.userProfile.self);
-            if(dataGetUserInfo.userProfile.self){
+            setPageTitle( data.userProfile.user.firstName + "'s profile");
+            if (dataGetUserInfo.userProfile.self) {
                 setSepLineValue('My reports');
-            } else{
-                const tmpValue = data.userProfile.user.firstName + "'s reports"
-                setSepLineValue(tmpValue);
+            } else {
+                setSepLineValue(data.userProfile.user.firstName + "'s reports");
             }
         }
     });
 
-    const {data: isUserSignedIn} = useQuery(IS_USER_SIGNED_IN);
+    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
 
-    const { data: dataGetUserFeed } = useQuery(GET_USER_FEED);
+    const { data: dataGetUserPosts } = useQuery(GET_USER_POSTS, {
+        variables: {
+            userId: userId
+        }
+    });
+
+    const handleEditPosts = () => {
+        setEditPosts(!editPosts);
+    }
 
     return (
         <>
-            <Container className="view-port">
+            <Helmet>
+                <title>{pageTitle}</title>
+            </Helmet>
+            <Container className="view-port ">
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} 
-                                isUserSignedIn={isUserSignedIn} 
-                                isSelf={isSelf}/>
+                            <HeaderWeb currentPage={props.pageName}
+                                isUserSignedIn={isUserSignedIn}
+                                isSelf={isSelf} />
                         </Col>
-                        <Col sm={8} md={9} className="main-comp">
+                        <Col sm={8} md={9} className="main-comp comp-profile">
                             <div className="div-1">
-                                <ProfileUserInfo isUserSignedIn={isUserSignedIn}/>
+                                <ProfileUserInfo isUserSignedIn={isUserSignedIn} />
                                 <SeperatorLine thisValue={sepLineValue} />
-                                <ProblemFeed thisPosts={dataGetUserFeed || {userFeed: []}} />
+                                <div className="div-posts">
+                                    <button className={dataGetUserPosts && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'} 
+                                        onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
+                                    <ProblemFeed thisPosts={(dataGetUserPosts && dataGetUserPosts.userPosts) || []} editPosts={editPosts} />
+                                </div>
                             </div>
                         </Col>
                     </Row>

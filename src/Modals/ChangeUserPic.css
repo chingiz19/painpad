@@ -1,5 +1,6 @@
 .none{
-    display: "none"
+    display: none;
+    opacity: 0;
 }
 
 .body-image-upload{
@@ -42,7 +43,7 @@
 
 .btn-edit-pic{
     position: absolute;
-    top: 28%;
+    top: 90px;
     right: 4%;
     width: 75px;
     height: 30px;

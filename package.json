@@ -25,6 +25,7 @@
     "react-dom": "^16.13.1",
     "react-easy-crop": "^2.1.1",
     "react-fade-in": "^0.1.8",
+    "react-helmet": "^6.0.0",
     "react-images-upload": "^1.2.8",
     "react-loading": "^2.0.3",
     "react-lottie": "^1.2.3",

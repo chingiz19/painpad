@@ -6,6 +6,17 @@
     width: 100%;
 }
 
+.comp-profile .div-posts{
+    position: relative;
+    padding-top: 10px;
+}
+
+.comp-profile .posts-edit-btn{
+    position: absolute;
+    right: 25px;
+    top: -20px;
+}
+
 .line-seperator{
     margin-top: 0px !important;
 }
