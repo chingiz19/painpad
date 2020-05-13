@@ -10,6 +10,7 @@ import ProblemFeed from '../../Components/ProblemFeed'
 import SeperatorLine from '../../Components/SeperatorLine'
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 
 export default function Profile(props) {
     let userId = parseInt(window.location.href.split("users/")[1]);
@@ -18,6 +19,8 @@ export default function Profile(props) {
     const [sepLineValue, setSepLineValue] = useState('');
     const [pageTitle, setPageTitle] = useState('PainPad | Profile');
     const [editPosts, setEditPosts] = useState(false);
+
+    const [allUserPosts, setAllUserPosts] = useState([]);
 
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
@@ -55,13 +58,25 @@ export default function Profile(props) {
         }
     `;
 
+    const GET_USER_PENDING_POSTS = gql`
+        query userPendingPosts { 
+            userPendingPosts {
+                id, description, 
+                postedBy{
+                    id, firstName, lastName, profilePic, industry, occupation
+                }, 
+                created, industry, location
+                }
+        }
+    `;
+
     const { data: dataGetUserInfo } = useQuery(GET_USER_INFO, {
         variables: {
             userId: userId
         },
         onCompleted: data => {
             setIsSelf(dataGetUserInfo.userProfile.self);
-            setPageTitle( data.userProfile.user.firstName + "'s profile");
+            setPageTitle(data.userProfile.user.firstName + "'s profile");
             if (dataGetUserInfo.userProfile.self) {
                 setSepLineValue('My reports');
             } else {
@@ -75,6 +90,22 @@ export default function Profile(props) {
     const { data: dataGetUserPosts } = useQuery(GET_USER_POSTS, {
         variables: {
             userId: userId
+        },
+        onCompleted: data => {
+            callGetUserPendingPosts({});
+        }
+    });
+
+    const [callGetUserPendingPosts] = useLazyQuery(GET_USER_PENDING_POSTS, {
+        onCompleted: data =>{
+            let tmpAllPosts = [];
+            let tmpUserPosts = dataGetUserPosts ? dataGetUserPosts.userPosts : [];
+            if(data.userPendingPosts.length > 0){
+                tmpAllPosts = data.userPendingPosts.concat(tmpUserPosts);
+            } else{
+                tmpAllPosts = tmpUserPosts;
+            }
+            setAllUserPosts(tmpAllPosts);
         }
     });
 
@@ -100,9 +131,9 @@ export default function Profile(props) {
                                 <ProfileUserInfo isUserSignedIn={isUserSignedIn} />
                                 <SeperatorLine thisValue={sepLineValue} />
                                 <div className="div-posts">
-                                    <button className={dataGetUserPosts && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'} 
+                                    <button className={dataGetUserPosts && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
                                         onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
-                                    <ProblemFeed thisPosts={(dataGetUserPosts && dataGetUserPosts.userPosts) || []} editPosts={editPosts} />
+                                    <ProblemFeed thisPosts={allUserPosts || []} editPosts={editPosts} />
                                 </div>
                             </div>
                         </Col>
