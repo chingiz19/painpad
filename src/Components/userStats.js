@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import './UserStats.css'
+import './UserStats.css';
 import { useQuery } from '@apollo/react-hooks';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import UserFollow from '../Modals/UserFollow'
+import UserFollow from '../Modals/UserFollow';
+import UserSignInUp from '../Modals/SignInUp/SignInUp';
 
 export default function UserStats(props) {
     let pageUserId = parseInt(window.location.href.split("users/")[1]);
@@ -12,6 +13,7 @@ export default function UserStats(props) {
     const [iFollow, setIFollow] = useState(false);
     const [followerCount, setFollowerCount] = useState(0);
     const [followingCount, setFollowingCount] = useState(0);
+    const [showSignModal, setSignModal] = useState(false);
 
     const GET_USER_STATS = gql`
         query userStats($userId: ID!){
@@ -69,6 +71,11 @@ export default function UserStats(props) {
     });
 
     function handleFollow() {
+        if(!props.isUserSignedIn){
+            setSignModal(true);
+            return;
+        }
+
         if (iFollow) {
             callPostUserUnfollow({
                 variables: {
@@ -82,6 +89,10 @@ export default function UserStats(props) {
                 }
             });
         }
+    };
+
+    function handleCloseModal() {
+        setSignModal(false);
     }
 
     return (
@@ -95,6 +106,10 @@ export default function UserStats(props) {
                     followingCount={followingCount}
                     userId={props.userId} />
             </div>
+
+            <UserSignInUp withButton={false}
+                showModal={showSignModal}
+                handleCloseModal={handleCloseModal} />
 
             <button className={(!props.isMyProfile ? 'btn-follow' : 'none')} onClick={handleFollow}>{iFollow ? "Unfollow" : "Follow"}</button>
         </>

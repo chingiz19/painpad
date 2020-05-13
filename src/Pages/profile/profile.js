@@ -85,14 +85,23 @@ export default function Profile(props) {
         }
     });
 
-    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
-
-    const { data: dataGetUserPosts } = useQuery(GET_USER_POSTS, {
-        variables: {
-            userId: userId
-        },
+    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN, {
         onCompleted: data => {
-            callGetUserPendingPosts({});
+            callGetUserPosts({
+                variables: {
+                    userId: userId
+                }
+            });
+        }
+    });
+
+    const [callGetUserPosts, { data: dataGetUserPosts }] = useLazyQuery(GET_USER_POSTS, {
+        onCompleted: data => {
+            if(isUserSignedIn && isUserSignedIn.isLogin.success){
+                callGetUserPendingPosts({});
+            } else{
+                setAllUserPosts(data ? data.userPosts : []);
+            }
         }
     });
 
@@ -128,12 +137,14 @@ export default function Profile(props) {
                         </Col>
                         <Col sm={8} md={9} className="main-comp comp-profile">
                             <div className="div-1">
-                                <ProfileUserInfo isUserSignedIn={isUserSignedIn} />
+                                <ProfileUserInfo isUserSignedIn={isUserSignedIn && isUserSignedIn.isLogin.success} />
                                 <SeperatorLine thisValue={sepLineValue} />
                                 <div className="div-posts">
                                     <button className={dataGetUserPosts && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
                                         onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
-                                    <ProblemFeed thisPosts={allUserPosts || []} editPosts={editPosts} />
+                                    <ProblemFeed thisPosts={allUserPosts || []} 
+                                        editPosts={editPosts} 
+                                        firstName={dataGetUserInfo && dataGetUserInfo.userProfile.user.firstName}/>
                                 </div>
                             </div>
                         </Col>

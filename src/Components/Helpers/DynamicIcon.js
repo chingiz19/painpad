@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import * as noFollow from "../../lottie/no-follow.json";
 import * as emailSent from "../../lottie/email-sent.json";
 import * as resetPass from "../../lottie/reset-pass.json";
+import * as noPosts from "../../lottie/no-posts.json";
 
 export default function Loading(props) {
 
@@ -29,6 +30,14 @@ export default function Loading(props) {
             loop: true,
             autoplay: true,
             animationData: resetPass.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        noPosts: {
+            loop: true,
+            autoplay: true,
+            animationData: noPosts.default,
             rendererSettings: {
                 preserveAspectRatio: "xMidYMid slice"
             }

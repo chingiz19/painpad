@@ -137,3 +137,11 @@
     border-radius: 10px;
     z-index: 1;
 }
+
+.div-no-posts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(101, 119, 134);
+}

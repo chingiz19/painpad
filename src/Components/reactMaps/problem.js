@@ -3,7 +3,7 @@ import './Maps.css';
 import Moment from 'react-moment';
 import UserShortInfo from './UserShortInfo';
 import SameHere from '../SameHere';
-import ConfirmationModal from '../../Modals/ConfirmationModal'
+import ConfirmationModal from '../../Modals/ConfirmationModal';
 
 export default function Problems(props) {
     return (
