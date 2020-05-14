@@ -137,14 +137,15 @@ export default function Profile(props) {
                         </Col>
                         <Col sm={8} md={9} className="main-comp comp-profile">
                             <div className="div-1">
-                                <ProfileUserInfo isUserSignedIn={isUserSignedIn && isUserSignedIn.isLogin.success} />
+                                <ProfileUserInfo isUserSignedIn={isUserSignedIn} />
                                 <SeperatorLine thisValue={sepLineValue} />
                                 <div className="div-posts">
                                     <button className={dataGetUserPosts && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
                                         onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
                                     <ProblemFeed thisPosts={allUserPosts || []} 
                                         editPosts={editPosts} 
-                                        firstName={dataGetUserInfo && dataGetUserInfo.userProfile.user.firstName}/>
+                                        firstName={dataGetUserInfo && dataGetUserInfo.userProfile.user.firstName}
+                                        isLogin={isUserSignedIn ? isUserSignedIn.isLogin.success : false}/>
                                 </div>
                             </div>
                         </Col>

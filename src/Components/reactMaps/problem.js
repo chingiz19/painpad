@@ -25,7 +25,10 @@ export default function Problems(props) {
                 {props.problemObj.description}
             </p>
             <div className="problem-footer">
-                <SameHere count={props.problemObj.sameHere} probelmId={props.problemObj.id} sameHered={props.problemObj.sameHered}/>
+                <SameHere count={props.problemObj.sameHere} 
+                    probelmId={props.problemObj.id} 
+                    sameHered={props.problemObj.sameHered} 
+                    isLogin={props.isLogin}/>
                 <a className="problem-what"
                     href={'/topics/' + props.problemObj.topic.name}>
                     {props.problemObj.topic.name} related</a>

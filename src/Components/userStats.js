@@ -71,8 +71,8 @@ export default function UserStats(props) {
     });
 
     function handleFollow() {
-        if(!props.isUserSignedIn){
-            setSignModal(true);
+        if(props.isUserSignedIn && !props.isUserSignedIn.isLogin.success){
+            handleShowModal();
             return;
         }
 
@@ -95,6 +95,10 @@ export default function UserStats(props) {
         setSignModal(false);
     }
 
+    function handleShowModal() {
+        setSignModal(true);
+    }
+
     return (
         <>
             <div className="user-stats-div">
@@ -104,7 +108,9 @@ export default function UserStats(props) {
                 </ul>
                 <UserFollow followerCount={followerCount}
                     followingCount={followingCount}
-                    userId={props.userId} />
+                    userId={props.userId}
+                    isUserSignedIn={props.isUserSignedIn && props.isUserSignedIn.isLogin.success}
+                    handleShowModal={handleShowModal}/>
             </div>
 
             <UserSignInUp withButton={false}

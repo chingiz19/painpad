@@ -9,8 +9,8 @@ export default function ProblemFeed(props) {
     if (props.thisPosts.length > 0) {
         listProblems = props.thisPosts.map((problem) =>
             problem && problem.approved
-                ? <Problem key={problem.id} problemObj={problem} editPosts={props.editPosts} />
-                : <PendingProblem key={problem.id} problemObj={problem} editPosts={props.editPosts} />
+                ? <Problem key={problem.id} problemObj={problem} editPosts={props.editPosts} isLogin={props.isLogin}/>
+                : <PendingProblem key={problem.id} problemObj={problem} editPosts={props.editPosts}/>
         );
     }
 

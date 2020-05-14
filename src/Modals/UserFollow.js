@@ -39,27 +39,38 @@ export default function FollowList(props) {
     }
 
     const handleShowFollower = () => {
-        setShow(true);
-        setShowFollower(true);
-        setShowFollowing(false);
-        callGetUserStats({
-            variables: {
-                userId: props.userId
-            }
-        });
+        if(props.isUserSignedIn){
+            setShow(true);
+            setShowFollower(true);
+            setShowFollowing(false);
+            callGetUserStats({
+                variables: {
+                    userId: props.userId
+                }
+            });
+        } else{
+            handleShowModal();
+        }
     }
 
     const handleShowFollowing = () => {
-        setShow(true);
-        setShowFollower(false);
-        setShowFollowing(true);
-        callGetUserStats({
-            variables: {
-                userId: props.userId
-            }
-        });
+        if(props.isUserSignedIn){
+            setShow(true);
+            setShowFollower(false);
+            setShowFollowing(true);
+            callGetUserStats({
+                variables: {
+                    userId: props.userId
+                }
+            });
+        } else{
+            handleShowModal();
+        }
     }
 
+    function handleShowModal() {
+        props.handleShowModal();
+    }
 
     return (
         <>

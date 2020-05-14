@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+import Admin from './Pages/admin/Admin';
 import Home from './Pages/home/Home';
 import About from './Pages/about/About';
 import Profile from './Pages/profile/Profile';
@@ -28,6 +29,7 @@ export default function App() {
       <Router>
         <Switch>
           <Route exact path="/about" render={(props) => <About {...props} pageName="about" />}/>
+          <Route exact path="/admin" render={(props) => <Admin {...props} pageName="admin" />}/>
           <Route path="/topics/:topic" render={(props) => <Topic {...props} pageName="topic" />}/>
           <Route path="/users/:userId" render={(props) => <Profile {...props} pageName="profile" />}/>
           <Route path="/resetPass/:token" render={(props) => <ResetPass {...props} pageName="resetPass" />}/>
