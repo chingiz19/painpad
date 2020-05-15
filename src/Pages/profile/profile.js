@@ -13,7 +13,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { useLazyQuery } from '@apollo/react-hooks';
 
 export default function Profile(props) {
-    let userId = parseInt(window.location.href.split("users/")[1]);
+    let profileUserId = parseInt(window.location.href.split("users/")[1]);
 
     const [isSelf, setIsSelf] = useState('');
     const [sepLineValue, setSepLineValue] = useState('');
@@ -72,7 +72,7 @@ export default function Profile(props) {
 
     const { data: dataGetUserInfo } = useQuery(GET_USER_INFO, {
         variables: {
-            userId: userId
+            userId: profileUserId
         },
         onCompleted: data => {
             setIsSelf(dataGetUserInfo.userProfile.self);
@@ -89,7 +89,7 @@ export default function Profile(props) {
         onCompleted: data => {
             callGetUserPosts({
                 variables: {
-                    userId: userId
+                    userId: profileUserId
                 }
             });
         }
@@ -97,7 +97,7 @@ export default function Profile(props) {
 
     const [callGetUserPosts, { data: dataGetUserPosts }] = useLazyQuery(GET_USER_POSTS, {
         onCompleted: data => {
-            if(isUserSignedIn && isUserSignedIn.isLogin.success){
+            if(isSelf){
                 callGetUserPendingPosts({});
             } else{
                 setAllUserPosts(data ? data.userPosts : []);

@@ -6,6 +6,7 @@ import * as noFollow from "../../lottie/no-follow.json";
 import * as emailSent from "../../lottie/email-sent.json";
 import * as resetPass from "../../lottie/reset-pass.json";
 import * as noPosts from "../../lottie/no-posts.json";
+import * as notFound from "../../lottie/not-found.json";
 
 export default function Loading(props) {
 
@@ -38,6 +39,14 @@ export default function Loading(props) {
             loop: true,
             autoplay: true,
             animationData: noPosts.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        notFound: {
+            loop: true,
+            autoplay: true,
+            animationData: notFound.default,
             rendererSettings: {
                 preserveAspectRatio: "xMidYMid slice"
             }

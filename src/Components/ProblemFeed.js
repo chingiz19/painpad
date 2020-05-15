@@ -22,7 +22,7 @@ export default function ProblemFeed(props) {
                     <div className="div-no-posts">
                         <DynamicIcon type="noPosts" width="200" height="200" />
                         <h3>{props.firstName + " doesn't have posts"}</h3>
-                        <p>{"Follow " + props.firstName + " to see their posts."}</p>
+                        <p>{"Follow " + props.firstName + " to see their future posts."}</p>
                     </div>
                 )
             }
