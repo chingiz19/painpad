@@ -1,6 +1,7 @@
 import React from 'react';
 import Problem from './reactMaps/Problem';
 import PendingProblem from './reactMaps/PendingProblem';
+import AdminPendingProblem from './reactMaps/AdminPendingProblem';
 import DynamicIcon from '../Components/Helpers/DynamicIcon';
 
 export default function ProblemFeed(props) {
@@ -9,8 +10,19 @@ export default function ProblemFeed(props) {
     if (props.thisPosts.length > 0) {
         listProblems = props.thisPosts.map((problem) =>
             problem && problem.approved
-                ? <Problem key={problem.id} problemObj={problem} editPosts={props.editPosts} isLogin={props.isLogin}/>
-                : <PendingProblem key={problem.id} problemObj={problem} editPosts={props.editPosts}/>
+                ? <Problem key={problem.id}
+                    problemObj={problem}
+                    editPosts={props.editPosts}
+                    isLogin={props.isLogin} />
+                : (
+                    props.isAdmin
+                        ? <AdminPendingProblem key={problem.id}
+                            problemObj={problem}
+                            handlePostAction={props.handlePostAction} />
+                        : <PendingProblem key={problem.id}
+                            problemObj={problem}
+                            editPosts={props.editPosts}/>
+                )
         );
     }
 

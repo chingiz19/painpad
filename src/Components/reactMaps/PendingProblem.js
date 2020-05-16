@@ -5,7 +5,7 @@ import UserShortInfo from './UserShortInfo';
 import SameHere from '../SameHere';
 import ConfirmationModal from '../../Modals/ConfirmationModal'
 
-export default function Problems(props) {
+export default function PendingProblem(props) {
     return (
         <div className="problem-div">
             <div className="div-background"></div>
@@ -26,8 +26,8 @@ export default function Problems(props) {
                 {props.problemObj.description}
             </p>
             <div className="problem-footer">
-                <SameHere count={props.problemObj.sameHere} probelmId={props.problemObj.id} sameHered={props.problemObj.sameHered}/>
-                <div className="div-pending">Pending approval</div>
+                <SameHere count={0} probelmId={props.problemObj.id} sameHered={props.problemObj.sameHered}/>
+                <div className={props.hideTag ? 'none' : 'div-pending'}>Pending approval</div>
             </div>
         </div>
     );

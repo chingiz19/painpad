@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import HeaderAdmin from './components/HeaderAdmin';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+import Posts from './components/Posts';
 
 export default function Admin(props) {
     const [selectedComp, setSelectedComp] = useState('post');
@@ -40,7 +41,7 @@ export default function Admin(props) {
                         </Col>
                         <Col sm={8} md={9} className="comp-main">
                             <div className={selectedComp === 'post' ? '' : 'none'}>
-                                <h3>Posts</h3>
+                                <Posts/>
                             </div>
                             <div className={selectedComp === 'analytics' ? '' : 'none'}>
                                 <h3>Analytics</h3>
