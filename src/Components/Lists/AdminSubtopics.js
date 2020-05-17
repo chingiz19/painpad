@@ -3,8 +3,15 @@ import './Lists.css';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 export default function AdminSubTopics(props) {
-    function handleChange(value) {
-        console.log("sub value ", value[0]);
+    
+    function handleChange(subtopic) {
+        if (!subtopic[0]) return;
+
+        if(subtopic.length > 0 && subtopic[0].customOption){
+            //Add subtopic then update variable
+        } else{
+            props.getTopic(subtopic[0]);
+        }
     }
 
     return (
