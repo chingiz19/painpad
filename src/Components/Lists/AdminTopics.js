@@ -26,11 +26,11 @@ export default function AdminTopics(props) {
     function handleChange(topic) {
         if (!topic[0]) return;
 
-        if(topic.length > 0 && topic[0].customOption){
-            //Add subtopic then update variable
-        } else{
+        // if(topic.length > 0 && topic[0].customOption){
+        //     //Add subtopic then update variable
+        // } else{
             props.getTopic(topic[0]);
-        }
+        // }
     }
 
     return (

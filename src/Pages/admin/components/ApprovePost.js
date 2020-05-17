@@ -32,11 +32,45 @@ export default function ApprovePost(props) {
             adminApprovePost(
                 postId: $postId,
                 subTopicId: $subTopicId
+            ){id}
+        }
+    `;
+
+    const ADMIN_ADD_TOPIC = gql`
+        mutation adminAddTopic ($name: String!){
+            adminAddTopic(
+                name: $name
+            ){id}
+        }
+    `;
+
+    const ADMIN_ADD_SUBTOPIC = gql`
+        mutation adminAddSubTopic ($name: String!, $topicId: ID!){
+            adminAddSubTopic (
+                name: $name,
+                topicId: $topicId
             )
         }
     `;
 
-    const [callApprovePost, { loading: loadingApprove, error: errorApprove, data: adataApprove }] = useMutation(ADMIN_APPROVE_POST, {
+    const [callAddTopic] = useMutation(ADMIN_ADD_TOPIC, {
+        onCompleted: data => {
+            callAddSubtopic({
+                variables: {
+                    name: topic.name,
+                    topicId: data.id
+                }
+            });
+        }
+    });
+
+    const [callAddSubtopic] = useMutation(ADMIN_ADD_SUBTOPIC, {
+        onCompleted: data => {
+            handleCallApprovePost(data.id);
+        }
+    });
+
+    const [callApprovePost, { loading: loadingApprove, error: errorApprove, data: dataApprove }] = useMutation(ADMIN_APPROVE_POST, {
         onCompleted: data => {
             setTimeout(() => {
                 handleBack();
@@ -50,11 +84,20 @@ export default function ApprovePost(props) {
 
     function getTopic(topic) {
         setTopic(topic);
-        setAllSubtopics(topic.subs);
+        setAllSubtopics(topic.subs ? topic.subs : []);
     }
 
     function getSubtopic(subtopic) {
         setSubtopic(subtopic);
+    }
+
+    function handleCallApprovePost(subtopicId) {
+        callApprovePost({
+            variables: {
+                postId: parseInt(props.post.id),
+                subTopicId: parseInt(subtopicId || subtopic.id)
+            }
+        });
     }
 
     function submitApproval() {
@@ -72,14 +115,23 @@ export default function ApprovePost(props) {
         });
 
         if (!check) {
-            callApprovePost({
-                variables: {
-                    postId: parseInt(props.post.id),
-                    subTopicId: parseInt(subtopic.id)
-                }
-            });
+            if (topic.customOption) {
+                callAddTopic({
+                    variables: {
+                        name: topic.name
+                    }
+                });
+            } else if (subtopic.customOption) {
+                callAddSubtopic({
+                    variables: {
+                        name: topic.name,
+                        topicId: parseInt(topic.id)
+                    }
+                });
+            } else {
+                handleCallApprovePost();
+            }
         }
-
     }
 
     return (
@@ -87,16 +139,16 @@ export default function ApprovePost(props) {
         <div className="main-AP">
             <button className="btn-back" onClick={handleBack}>back</button>
             <div className="body-AP">
-                <PendingProblem problemObj={props.post} hideTag={true}/>
-                <AdminTopics getTopic={getTopic} 
-                    helperText={stateObj.topicMessage}/>
-                <AdminSubtopics list={allSubtopics} 
-                    getSubtopic={getSubtopic} 
-                    thisDisabled={!topic} 
-                    helperText={stateObj.subtopicMessage}/>
+                <PendingProblem problemObj={props.post} hideTag={true} />
+                <AdminTopics getTopic={getTopic}
+                    helperText={stateObj.topicMessage} />
+                <AdminSubtopics list={allSubtopics}
+                    getSubtopic={getSubtopic}
+                    thisDisabled={!topic}
+                    helperText={stateObj.subtopicMessage} />
 
-                {(loadingApprove || adataApprove)
-                    ? <Loading done={adataApprove} loading={loadingApprove} />
+                {(loadingApprove || dataApprove)
+                    ? <Loading done={dataApprove} loading={loadingApprove} />
                     : <button className="btn-submit" onClick={submitApproval}>Approve post</button>}
 
                 {errorApprove && <Loading error={errorApprove} />}

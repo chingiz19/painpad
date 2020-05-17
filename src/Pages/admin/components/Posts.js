@@ -34,7 +34,6 @@ export default function Posts(props) {
         fetchPolicy: 'network-only',
         onCompleted: data => {
             setAllUserPosts(data.adminPendingPosts);
-            console.log("callGetUserPendingPosts data ", data);
         }
     });
 
