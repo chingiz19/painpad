@@ -5,7 +5,6 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 export default function Industries(props) {
-
     const GET_INDUSTRIES = gql`
             query industries($text: String!, $limit: Int!) {
                 industries(
@@ -44,6 +43,7 @@ export default function Industries(props) {
                     options={(data && data.industries) || (props.thisValue && [props.thisValue]) || []}
                     onInputChange={handleInputChange}
                     onChange={handleChange}
+                    minLength={2}
                     disabled={props.thisDisabled}
                     emptyLabel="No such industry.."
                     placeholder={props.thisPlaceholder}

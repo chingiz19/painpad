@@ -44,7 +44,10 @@ export default function Occupations(props) {
                     options={(data && data.occupations) || (props.thisValue && [props.thisValue]) || []}
                     onInputChange={handleInputChange}
                     onChange={handleChange}
+                    minLength={2}
                     disabled={props.thisDisabled}
+                    emptyLabel="No such occupation.."
+                    placeholder={props.thisPlaceholder}
                 />
                 <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
             </div>)

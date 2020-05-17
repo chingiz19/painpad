@@ -47,7 +47,7 @@
 /* Post Approval  && Post Rejection*/
 .main-AP,
 .main-RP{
-    padding: 30px 0;
+    padding: 50px 0;
 }
 
 .main-AP .btn-back,
@@ -65,4 +65,34 @@
     color: #3f4257;
     border-color: 1px solid #3f4257;
     background-color: rgb(244,244,244);
+}
+
+.body-AP{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.body-AP .problem-div{
+    margin-bottom: 40px;
+}
+
+.main-AP .btn-submit{
+    outline: none !important;
+    height: 40px;
+    width: 250px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 7px;
+    background-color: rgb(198 , 241, 231);
+    color: rgb(100,100,100);
+    font-weight: 600;
+    transition: all 0.15s;
+}
+
+.main-AP .btn-submit:hover{
+    background-color: rgb(126, 218, 196);
+    color: rgb(30,30,30);
 }

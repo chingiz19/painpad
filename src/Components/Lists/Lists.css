@@ -39,7 +39,8 @@
 
 .industry-span,
 .occupation-span,
-.location-span{
+.location-span,
+.combo-box .label-list{
     position: absolute;
     bottom: 37px;
     color: #959595;
@@ -52,4 +53,8 @@
 
 .combo-box-lists{
     width: 250px;
+}
+
+.topic .combo-box-lists{
+    width: 350px;
 }

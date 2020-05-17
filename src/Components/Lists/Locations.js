@@ -43,7 +43,9 @@ export default function Locations(props) {
                     options={(data && data.locations) || (props.thisValue && [props.thisValue]) || []}
                     onInputChange={handleInputChange}
                     onChange={handleChange}
+                    minLength={2}
                     disabled={props.thisDisabled}
+                    emptyLabel="No such city.."
                     placeholder={props.thisPlaceholder}
                 />
                 <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
