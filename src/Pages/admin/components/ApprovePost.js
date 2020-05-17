@@ -71,14 +71,14 @@ export default function ApprovePost(props) {
             }
         });
 
-        // if (!check) {
-        //     callApprovePost({
-        //         variables: {
-        //             postId: parseInt(props.post.id),
-        //             subTopicId: parseInt(subtopic.id)
-        //         }
-        //     });
-        // }
+        if (!check) {
+            callApprovePost({
+                variables: {
+                    postId: parseInt(props.post.id),
+                    subTopicId: parseInt(subtopic.id)
+                }
+            });
+        }
 
     }
 

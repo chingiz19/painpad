@@ -31,7 +31,7 @@ export default function AdminPendingProblem(props) {
             </div>
             <div className="div-app-btns">
                 <button className="btn-approve" onClick={() => handlePostAction('approve', props.problemObj)}>Approve</button>
-                <button className="btn-reject" onClick={() => handlePostAction('reject', props.problemObj)}>Reject</button>
+                <button className="btn-reject" onClick={() => handlePostAction('reject', props.problemObj)}>Check</button>
             </div>
         </div>
     );

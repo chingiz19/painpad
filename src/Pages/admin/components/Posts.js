@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './AdminComponents.css';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import ProblemFeed from '../../../Components/ProblemFeed';
 import ApprovePost from '../components/ApprovePost';
-import RejectPost from '../components/RejectPost';
+import CheckPost from './checkPost/CheckPost';
 
 export default function Posts(props) {
     const [allUserPosts, setAllUserPosts] = useState([]);
@@ -29,6 +30,14 @@ export default function Posts(props) {
         }
     });
 
+    const [callGetUserPendingPosts] = useLazyQuery(ADMIN_GET_USER_PENDING_POSTS, {
+        fetchPolicy: 'network-only',
+        onCompleted: data => {
+            setAllUserPosts(data.adminPendingPosts);
+            console.log("callGetUserPendingPosts data ", data);
+        }
+    });
+
     function handlePostAction(type, post) {
         setAdminPostAction(type);
         setPostAction(post);
@@ -36,18 +45,20 @@ export default function Posts(props) {
 
     function handleBack() {
         setAdminPostAction(null);
+        callGetUserPendingPosts({});
     }
 
     return (
         // apps - Admin Pending Posts
         <div className="main-apps">
             <h2 className="apps-header">
-                <span>Pending Posts</span>
+                <span className={adminPostAction ? 'none' : 'count'}>{allUserPosts.length}</span>
+                <span>Pending posts</span>
                 <div className={adminPostAction ? 'header-type' : 'none'}>
                     <i className="fas fa-long-arrow-alt-right arrow"></i>
                     {adminPostAction === 'approve'
                         ? <div className="approve">Approval</div>
-                        : <div className="reject">Rejection</div>}
+                        : <div className="reject">Check</div>}
                 </div>
 
             </h2>
@@ -56,7 +67,7 @@ export default function Posts(props) {
             {adminPostAction
             ? (adminPostAction === 'approve'
                 ? <ApprovePost handleBack={handleBack} post={postAction}/>
-                : <RejectPost handleBack={handleBack} post={postAction}/>)
+                : <CheckPost handleBack={handleBack} post={postAction}/>)
             : <ProblemFeed thisPosts={allUserPosts} isAdmin={true} handlePostAction={handlePostAction} />}
             
             

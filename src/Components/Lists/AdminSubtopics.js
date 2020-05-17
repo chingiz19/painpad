@@ -10,7 +10,7 @@ export default function AdminSubTopics(props) {
         if(subtopic.length > 0 && subtopic[0].customOption){
             //Add subtopic then update variable
         } else{
-            props.getTopic(subtopic[0]);
+            props.getSubtopic(subtopic[0]);
         }
     }
 

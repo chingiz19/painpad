@@ -11,7 +11,7 @@
     font-size: 18px;
     color: rgb(180,180,180);
     border-radius: 4px;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,font-size .15s ease-in-out, padding .15s ease-in-out;
+    transition: all 0.15s ease-in-out;
 }
 
 .header-btn-div button:hover{
