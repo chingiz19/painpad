@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { useLazyQuery } from '@apollo/react-hooks';
 import ProblemFeed from '../../../Components/ProblemFeed';
 import ApprovePost from '../components/ApprovePost';
-import CheckPost from './checkPost/CheckPost';
+import RejectPost from './RejectPost';
 
 export default function Posts(props) {
     const [allUserPosts, setAllUserPosts] = useState([]);
@@ -57,7 +57,7 @@ export default function Posts(props) {
                     <i className="fas fa-long-arrow-alt-right arrow"></i>
                     {adminPostAction === 'approve'
                         ? <div className="approve">Approval</div>
-                        : <div className="reject">Check</div>}
+                        : <div className="reject">Reject</div>}
                 </div>
 
             </h2>
@@ -66,7 +66,7 @@ export default function Posts(props) {
             {adminPostAction
             ? (adminPostAction === 'approve'
                 ? <ApprovePost handleBack={handleBack} post={postAction}/>
-                : <CheckPost handleBack={handleBack} post={postAction}/>)
+                : <RejectPost handleBack={handleBack} post={postAction}/>)
             : <ProblemFeed thisPosts={allUserPosts} isAdmin={true} handlePostAction={handlePostAction} />}
             
             
