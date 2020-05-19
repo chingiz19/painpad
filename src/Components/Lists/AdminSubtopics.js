@@ -6,12 +6,7 @@ export default function AdminSubTopics(props) {
     
     function handleChange(subtopic) {
         if (!subtopic[0]) return;
-
-        // if(subtopic.length > 0 && subtopic[0].customOption){
-        //     //Add subtopic then update variable
-        // } else{
-            props.getSubtopic(subtopic[0]);
-        // }
+        props.getSubtopic(subtopic[0]);
     }
 
     return (

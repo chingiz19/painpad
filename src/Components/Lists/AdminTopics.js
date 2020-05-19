@@ -7,7 +7,7 @@ import { useQuery } from '@apollo/react-hooks';
 export default function AdminTopics(props) {
     const [allTopics, setAllTopics] = useState([]);
 
-    const GET_TPOICS = gql`
+    const GET_TOPICS = gql`
             query adminAllTopics {
                 adminAllTopics{
                     id, name, subs{
@@ -17,7 +17,8 @@ export default function AdminTopics(props) {
             }
         `;
 
-    useQuery(GET_TPOICS, {
+    useQuery(GET_TOPICS, {
+        fetchPolicy: 'network-only',
         onCompleted: data => {
             setAllTopics(data.adminAllTopics);
         }
@@ -25,12 +26,7 @@ export default function AdminTopics(props) {
 
     function handleChange(topic) {
         if (!topic[0]) return;
-
-        // if(topic.length > 0 && topic[0].customOption){
-        //     //Add subtopic then update variable
-        // } else{
-            props.getTopic(topic[0]);
-        // }
+        props.getTopic(topic[0]);
     }
 
     return (
