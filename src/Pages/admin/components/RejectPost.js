@@ -70,6 +70,8 @@ export default function RejectPost(props) {
 
     return (
         // RP - Reject Post
+
+        // TO-DO: add BE call and also add call that retreives the reasons list
         <div className="main-RP">
             <button className="btn-back" onClick={handleBack}>back</button>
             <div className="body-RP">

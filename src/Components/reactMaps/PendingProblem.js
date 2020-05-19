@@ -27,7 +27,7 @@ export default function PendingProblem(props) {
             </p>
             <div className="problem-footer">
                 <SameHere count={0} probelmId={props.problemObj.id} sameHered={props.problemObj.sameHered}/>
-                <div className={props.hideTag ? 'none' : 'div-pending'}>Reject</div>
+                <div className={props.hideTag ? 'none' : 'div-pending'}>Pending approval</div>
             </div>
         </div>
     );

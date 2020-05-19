@@ -27,12 +27,12 @@ export default function ApprovePost(props) {
         }
     };
 
-    const ADMIN_APPROVE_POST = gql`
-        mutation adminApprovePost ($postId: ID!, $subTopicId: ID!){
-            adminApprovePost(
-                postId: $postId,
-                subTopicId: $subTopicId
-            ){id}
+    const ADMIN_ADD_SUBTOPIC = gql`
+        mutation adminAddSubTopic ($name: String!, $topicId: ID!){
+            adminAddSubTopic (
+                topicId: $topicId,
+                name: $name
+            )
         }
     `;
 
@@ -40,33 +40,33 @@ export default function ApprovePost(props) {
         mutation adminAddTopic ($name: String!){
             adminAddTopic(
                 name: $name
-            ){id}
-        }
-    `;
-
-    const ADMIN_ADD_SUBTOPIC = gql`
-        mutation adminAddSubTopic ($name: String!, $topicId: ID!){
-            adminAddSubTopic (
-                name: $name,
-                topicId: $topicId
             )
         }
     `;
+
+    const ADMIN_APPROVE_POST = gql`
+        mutation adminApprovePost ($postId: ID!, $subTopicId: ID!){
+            adminApprovePost(
+                postId: $postId,
+                subTopicId: $subTopicId
+            )
+        }
+    `;
+
+    const [callAddSubtopic] = useMutation(ADMIN_ADD_SUBTOPIC, {
+        onCompleted: data => {
+            handleCallApprovePost(parseInt(data.adminAddSubTopic));
+        }
+    });
 
     const [callAddTopic] = useMutation(ADMIN_ADD_TOPIC, {
         onCompleted: data => {
             callAddSubtopic({
                 variables: {
-                    name: topic.name,
-                    topicId: data.id
+                    name: subtopic.description,
+                    topicId: parseInt(data.adminAddTopic)
                 }
             });
-        }
-    });
-
-    const [callAddSubtopic] = useMutation(ADMIN_ADD_SUBTOPIC, {
-        onCompleted: data => {
-            handleCallApprovePost(data.id);
         }
     });
 
@@ -84,7 +84,7 @@ export default function ApprovePost(props) {
 
     function getTopic(topic) {
         setTopic(topic);
-        setAllSubtopics(topic.subs ? topic.subs : []);
+        setAllSubtopics((topic && topic.subs && topic.subs[0].id) ? topic.subs : []);
     }
 
     function getSubtopic(subtopic) {
@@ -124,7 +124,7 @@ export default function ApprovePost(props) {
             } else if (subtopic.customOption) {
                 callAddSubtopic({
                     variables: {
-                        name: topic.name,
+                        name: subtopic.description,
                         topicId: parseInt(topic.id)
                     }
                 });

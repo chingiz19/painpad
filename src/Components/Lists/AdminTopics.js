@@ -46,7 +46,6 @@ export default function AdminTopics(props) {
                     labelKey="name"
                     options={allTopics}
                     onChange={handleChange}
-                    minLength={2}
                     newSelectionPrefix="Add a new topic: "
                 />
                 <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>

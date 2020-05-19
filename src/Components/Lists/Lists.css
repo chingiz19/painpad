@@ -19,6 +19,10 @@
     margin: 20px 0 12px 0;
 }
 
+.combo-box .dropdown-item{
+    text-transform: capitalize;
+}
+
 .combo-box-lists.error input{
     border-color: #e70000;
 }

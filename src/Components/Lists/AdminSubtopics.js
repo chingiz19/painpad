@@ -27,7 +27,6 @@ export default function AdminSubTopics(props) {
                     labelKey="description"
                     options={props.list}
                     onChange={handleChange}
-                    minLength={2}
                     newSelectionPrefix="Add a new subtopic: "
                     disabled={props.thisDisabled}
                 />
