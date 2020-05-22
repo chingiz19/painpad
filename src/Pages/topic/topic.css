@@ -6,45 +6,183 @@
     margin-bottom: 20px;
     border-bottom: 1px solid rgba(180,180,180, 0.6);
     font-size: 24px;
-    font-weight: 700;
+    color: #3f4257ab;
     background-color: rgba(198, 241, 231, 0.4);
 }
 
-.pie-stats{
-    display: flex;
-    flex-direction: column;
-    width: 640px;
-    margin: 0 auto;
+.main-header span{
+    padding-left: 10px;
+    color: #3f4257;
+    font-weight: 600;
 }
 
-.stats-div{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.section-chart{
+    position: relative;
 }
 
-.stats-div div{
+.section-chart .div-btn{
+    position: absolute;
+    right: 10px;
+    top: -10px;
+    z-index: 1;
+}
+
+.section-chart .div-btn button{
+    outline: none !important;
+    width: 70px;
+    border: 1px solid #3f425757;
+}
+
+.section-chart .div-btn button:focus{
+    outline: none !important;
+}
+
+.section-chart .div-btn .selected-l,
+.section-chart .div-btn .selected-r{
+    color: #b6bad6;
+    background-color: #3f4257;
+    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.section-chart .div-btn .selected-l{
+    border-radius: 5px 0 0 5px;
+}
+
+.section-chart .div-btn .selected-r{
+    border-radius: 0 5px 5px 0;
+}
+
+.section-chart .div-btn .not-selected-l,
+.section-chart .div-btn .not-selected-r{
+    background-color: transparent;
+    color: #3f425757;
+}
+
+.section-chart .div-btn .not-selected-l{
+    border-radius: 5px 0 0 5px;
+}
+
+.section-chart .div-btn .not-selected-r{
+    border-radius: 0 5px 5px 0;
+}
+
+.section-chart .div-btn i{
+    margin-right: 3px;
+}
+
+.selected-l i,
+.selected-r i{
+    color: white;
+}
+
+.div-chart{
+    height: 425px;
+    margin: auto;
+}
+
+.div-chart text{
+    font-size: 16px !important;
+    text-transform: capitalize;
+    font-family: "Comic Sans MS", cursive, sans-serif !important;
+    font-weight: 500;
+}
+
+/* Explanation Box */
+.div-explaination{
     display: flex;
     flex-direction: row;
+    width: 70%;
+    height: 105px;
+    margin: 10px auto 30px auto;
+    background-color: rgb(244,244,244);
+    color: #41477471;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    text-align: center;
+    padding: 15px 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.15s ease-in-out;
+    animation: growExpBox 0.35s;
+}
+
+.div-explaination span{
+    color: #414774;
+    font-weight: 600;
+}
+
+.none-exp{
+    opacity: 0;
+    height: 0;
+    animation: shrinkExpBox 0.35s;
+}
+
+@keyframes growExpBox {
+    from { height: 0; }
+    to   { height: 105px; }
+}
+
+@keyframes shrinkExpBox {
+    from { 
+            height: 105px;
+            opacity: 0; 
+        }
+    to   { 
+            height: 0; 
+            opacity: 0;
+        }
+}
+
+.ul-expl-box{
     list-style: none;
-    padding-left: 5px;
-    margin: 20px 10px 5px 10px;
-    letter-spacing: 0.025em;
+    margin: 0;
+    padding: 0;
 }
 
-.stats-div .number{
-    font-size: 24px;
-    font-weight: 550;
+.ul-expl-box li{
+    width: 165px;
+    text-align: left;
 }
 
-.stats-div .txt{
-    padding-left: 5px;
-    padding-top: 7px;
+/* Post Section */
+.section-posts .div-no-posts{
+    padding-top: 30px;
+}
+
+.section-posts .div-filter{
+    display: inline-flex;
+    margin-left: 20px;
+}
+
+.div-filter div{
+    padding-top: 5px;
+    color: rgba(110, 110, 110,0.4);
     font-size: 18px;
-    color: rgb(150,150,150);
 }
 
-.line-seperator{
-    margin: 30px 0;
+.div-filter span{
+    text-transform: capitalize;
+    color: #484c63;
+    font-weight: 600;
+}
+
+.section-posts .btn-clear{
+    outline: none !important;
+    border: none;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    font-size: 20px;
+    color: rgba(140, 140, 140,0.4);
+    transition: all 0.15 ease-in-out;
+}
+
+.section-posts .btn-clear:hover{
+    color: #484c63;
+    background-color: rgb(240,240,240);
+    border-radius: 5px;
+}
+
+.section-posts .btn-clear:focus{
+    outline: none !important;
 }

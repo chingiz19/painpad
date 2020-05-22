@@ -55,7 +55,7 @@ export default function Home(props) {
                                 <div className="problems-div">
                                     <WriteReport />
                                     <SeperatorLine thisValue="Reports feed" />
-                                    <ProblemFeed thisPosts={(dataGetUserFeed && dataGetUserFeed.userFeed) || []} />
+                                    <ProblemFeed thisPosts={(dataGetUserFeed && dataGetUserFeed.userFeed) || []} isLogin={isUserSignedIn ? isUserSignedIn.isLogin.success : false}/>
                                 </div>
                             </div>
                         </Col>

@@ -21,7 +21,7 @@ export default function ProblemFeed(props) {
                             handlePostAction={props.handlePostAction} />
                         : <PendingProblem key={problem.id}
                             problemObj={problem}
-                            editPosts={props.editPosts}/>
+                            editPosts={props.editPosts} />
                 )
         );
     }
@@ -33,8 +33,20 @@ export default function ProblemFeed(props) {
                 : (
                     <div className="div-no-posts">
                         <DynamicIcon type="noPosts" width="200" height="200" />
-                        <h3>{props.firstName + " doesn't have posts"}</h3>
-                        <p>{"Follow " + props.firstName + " to see their future posts."}</p>
+                        {
+                            props.page === 'topic'
+                                ?
+                                <>
+                                    <p>There are no {props.topic + ' '} {props.subTopic ? props.subTopic : ''} related posts.</p>
+                                </>
+
+                                :
+                                <>
+                                    <h3>{props.firstName + " doesn't have posts"}</h3>
+                                    <p>{"Follow " + props.firstName + " to see their future posts."}</p>
+                                </>
+
+                        }
                     </div>
                 )
             }
