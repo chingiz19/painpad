@@ -30,6 +30,7 @@
 .section-chart .div-btn button{
     outline: none !important;
     width: 70px;
+    padding: 3px 7px;
     border: 1px solid #3f425757;
 }
 

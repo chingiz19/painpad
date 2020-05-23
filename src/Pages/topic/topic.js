@@ -13,7 +13,7 @@ import SectionPost from './SectionPost';
 import SectionChart from './SectionChart';
 
 export default function Topic(props) {
-    const [pieSlice, setPieSlice] = useState(null);
+    const [chartData, setChartData] = useState(null);
     const [displayBox, setDisplayBox] = useState(null);
 
     let topic = "Wi-Fi";
@@ -26,22 +26,18 @@ export default function Topic(props) {
 
     const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
 
-    function handlePieClick(data) {
-        if (pieSlice && pieSlice.label === data.label) {
-            setPieSlice(null);
+    function handleChartClick(data) {
+        if (chartData && chartData.label === data.label) {
+            setChartData(null);
             setDisplayBox('hide');
         } else {
-            setPieSlice(data);
+            setChartData(data);
             setDisplayBox('show');
         }
     }
 
-    function handleMapClick(data) {
-        console.log("data ", data);
-    }
-
     function clearFilter() {
-        setPieSlice(null);
+        setChartData(null);
         setDisplayBox('hide');
     }
 
@@ -59,15 +55,14 @@ export default function Topic(props) {
                         <Col sm={8} md={9} className="main-comp">
                             <div className="main-topic-page">
                                 <div className="main-header">Analytics for <span>{topic}</span></div>
-                                <SectionChart handlePieClick={handlePieClick}
-                                    handleMapClick={handleMapClick} />
-                                <ExplainationBox pieSlice={pieSlice}
+                                <SectionChart handleChartClick={handleChartClick}/>
+                                <ExplainationBox chartData={chartData}
                                     displayBox={displayBox} />
                                 <SeperatorLine thisValue="Related posts" />
-                                <SectionPost pieSlice={pieSlice}
+                                <SectionPost chartData={chartData}
                                     clearFilter={clearFilter}
                                     topic={topic}
-                                    subTopic={pieSlice && pieSlice.label} />
+                                    subTopic={chartData && chartData.label} />
                             </div>
                         </Col>
                     </Row>

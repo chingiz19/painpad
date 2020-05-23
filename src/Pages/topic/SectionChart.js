@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Topic.css';
 import PieChart from '../../Components/Helpers/charts/PieChart';
 import Choropleth from '../../Components/Helpers/charts/Choropleth';
+import Fade from 'react-reveal/Fade';
 
 export default function SectionChart(props) {
     const [chartType, setChartType] = useState('pie');
@@ -10,12 +11,8 @@ export default function SectionChart(props) {
         setChartType(data);
     }
 
-    function handlePieClick(data) {
-        props.handlePieClick(data);
-    }
-
-    function handleMapClick(data) {
-        props.handleMapClick(data);
+    function handleChartClick(data) {
+        props.handleChartClick(data);
     }
 
     let chartData = [
@@ -48,16 +45,16 @@ export default function SectionChart(props) {
 
     let mapData = [
         {
-          "id": "CAN",
-          "value": 982207
+            "id": "CAN",
+            "value": 982207
         },
         {
-          "id": "AGO",
-          "value": 302178
+            "id": "AGO",
+            "value": 302178
         },
         {
-          "id": "BLZ",
-          "value": 790717
+            "id": "BLZ",
+            "value": 790717
         }
     ];
 
@@ -71,12 +68,14 @@ export default function SectionChart(props) {
                     <i className="fas fa-globe-americas"></i>Map
                 </button>
             </div>
-            <div className={chartType === 'pie' ? 'div-chart' : 'none'}>
-                <PieChart data={chartData} sliceClicked={handlePieClick} />
-            </div>
-            <div className={chartType === 'map' ? 'div-chart' : 'none'}>
-                <Choropleth data={mapData} mapClicked={handleMapClick} />
-            </div>
+            <Fade cascade>
+                <div className={chartType === 'pie' ? 'div-chart' : 'none'}>
+                    <PieChart data={chartData} sliceClicked={handleChartClick} />
+                </div>
+                <div className={chartType === 'map' ? 'div-chart' : 'none'}>
+                    <Choropleth data={mapData} mapClicked={handleChartClick} />
+                </div>
+            </Fade>
         </div>
     );
 }
