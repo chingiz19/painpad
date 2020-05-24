@@ -97,21 +97,21 @@ export default function Profile(props) {
 
     const [callGetUserPosts, { data: dataGetPosts }] = useLazyQuery(GET_USER_POSTS, {
         onCompleted: data => {
-            if(isSelf){
+            if (isSelf) {
                 callGetUserPendingPosts({});
-            } else{
+            } else {
                 setAllUserPosts(data ? data.userPosts : []);
             }
         }
     });
 
     const [callGetUserPendingPosts] = useLazyQuery(GET_USER_PENDING_POSTS, {
-        onCompleted: data =>{
+        onCompleted: data => {
             let tmpAllPosts = [];
             let tmpUserPosts = dataGetPosts ? dataGetPosts.posts : [];
-            if(data.userPendingPosts.length > 0){
+            if (data.userPendingPosts.length > 0) {
                 tmpAllPosts = data.userPendingPosts.concat(tmpUserPosts);
-            } else{
+            } else {
                 tmpAllPosts = tmpUserPosts;
             }
             setAllUserPosts(tmpAllPosts);
@@ -140,12 +140,12 @@ export default function Profile(props) {
                                 <ProfileUserInfo isSignedIn={isSignedIn} />
                                 <SeperatorLine thisValue={sepLineValue} />
                                 <div className="div-posts">
-                                    <button className={dataGetPosts && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
+                                    <button className={dataGetPosts && dataGetPosts.posts.length && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
                                         onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
-                                    <ProblemFeed thisPosts={allUserPosts || []} 
-                                        editPosts={editPosts} 
+                                    <ProblemFeed thisPosts={allUserPosts || []}
+                                        editPosts={editPosts}
                                         firstName={dataGetUserInfo && dataGetUserInfo.userProfile.user.firstName}
-                                        isLogin={isSignedIn ? isSignedIn.isLogin.success : false}/>
+                                        isLogin={isSignedIn ? isSignedIn.isLogin.success : false} />
                                 </div>
                             </div>
                         </Col>

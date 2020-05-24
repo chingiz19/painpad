@@ -171,7 +171,7 @@ export default function ProfileUserInfo(props) {
                     <UserStats isMyProfile={isMyProfile} 
                         userId={userId} 
                         userScore={userInfoBE.score} 
-                        isUserSignedIn={props.isUserSignedIn}/>
+                        isSignedIn={props.isSignedIn}/>
                     <ChangeUserPic userId={userId} 
                         userPic={userInfoBE.profilePic} 
                         isMyProfile={isMyProfile}/>

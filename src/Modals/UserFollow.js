@@ -39,7 +39,7 @@ export default function FollowList(props) {
     }
 
     const handleShowFollower = () => {
-        if(props.isUserSignedIn){
+        if(props.isSignedIn){
             setShow(true);
             setShowFollower(true);
             setShowFollowing(false);
@@ -54,7 +54,7 @@ export default function FollowList(props) {
     }
 
     const handleShowFollowing = () => {
-        if(props.isUserSignedIn){
+        if(props.isSignedIn){
             setShow(true);
             setShowFollower(false);
             setShowFollowing(true);

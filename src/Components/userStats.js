@@ -8,7 +8,7 @@ import UserSignInUp from '../Modals/SignInUp/SignInUp';
 
 export default function UserStats(props) {
     let pageUserId = parseInt(window.location.href.split("users/")[1]);
-    let myUserId = parseInt(props.isUserSignedIn && props.isUserSignedIn.isLogin.id);
+    let myUserId = parseInt(props.isSignedIn && props.isSignedIn.isLogin.id);
 
     const [iFollow, setIFollow] = useState(false);
     const [followerCount, setFollowerCount] = useState(0);
@@ -71,7 +71,7 @@ export default function UserStats(props) {
     });
 
     function handleFollow() {
-        if(props.isUserSignedIn && !props.isUserSignedIn.isLogin.success){
+        if(props.isSignedIn && !props.isSignedIn.isLogin.success){
             handleShowModal();
             return;
         }
@@ -109,7 +109,7 @@ export default function UserStats(props) {
                 <UserFollow followerCount={followerCount}
                     followingCount={followingCount}
                     userId={props.userId}
-                    isUserSignedIn={props.isUserSignedIn && props.isUserSignedIn.isLogin.success}
+                    isSignedIn={props.isSignedIn && props.isSignedIn.isLogin.success}
                     handleShowModal={handleShowModal}/>
             </div>
 

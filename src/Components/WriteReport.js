@@ -31,7 +31,7 @@ export default function WriteReport() {
         },
         reportText: {
             format: {
-                pattern: "[a-zA-Z0-9.:);+-?! ]+"
+                pattern: "[a-zA-Z0-9.:());+-?!# ]+"
             }
         }
     };

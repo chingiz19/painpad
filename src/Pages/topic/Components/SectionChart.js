@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './Topic.css';
-import PieChart from '../../Components/Helpers/charts/PieChart';
-import Choropleth from '../../Components/Helpers/charts/Choropleth';
+import '../Topic.css';
+import PieChart from '../../../Components/Helpers/charts/PieChart';
+import Choropleth from '../../../Components/Helpers/charts/Choropleth';
 import Fade from 'react-reveal/Fade';
 
 export default function SectionChart(props) {
@@ -9,54 +9,12 @@ export default function SectionChart(props) {
 
     function selectChartType(data) {
         setChartType(data);
+        props.selectChartType(data);
     }
 
     function handleChartClick(data) {
         props.handleChartClick(data);
     }
-
-    let chartData = [
-        {
-            "id": "connection",
-            "label": "connection",
-            "value": 224
-        },
-        {
-            "id": "expensive",
-            "label": "expensive",
-            "value": 268
-        },
-        {
-            "id": "password",
-            "label": "password",
-            "value": 380
-        },
-        {
-            "id": "speed",
-            "label": "speed",
-            "value": 14
-        },
-        {
-            "id": "maintenance",
-            "label": "maintenance",
-            "value": 549
-        }
-    ];
-
-    let mapData = [
-        {
-            "id": "CAN",
-            "value": 982207
-        },
-        {
-            "id": "AGO",
-            "value": 302178
-        },
-        {
-            "id": "BLZ",
-            "value": 790717
-        }
-    ];
 
     return (
         <div className="section-chart">
@@ -70,10 +28,10 @@ export default function SectionChart(props) {
             </div>
             <Fade cascade>
                 <div className={chartType === 'pie' ? 'div-chart' : 'none'}>
-                    <PieChart data={chartData} sliceClicked={handleChartClick} />
+                    <PieChart data={props.chartData ? props.chartData.pie : []} sliceClicked={handleChartClick} />
                 </div>
                 <div className={chartType === 'map' ? 'div-chart' : 'none'}>
-                    <Choropleth data={mapData} mapClicked={handleChartClick} />
+                    <Choropleth data={props.chartData ? props.chartData.map : []} mapClicked={handleChartClick} />
                 </div>
             </Fade>
         </div>

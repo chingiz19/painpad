@@ -30,7 +30,7 @@ export default function Problems(props) {
                     sameHered={props.problemObj.sameHered} 
                     isLogin={props.isLogin}/>
                 <a className="problem-what"
-                    href={'/topics/' + props.problemObj.topic.name}>
+                    href={'/topics/' + props.problemObj.topic.id}>
                     {props.problemObj.topic.name} related</a>
             </div>
         </div>

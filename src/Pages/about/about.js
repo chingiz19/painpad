@@ -20,7 +20,7 @@ export default function About(props) {
         }
     `;
 
-    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
+    const { data: isSignedIn } = useQuery(IS_USER_SIGNED_IN);
 
     return (
         <>
@@ -31,7 +31,7 @@ export default function About(props) {
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn} />
+                            <HeaderWeb currentPage={props.pageName} isSignedIn={isSignedIn} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp about">
                             <Header/>

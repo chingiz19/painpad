@@ -108,7 +108,7 @@ export default function ResetPass(props) {
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={false} />
+                            <HeaderWeb currentPage={props.pageName} isSignedIn={false} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
                             <div className="main reset-pass-main">

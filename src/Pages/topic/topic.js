@@ -8,15 +8,18 @@ import HeaderWeb from '../../Components/HeaderWeb'
 import SeperatorLine from '../../Components/SeperatorLine';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import ExplainationBox from './ExplanationBox';
-import SectionPost from './SectionPost';
-import SectionChart from './SectionChart';
+import ExplainationBox from './Components/ExplanationBox';
+import SectionPost from './Components/SectionPost';
+import SectionChart from './Components/SectionChart';
 
 export default function Topic(props) {
+    let topicId = parseInt(window.location.href.split("topics/")[1]);
+
+    const [topicName, setTopicName] = useState(null);
+    const [chartType, setChartType] = useState('pie');
+    const [selectedData, setSelectedData] = useState(null);
     const [chartData, setChartData] = useState(null);
     const [displayBox, setDisplayBox] = useState(null);
-
-    let topic = "Wi-Fi";
 
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
@@ -24,21 +27,83 @@ export default function Topic(props) {
         }
     `;
 
-    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
+    const GET_TOPIC_STATS = gql`
+        query topicStats ($topicId: ID!) {
+            topicStats (topicId: $topicId) {
+                topicName,
+                weights{
+                    subTopicWeights {
+                        postCount, userPoint, sameHere
+                    },
+                    countryWeights {
+                        postCount, sameHere
+                    }
+                }, 
+                subTopicStats {
+                    subTopicId, subTopicName, sameHereCount, userPoints, postCount
+                },
+                topicCountryStats {
+                    countryId, countryName, postCount, sameHereCount
+                }
+            }
+        }
+    `;
 
-    function handleChartClick(data) {
-        if (chartData && chartData.label === data.label) {
-            setChartData(null);
+    const { data: isSignedIn } = useQuery(IS_USER_SIGNED_IN);
+
+    useQuery(GET_TOPIC_STATS, {
+        variables: {
+            topicId: topicId
+        },
+        onCompleted: data => {
+            setTopicName(data.topicStats.topicName);
+            formatChartData(data.topicStats);
+        }
+    });
+
+    function handleChartClick(data, type) {
+        if (selectedData && selectedData.label === data.label) {
+            setSelectedData(null);
             setDisplayBox('hide');
         } else {
-            setChartData(data);
+            setSelectedData(data);
             setDisplayBox('show');
         }
     }
 
+    function selectChartType(data) {
+        setChartType(data);
+        clearFilter();
+    }
+
     function clearFilter() {
-        setChartData(null);
+        setSelectedData(null);
         setDisplayBox('hide');
+    }
+
+    function formatChartData(data) {
+        let formatedObj = {};
+        let stWt = data.weights.subTopicWeights;
+        let cntWt = data.weights.countryWeights;
+        formatedObj["pie"] = data.subTopicStats.map((obj) => {
+            return {
+                id: obj.subTopicName,
+                subtopicId: parseInt(obj.subTopicId),
+                label: obj.subTopicName,
+                value: Math.ceil((stWt.postCount * obj.postCount + stWt.sameHere * obj.sameHereCount + stWt.userPoint * obj.userPoints) / 5) * 5,
+                postCount: obj.postCount,
+                sameHereCount: obj.sameHereCount
+            };
+        });
+        formatedObj["map"] = data.topicCountryStats.map((obj) => {
+            return {
+                id: obj.countryName,
+                value: Math.ceil((cntWt.postCount * obj.postCount + cntWt.sameHere * obj.sameHereCount) / 5) * 5,
+                postCount: obj.postCount,
+                sameHereCount: obj.sameHereCount
+            };
+        });
+        setChartData(formatedObj);
     }
 
     return (
@@ -50,19 +115,22 @@ export default function Topic(props) {
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn} />
+                            <HeaderWeb currentPage={props.pageName} isSignedIn={isSignedIn} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
                             <div className="main-topic-page">
-                                <div className="main-header">Analytics for <span>{topic}</span></div>
-                                <SectionChart handleChartClick={handleChartClick}/>
-                                <ExplainationBox chartData={chartData}
+                                <div className="main-header">Analytics for <span>{topicName}</span></div>
+                                <SectionChart handleChartClick={handleChartClick}
+                                    selectChartType={selectChartType}
+                                    chartData={chartData} />
+                                <ExplainationBox selectedData={selectedData}
+                                    type={chartType}
                                     displayBox={displayBox} />
                                 <SeperatorLine thisValue="Related posts" />
-                                <SectionPost chartData={chartData}
+                                <SectionPost selectedData={selectedData}
                                     clearFilter={clearFilter}
-                                    topic={topic}
-                                    subTopic={chartData && chartData.label} />
+                                    topic={topicName}
+                                    subTopic={selectedData && selectedData.label} />
                             </div>
                         </Col>
                     </Row>

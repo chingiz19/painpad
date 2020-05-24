@@ -7,6 +7,7 @@ export default function PieChart(props) {
         props.sliceClicked(data);
     }
 
+
     return (
         <ResponsivePie
             data={props.data}
