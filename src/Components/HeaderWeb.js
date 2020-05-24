@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
 
 export default function HeaderWeb(props) {
-    let isUserSignedIn = props.isUserSignedIn;
+    let isSignedIn = props.isSignedIn;
 
     const USER_SIGN_OUT = gql`
         query signout{
@@ -27,7 +27,7 @@ export default function HeaderWeb(props) {
                 <a href="/" className="a-logo-hdr-web">
                     <img src={LogoTransperent} className="header-logo" alt="Transperent Logo" />
                 </a>
-                <ul className="guest-user-ul" style={{ display: !(isUserSignedIn && isUserSignedIn.isLogin.success) ? '' : 'none' }}>
+                <ul className="guest-user-ul" style={{ display: !(isSignedIn && isSignedIn.isLogin.success) ? '' : 'none' }}>
                     <li className="wh-li">
                         <a href="/" className="wh-li-a">
                             <div className="wh-li-a-div">
@@ -50,7 +50,7 @@ export default function HeaderWeb(props) {
                         </a>
                     </li>
                 </ul>
-                <ul className="user-ul" style={{ display: (isUserSignedIn && isUserSignedIn.isLogin.success) ? '' : 'none' }}>
+                <ul className="user-ul" style={{ display: (isSignedIn && isSignedIn.isLogin.success) ? '' : 'none' }}>
                     <li className="wh-li">
                         <a href="/" className="wh-li-a">
                             <div className="wh-li-a-div">
@@ -61,7 +61,7 @@ export default function HeaderWeb(props) {
                         </a>
                     </li>
                     <li className="wh-li">
-                        <a href={'/users/' + (isUserSignedIn && isUserSignedIn.isLogin.id)} className="wh-li-a">
+                        <a href={'/users/' + (isSignedIn && isSignedIn.isLogin.id)} className="wh-li-a">
                             <div className="wh-li-a-div">
                                 <div className={((props.currentPage === 'profile' && props.isSelf) ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
                                     <i className="far fa-user"></i>Profile

@@ -19,9 +19,9 @@ export default function Home(props) {
         }
     `;
 
-    const GET_USER_FEED = gql`
-        query userFeed { 
-            userFeed{
+    const GET_POSTS = gql`
+        query posts { 
+            posts{
                 id, description, 
                 postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
@@ -35,9 +35,9 @@ export default function Home(props) {
         }
     `;
 
-    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
+    const { data: isSignedIn } = useQuery(IS_USER_SIGNED_IN);
 
-    const { data: dataGetUserFeed } = useQuery(GET_USER_FEED);
+    const { data: dataGetPosts } = useQuery(GET_POSTS);
 
     return (
         <>
@@ -48,14 +48,15 @@ export default function Home(props) {
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn} />
+                            <HeaderWeb currentPage={props.pageName} isSignedIn={isSignedIn} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
                             <div className="main">
                                 <div className="problems-div">
-                                    <WriteReport />
+                                    <WriteReport/>
                                     <SeperatorLine thisValue="Reports feed" />
-                                    <ProblemFeed thisPosts={(dataGetUserFeed && dataGetUserFeed.userFeed) || []} isLogin={isUserSignedIn ? isUserSignedIn.isLogin.success : false}/>
+                                    <ProblemFeed thisPosts={(dataGetPosts && dataGetPosts.posts) || []} 
+                                        isLogin={isSignedIn ? isSignedIn.isLogin.success : false}/>
                                 </div>
                             </div>
                         </Col>

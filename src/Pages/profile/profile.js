@@ -22,7 +22,7 @@ export default function Profile(props) {
 
     const [allUserPosts, setAllUserPosts] = useState([]);
 
-    const IS_USER_SIGNED_IN = gql`
+    const IS_SIGNED_IN = gql`
         query isLogin{
             isLogin {success, id}
         }
@@ -43,8 +43,8 @@ export default function Profile(props) {
     `;
 
     const GET_USER_POSTS = gql`
-        query userPosts ($userId: ID!){ 
-            userPosts (userId: $userId){
+        query posts ($userId: ID!){ 
+            posts (userId: $userId){
                 id, description, 
                 postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
@@ -85,7 +85,7 @@ export default function Profile(props) {
         }
     });
 
-    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN, {
+    const { data: isSignedIn } = useQuery(IS_SIGNED_IN, {
         onCompleted: data => {
             callGetUserPosts({
                 variables: {
@@ -95,7 +95,7 @@ export default function Profile(props) {
         }
     });
 
-    const [callGetUserPosts, { data: dataGetUserPosts }] = useLazyQuery(GET_USER_POSTS, {
+    const [callGetUserPosts, { data: dataGetPosts }] = useLazyQuery(GET_USER_POSTS, {
         onCompleted: data => {
             if(isSelf){
                 callGetUserPendingPosts({});
@@ -108,7 +108,7 @@ export default function Profile(props) {
     const [callGetUserPendingPosts] = useLazyQuery(GET_USER_PENDING_POSTS, {
         onCompleted: data =>{
             let tmpAllPosts = [];
-            let tmpUserPosts = dataGetUserPosts ? dataGetUserPosts.userPosts : [];
+            let tmpUserPosts = dataGetPosts ? dataGetPosts.posts : [];
             if(data.userPendingPosts.length > 0){
                 tmpAllPosts = data.userPendingPosts.concat(tmpUserPosts);
             } else{
@@ -132,20 +132,20 @@ export default function Profile(props) {
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
                             <HeaderWeb currentPage={props.pageName}
-                                isUserSignedIn={isUserSignedIn}
+                                isSignedIn={isSignedIn}
                                 isSelf={isSelf} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp comp-profile">
                             <div className="div-1">
-                                <ProfileUserInfo isUserSignedIn={isUserSignedIn} />
+                                <ProfileUserInfo isSignedIn={isSignedIn} />
                                 <SeperatorLine thisValue={sepLineValue} />
                                 <div className="div-posts">
-                                    <button className={dataGetUserPosts && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
+                                    <button className={dataGetPosts && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
                                         onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
                                     <ProblemFeed thisPosts={allUserPosts || []} 
                                         editPosts={editPosts} 
                                         firstName={dataGetUserInfo && dataGetUserInfo.userProfile.user.firstName}
-                                        isLogin={isUserSignedIn ? isUserSignedIn.isLogin.success : false}/>
+                                        isLogin={isSignedIn ? isSignedIn.isLogin.success : false}/>
                                 </div>
                             </div>
                         </Col>
