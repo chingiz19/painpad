@@ -44,17 +44,20 @@ export default function Profile(props) {
 
     const GET_USER_POSTS = gql`
         query posts ($userId: ID!){ 
-            posts (userId: $userId){
+            posts(userId: $userId){
                 id, description, 
                 postedBy{
-                    id, firstName, lastName, profilePic, industry, occupation
-                }, 
-                created, industry, location, approved, topic{
-                    id, name
+                id, firstName, lastName, profilePic, industry, occupation
                 },
-                sameHere,
-                sameHered
-                }
+                created, industry, 
+                location{
+                countryId, countryName, stateId, stateName, cityId, cityName
+                },
+                subTopic{
+                id, description, topicId, topicName
+                },
+                approved, sameHere, sameHered
+            }
         }
     `;
 
@@ -142,7 +145,8 @@ export default function Profile(props) {
                                 <div className="div-posts">
                                     <button className={dataGetPosts && dataGetPosts.posts.length && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
                                         onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
-                                    <ProblemFeed thisPosts={allUserPosts || []}
+                                    <ProblemFeed filter={false} 
+                                        thisPosts={allUserPosts || []}
                                         editPosts={editPosts}
                                         firstName={dataGetUserInfo && dataGetUserInfo.userProfile.user.firstName}
                                         isLogin={isSignedIn ? isSignedIn.isLogin.success : false} />

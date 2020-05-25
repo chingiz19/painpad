@@ -20,10 +20,10 @@ export default function SectionChart(props) {
         <div className="section-chart">
             <div className="div-btn">
                 <button onClick={() => selectChartType('pie')} className={chartType === 'pie' ? 'selected-l' : 'not-selected-l'}>
-                    <i className="fas fa-chart-pie"></i>Pie
+                    <i className="fas fa-chart-pie"></i>
                 </button>
                 <button onClick={() => selectChartType('map')} className={chartType === 'map' ? 'selected-r' : 'not-selected-r'}>
-                    <i className="fas fa-globe-americas"></i>Map
+                    <i className="fas fa-globe-americas"></i>
                 </button>
             </div>
             <Fade cascade>

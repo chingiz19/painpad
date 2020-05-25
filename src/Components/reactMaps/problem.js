@@ -17,7 +17,7 @@ export default function Problems(props) {
                 <UserShortInfo key={props.problemObj.postedBy.id}
                     userInfo={props.problemObj.postedBy} />
                 <ul className="ul-loc-date">
-                    <li className="li-loc">{props.problemObj.location}</li>
+                    <li className="li-loc">{props.problemObj.location.cityName + ', ' + props.problemObj.location.countryName}</li>
                     <li className="li-date"><Moment date={props.problemObj.created} format="D MMM" withTitle /></li>
                 </ul>
             </div>
@@ -30,8 +30,8 @@ export default function Problems(props) {
                     sameHered={props.problemObj.sameHered} 
                     isLogin={props.isLogin}/>
                 <a className="problem-what"
-                    href={'/topics/' + props.problemObj.topic.id}>
-                    {props.problemObj.topic.name} related</a>
+                    href={'/topics/' + props.problemObj.subTopic.topicId}>
+                    {props.problemObj.subTopic.topicName} related</a>
             </div>
         </div>
     );

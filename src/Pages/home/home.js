@@ -20,24 +20,29 @@ export default function Home(props) {
     `;
 
     const GET_POSTS = gql`
-        query posts { 
+        query posts{ 
             posts{
                 id, description, 
                 postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
-                }, 
-                created, industry, location, approved, topic{
-                    id, name
                 },
-                sameHere,
-                sameHered
-                }
+                created, industry, 
+                location{
+                    countryId, countryName, stateId, stateName, cityId, cityName
+                },
+                subTopic{
+                    id, description, topicId, topicName
+                },
+                approved, sameHere, sameHered
+            }
         }
     `;
 
     const { data: isSignedIn } = useQuery(IS_USER_SIGNED_IN);
 
     const { data: dataGetPosts } = useQuery(GET_POSTS);
+
+    console.log("dataGetPosts ", dataGetPosts);
 
     return (
         <>
@@ -55,7 +60,8 @@ export default function Home(props) {
                                 <div className="problems-div">
                                     <WriteReport/>
                                     <SeperatorLine thisValue="Reports feed" />
-                                    <ProblemFeed thisPosts={(dataGetPosts && dataGetPosts.posts) || []} 
+                                    <ProblemFeed filter={false} 
+                                        thisPosts={(dataGetPosts && dataGetPosts.posts) || []} 
                                         isLogin={isSignedIn ? isSignedIn.isLogin.success : false}/>
                                 </div>
                             </div>

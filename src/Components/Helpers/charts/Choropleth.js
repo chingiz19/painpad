@@ -14,7 +14,7 @@ export default function Choropleth(props) {
             onClick={handleOnClick}
             features={features.features}
             margin={{ top: 70, right: 0, bottom: 0, left: 0 }}
-            colors="nivo"
+            colors="OrRd"
             domain={[0, 1000000]}
             unknownColor="rgb(220, 220, 243)"
             label="properties.name"

@@ -19,7 +19,7 @@ export default function Topic(props) {
     const [chartType, setChartType] = useState('pie');
     const [selectedData, setSelectedData] = useState(null);
     const [chartData, setChartData] = useState(null);
-    const [displayBox, setDisplayBox] = useState(null);
+    const [displayBox, setDisplayBox] = useState('hide');
 
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
@@ -61,7 +61,9 @@ export default function Topic(props) {
         }
     });
 
-    function handleChartClick(data, type) {
+    function handleChartClick(data) {
+        console.log("data ", data);
+
         if (selectedData && selectedData.label === data.label) {
             setSelectedData(null);
             setDisplayBox('hide');
@@ -98,6 +100,7 @@ export default function Topic(props) {
         formatedObj["map"] = data.topicCountryStats.map((obj) => {
             return {
                 id: obj.countryName,
+                countryId: parseInt(obj.countryId),
                 value: Math.ceil((cntWt.postCount * obj.postCount + cntWt.sameHere * obj.sameHereCount) / 5) * 5,
                 postCount: obj.postCount,
                 sameHereCount: obj.sameHereCount
@@ -129,8 +132,11 @@ export default function Topic(props) {
                                 <SeperatorLine thisValue="Related posts" />
                                 <SectionPost selectedData={selectedData}
                                     clearFilter={clearFilter}
-                                    topic={topicName}
-                                    subTopic={selectedData && selectedData.label} />
+                                    subtopicId={selectedData && selectedData.subtopicId}
+                                    subtopicName={selectedData && selectedData.label}
+                                    topicId={topicId}
+                                    topicName={topicName}
+                                    countryId={selectedData && selectedData.data && selectedData.data.countryId} />
                             </div>
                         </Col>
                     </Row>
