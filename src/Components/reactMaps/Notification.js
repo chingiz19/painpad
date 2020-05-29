@@ -16,7 +16,7 @@ export default function Notification(props) {
     }
 
     return (
-        <div className="container-notif">
+        <a className="container-notif" href={obj.action}>
             <div className={obj.seen ? 'notif-none' : 'div-unread'}><span></span></div>
             <div className="header-notif reward" style={{backgroundColor: obj.type.backgroundColor, borderColor: obj.type.backgroundColor}}>
                 <span className="txt">{obj.header}</span>
@@ -35,6 +35,6 @@ export default function Notification(props) {
                     <p>{obj.postText}</p>
                 </div>
             </div>
-        </div>
+        </a>
     );
 }

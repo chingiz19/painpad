@@ -4,8 +4,7 @@ import './HeaderWeb.css';
 import LogoTransperent from '../images/logos/logo_transparent.png';
 import UserSignInUp from '../Modals/SignInUp/SignInUp';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery, useSubscription } from '@apollo/react-hooks';
 
 export default function HeaderWeb(props) {
     let isSignedIn = props.isSignedIn;
@@ -24,6 +23,12 @@ export default function HeaderWeb(props) {
         }
     `;
 
+    const NEW_NOTIFICATION_COUNT = gql`
+        subscription newNotificationCount{
+            newNotificationCount
+        }
+    `;
+
     const [callUserSignOut] = useLazyQuery(USER_SIGN_OUT, {
         onCompleted: data =>{
             window.location.href = "/";
@@ -33,6 +38,12 @@ export default function HeaderWeb(props) {
     useQuery(GET_NOTIFICATION_COUNT, {
         onCompleted: data => {
             setNotifCount(data.newNotificationCount);
+        }
+    });
+
+    useSubscription(NEW_NOTIFICATION_COUNT, {
+        onSubscriptionData: ({ subscriptionData }) => {
+            setNotifCount(subscriptionData.data.newNotificationCount);
         }
     });
 

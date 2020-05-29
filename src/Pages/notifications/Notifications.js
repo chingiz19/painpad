@@ -17,6 +17,8 @@ export default function Topic(props) {
         }
     `;
 
+
+
     const GET_NOTIFICATIONS = gql`
         query notifications {
             notifications {
@@ -33,7 +35,7 @@ export default function Topic(props) {
     const { data: isSignedIn } = useQuery(IS_USER_SIGNED_IN);
 
     const { data: notifications } = useQuery(GET_NOTIFICATIONS);
-
+        
     return (
         <>
             <Container className="view-port">

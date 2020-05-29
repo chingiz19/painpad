@@ -23,7 +23,7 @@ export default function SameHere(props) {
             if(sameHered){
                 setSameHereCount(sameHereCount - 1);
             } else{
-                setSameHereCount(props.count + 1);
+                setSameHereCount(sameHereCount + 1);
             }
             setSameHered(!sameHered);
         }
