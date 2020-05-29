@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import LogoTransperent from '../../../images/logos/logo_transparent.png';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
@@ -29,6 +30,9 @@ export default function HeaderAdmin(props) {
 
     return (
         <>
+            <Helmet>
+                <title>PainPad | {props.currentPage}</title>
+            </Helmet>
             <div className="header-div">
                 {/* TODO make li as a seperate component - repeats */}
                 <a href="/" className="a-logo-hdr-web">

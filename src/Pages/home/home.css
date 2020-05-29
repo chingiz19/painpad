@@ -16,4 +16,5 @@
 
 .problems-div{
     width: 670px;
+    scroll-behavior: smooth ;
 }

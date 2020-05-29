@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
 import './Admin.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -31,14 +30,11 @@ export default function Admin(props) {
 
     return (
         <>
-            <Helmet>
-                <title>PainPad | Admin</title>
-            </Helmet>
             <Container className={isUserAdmin && isUserAdmin.isAdmin ? "view-port" : "none"}>
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="comp-header">
-                            <HeaderAdmin selectComp={handleSelectComp}/>
+                            <HeaderAdmin currentPage={props.pageName} selectComp={handleSelectComp}/>
                         </Col>
                         <Col sm={8} md={9} className="comp-main">
                             <div className={selectedComp === 'post' ? '' : 'none'}>

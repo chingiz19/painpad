@@ -1,3 +1,4 @@
+/* ------- Problem -------*/
 .problem-div{
     position: relative;
     display: flex;
@@ -150,7 +151,7 @@
 }
 
 
-/* Admin Pending Posts */
+/* ------- Admin Pending Posts -------*/
 .div-app{
     display: flex;
     flex-direction: column;

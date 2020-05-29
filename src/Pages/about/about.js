@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
 import './About.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -24,9 +23,6 @@ export default function About(props) {
 
     return (
         <>
-            <Helmet>
-                <title>PainPad | About</title>
-            </Helmet>
             <Container className="view-port">
                 <Container fluid="lg">
                     <Row>
@@ -34,11 +30,11 @@ export default function About(props) {
                             <HeaderWeb currentPage={props.pageName} isSignedIn={isSignedIn} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp about">
-                            <Header/>
-                            <SeperatorLineAbout label="entrepreneur advice"/>
+                            <Header />
+                            <SeperatorLineAbout label="entrepreneur advice" />
                             <EntrepreneurAdvice />
-                            <SeperatorLineAbout label="our story"/>
-                            <OurStory/>
+                            <SeperatorLineAbout label="our story" />
+                            <OurStory />
                         </Col>
                     </Row>
                 </Container>

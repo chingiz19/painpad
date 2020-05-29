@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
 import './Profile.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -79,11 +78,12 @@ export default function Profile(props) {
         },
         onCompleted: data => {
             setIsSelf(dataGetUserInfo.userProfile.self);
-            setPageTitle(data.userProfile.user.firstName + "'s profile");
             if (dataGetUserInfo.userProfile.self) {
                 setSepLineValue('My reports');
+                setPageTitle('My profile');
             } else {
                 setSepLineValue(data.userProfile.user.firstName + "'s reports");
+                setPageTitle(data.userProfile.user.firstName + "'s profile");
             }
         }
     });
@@ -103,7 +103,7 @@ export default function Profile(props) {
             if (isSelf) {
                 callGetUserPendingPosts({});
             } else {
-                setAllUserPosts(data ? data.userPosts : []);
+                setAllUserPosts(data ? data.posts : []);
             }
         }
     });
@@ -127,16 +127,14 @@ export default function Profile(props) {
 
     return (
         <>
-            <Helmet>
-                <title>{pageTitle}</title>
-            </Helmet>
             <Container className="view-port ">
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
                             <HeaderWeb currentPage={props.pageName}
                                 isSignedIn={isSignedIn}
-                                isSelf={isSelf} />
+                                isSelf={isSelf}
+                                pageTitle={pageTitle} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp comp-profile">
                             <div className="div-1">
@@ -145,7 +143,7 @@ export default function Profile(props) {
                                 <div className="div-posts">
                                     <button className={dataGetPosts && dataGetPosts.posts.length && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
                                         onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
-                                    <ProblemFeed filter={false} 
+                                    <ProblemFeed filter={false}
                                         thisPosts={allUserPosts || []}
                                         editPosts={editPosts}
                                         firstName={dataGetUserInfo && dataGetUserInfo.userProfile.user.firstName}

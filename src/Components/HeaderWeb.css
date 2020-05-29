@@ -1,4 +1,28 @@
 /*wh - web-header*/
+.div-notif-count{
+    position: absolute;
+    min-width: 19px;
+    color: rgb(253, 253, 253);
+    background-color: #F02849;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 0 5px;
+}
+
+.div-notif-count.less-10{
+    top: -7px;
+    left: 11px;
+    height: 19px;
+    border-radius: 50%;
+}
+
+.div-notif-count.plus-10{
+    top: -13px;
+    left: -5px;
+    height: 20px;
+    border-radius: 34%;
+}
+
 .a-logo-hdr-web{
     width: 100%;
     display: flex;
@@ -63,6 +87,7 @@
 
 .wh-li-div-span-div,
 .wh-li-a-div-div{
+    position: relative;
     display: flex;
     align-items: center;
 }

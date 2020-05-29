@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet';
 import './Topic.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -62,8 +61,6 @@ export default function Topic(props) {
     });
 
     function handleChartClick(data) {
-        console.log("data ", data);
-
         if (selectedData && selectedData.label === data.label) {
             setSelectedData(null);
             setDisplayBox('hide');
@@ -111,9 +108,6 @@ export default function Topic(props) {
 
     return (
         <>
-            <Helmet>
-                <title>PainPad | Topic</title>
-            </Helmet>
             <Container className="view-port">
                 <Container fluid="lg">
                     <Row>

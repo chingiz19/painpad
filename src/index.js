@@ -5,6 +5,7 @@ import './index.css';
 import Admin from './Pages/admin/Admin';
 import Home from './Pages/home/Home';
 import About from './Pages/about/About';
+import Notifications from './Pages/notifications/Notifications';
 import Profile from './Pages/profile/Profile';
 import Topic from './Pages/topic/Topic';
 import ResetPass from './Pages/resetPass/ResetPass';
@@ -28,13 +29,15 @@ export default function App() {
     <ApolloProvider client={client}>
       <Router>
         <Switch>
-          <Route exact path="/about" render={(props) => <About {...props} pageName="about" />}/>
-          <Route exact path="/admin" render={(props) => <Admin {...props} pageName="admin" />}/>
-          <Route path="/topics/:topic" render={(props) => <Topic {...props} pageName="topic" />}/>
-          <Route path="/users/:userId" render={(props) => <Profile {...props} pageName="profile" />}/>
-          <Route path="/resetPass/:token" render={(props) => <ResetPass {...props} pageName="resetPass" />}/>
-          <Route exact path="/" render={(props) => <Home {...props} pageName="home" />}/>
-          <Route path="*" component={NotFound} />
+          <Route exact path="/about" render={(props) => <About {...props} pageName="About" />}/>
+          <Route exact path="/notifications" render={(props) => <Notifications {...props} pageName="Notifications" />}/>
+          <Route exact path="/admin" render={(props) => <Admin {...props} pageName="Admin" />}/>
+          <Route path="/topics/:topic" render={(props) => <Topic {...props} pageName="Topic" />}/>
+          <Route path="/users/:userId" render={(props) => <Profile {...props} pageName="Profile" />}/>
+          <Route path="/resetPass/:token" render={(props) => <ResetPass {...props} pageName="ResetPass" />}/>
+          <Route exact path="/" render={(props) => <Home {...props} pageName="Home" />}/>
+          <Route path="*" render={(props) => <NotFound {...props} pageName="404" />}/>
+          {/* <Route path="*" component={NotFound} /> */}
         </Switch>
       </Router>
     </ApolloProvider>

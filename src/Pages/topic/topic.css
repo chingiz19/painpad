@@ -1,3 +1,7 @@
+.main-topic-page{
+    scroll-behavior: smooth;
+}
+
 .main-header{
     display: flex;
     justify-content: center;

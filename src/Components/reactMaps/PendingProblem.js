@@ -18,7 +18,7 @@ export default function PendingProblem(props) {
                 <UserShortInfo key={props.problemObj.postedBy.id}
                     userInfo={props.problemObj.postedBy} />
                 <ul className="ul-loc-date">
-                    <li className="li-loc">{props.problemObj.location.cityName + ', ' + props.problemObj.location.countryName}</li>
+                    <li className="li-loc">{props.problemObj.location}</li>
                     <li className="li-date"><Moment date={props.problemObj.created} format="D MMM" withTitle /></li>
                 </ul>
             </div>

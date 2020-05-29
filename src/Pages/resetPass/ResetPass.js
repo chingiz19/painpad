@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { Helmet } from 'react-helmet';
 import './ResetPass.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
@@ -101,9 +100,6 @@ export default function ResetPass(props) {
 
     return (
         <>
-            <Helmet>
-                <title>PainPad | Reset Password</title>
-            </Helmet>
             <Container className="view-port">
                 <Container fluid="lg">
                     <Row>

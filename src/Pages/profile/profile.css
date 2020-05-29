@@ -4,6 +4,7 @@
 
 .main-comp .div-1{
     width: 100%;
+    scroll-behavior: smooth ;
 }
 
 .comp-profile .div-posts{

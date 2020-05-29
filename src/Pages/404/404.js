@@ -1,6 +1,5 @@
 import React from 'react';
 import './404.css';
-import { Helmet } from 'react-helmet';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -18,18 +17,15 @@ export default function NotFound(props) {
         }
     `;
 
-    const { data: isUserSignedIn } = useQuery(IS_USER_SIGNED_IN);
+    const { data: isSignedIn } = useQuery(IS_USER_SIGNED_IN);
 
     return (
         <>
-            <Helmet>
-                <title>PainPad | Not Found</title>
-            </Helmet>
             <Container className="view-port">
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} isUserSignedIn={isUserSignedIn} />
+                            <HeaderWeb currentPage={props.pageName} isSignedIn={isSignedIn} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
                             <div className="main main-404">

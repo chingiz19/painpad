@@ -1,13 +1,12 @@
 import React from 'react';
-import { Helmet } from 'react-helmet'
 import './Home.css';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import HeaderWeb from '../../Components/HeaderWeb'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import HeaderWeb from '../../Components/HeaderWeb';
 import WriteReport from '../../Components/WriteReport';
-import ProblemFeed from '../../Components/ProblemFeed'
-import SeperatorLine from '../../Components/SeperatorLine'
+import ProblemFeed from '../../Components/ProblemFeed';
+import SeperatorLine from '../../Components/SeperatorLine';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
@@ -42,13 +41,8 @@ export default function Home(props) {
 
     const { data: dataGetPosts } = useQuery(GET_POSTS);
 
-    console.log("dataGetPosts ", dataGetPosts);
-
     return (
         <>
-            <Helmet>
-                <title>PainPad | Home</title>
-            </Helmet>
             <Container className="view-port">
                 <Container fluid="lg">
                     <Row>
