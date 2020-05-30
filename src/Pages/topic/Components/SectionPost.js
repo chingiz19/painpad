@@ -30,7 +30,7 @@ export default function SectionPost(props) {
     `;
 
     useQuery(GET_TOPIC_POSTS, {
-        variables:{
+        variables: {
             topicId: props.topicId
         },
         onCompleted: data => {
@@ -49,13 +49,14 @@ export default function SectionPost(props) {
                 <button onClick={handleClearFilter} className="btn-clear"><i className="fas fa-times"></i></button>
             </div>
             <ProblemFeed page={'topic'}
-                filter={true} 
+                isLogin={props.isSignedIn}
+                filter={true}
                 subtopicId={props.subtopicId}
                 subtopicName={props.subtopicName}
                 countryId={props.countryId}
                 topicId={props.topicId}
                 topicName={props.topicName}
-                thisPosts={topicPosts}/>
+                thisPosts={topicPosts} />
         </div>
     );
 }

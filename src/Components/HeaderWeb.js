@@ -7,8 +7,6 @@ import gql from 'graphql-tag';
 import { useQuery, useLazyQuery, useSubscription } from '@apollo/react-hooks';
 
 export default function HeaderWeb(props) {
-    let isSignedIn = props.isSignedIn;
-
     const [notifCount, setNotifCount] = useState(0);
 
     const USER_SIGN_OUT = gql`
@@ -65,7 +63,7 @@ export default function HeaderWeb(props) {
                 <a href="/" className="a-logo-hdr-web">
                     <img src={LogoTransperent} className="header-logo" alt="Transperent Logo" />
                 </a>
-                <ul className="guest-user-ul" style={{ display: !(isSignedIn && isSignedIn.isLogin.success) ? '' : 'none' }}>
+                <ul className="guest-user-ul" style={{ display: !props.isSignedIn ? '' : 'none' }}>
                     <li className="wh-li">
                         <a href="/" className="wh-li-a">
                             <div className="wh-li-a-div">
@@ -88,7 +86,7 @@ export default function HeaderWeb(props) {
                         </a>
                     </li>
                 </ul>
-                <ul className="user-ul" style={{ display: (isSignedIn && isSignedIn.isLogin.success) ? '' : 'none' }}>
+                <ul className="user-ul" style={{ display: props.isSignedIn ? '' : 'none' }}>
                     <li className="wh-li">
                         <a href="/" className="wh-li-a">
                             <div className="wh-li-a-div">
@@ -99,7 +97,7 @@ export default function HeaderWeb(props) {
                         </a>
                     </li>
                     <li className="wh-li">
-                        <a href={'/users/' + (isSignedIn && isSignedIn.isLogin.id)} className="wh-li-a">
+                        <a href={'/users/' + props.userId} className="wh-li-a">
                             <div className="wh-li-a-div">
                                 <div className={((props.currentPage === 'Profile' && props.isSelf) ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
                                     <i className="far fa-user"></i>Profile

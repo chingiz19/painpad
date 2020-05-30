@@ -1,5 +1,52 @@
 .samehere,
 .samehered{
+    display: flex;
+    border: none;
+    background-color: transparent;
+    margin: 0 25px 0 10px;
+    padding: 3px 10px;
+}
+
+.samehere:focus,
+.samehered:focus{
+    outline:none;
+}
+
+.samehere .div-cnt,
+.samehered .div-cnt{
+    padding: 8px 15px;
+    text-transform: capitalize;
+    font-weight: 600;
+    border-radius: 10px;
+    color: #3f4257;
+    transition: all 0.15s ease-in-out;
+}
+
+.samehere .div-cnt{
+    background-color: rgba(198, 241, 231, 0.2);
+}
+
+.samehere:hover .div-cnt{
+    background-color: rgba(198, 241, 231, 1);
+}
+
+.samehered .div-cnt{
+    background-color: rgba(198, 241, 231, 1);
+}
+
+.div-cnt .sh-emoji{
+    margin: 0 5px 0 10px;
+}
+
+.samehere .sh-txt,
+.samehered .sh-txt{
+    padding: 7px 0 0 5px;
+    color: #3f425765;
+}
+
+
+/* .samehere,
+.samehered{
     border: none;
     background-color: transparent;
     margin: 0 25px 0 10px;
@@ -12,11 +59,20 @@
 }
 
 .samehere:hover,
-.problem-what:hover,
 .samehered{
     border-radius: 5px;
     background-color: rgb(198 , 241, 231);
     transition: all 0.15s;
+}
+
+.samehere .div-cnt{
+    padding: 10px 15px;
+    text-transform: capitalize;
+    background-color: rgba(198, 241, 231, 0.2);
+    color: #3f4257;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.15s ease-in-out;
 }
 
 .sh-cnt{
@@ -28,5 +84,5 @@
 }
 
 .sh-txt{
-    color: rgb(150,150,150);
-}
+    color: #3f425765;
+} */

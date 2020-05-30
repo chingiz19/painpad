@@ -10,8 +10,9 @@ import * as notFound from "../../lottie/not-found.json";
 import * as postApproved from "../../lottie/post-approved.json";
 import * as postRejected from "../../lottie/post-rejected.json";
 import * as notifReward from "../../lottie/notif-reward.json";
+import * as Loading from "../../lottie/loading.json";
 
-export default function Loading(props) {
+export default function DynamicIcon(props) {
 
     var iconList = {
         noFollow: {
@@ -74,6 +75,14 @@ export default function Loading(props) {
             loop: true,
             autoplay: true,
             animationData: notifReward.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        loading: {
+            loop: true,
+            autoplay: true,
+            animationData: Loading.default,
             rendererSettings: {
                 preserveAspectRatio: "xMidYMid slice"
             }

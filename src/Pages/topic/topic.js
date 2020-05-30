@@ -14,6 +14,8 @@ import SectionChart from './Components/SectionChart';
 export default function Topic(props) {
     let topicId = parseInt(window.location.href.split("topics/")[1]);
 
+    const [isSignedIn, setIsSignedIn] = useState(false);
+    const [userId, setUserId] = useState(false);
     const [topicName, setTopicName] = useState(null);
     const [chartType, setChartType] = useState('pie');
     const [selectedData, setSelectedData] = useState(null);
@@ -48,7 +50,12 @@ export default function Topic(props) {
         }
     `;
 
-    const { data: isSignedIn } = useQuery(IS_USER_SIGNED_IN);
+    useQuery(IS_USER_SIGNED_IN, {
+        onCompleted: data =>{
+            setUserId(data.isLogin.id);
+            setIsSignedIn(data.isLogin.success);
+        }
+    });
 
     useQuery(GET_TOPIC_STATS, {
         variables: {
@@ -112,7 +119,9 @@ export default function Topic(props) {
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} isSignedIn={isSignedIn} />
+                            <HeaderWeb currentPage={props.pageName}
+                                isSignedIn={isSignedIn} 
+                                userId={userId}/>
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
                             <div className="main-topic-page">
@@ -124,7 +133,8 @@ export default function Topic(props) {
                                     type={chartType}
                                     displayBox={displayBox} />
                                 <SeperatorLine thisValue="Related posts" />
-                                <SectionPost selectedData={selectedData}
+                                <SectionPost isSignedIn={isSignedIn}
+                                    selectedData={selectedData}
                                     clearFilter={clearFilter}
                                     subtopicId={selectedData && selectedData.subtopicId}
                                     subtopicName={selectedData && selectedData.label}

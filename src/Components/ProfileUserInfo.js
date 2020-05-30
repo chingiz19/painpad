@@ -17,7 +17,7 @@ import ChangePassword from '../Modals/ChangePassword'
 import ChangeUserPic from '../Modals/ChangeUserPic'
 
 export default function ProfileUserInfo(props) {
-    let userId = parseInt(window.location.href.split("users/")[1]);
+    let pageUserId = parseInt(window.location.href.split("users/")[1]);
 
     let firstName = useRef(null);
     let lastName = useRef(null);
@@ -88,7 +88,7 @@ export default function ProfileUserInfo(props) {
 
     const { data: dataGetUserInfo, loading: loadingUserInfoBE } = useQuery(GET_USER_INFO, {
         variables: {
-            userId: userId
+            userId: pageUserId
         }
     });
 
@@ -168,13 +168,14 @@ export default function ProfileUserInfo(props) {
             <Row>
                 <Col sm={3} className="img-col">
                     <img src={userInfoBE.profilePic} className="user-prof-pic" alt="User Profile" />
-                    <UserStats isMyProfile={isMyProfile} 
-                        userId={userId} 
-                        userScore={userInfoBE.score} 
-                        isSignedIn={props.isSignedIn}/>
-                    <ChangeUserPic userId={userId} 
-                        userPic={userInfoBE.profilePic} 
-                        isMyProfile={isMyProfile}/>
+                    <UserStats isMyProfile={isMyProfile}
+                        isSignedIn={props.isSignedIn} 
+                        pageUserId={pageUserId}
+                        myUserId={props.userId} 
+                        userScore={userInfoBE.score}/>
+                    <ChangeUserPic isMyProfile={isMyProfile}
+                        userId={pageUserId} 
+                        userPic={userInfoBE.profilePic}/>
                 </Col>
                 <Col sm={9} className="info-col">
                     <div className="input-btn-section">

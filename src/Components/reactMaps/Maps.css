@@ -78,23 +78,36 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     font-size: 16px;
 }
 
-.problem-what{
+.problem-topic{
     padding: 3px 10px;
-    text-transform: capitalize;
-    font-weight: 600;
     outline: none;
-    color: rgb(0,0,0);
+    color: #3f425765;
 }
 
-.problem-what:hover,
+.problem-topic span{
+    padding: 10px 15px;
+    text-transform: capitalize;
+    background-color: rgba(198, 241, 231, 0.2);
+    color: #3f4257;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.15s ease-in-out;
+}
+
+.problem-topic:hover,
 .user-short-info:hover{
     border: none;
     outline: none;
     text-decoration: none;
-    color: inherit;
+    color: #3f425765;
+}
+
+.problem-topic:hover span{
+    background-color: rgba(198, 241, 231, 1);
 }
 
 .div-user-short{

@@ -52,9 +52,11 @@ export default function SameHere(props) {
                     showModal={showSignModal}
                     handleCloseModal={handleCloseModal} />
             <button className={sameHered ? "samehered" : "samehere"} onClick={handleSameHere}>
-                <span className="sh-cnt">{sameHereCount}</span>
-                <span className="sh-emoji" role="img" aria-label="Raising hands">🙌🏼</span>
-                <span className="sh-txt">Same-Here</span>
+                <div className="div-cnt">
+                    <span className="sh-cnt">{sameHereCount}</span>
+                    <span className="sh-emoji" role="img" aria-label="Raising hands">🙌🏼</span>
+                </div>
+                <span className="sh-txt">same-here</span>
             </button>
         </>
     );

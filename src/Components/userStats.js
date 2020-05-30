@@ -7,8 +7,8 @@ import UserFollow from '../Modals/UserFollow';
 import UserSignInUp from '../Modals/SignInUp/SignInUp';
 
 export default function UserStats(props) {
-    let pageUserId = parseInt(window.location.href.split("users/")[1]);
-    let myUserId = parseInt(props.isSignedIn && props.isSignedIn.isLogin.id);
+    let pageUserId = parseInt(props.pageUserId);
+    let myUserId = parseInt(props.myUserId);
 
     const [iFollow, setIFollow] = useState(false);
     const [followerCount, setFollowerCount] = useState(0);
@@ -42,7 +42,7 @@ export default function UserStats(props) {
 
     useQuery(GET_USER_STATS, {
         variables: {
-            userId: props.userId
+            userId: pageUserId
         },
         onCompleted: data => {
             for (let i = 0; i < data.userStats.followers.length; i++) {
@@ -71,7 +71,7 @@ export default function UserStats(props) {
     });
 
     function handleFollow() {
-        if(props.isSignedIn && !props.isSignedIn.isLogin.success){
+        if(!props.isSignedIn){
             handleShowModal();
             return;
         }
@@ -109,7 +109,7 @@ export default function UserStats(props) {
                 <UserFollow followerCount={followerCount}
                     followingCount={followingCount}
                     userId={props.userId}
-                    isSignedIn={props.isSignedIn && props.isSignedIn.isLogin.success}
+                    isSignedIn={props.isSignedIn}
                     handleShowModal={handleShowModal}/>
             </div>
 
@@ -117,7 +117,8 @@ export default function UserStats(props) {
                 showModal={showSignModal}
                 handleCloseModal={handleCloseModal} />
 
-            <button className={(!props.isMyProfile ? 'btn-follow' : 'none')} onClick={handleFollow}>{iFollow ? "Unfollow" : "Follow"}</button>
+            <button className={(!props.isMyProfile ? 'btn-follow' : 'none')} 
+                onClick={handleFollow}>{iFollow ? "Unfollow" : "Follow"}</button>
         </>
     );
 }

@@ -15,6 +15,8 @@ export default function Profile(props) {
     let profileUserId = parseInt(window.location.href.split("users/")[1]);
 
     const [isSelf, setIsSelf] = useState('');
+    const [isSignedIn, setIsSignedIn] = useState(false);
+    const [userId, setUserId] = useState(false);
     const [sepLineValue, setSepLineValue] = useState('');
     const [pageTitle, setPageTitle] = useState('PainPad | Profile');
     const [editPosts, setEditPosts] = useState(false);
@@ -88,8 +90,10 @@ export default function Profile(props) {
         }
     });
 
-    const { data: isSignedIn } = useQuery(IS_SIGNED_IN, {
+    useQuery(IS_SIGNED_IN, {
         onCompleted: data => {
+            setUserId(data.isLogin.id);
+            setIsSignedIn(data.isLogin.success);
             callGetUserPosts({
                 variables: {
                     userId: profileUserId
@@ -132,13 +136,15 @@ export default function Profile(props) {
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
                             <HeaderWeb currentPage={props.pageName}
-                                isSignedIn={isSignedIn}
-                                isSelf={isSelf}
-                                pageTitle={pageTitle} />
+                                pageTitle={pageTitle}
+                                isSignedIn={isSignedIn} 
+                                userId={userId}
+                                isSelf={isSelf}/>
                         </Col>
                         <Col sm={8} md={9} className="main-comp comp-profile">
                             <div className="div-1">
-                                <ProfileUserInfo isSignedIn={isSignedIn} />
+                                <ProfileUserInfo isSignedIn={isSignedIn} 
+                                    userId={userId}/>
                                 <SeperatorLine thisValue={sepLineValue} />
                                 <div className="div-posts">
                                     <button className={dataGetPosts && dataGetPosts.posts.length && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
@@ -147,7 +153,7 @@ export default function Profile(props) {
                                         thisPosts={allUserPosts || []}
                                         editPosts={editPosts}
                                         firstName={dataGetUserInfo && dataGetUserInfo.userProfile.user.firstName}
-                                        isLogin={isSignedIn ? isSignedIn.isLogin.success : false} />
+                                        isLogin={isSignedIn} />
                                 </div>
                             </div>
                         </Col>
