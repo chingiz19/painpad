@@ -130,17 +130,26 @@
     list-style: none;
 }
 
-.div-pending{
+.div-pending,
+.div-declined{
     outline: none;
     padding: 4px 12px;
     background-color: rgb(255, 255, 255);
     text-transform: capitalize;
     font-weight: 600;
     font-size: 15px;
-    color: rgba(255, 82, 146, 0.6);
-    border: 1px solid rgba(255, 82, 146, 0.6);
     border-radius: 15px;
     z-index: 2;
+}
+
+.div-pending{
+    color: rgba(255, 82, 146, 0.6);
+    border: 1px solid rgba(255, 82, 146, 0.6);
+}
+
+.div-declined{
+    color: rgba(226, 14, 43, 0.6);
+    border: 1px solid rgba(226, 14, 43, 0.6);
 }
 
 .problem-div .div-background{
@@ -149,7 +158,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(63, 66, 87, 0.1);
+    background-color: rgba(203, 205, 216, 0.1);
     border-radius: 10px;
     z-index: 1;
 }

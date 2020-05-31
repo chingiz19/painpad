@@ -10,6 +10,7 @@ import Profile from './Pages/profile/Profile';
 import Topic from './Pages/topic/Topic';
 import ResetPass from './Pages/resetPass/ResetPass';
 import NotFound from './Pages/404/404';
+import Post from './Pages/post/Post';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from "apollo-client";
 import { WebSocketLink } from 'apollo-link-ws';
@@ -39,7 +40,6 @@ const wsLink = new WebSocketLink({
 });
 
 const link = split(
-  // split based on operation type
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query);
     return kind === 'OperationDefinition' && operation === 'subscription';
@@ -64,6 +64,7 @@ export default function App() {
           <Route exact path="/admin" render={(props) => <Admin {...props} pageName="Admin" />} />
           <Route path="/topics/:topic" render={(props) => <Topic {...props} pageName="Topic" />} />
           <Route path="/users/:userId" render={(props) => <Profile {...props} pageName="Profile" />} />
+          <Route path="/posts/:postId" render={(props) => <Post {...props} pageName="Post" />} />
           <Route path="/resetPass/:token" render={(props) => <ResetPass {...props} pageName="ResetPass" />} />
           <Route exact path="/" render={(props) => <Home {...props} pageName="Home" />} />
           <Route path="*" render={(props) => <NotFound {...props} pageName="404" />} />

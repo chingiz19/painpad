@@ -1,14 +1,14 @@
 import React, { useState, useRef } from 'react';
 import './ResetPass.css';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import HeaderWeb from '../../Components/HeaderWeb'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import HeaderWeb from '../../Components/HeaderWeb';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import DynamicIcon from '../../Components/Helpers/DynamicIcon'
+import DynamicIcon from '../../Components/Helpers/DynamicIcon';
 import Validate from 'validate.js';
-import Loading from '../../Components/Helpers/Loading'
+import Loading from '../../Components/Helpers/Loading';
 
 export default function ResetPass(props) {
     let token = window.location.href.split("resetPass/")[1];

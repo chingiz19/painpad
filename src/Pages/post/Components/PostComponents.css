@@ -1,0 +1,50 @@
+.div-explation{
+    width: 60%;
+    margin: 20px auto 30px auto;
+    letter-spacing: 0.015em;
+}
+
+.div-explation h2{
+    margin-top: 20px;
+    text-align: center;
+    color: #3f4257
+}
+
+.div-explation h4{
+    font-weight: 400;
+    text-align: center;
+    color: #3f4257d3
+}
+
+.div-explation span{
+    text-transform: lowercase;
+}
+
+.suggested,
+.div-sub-explation{
+    margin: 40px auto 0 auto;
+    letter-spacing: 0.015em;
+    width: 570px;
+}
+
+.suggested h4{
+    font-weight: 400;
+    color: #3f4257;
+}
+
+.suggested p{
+    font-weight: 400;
+    font-size: 15px;
+    position: relative;
+    top: 16px;
+    color: #414774;
+    background-color: rgb(244,244,244);
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.div-sub-explation{
+    padding: 5px 10px;
+    font-weight: 400;
+    color: #3f4257bd;
+}
