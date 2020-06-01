@@ -108,7 +108,7 @@ export default function UserStats(props) {
                 </ul>
                 <UserFollow followerCount={followerCount}
                     followingCount={followingCount}
-                    userId={props.userId}
+                    userId={props.pageUserId}
                     isSignedIn={props.isSignedIn}
                     handleShowModal={handleShowModal}/>
             </div>

@@ -46,13 +46,13 @@ export default function Post(props) {
     const GET_REJECTED_POST = gql`
         query rejectedPost($rejectedPostId: ID!) {
             rejectedPost(rejectedPostId: $rejectedPostId){
-            id, description, postedBy{
-                id, firstName, lastName, profilePic, industry, occupation
-            },
-            created, industry, location, rejected, rejectedBy{
-                id, firstName, lastName, profilePic, industry, occupation
-            },
-            reason, explanation, suggestion
+                id, description, postedBy{
+                    id, firstName, lastName, profilePic, industry, occupation
+                },
+                created, industry, location, rejected, rejectedBy{
+                    id, firstName, lastName, profilePic, industry, occupation
+                },
+                reason, explanation, suggestion
             }
         }
     `;
@@ -70,8 +70,15 @@ export default function Post(props) {
             if (isRejected) {
                 setRejectedPost(data.rejectedPost);
             } else {
-                setPost(data.posts[0]);
+                if (data.posts.length > 0) {
+                    setPost(data.posts[0]);
+                } else {
+                    window.location.href = "/404";
+                }
             }
+        },
+        onError: ({ graphQLErrors }) => {
+            window.location.href = "/404";
         }
     });
 

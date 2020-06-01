@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import './SignUp.css';
 import './UserInput.css';
-import Loading from '../Components/Helpers/Loading'
+import DynamicIcon from '../Components/Helpers/DynamicIcon';
 import Validate from 'validate.js';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import Locations from './Lists/Locations'
-import Indsutries from './Lists/Industries'
+import Locations from './Lists/Locations';
+import Indsutries from './Lists/Industries';
 
 export default function SignUp() {
     const firstName = useRef(null);
@@ -161,12 +161,11 @@ export default function SignUp() {
                     <span className="helper-txt">{stateObj.passMessage}</span>
                 </div>
 
-                {(loading || userSignUp)
-                    ? <Loading done={userSignUp} loading={loading} />
+                {(loading || userSignUp || error)
+                    ? (userSignUp || error
+                        ? <DynamicIcon type={error ? 'loadingError' : 'loadingDone'} width='90' height='90' />
+                        : <DynamicIcon type='loading' width='90' height='90' />)
                     : <button className="submit-btn" onClick={submitInput}>Sign Up</button>}
-
-                {error && <Loading error={error} />}
-
             </div>
         </>
     );

@@ -37,16 +37,16 @@ export default function Industries(props) {
                 <span className={!props.thisPlaceholder ? 'industry-span' : 'none'}>Industry</span>
                 <Typeahead
                     id="industries-list"
-                    className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
                     labelKey="industry"
+                    emptyLabel="No such industry.."
+                    className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
                     defaultSelected={props.thisValue ? [props.thisValue] : []}
                     options={(data && data.industries) || (props.thisValue && [props.thisValue]) || []}
+                    onFocus={handleInputChange}
                     onInputChange={handleInputChange}
                     onChange={handleChange}
-                    minLength={2}
-                    disabled={props.thisDisabled}
-                    emptyLabel="No such industry.."
                     placeholder={props.thisPlaceholder}
+                    disabled={props.thisDisabled}
                 />
                 <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
             </div>)

@@ -38,16 +38,16 @@ export default function Occupations(props) {
                 <span className="occupation-span">Occupation</span>
                 <Typeahead
                     id="occupations-list"
-                    className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
                     labelKey="occupation"
+                    emptyLabel="No such occupation.."
+                    className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
                     defaultSelected={props.thisValue ? [props.thisValue] : []}
                     options={(data && data.occupations) || (props.thisValue && [props.thisValue]) || []}
+                    onFocus={handleInputChange}
                     onInputChange={handleInputChange}
                     onChange={handleChange}
-                    minLength={2}
-                    disabled={props.thisDisabled}
-                    emptyLabel="No such occupation.."
                     placeholder={props.thisPlaceholder}
+                    disabled={props.thisDisabled}
                 />
                 <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
             </div>)

@@ -2,19 +2,19 @@ import React, { useRef, useState } from 'react';
 import './ProfileUserInfo.css';
 import './UserInput.css';
 import Validate from 'validate.js';
-import Loading from './Helpers/Loading'
+import DynamicIcon from '../Components/Helpers/DynamicIcon';
 import { useMutation } from '@apollo/react-hooks';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Occupations from './Lists/Occupations'
-import Indsutries from './Lists/Industries'
-import UserStats from './UserStats'
-import Locations from './Lists/Locations'
-import ChangePassword from '../Modals/ChangePassword'
-import ChangeUserPic from '../Modals/ChangeUserPic'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Occupations from './Lists/Occupations';
+import Indsutries from './Lists/Industries';
+import UserStats from './UserStats';
+import Locations from './Lists/Locations';
+import ChangePassword from '../Modals/ChangePassword';
+import ChangeUserPic from '../Modals/ChangeUserPic';
 
 export default function ProfileUserInfo(props) {
     let pageUserId = parseInt(window.location.href.split("users/")[1]);
@@ -60,7 +60,7 @@ export default function ProfileUserInfo(props) {
     };
 
     const POST_USER_INFO = gql`
-            mutation changeprofile($firstName: String!, $lastName: String!, $occupationId: ID!, $locationId: ID!, $industryId: ID!, $profilePic: String!){
+            mutation changeprofile($firstName: String!, $lastName: String!, $occupationId: ID, $locationId: ID!, $industryId: ID!, $profilePic: String!){
             changeProfile(
                 firstName: $firstName,
                 lastName: $lastName,
@@ -92,7 +92,7 @@ export default function ProfileUserInfo(props) {
         }
     });
 
-    const [callPostUserInfo, { data: dataPostUserInfo, loading: loadingPostUserInfo, error: errorPostUserInfo}] = useMutation(POST_USER_INFO);
+    const [callPostUserInfo, { data: dataPostUserInfo, loading: loadingPostUserInfo, error: errorPostUserInfo }] = useMutation(POST_USER_INFO);
 
     let userInfoBE = dataGetUserInfo ? dataGetUserInfo.userProfile.user : {};
     let isMyProfile = dataGetUserInfo ? dataGetUserInfo.userProfile.self : false;
@@ -149,11 +149,13 @@ export default function ProfileUserInfo(props) {
         });
 
         if (!check) {
+            const ocupadionId = occupation ? occupation.occupationId : userInfoBE.occupation.occupationId;
+
             callPostUserInfo({
                 variables: {
                     firstName: firstName ? firstName.current.value : userInfoBE.firstName,
                     lastName: lastName ? lastName.current.value : userInfoBE.lastName,
-                    occupationId: parseInt(occupation ? occupation.occupationId : userInfoBE.occupation.occupationId),
+                    occupationId: ocupadionId === '0' ? null : parseInt(ocupadionId),
                     locationId: parseInt(location ? location.locationId : userInfoBE.location.locationId),
                     industryId: parseInt(industry ? industry.industryId : userInfoBE.industry.industryId),
                     profilePic: userInfoBE.profilePic
@@ -169,19 +171,19 @@ export default function ProfileUserInfo(props) {
                 <Col sm={3} className="img-col">
                     <img src={userInfoBE.profilePic} className="user-prof-pic" alt="User Profile" />
                     <UserStats isMyProfile={isMyProfile}
-                        isSignedIn={props.isSignedIn} 
+                        isSignedIn={props.isSignedIn}
                         pageUserId={pageUserId}
-                        myUserId={props.userId} 
-                        userScore={userInfoBE.score}/>
+                        myUserId={props.userId}
+                        userScore={userInfoBE.score} />
                     <ChangeUserPic isMyProfile={isMyProfile}
-                        userId={pageUserId} 
-                        userPic={userInfoBE.profilePic}/>
+                        userId={pageUserId}
+                        userPic={userInfoBE.profilePic} />
                 </Col>
                 <Col sm={9} className="info-col">
                     <div className="input-btn-section">
                         <button className={(isMyProfile ? 'btn-user-prof info-edit-btn' : 'none')}
                             onClick={handleHideEditInfo}>{!editInfo ? 'Edit' : 'Cancel'}</button>
-                        <div className="input-section" style={{ paddingBottom : (isMyProfile && editInfo) ? '70px': '0px'}}>
+                        <div className="input-section" style={{ paddingBottom: (isMyProfile && (editInfo && !(loadingPostUserInfo || dataPostUserInfo || errorPostUserInfo))) ? '70px' : '0px' }}>
                             <div className="user-names-div">
 
                                 <div className={(!stateObj.firstNameMessage ? 'user-input' : 'user-input error')}>
@@ -226,15 +228,16 @@ export default function ProfileUserInfo(props) {
                                 onChange={handleChangeLocation}
                                 thisClassName="autocomplete" />
 
-                            <ChangePassword showEdit={editInfo} isMyProfile={isMyProfile}/>
+                            <ChangePassword showEdit={editInfo} isMyProfile={isMyProfile} />
 
                         </div>
 
-                        {(loadingPostUserInfo || dataPostUserInfo)
-                            ? <Loading done={dataPostUserInfo} loading={loadingPostUserInfo} thisClass="loadding-user-info"/>
-                            : <button className={(!editInfo ? 'hide' : 'btn-user-prof btn-info-update')} onClick={updateUserInfo}>Update</button>}
-
-                        {errorPostUserInfo && <Loading error={errorPostUserInfo} />}
+                        {(loadingPostUserInfo || dataPostUserInfo || errorPostUserInfo)
+                            ? (dataPostUserInfo || errorPostUserInfo
+                                ? <DynamicIcon type={errorPostUserInfo ? 'loadingError' : 'loadingDone'} width='60' height='60' />
+                                : <DynamicIcon type='loading' width='60' height='60' />)
+                            : <button className={(!editInfo ? 'hide' : 'btn-user-prof btn-info-update')} onClick={updateUserInfo}>Update</button>
+                        }
                     </div>
                 </Col>
             </Row>

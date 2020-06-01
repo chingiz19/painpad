@@ -17,12 +17,12 @@ export default function FollowList(props) {
     const GET_USER_STATS = gql`
         query userStats($userId: ID!){
             userStats(userId:$userId){
-            following{
-                id, firstName, lastName, profilePic, industry, occupation
-            }
-            followers{
-                id, firstName, lastName, profilePic, industry, occupation
-            }
+                following{
+                    id, firstName, lastName, profilePic, industry, occupation
+                }
+                followers{
+                    id, firstName, lastName, profilePic, industry, occupation
+                }
             }
         }
     `;

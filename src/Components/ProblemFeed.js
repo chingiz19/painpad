@@ -53,8 +53,8 @@ export default function ProblemFeed(props) {
                                 </>
                                 :
                                 <>
-                                    <h3>{props.firstName + " doesn't have posts"}</h3>
-                                    <p>{"Follow " + props.firstName + " to see their future posts."}</p>
+                                    <h3 className={props.firstName ? '' : 'none'}>{props.firstName + " doesn't have posts"}</h3>
+                                    <p className={props.firstName ? '' : 'none'}>{"Follow " + props.firstName + " to see their future posts."}</p>
                                 </>
                         }
                     </div>

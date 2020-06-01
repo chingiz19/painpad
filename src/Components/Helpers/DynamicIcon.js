@@ -10,11 +10,37 @@ import * as notFound from "../../lottie/not-found.json";
 import * as postApproved from "../../lottie/post-approved.json";
 import * as postRejected from "../../lottie/post-rejected.json";
 import * as notifReward from "../../lottie/notif-reward.json";
-import * as Loading from "../../lottie/loading.json";
+import * as loading from "../../lottie/loading.json";
+import * as loadingDone from "../../lottie/doneloading.json";
+import * as loadingError from "../../lottie/errorloading.json";
 
 export default function DynamicIcon(props) {
 
     var iconList = {
+        loading: {
+            loop: true,
+            autoplay: true,
+            animationData: loading.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        loadingDone: {
+            loop: true,
+            autoplay: true,
+            animationData: loadingDone.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        loadingError: {
+            loop: true,
+            autoplay: true,
+            animationData: loadingError.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
         noFollow: {
             loop: true,
             autoplay: true,
@@ -75,14 +101,6 @@ export default function DynamicIcon(props) {
             loop: true,
             autoplay: true,
             animationData: notifReward.default,
-            rendererSettings: {
-                preserveAspectRatio: "xMidYMid slice"
-            }
-        },
-        loading: {
-            loop: true,
-            autoplay: true,
-            animationData: Loading.default,
             rendererSettings: {
                 preserveAspectRatio: "xMidYMid slice"
             }

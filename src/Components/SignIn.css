@@ -35,6 +35,15 @@
     color: rgb(30,30,30);
 }
 
+.signin-main-div .div-error-msg{
+    padding: 10px 0;
+}
+
+.signin-main-div .div-error-msg span{
+    color: #8b0300;
+    letter-spacing: 0.015em;
+}
+
 .btn-forgot-pass{
     margin-top: 15px;
     font-size: 14px;

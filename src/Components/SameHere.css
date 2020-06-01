@@ -34,6 +34,10 @@
     background-color: rgba(198, 241, 231, 1);
 }
 
+.samehered:hover .div-cnt{
+    background-color: rgba(198, 241, 231, 0.2);
+}
+
 .div-cnt .sh-emoji{
     margin: 0 5px 0 10px;
 }

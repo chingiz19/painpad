@@ -5,13 +5,14 @@ import Locations from './Lists/Locations'
 import Indsutries from './Lists/Industries'
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import Loading from '../Components/Helpers/Loading';
+import DynamicIcon from '../Components/Helpers/DynamicIcon';
 import UserSignInUp from '../Modals/SignInUp/SignInUp';
 
 export default function WriteReport() {
     const reportText = useRef(null);
 
     const [showSignModal, setSignModal] = useState(false);
+    const [charCount, setCharCount] = useState(160);
     const [postSent, setPostSent] = useState(false);
     const [industry, setIndustry] = useState(null);
     const [city, setCity] = useState(null);
@@ -83,6 +84,10 @@ export default function WriteReport() {
 
     }
 
+    function handleInputChange(event) {
+        setCharCount(160 - event.target.value.length);
+    }
+
     function handleChangeIndustry(newValue) {
         setIndustry(newValue[0]);
     }
@@ -95,40 +100,58 @@ export default function WriteReport() {
         setSignModal(false);
     }
 
+    function addAutoResize() {
+        document.querySelectorAll('[data-autoresize]').forEach(function (element) {
+            element.style.boxSizing = 'border-box';
+            var offset = element.offsetHeight - element.clientHeight;
+            element.addEventListener('input', function (event) {
+                event.target.style.height = 'auto';
+                event.target.style.height = event.target.scrollHeight + offset + 'px';
+            });
+            element.removeAttribute('data-autoresize');
+        });
+    }
+
+    addAutoResize();
+
     return (
         <>
             <div className="write-report-main">
                 <div className="wr-ln-1">
-                    <textarea className="wr-textarea" 
-                        maxLength="160" 
-                        cols="52" 
-                        rows="3" 
-                        placeholder="What needs a fix?" 
-                        ref={reportText}></textarea>
+                    <textarea data-autoresize
+                        className="wr-textarea"
+                        maxLength="160"
+                        cols="52"
+                        rows="2"
+                        placeholder="What needs a fix?"
+                        ref={reportText}
+                        onChange={handleInputChange}></textarea>
                     <span className={stateObj.reportTextMessage ? 'show-error' : 'hide-error'}>{stateObj.reportTextMessage}</span>
+                    <span className={charCount > 99 ? 'none' : (charCount > 19 ? 'char-count cc-99' : 'char-count cc-19')}>{charCount}</span>
                 </div>
                 <div className="wr-ln-2">
                     <div className="wr-list-div">
                         <div className="combo-industry">
                             <Indsutries helperText={stateObj.industryMessage}
                                 onChange={handleChangeIndustry}
-                                thisClassName="autocomplete" 
-                                thisPlaceholder="Industry"/>
+                                thisClassName="autocomplete"
+                                thisPlaceholder="Industry" />
                         </div>
                         <div className="combo-city">
                             <Locations helperText={stateObj.cityMessage}
                                 onChange={handleChangeCity}
-                                thisClassName="autocomplete" 
-                                thisPlaceholder="Location"/>
+                                thisClassName="autocomplete"
+                                thisPlaceholder="Location" />
                         </div>
                     </div>
-                    <UserSignInUp withButton={false} 
-                        showModal={showSignModal} 
-                        handleCloseModal={handleCloseModal}/>
-                        
-                    {( loadingNewPost || errorNewPost)
-                    ? <Loading loading={loadingNewPost} error={errorNewPost} width="50" height="50"/>
-                    : <button className="btn-report" onClick={sendReport} disabled={postSent}>{postSent ? "Posted" : "Post"}</button>}
+                    <UserSignInUp withButton={false}
+                        showModal={showSignModal}
+                        handleCloseModal={handleCloseModal} />
+
+                    {(loadingNewPost || errorNewPost)
+                        ? <DynamicIcon type={loadingNewPost ? 'loading' : 'loadingError'} width='50' height='50' />
+                        : <button className="btn-report" onClick={sendReport} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
+
                 </div>
             </div>
         </>

@@ -2,20 +2,21 @@ import React, { useRef, useState } from 'react';
 import Validate from 'validate.js';
 import './SignIn.css';
 import './UserInput.css';
-import Loading from '../Components/Helpers/Loading'
+import DynamicIcon from '../Components/Helpers/DynamicIcon';
 import { gql } from 'apollo-boost';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { useMutation } from '@apollo/react-hooks';
-import DynamicIcon from '../Components/Helpers/DynamicIcon'
 
 export default function SignIn() {
     const email = useRef(null);
     const password = useRef(null);
     const [showForgotPass, setShowForgotPass] = useState(false);
+    const [userSignIn, serUserSignIn] = useState(false);
 
     const [stateObj, setMessage] = useState({
         emailMessage: null,
-        passMessage: null
+        passMessage: null,
+        BEMessage: null
     });
 
     const constraints = {
@@ -43,15 +44,26 @@ export default function SignIn() {
         }
     `;
 
-    const [callUserSignIn, { loading, error, data: userSignIn }] = useLazyQuery(USER_SIGN_IN);
+    const [callUserSignIn, { loading }] = useLazyQuery(USER_SIGN_IN, {
+        onCompleted: data =>{
+            serUserSignIn(data);
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        },
+        onError: ({ graphQLErrors }) => {
+            setMessage({
+                ...stateObj,
+                BEMessage: graphQLErrors[0].message
+            });
+        }
+    });
 
     const [callForgotPass, { data: userForgotPass }] = useMutation(USER_FORGOT_PASS);
 
-    if (userSignIn) {
-        setTimeout(() => {
-            window.location.reload();
-        }, 2000);
-    }
+    const handleFogotPass = e => {
+        setShowForgotPass(!showForgotPass);
+    };
 
     const submitSignIn = e => {
         let check = Validate({
@@ -75,12 +87,7 @@ export default function SignIn() {
                 }
             });
         }
-
     }
-
-    const handleFogotPass = e => {
-        setShowForgotPass(!showForgotPass);
-    };
 
     const submitForgotPass = e => {
         let check = Validate({
@@ -101,12 +108,11 @@ export default function SignIn() {
                 }
             });
         }
-
     };
 
     return (
         <>
-            <div className={ !(showForgotPass && userForgotPass && userForgotPass.forgotPwd) ? 'signin-main-div' : 'none'}>
+            <div className={!(showForgotPass && userForgotPass && userForgotPass.forgotPwd) ? 'signin-main-div' : 'none'}>
                 <div className={(!stateObj.emailMessage ? 'user-input' : 'user-input error')}>
                     <label>Email</label>
                     <input name="email"
@@ -124,23 +130,27 @@ export default function SignIn() {
                 </div>
 
                 {(loading || userSignIn)
-                    ? <Loading done={userSignIn} loading={loading} />
+                    ? (userSignIn
+                        ? <DynamicIcon type='loadingDone' width='90' height='90' />
+                        : <DynamicIcon type='loading' width='90' height='90' />)
                     : (
                         !showForgotPass
-                        ? <button className="submit-btn" onClick={submitSignIn}>Sign In</button>
-                        : <button className="submit-btn" onClick={submitForgotPass}>Send password reset email</button>
+                            ? <button className="submit-btn" onClick={submitSignIn}>Sign In</button>
+                            : <button className="submit-btn" onClick={submitForgotPass}>Send password reset email</button>
                     )}
-
-                {error && <Loading error={error} />}
 
                 <div className={(userSignIn || loading ? 'none' : (showForgotPass ? 'btn-forgot-pass margin-cancel' : 'btn-forgot-pass margin-fp'))}
                     onClick={handleFogotPass}>
                     {showForgotPass ? 'Cancel' : 'Forgot password'}
                 </div>
 
+                <div className={stateObj.BEMessage ? 'div-error-msg' : 'none'}>
+                    <DynamicIcon type='loadingError' width='50' height='50' />
+                    <span>{stateObj.BEMessage}</span>
+                </div>
             </div>
 
-            <div className={ showForgotPass && userForgotPass && userForgotPass.forgotPwd ? 'div-forgot-pass' : 'none'}>
+            <div className={showForgotPass && userForgotPass && userForgotPass.forgotPwd ? 'div-forgot-pass' : 'none'}>
                 <DynamicIcon type="emailSent" width="160" height="160" />
                 <span>Please check your email and click on the provided link to reset your password.</span>
             </div>

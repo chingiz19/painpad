@@ -17,6 +17,11 @@
     width: 100%;
 }
 
+.user-short-info{
+    padding-right: 100px;
+    transition: all 0.15s ease-in-out;
+}
+
 .problem-hdr,
 .user-short-info{
     display: flex;

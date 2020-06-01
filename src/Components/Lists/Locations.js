@@ -19,7 +19,7 @@ export default function Locations(props) {
     function handleInputChange(value, event) {
         callGetLocations({
             variables: {
-                text: event.target.value,
+                text: event ? event.target.value : '',
                 limit: 5
             }
         });
@@ -37,16 +37,16 @@ export default function Locations(props) {
                 <span className={!props.thisPlaceholder ? 'location-span' : 'none'}>Location</span>
                 <Typeahead
                     id="locations-list"
-                    className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
                     labelKey="location"
+                    emptyLabel="No such city.."
+                    className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
                     defaultSelected={props.thisValue ? [props.thisValue] : []}
                     options={(data && data.locations) || (props.thisValue && [props.thisValue]) || []}
+                    onFocus={handleInputChange}
                     onInputChange={handleInputChange}
                     onChange={handleChange}
-                    minLength={2}
-                    disabled={props.thisDisabled}
-                    emptyLabel="No such city.."
                     placeholder={props.thisPlaceholder}
+                    disabled={props.thisDisabled}
                 />
                 <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
             </div>)
