@@ -11,8 +11,9 @@ import * as postApproved from "../../lottie/post-approved.json";
 import * as postRejected from "../../lottie/post-rejected.json";
 import * as notifReward from "../../lottie/notif-reward.json";
 import * as loading from "../../lottie/loading.json";
-import * as loadingDone from "../../lottie/doneloading.json";
-import * as loadingError from "../../lottie/errorloading.json";
+import * as loadingDone from "../../lottie/done-loading.json";
+import * as loadingError from "../../lottie/error-loading.json";
+import * as networkIcon from "../../lottie/network-icon.json";
 
 export default function DynamicIcon(props) {
 
@@ -82,7 +83,7 @@ export default function DynamicIcon(props) {
             }
         },
         postApproved: {
-            loop: true,
+            loop: props.loop,
             autoplay: true,
             animationData: postApproved.default,
             rendererSettings: {
@@ -90,7 +91,7 @@ export default function DynamicIcon(props) {
             }
         },
         postRejected: {
-            loop: true,
+            loop: props.loop,
             autoplay: true,
             animationData: postRejected.default,
             rendererSettings: {
@@ -98,9 +99,17 @@ export default function DynamicIcon(props) {
             }
         },
         notifReward: {
-            loop: true,
+            loop: props.loop,
             autoplay: true,
             animationData: notifReward.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        networkIcon: {
+            loop: true,
+            autoplay: true,
+            animationData: networkIcon.default,
             rendererSettings: {
                 preserveAspectRatio: "xMidYMid slice"
             }

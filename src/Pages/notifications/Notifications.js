@@ -9,7 +9,6 @@ import { useQuery } from '@apollo/react-hooks';
 import NotificationsList from '../../Components/NotificationsList';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
 
-
 export default function Topic(props) {
     const [notifications, setNotifications] = useState([]);
     const [isSignedIn, setIsSignedIn] = useState(false);

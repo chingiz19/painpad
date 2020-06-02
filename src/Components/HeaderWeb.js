@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import { Helmet } from 'react-helmet';
 import './HeaderWeb.css';
-import LogoTransperent from '../images/logos/logo_transparent.png';
 import UserSignInUp from '../Modals/SignInUp/SignInUp';
 import gql from 'graphql-tag';
 import { useQuery, useLazyQuery, useSubscription } from '@apollo/react-hooks';
+
+import LogoTransperent from '../images/logos/logo_transparent.png';
 
 export default function HeaderWeb(props) {
     const [notifCount, setNotifCount] = useState(0);

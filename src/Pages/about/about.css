@@ -1,5 +1,7 @@
 .main-comp.about{
-    padding-bottom: 50px;
+    padding-bottom: 30px !important;
+    letter-spacing: 0.015em;
+    overflow-y: scroll;
 }
 
 .about .main-header{
@@ -8,8 +10,10 @@
 }
 
 .main-comp.about .sec-EA, 
-.main-comp.about .sec-OS {
-    padding: 0 3%;
+.main-comp.about .sec-OS,
+.main-comp.about .sec-PC,
+.main-comp.about .sec-TS {
+    padding: 5px 3%;
 }
 
 /* Header */
@@ -36,7 +40,7 @@
 
 .div-ASL .line {
     width: 94%;
-    height: 1px;
+    height: 2px;
     margin-top: 21px;
     margin-left: 3%;
     position: absolute;
@@ -47,13 +51,12 @@
 .div-ASL .txt {
     position: relative;
     margin: auto;
-    padding: 7px;
+    padding: 7px 9px;
     background-color: rgb(254, 254, 254);
     color: #3f4257;
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 600;
     letter-spacing: 0.01em;
-    text-transform: capitalize;
     z-index: 1;
 }
 
@@ -69,27 +72,194 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin: 10px 0 20px 0;
 }
 
 .div-entrepreneur p {
     margin: 2% 4%;
+    line-height: 1.45em;
     font-size: 20px;
     color: #525f7f;
     font-family: Courier New;
 }
 
+
 /* Our Store */
+.sec-OS{
+    margin: 30px 0;
+}
+
 .sec-OS p{
     padding: 0 3%;
+    line-height: 1.45em;
     text-align: center;
     font-size: 20px;
     color: #525f7f;
-    letter-spacing: 0.01em;
 }
 
 .sec-OS div{
     width: 40%;
     height: 2px;
     background-color: rgba(44, 44, 44, 0.7);
-    margin: 15px auto 15px;
+    margin: 20px auto;
+}
+
+
+/* PC - People's Challange */
+.sec-PC img{
+    margin: 20px 0;
+    border-radius: 10px;
+}
+
+.sec-PC .hacker-news,
+.sec-PC .medium{
+    display: flex;
+    margin-left: auto;
+}
+
+
+/* TS - The Solution */
+.sec-TS h1{
+    margin-top: 15px;
+    text-align: center;
+    color: #3f4257;
+}
+
+.sec-TS p{
+    padding: 15px 0;
+    text-align: center;
+    line-height: 1.45em;
+    font-size: 20px;
+    color: #525f7f;
+}
+
+.sec-TS .str{
+    color: #3f4257;
+    font-weight: 600;
+}
+
+.sec-TS h3{
+    margin-top: 10px;
+    text-align: center;
+    color: #3f4257;
+}
+
+.sec-TS .arrow{
+    display: flex;
+    margin: 20px auto;
+}
+
+.sec-TS .h3-pp,
+.sec-TS .h3-e{
+    font-weight: 600;
+}
+
+.sec-TS .ul-pp,
+.sec-TS .ul-e{
+    list-style: none;
+    width: 80%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+}
+
+.ul-pp li,
+.ul-e li{
+    display: flex;
+    line-height: 1.45em;
+    font-size: 22px;
+    color: #525f7f;
+}
+
+.ul-pp li i,
+.ul-e li i{
+    font-size: 27px;
+    color: #3f4257;
+}
+
+.ul-pp .li-1 i{
+    padding-left: 5px;
+}
+
+.ul-pp .li-3 i{
+    padding-left: 3px;
+}
+
+.ul-pp .li-1 div{
+    padding-left: 11px;
+    padding-bottom: 12px;
+    line-height: 1em;
+}
+
+.ul-pp .li-2 div{
+    padding-left: 3px;
+    padding-bottom: 9px;
+    line-height: 1.3em;
+}
+
+.ul-pp .li-3 div{
+    padding-left: 9px;
+    padding-bottom: 7px;
+    line-height: 1.3em;
+}
+
+.ul-e .li-2 i{
+    padding-left: 5px;
+}
+
+.ul-e .li-3 i{
+    padding-left: 3px;
+}
+
+.ul-e .li-1 div{
+    padding-left: 6px;
+    padding-bottom: 10px;
+    line-height: 1.3em;
+}
+
+.ul-e .li-2 div{
+    padding-left: 5px;
+    padding-bottom: 9px;
+    line-height: 1.3em;
+}
+
+.ul-e .li-3 div{
+    padding-left: 7px;
+    padding-bottom: 7px;
+    line-height: 1.2em;
+}
+
+.sec-TS .div-lottie{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 7% 0 3% 0;
+}
+
+.div-lottie h2{
+    width: 60%;
+    margin-top: 20px;
+    text-align: center;
+    color: #3f4257;
+    text-shadow: rgba(23, 32, 38, 0.2) 0px 2px 10px, rgba(23, 32, 38, 0.2) 0px 2px 4px;
+}
+
+.div-lottie p{
+    width: 60%;
+    text-align: center;
+    color: rgb(101, 119, 134);
+}
+
+.div-lottie a{
+    transition: all 0.15s ease-in-out;
+}
+
+.div-lottie a:hover{
+    border: none;
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+    color: rgb(67, 93, 114);
 }

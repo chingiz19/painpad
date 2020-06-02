@@ -123,7 +123,7 @@ export default function WriteReport() {
                         maxLength="160"
                         cols="52"
                         rows="2"
-                        placeholder="What needs a fix?"
+                        placeholder="Share your 'pain'.."
                         ref={reportText}
                         onChange={handleInputChange}></textarea>
                     <span className={stateObj.reportTextMessage ? 'show-error' : 'hide-error'}>{stateObj.reportTextMessage}</span>

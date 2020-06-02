@@ -3,8 +3,8 @@ import FadeIn from "react-fade-in";
 import Lottie from "react-lottie";
 import "bootstrap/dist/css/bootstrap.css";
 import * as loadingData from "../../lottie/loading.json";
-import * as doneData from "../../lottie/doneloading.json";
-import * as errorData from "../../lottie/errorloading.json";
+import * as doneData from "../../lottie/done-loading.json";
+import * as errorData from "../../lottie/error-loading.json";
 
 
 export default function Loading(props) {
