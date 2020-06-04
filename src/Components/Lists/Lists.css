@@ -29,10 +29,10 @@
 
 .combo-box .helper-txt-error{
     position: absolute;
-    top: 36px;
+    top: 32px;
     color: #e70000;
     float: left;
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 1px;
     z-index: 1;
 }

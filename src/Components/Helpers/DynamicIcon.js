@@ -14,6 +14,8 @@ import * as loading from "../../lottie/loading.json";
 import * as loadingDone from "../../lottie/done-loading.json";
 import * as loadingError from "../../lottie/error-loading.json";
 import * as networkIcon from "../../lottie/network-icon.json";
+import * as peSad from "../../lottie/post-explaination-sad.json";
+import * as peHappy from "../../lottie/post-explaination-happy.json";
 
 export default function DynamicIcon(props) {
 
@@ -110,6 +112,22 @@ export default function DynamicIcon(props) {
             loop: true,
             autoplay: true,
             animationData: networkIcon.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        peSad: {
+            loop: true,
+            autoplay: true,
+            animationData: peSad.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        peHappy: {
+            loop: true,
+            autoplay: true,
+            animationData: peHappy.default,
             rendererSettings: {
                 preserveAspectRatio: "xMidYMid slice"
             }

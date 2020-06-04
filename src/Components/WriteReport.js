@@ -8,7 +8,7 @@ import { useMutation } from '@apollo/react-hooks';
 import DynamicIcon from '../Components/Helpers/DynamicIcon';
 import UserSignInUp from '../Modals/SignInUp/SignInUp';
 
-export default function WriteReport() {
+export default function WriteReport(props) {
     const reportText = useRef(null);
 
     const [showSignModal, setSignModal] = useState(false);
@@ -57,6 +57,11 @@ export default function WriteReport() {
     });
 
     const sendReport = e => {
+        if(!props.isLogin){
+            setSignModal(true);
+            return;
+        }
+
         let check = Validate({
             industry: industry,
             city: city,
@@ -68,7 +73,7 @@ export default function WriteReport() {
                 ...prevState,
                 industryMessage: check && check.industry ? "Required" : null,
                 cityMessage: check && check.city ? "Required" : null,
-                reportTextMessage: check && check.reportText ? "Ups..Doesn't look like a valid report text" : null
+                reportTextMessage: check && check.reportText ? "Ups..Doesn't look like a valid post. Characters can be used (.:;+-?!#)" : null
             }
         });
 

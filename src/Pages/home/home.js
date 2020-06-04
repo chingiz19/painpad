@@ -3,12 +3,13 @@ import './Home.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 import HeaderWeb from '../../Components/HeaderWeb';
 import WriteReport from '../../Components/WriteReport';
 import ProblemFeed from '../../Components/ProblemFeed';
 import SeperatorLine from '../../Components/SeperatorLine';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import PostExplaination from './Components/PostExplaination';
 
 export default function Home(props) {
     const [isSignedIn, setIsSignedIn] = useState(false);
@@ -61,7 +62,8 @@ export default function Home(props) {
                         <Col sm={8} md={9} className="main-comp">
                             <div className="main">
                                 <div className="problems-div">
-                                    <WriteReport/>
+                                    <PostExplaination/>
+                                    <WriteReport isLogin={isSignedIn}/>
                                     <SeperatorLine thisValue="Reports feed" />
                                     <ProblemFeed filter={false} 
                                         thisPosts={(dataGetPosts && dataGetPosts.posts) || []} 
