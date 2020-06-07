@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
 import './Profile.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import HeaderWeb from '../../Components/HeaderWeb'
-import ProfileUserInfo from '../../Components/ProfileUserInfo'
-import ProblemFeed from '../../Components/ProblemFeed'
-import SeperatorLine from '../../Components/SeperatorLine'
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import HeaderWeb from '../../Components/HeaderWeb';
+import ProfileUserInfo from '../../Components/ProfileUserInfo';
+import ProblemFeed from '../../Components/ProblemFeed';
+import SeperatorLine from '../../Components/SeperatorLine';
+import DynamicIcon from '../../Components/Helpers/DynamicIcon';
 
 export default function Profile(props) {
     let profileUserId = parseInt(window.location.href.split("users/")[1]);
 
-    const [isSelf, setIsSelf] = useState('');
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [userId, setUserId] = useState(false);
     const [sepLineValue, setSepLineValue] = useState('');
     const [pageTitle, setPageTitle] = useState('PainPad | Profile');
     const [editPosts, setEditPosts] = useState(false);
 
+    const [userInfo, setUserInfo] = useState();
     const [allUserPosts, setAllUserPosts] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
 
     const IS_SIGNED_IN = gql`
         query isLogin{
@@ -30,32 +32,38 @@ export default function Profile(props) {
     `;
 
     const GET_USER_INFO = gql`
-        query userProfile($userId: ID!){
+        query userProfile($userId: ID!) {
             userProfile(userId: $userId) {
-            self, user{
-                id, firstName, lastName, email, emailVerified, profilePic, 
-                occupation {occupationId: id, occupation: value}, 
-                industry {industryId: id, industry: value}, 
-                location {locationId: id, location: value}, 
-                since, score 
-            }
+                self, user{
+                    id, firstName, lastName, email, emailVerified, profilePic, 
+                    occupation {
+                        occupationId: id, occupation: value
+                    }, 
+                    industry {
+                        industryId: id, industry: value
+                    }, 
+                    location {
+                        locationId: id, location: value
+                    }, 
+                    since, score 
+                }
             }
         }
     `;
 
     const GET_USER_POSTS = gql`
-        query posts ($userId: ID!){ 
-            posts(userId: $userId){
+        query posts ($userId: ID!, $count: Int!) { 
+            posts(userId: $userId, count: $count) {
                 id, description, 
                 postedBy{
-                id, firstName, lastName, profilePic, industry, occupation
+                    id, firstName, lastName, profilePic, industry, occupation
                 },
                 created, industry, 
                 location{
-                countryId, countryName, stateId, stateName, cityId, cityName
+                    countryId, countryName, stateId, stateName, cityId, cityName
                 },
                 subTopic{
-                id, description, topicId, topicName
+                    id, description, topicId, topicName
                 },
                 approved, sameHere, sameHered
             }
@@ -74,13 +82,45 @@ export default function Profile(props) {
         }
     `;
 
-    const { data: dataGetUserInfo } = useQuery(GET_USER_INFO, {
+    const GET_MORE_POSTS = gql`
+        query posts($lastDate: Float!, $count: Int!){ 
+            posts(lastDate: $lastDate, count: $count) {
+                id, description, 
+                postedBy{
+                    id, firstName, lastName, profilePic, industry, occupation
+                },
+                created, industry, 
+                location{
+                    countryId, countryName, stateId, stateName, cityId, cityName
+                },
+                subTopic{
+                    id, description, topicId, topicName
+                },
+                approved, sameHere, sameHered
+            }
+        }
+    `;
+
+    useQuery(IS_SIGNED_IN, {
+        onCompleted: data => {
+            setUserId(data.isLogin.id);
+            setIsSignedIn(data.isLogin.success);
+            getPosts({
+                variables: {
+                    userId: profileUserId,
+                    count: 10
+                }
+            });
+        }
+    });
+
+    useQuery(GET_USER_INFO, {
         variables: {
             userId: profileUserId
         },
         onCompleted: data => {
-            setIsSelf(dataGetUserInfo.userProfile.self);
-            if (dataGetUserInfo.userProfile.self) {
+            setUserInfo(data.userProfile);
+            if (data.userProfile.self) {
                 setSepLineValue('My reports');
                 setPageTitle('My profile');
             } else {
@@ -90,29 +130,17 @@ export default function Profile(props) {
         }
     });
 
-    useQuery(IS_SIGNED_IN, {
+    const [getPosts, { data: dataGetPosts }] = useLazyQuery(GET_USER_POSTS, {
         onCompleted: data => {
-            setUserId(data.isLogin.id);
-            setIsSignedIn(data.isLogin.success);
-            callGetUserPosts({
-                variables: {
-                    userId: profileUserId
-                }
-            });
-        }
-    });
-
-    const [callGetUserPosts, { data: dataGetPosts }] = useLazyQuery(GET_USER_POSTS, {
-        onCompleted: data => {
-            if (isSelf) {
-                callGetUserPendingPosts({});
+            if (userInfo && userInfo.self) {
+                getPendingPosts({});
             } else {
-                setAllUserPosts(data ? data.posts : []);
+                setAllUserPosts(data.posts);
             }
         }
     });
 
-    const [callGetUserPendingPosts] = useLazyQuery(GET_USER_PENDING_POSTS, {
+    const [getPendingPosts] = useLazyQuery(GET_USER_PENDING_POSTS, {
         onCompleted: data => {
             let tmpAllPosts = [];
             let tmpUserPosts = dataGetPosts ? dataGetPosts.posts : [];
@@ -125,8 +153,31 @@ export default function Profile(props) {
         }
     });
 
+    const [getMorePosts] = useLazyQuery(GET_MORE_POSTS, {
+        onCompleted: data => {
+            let tmpArray = allUserPosts.concat(data.posts);
+            if (tmpArray.length === allUserPosts.length) {
+                setHasMore(false);
+            } else {
+                setHasMore(true);
+            }
+            setAllUserPosts(tmpArray);
+        }
+    });
+
     const handleEditPosts = () => {
         setEditPosts(!editPosts);
+    }
+
+    function handleLoadMore() {
+        setTimeout(() => {
+            getMorePosts({
+                variables: {
+                    count: 5,
+                    lastDate: allUserPosts && allUserPosts[allUserPosts.length - 1].created
+                }
+            });
+        }, 800);
     }
 
     return (
@@ -137,23 +188,37 @@ export default function Profile(props) {
                         <Col sm={4} md={3} className="header-comp">
                             <HeaderWeb currentPage={props.pageName}
                                 pageTitle={pageTitle}
-                                isSignedIn={isSignedIn} 
+                                isSignedIn={isSignedIn}
                                 userId={userId}
-                                isSelf={isSelf}/>
+                                isSelf={userInfo && userInfo.self} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp comp-profile">
-                            <div className="div-1">
-                                <ProfileUserInfo isSignedIn={isSignedIn} 
-                                    userId={userId}/>
+                            <div id="mp-problem" className="div-mp-problem">
+                                <ProfileUserInfo isSignedIn={isSignedIn}
+                                    userId={userId} />
                                 <SeperatorLine thisValue={sepLineValue} />
                                 <div className="div-posts">
-                                    <button className={dataGetPosts && dataGetPosts.posts.length && isSelf ? 'btn-user-prof posts-edit-btn' : 'none'}
+                                    <button className={dataGetPosts && dataGetPosts.posts.length && userInfo && userInfo.self ? 'btn-user-prof posts-edit-btn' : 'none'}
                                         onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
-                                    <ProblemFeed filter={false}
-                                        thisPosts={allUserPosts || []}
-                                        editPosts={editPosts}
-                                        firstName={dataGetUserInfo && dataGetUserInfo.userProfile.user.firstName}
-                                        isLogin={isSignedIn} />
+                                    <InfiniteScroll
+                                        scrollableTarget="mp-problem"
+                                        scrollThreshold={1}
+                                        dataLength={allUserPosts.length}
+                                        next={handleLoadMore}
+                                        hasMore={hasMore}
+                                        loader={
+                                            (allUserPosts.length > 0 && <DynamicIcon type='loading' width={80} height={80} />)
+                                        }
+                                        endMessage={
+                                            <div className="end-message">Yay! You have seen it all</div>
+                                        }>
+                                        <ProblemFeed filter={false}
+                                            thisPosts={allUserPosts || []}
+                                            editPosts={editPosts}
+                                            firstName={userInfo && userInfo.user.firstName}
+                                            isLogin={isSignedIn}
+                                            showEmpty={true} />
+                                    </InfiniteScroll>
                                 </div>
                             </div>
                         </Col>

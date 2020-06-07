@@ -39,6 +39,7 @@
     "react-fade-in": "^0.1.8",
     "react-helmet": "^6.0.0",
     "react-images-upload": "^1.2.8",
+    "react-infinite-scroll-component": "^5.0.5",
     "react-loading": "^2.0.3",
     "react-lottie": "^1.2.3",
     "react-mixpanel-browser": "^3.0.0",

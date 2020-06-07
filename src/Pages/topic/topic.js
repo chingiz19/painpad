@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './Topic.css';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import HeaderWeb from '../../Components/HeaderWeb'
 import SeperatorLine from '../../Components/SeperatorLine';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 import ExplainationBox from './Components/ExplanationBox';
 import SectionPost from './Components/SectionPost';
 import SectionChart from './Components/SectionChart';
@@ -124,7 +124,7 @@ export default function Topic(props) {
                                 userId={userId}/>
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
-                            <div className="main-topic-page">
+                            <div className="main-TP">
                                 <div className="main-header">Analytics for <span>{topicName}</span></div>
                                 <SectionChart handleChartClick={handleChartClick}
                                     selectChartType={selectChartType}

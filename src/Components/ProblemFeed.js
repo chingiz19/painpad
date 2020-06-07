@@ -10,9 +10,9 @@ export default function ProblemFeed(props) {
     if (props.thisPosts.length > 0) {
         listProblems = props.thisPosts
             .filter(function (problem) {
-                return !props.filter 
-                    || (!props.subtopicId && !props.countryId) 
-                    || (parseInt(problem.subTopic.id) === props.subtopicId) 
+                return !props.filter
+                    || (!props.subtopicId && !props.countryId)
+                    || (parseInt(problem.subTopic.id) === props.subtopicId)
                     || (parseInt(problem.location.countryId) === props.countryId);
             })
             .map((problem) =>
@@ -35,30 +35,16 @@ export default function ProblemFeed(props) {
 
     return (
         <>
-            {listProblems.length > 0
-                ? listProblems
-                : (
-                    <div className="div-no-posts">
-                        <DynamicIcon type="noPosts" width="200" height="200" />
-                        {
-                            props.page === 'topic'
-                                ?
-                                <>{
-                                    props.subtopicId
-                                        ?
-                                        <p>There are no {props.topicName + ' '} {props.subtopicName ? props.subtopicName : ''} related posts.</p>
-                                        :
-                                        <p>There are no {props.subtopicName ? props.subtopicName : ''} related posts.</p>
-                                }
-                                </>
-                                :
-                                <>
-                                    <h3 className={props.firstName ? '' : 'none'}>{props.firstName + " doesn't have posts"}</h3>
-                                    <p className={props.firstName ? '' : 'none'}>{"Follow " + props.firstName + " to see their future posts."}</p>
-                                </>
-                        }
-                    </div>
-                )
+            {
+                listProblems.length > 0
+                    ? listProblems
+                    : (props.showEmpty
+                        ? <div className="div-no-posts">
+                            <DynamicIcon type="noPosts" width="200" height="200" />
+                            <h3 className={props.firstName ? '' : 'none'}>{props.firstName + " doesn't have posts"}</h3>
+                            <p className={props.firstName ? '' : 'none'}>{"Follow " + props.firstName + " to see their future posts."}</p>
+                        </div>
+                        : '')
             }
         </>
     );
