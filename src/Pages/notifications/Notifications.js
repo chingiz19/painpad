@@ -62,7 +62,7 @@ export default function Topic(props) {
                             <div className="main-header">Notifications</div>
                             {!notifications.length
                                 ?
-                                <DynamicIcon type="loading" width="200" height="200" />
+                                <DynamicIcon type="loading" width="150" height="150" />
                                 :
                                 <NotificationsList notifs={notifications} />}
                         </Col>

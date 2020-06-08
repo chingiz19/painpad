@@ -28,7 +28,7 @@ export default function Notification(props) {
                     <div className="div-icon">
                         <img alt="User" className={obj.type.isUserIcon ? 'img' : 'notif-none'} src={obj.icon} />
                         <div className={!obj.type.isUserIcon ? '' : 'notif-none'}>
-                            <DynamicIcon type={obj.type.icon} loop={obj.seen && true} width="100" height="100" />
+                            <DynamicIcon type={obj.type.icon} loop={!obj.seen && true} width="100" height="100" />
                         </div>
                     </div>
                     <div className="subbody-notif">
