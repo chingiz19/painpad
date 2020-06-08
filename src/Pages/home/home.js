@@ -3,9 +3,6 @@ import './Home.css';
 import gql from 'graphql-tag';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import HeaderWeb from '../../Components/HeaderWeb';
 import WriteReport from '../../Components/WriteReport';
 import ProblemFeed from '../../Components/ProblemFeed';
@@ -104,41 +101,35 @@ export default function Home(props) {
 
     return (
         <>
-            <Container className="view-port">
-                <Container fluid="lg">
-                    <Row>
-                        <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName}
-                                isSignedIn={isSignedIn}
-                                userId={userId} />
-                        </Col>
-                        <Col sm={8} md={9} className="main-comp">
-                            <div id="main-problems" className="problems-div">
-                                <PostExplaination />
-                                <WriteReport isLogin={isSignedIn} />
-                                <SeperatorLine thisValue="Reports feed" />
-                                <InfiniteScroll
-                                    scrollableTarget="main-problems"
-                                    scrollThreshold={1}
-                                    dataLength={feedPosts.length}
-                                    next={handleLoadMore}
-                                    hasMore={hasMore}
-                                    loader={
-                                        (feedPosts.length > 0 && <DynamicIcon type='loading' width={80} height={80} />)
-                                    }
-                                    endMessage={
-                                        <div className="end-message">Yay! You have seen it all</div>
-                                    }>
-                                    <ProblemFeed filter={false}
-                                        thisPosts={feedPosts}
-                                        isLogin={isSignedIn}
-                                        showEmpty={false} />
-                                </InfiniteScroll>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container>
+            <div className="div-main">
+                <div className="col-left">
+                    <HeaderWeb currentPage={props.pageName}
+                        isSignedIn={isSignedIn}
+                        userId={userId} />
+                </div>
+                <div id="main-problems" className="col-right problems-div">
+                    <PostExplaination />
+                    <WriteReport isLogin={isSignedIn} />
+                    <SeperatorLine thisValue="Reports feed" />
+                    <InfiniteScroll
+                        scrollableTarget="main-problems"
+                        scrollThreshold={1}
+                        dataLength={feedPosts.length}
+                        next={handleLoadMore}
+                        hasMore={hasMore}
+                        loader={
+                            (feedPosts.length > 0 && <DynamicIcon type='loading' width={80} height={80} />)
+                        }
+                        endMessage={
+                            <div className="end-message">Yay! You have seen it all</div>
+                        }>
+                        <ProblemFeed filter={false}
+                            thisPosts={feedPosts}
+                            isLogin={isSignedIn}
+                            showEmpty={false} />
+                    </InfiniteScroll>
+                </div>
+            </div>
         </>
     );
 }

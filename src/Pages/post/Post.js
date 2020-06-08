@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import './Post.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import HeaderWeb from '../../Components/HeaderWeb'
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
@@ -84,29 +81,25 @@ export default function Post(props) {
 
     return (
         <>
-            <Container className="view-port">
-                <Container fluid="lg">
-                    <Row>
-                        <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName}
-                                isSignedIn={isSignedIn}
-                                userId={userId} />
-                        </Col>
-                        <Col sm={8} md={9} className="main-comp main-post">
-                            <div className="main-header">Post page</div>
-                            <div className="main main-post">
-                                {
-                                    isRejected
-                                        ?
-                                        <PostRejected problemObj={rejectedPost} />
-                                        :
-                                        <Problem problemObj={post} editPosts={false} isLogin={isSignedIn} />
-                                }
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container>
+            <div className="div-main">
+                <div className="col-left">
+                    <HeaderWeb currentPage={props.pageName}
+                        isSignedIn={isSignedIn}
+                        userId={userId} />
+                </div>
+                <div className="col-right main-post">
+                    <div className="main-header">Post page</div>
+                    <div className="main main-post">
+                        {
+                            isRejected
+                                ?
+                                <PostRejected problemObj={rejectedPost} />
+                                :
+                                <Problem problemObj={post} editPosts={false} isLogin={isSignedIn} />
+                        }
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

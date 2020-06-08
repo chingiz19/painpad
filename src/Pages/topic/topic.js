@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import './Topic.css';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import HeaderWeb from '../../Components/HeaderWeb'
+import HeaderWeb from '../../Components/HeaderWeb';
 import SeperatorLine from '../../Components/SeperatorLine';
 import ExplainationBox from './Components/ExplanationBox';
 import SectionPost from './Components/SectionPost';
@@ -51,7 +48,7 @@ export default function Topic(props) {
     `;
 
     useQuery(IS_USER_SIGNED_IN, {
-        onCompleted: data =>{
+        onCompleted: data => {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
         }
@@ -115,37 +112,31 @@ export default function Topic(props) {
 
     return (
         <>
-            <Container className="view-port">
-                <Container fluid="lg">
-                    <Row>
-                        <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName}
-                                isSignedIn={isSignedIn} 
-                                userId={userId}/>
-                        </Col>
-                        <Col sm={8} md={9} className="main-comp">
-                            <div className="main-TP">
-                                <div className="main-header">Analytics for <span>{topicName}</span></div>
-                                <SectionChart handleChartClick={handleChartClick}
-                                    selectChartType={selectChartType}
-                                    chartData={chartData} />
-                                <ExplainationBox selectedData={selectedData}
-                                    type={chartType}
-                                    displayBox={displayBox} />
-                                <SeperatorLine thisValue="Related posts" />
-                                <SectionPost isSignedIn={isSignedIn}
-                                    selectedData={selectedData}
-                                    clearFilter={clearFilter}
-                                    subtopicId={selectedData && selectedData.subtopicId}
-                                    subtopicName={selectedData && selectedData.label}
-                                    topicId={topicId}
-                                    topicName={topicName}
-                                    countryId={selectedData && selectedData.data && selectedData.data.countryId} />
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container>
+            <div className="div-main">
+                <div className="col-left">
+                    <HeaderWeb currentPage={props.pageName}
+                        isSignedIn={isSignedIn}
+                        userId={userId} />
+                </div>
+                <div className="col-right main-TP">
+                    <div className="main-header">Analytics for <span>{topicName}</span></div>
+                    <SectionChart handleChartClick={handleChartClick}
+                        selectChartType={selectChartType}
+                        chartData={chartData} />
+                    <ExplainationBox selectedData={selectedData}
+                        type={chartType}
+                        displayBox={displayBox} />
+                    <SeperatorLine thisValue="Related posts" />
+                    <SectionPost isSignedIn={isSignedIn}
+                        selectedData={selectedData}
+                        clearFilter={clearFilter}
+                        subtopicId={selectedData && selectedData.subtopicId}
+                        subtopicName={selectedData && selectedData.label}
+                        topicId={topicId}
+                        topicName={topicName}
+                        countryId={selectedData && selectedData.data && selectedData.data.countryId} />
+                </div>
+            </div>
         </>
     );
 }

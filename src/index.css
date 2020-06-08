@@ -6,3 +6,29 @@ body {
   -webkit-font-smoothing: antialiased !important;
   -moz-osx-font-smoothing: grayscale !important;
 }
+
+.infinite-scroll-component {
+  overflow: hidden !important;
+}
+
+.div-main{
+  width: 1140px;
+  height: 100vh;
+  display: flex;
+  margin: 0 auto;
+  background-color: rgb(254,254,254);
+  padding: 0;
+}
+
+.div-main .col-left{
+  width: 285px;
+  height: 100vh;
+  border-right: 1px solid rgba(180,180,180, 0.6);
+  padding-right: 0;
+}
+
+.div-main .col-right{
+  width: 855px;
+  height: 100vh;
+  overflow-y: auto;
+}

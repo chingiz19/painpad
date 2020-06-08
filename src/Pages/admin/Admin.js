@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import './Admin.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import HeaderAdmin from './components/HeaderAdmin';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
@@ -30,23 +27,20 @@ export default function Admin(props) {
 
     return (
         <>
-            <Container className={isUserAdmin && isUserAdmin.isAdmin ? "view-port" : "none"}>
-                <Container fluid="lg">
-                    <Row>
-                        <Col sm={4} md={3} className="comp-header">
-                            <HeaderAdmin currentPage={props.pageName} selectComp={handleSelectComp}/>
-                        </Col>
-                        <Col sm={8} md={9} className="comp-main">
-                            <div className={selectedComp === 'post' ? '' : 'none'}>
-                                <Posts/>
-                            </div>
-                            <div className={selectedComp === 'analytics' ? '' : 'none'}>
-                                <Analytics/>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container>
+            <div className={isUserAdmin && isUserAdmin.isAdmin ? "div-main" : "none"}>
+                <div className="col-left">
+                    <HeaderAdmin currentPage={props.pageName}
+                        selectComp={handleSelectComp} />
+                </div>
+                <div className="col-right">
+                    <div className={selectedComp === 'post' ? '' : 'none'}>
+                        <Posts />
+                    </div>
+                    <div className={selectedComp === 'analytics' ? '' : 'none'}>
+                        <Analytics />
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

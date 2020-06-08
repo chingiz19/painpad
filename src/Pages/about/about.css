@@ -1,23 +1,21 @@
-.main-comp.about{
-    padding-bottom: 30px !important;
+.col-right{
     letter-spacing: 0.015em;
-    overflow-y: scroll;
 }
 
-.about .main-header{
+.col-right .main-header{
     margin-bottom: 20px;
     color: #3f4257;
 }
 
-.main-comp.about .sec-EA, 
-.main-comp.about .sec-OS,
-.main-comp.about .sec-PC,
-.main-comp.about .sec-TS {
+.col-right .sec-EA, 
+.col-right .sec-OS,
+.col-right .sec-PC,
+.col-right .sec-TS {
     padding: 5px 3%;
 }
 
 /* Header */
-.about .div-header {
+.col-right .div-header {
     position: relative;
     top: 0;
     width: 100%;
@@ -26,7 +24,7 @@
     text-align: center;
 }
 
-.about .div-header img {
+.col-right .div-header img {
     height: 100%;
 }
 

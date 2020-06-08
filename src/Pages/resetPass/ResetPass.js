@@ -1,8 +1,5 @@
 import React, { useState, useRef } from 'react';
 import './ResetPass.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import HeaderWeb from '../../Components/HeaderWeb';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
@@ -12,6 +9,8 @@ import Loading from '../../Components/Helpers/Loading';
 
 export default function ResetPass(props) {
     let token = window.location.href.split("resetPass/")[1];
+
+    console.log("token ", token);
 
     let newPassword = useRef(null);
     let newPassword2 = useRef(null);
@@ -62,7 +61,6 @@ export default function ResetPass(props) {
         }
     });
 
-
     const resetPassword = e => {
         let check = Validate({
             newPassword: newPassword.current.value,
@@ -100,46 +98,43 @@ export default function ResetPass(props) {
 
     return (
         <>
-            <Container className="view-port">
-                <Container fluid="lg">
-                    <Row>
-                        <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} isSignedIn={false} />
-                        </Col>
-                        <Col sm={8} md={9} className="main-comp">
-                            <div className="main reset-pass-main">
-                                <div className="div-icon">
-                                    {stateObj.errorMessage
-                                        ? <Loading error={stateObj.errorMessage} width="220" height="220" />
-                                        : <DynamicIcon type="resetPass" width="220" height="220" />}
-                                    <span>{stateObj.errorMessage ? stateObj.errorMessage : 'Reset Password'}</span>
-                                </div>
-                                <div className="div-input">
-                                    <div className={(!stateObj.newPassMessage ? 'user-input password' : 'user-input error password')}>
-                                        <label>New password</label>
-                                        <input name="user-email"
-                                            ref={newPassword}
-                                            type="password" />
-                                        <span className="helper-txt">{stateObj.newPassMessage}</span>
-                                    </div>
 
-                                    <div className={(!stateObj.newPass2Message ? 'user-input password' : 'user-input error password')}>
-                                        <label>Confirm password</label>
-                                        <input name="user-email"
-                                            ref={newPassword2}
-                                            type="password" />
-                                        <span className="helper-txt">{stateObj.newPass2Message}</span>
-                                    </div>
+            <div className="div-main">
+                <div className="col-left">
+                    <HeaderWeb currentPage={props.pageName}
+                        isSignedIn={false} />
+                </div>
+                <div className="col-right reset-pass-main">
+                    <div className="div-icon">
+                        {stateObj.errorMessage
+                            ? <Loading error={stateObj.errorMessage} width="220" height="220" />
+                            : <DynamicIcon type="resetPass" width="220" height="220" />}
+                        <span>{stateObj.errorMessage ? stateObj.errorMessage : 'Reset Password'}</span>
+                    </div>
+                    <div className="div-input">
+                        <div className={(!stateObj.newPassMessage ? 'user-input password' : 'user-input error password')}>
+                            <label>New password</label>
+                            <input name="user-email"
+                                ref={newPassword}
+                                type="password" />
+                            <span className="helper-txt">{stateObj.newPassMessage}</span>
+                        </div>
 
-                                    {(loadingPostResetPwd || dataPostResetPwd)
-                                        ? <Loading loading={loadingPostResetPwd} done={dataPostResetPwd} />
-                                        : <button className="submit-btn" onClick={resetPassword}>Reset password</button>}
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container>
+                        <div className={(!stateObj.newPass2Message ? 'user-input password' : 'user-input error password')}>
+                            <label>Confirm password</label>
+                            <input name="user-email"
+                                ref={newPassword2}
+                                type="password" />
+                            <span className="helper-txt">{stateObj.newPass2Message}</span>
+                        </div>
+
+                        {(loadingPostResetPwd || dataPostResetPwd)
+                            ? <Loading loading={loadingPostResetPwd} done={dataPostResetPwd} />
+                            : <button className="submit-btn" onClick={resetPassword}>Reset password</button>}
+                    </div>
+                </div>
+            </div>
+
         </>
     );
 }
