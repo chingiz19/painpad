@@ -1,0 +1,125 @@
+.notif-none{
+    display: none;
+}
+
+.main-notif {
+    overflow-y: auto;
+    scroll-behavior: smooth ;
+    padding-bottom: 50px !important;
+}
+
+.main-notif .main-header{
+    margin-bottom: 20px;
+    color: #3f4257;
+}
+
+/* Notification */
+.container-notif{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 10px auto 20px auto;
+    width: 70%;
+    letter-spacing: 0.015em;
+    border-radius:  10px 10px 8px 8px;
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+    transition: all .15s ease-in-out;
+}
+
+.container-notif:hover{
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    border: none;
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+}
+
+.container-notif .div-unread{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    right: -25px;
+    height: 100%;
+}
+
+.div-unread span{
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: rgba(9, 151, 118, 1.0);
+    box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+}
+
+.header-notif{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: none;
+    border: 1px solid;
+    border-radius: 10px 10px 0 0;
+}
+
+.header-notif .txt{
+    padding: 3px 8px 3px 8px;
+    color: #3f4257;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.header-notif .date{
+    padding: 3px 8px 3px 8px;
+    color: #3f4257ad;
+    font-size: 14px;
+}
+
+
+.body-notif{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid rgba(101, 119, 134, 0.2);
+    border-top: none;
+    border-radius:  0 0 8px 8px;
+}
+
+.body-notif .div-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.div-icon .img{
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin-bottom: auto;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+
+.subbody-notif{
+    padding: 5px 5px 5px 0;
+}
+
+.subbody-notif h4{
+    color: #3f4257;
+    font-weight: 600;
+}
+
+.subbody-notif h5{
+    color: #3f4257c9;
+    font-weight: 500;
+}
+
+.subbody-notif h5 .span-reason{
+    color: #3f4257;
+    font-weight: 600;
+    text-transform: lowercase;
+}
+
+.subbody-notif p{
+    color: #3f425765;
+    margin: 15px 0 10px 0;
+}

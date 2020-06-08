@@ -1,0 +1,107 @@
+.none{
+    display: none;
+    opacity: 0;
+}
+
+.body-image-upload{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-choose-pic,
+.btn-edit-pic,
+.btn-upload-pic{
+    font-size: 16px;
+    transition: all 0.15s ease-in;
+    cursor: pointer;
+    outline: none !important;
+    border: none;
+    transition: all 0.15s ease-in;
+}
+
+.btn-choose-pic,
+.btn-upload-pic{
+    height: 36px;
+    margin: 20px 0;
+    padding: 0 18px;
+    border-radius: 30px;
+    color: white;
+    font-weight: 300;
+}
+
+.btn-choose-pic{
+    background: #3f4257;
+}
+
+.btn-upload-pic{
+    background-color: rgb(198 , 241, 231);
+    color: rgb(100,100,100);
+}
+
+.btn-edit-pic{
+    position: absolute;
+    top: 90px;
+    right: 4%;
+    width: 75px;
+    height: 30px;
+    border-radius: 12px;
+    background-color: rgb(198 , 241, 231);
+    color: rgb(100,100,100);
+    font-weight: 600;
+}
+
+.btn-remove{
+    position: absolute;
+    top: -4px;
+    right: -3%;
+    height: 30px;
+    width: 40px;
+    border: none;
+    outline: none !important;
+    border-radius: 20px;
+    background-color: #e81f6980;
+    color: rgb(253,253,253);
+    font-weight: bold;
+    transition: all 0.15s ease-in;
+}
+
+.btn-edit-pic:hover,
+.btn-choose-pic:hover,
+.btn-upload-pic:hover{
+    background-color: rgb(126, 218, 196);
+    color: rgb(30,30,30);
+}
+
+.btn-remove:hover{
+    background-color: #e81f6acf;
+}
+
+.div-current{
+    height: 142px;
+    width: 142px;
+    background-color: #e0e0e0;
+    border: 1px solid #e0e0e0;
+    border-radius: 71px;
+}
+
+.div-current img{
+    width: calc(100% - 1px);
+    height: calc(100% - 1px);
+    border-radius: 70px;
+    border: 1px solid #e0e0e0;
+}
+
+.div-crop .css-1dkwqii{
+    position: relative;
+    height: 286px;
+    width: 466px;
+}
+
+.CP-body .error-msg{
+    color: #e70000;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 15px;
+}

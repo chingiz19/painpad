@@ -1,47 +1,106 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Home.css';
+import gql from 'graphql-tag';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import HeaderWeb from '../../Components/HeaderWeb'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import HeaderWeb from '../../Components/HeaderWeb';
 import WriteReport from '../../Components/WriteReport';
-import ProblemFeed from '../../Components/ProblemFeed'
+import ProblemFeed from '../../Components/ProblemFeed';
+import SeperatorLine from '../../Components/SeperatorLine';
+import PostExplaination from './Components/PostExplaination';
+import DynamicIcon from '../../Components/Helpers/DynamicIcon';
 
 export default function Home(props) {
+    const [isSignedIn, setIsSignedIn] = useState(false);
+    const [userId, setUserId] = useState(false);
+    const [feedPosts, setFeedPosts] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
 
-    let posts_tmp = [{
-        poster: {
-            firstName: "Elnar",
-            lastName: "Sharifli",
-            profilePic: "../images/users/profile-pictures/elnarsharifli.jpg",
-            industry: "Investment Management"
-        },
-        problem: {
-            id: "123423",
-            topic_id: "121a81ua",
-            body: "Phone charger cable not being able to reach your bed. You may rearrange bed, or lie on floor, so you can scroll through Facebook or some other website.",
-            same_here_count: 8,
-            problem_what: "parking",
-            location: "Calgary, CAD"
+    const IS_USER_SIGNED_IN = gql`
+        query isLogin{
+            isLogin {success, id}
         }
-    },
-    {
-        poster: {
-            firstName: "Elnar",
-            lastName: "Sharifli",
-            profilePic: "../images/users/profile-pictures/elnarsharifli.jpg",
-            industry: "Investment Management"
-        },
-        problem: {
-            id: "225",
-            topic_id: "312b81uc",
-            body: "Having to give your friends your WiFi code. Made even worse when one of your friends isn't listening or arrives late, and you have to give it out again.",
-            same_here_count: 23,
-            problem_what: "wi-fi",
-            location: "Vancouver, CAD"
+    `;
+
+    const GET_POSTS = gql`
+        query posts($count: Int!){ 
+            posts(count: $count) {
+                id, description, 
+                postedBy{
+                    id, firstName, lastName, profilePic, industry, occupation
+                },
+                created, industry, 
+                location{
+                    countryId, countryName, stateId, stateName, cityId, cityName
+                },
+                subTopic{
+                    id, description, topicId, topicName
+                },
+                approved, sameHere, sameHered
+            }
         }
+    `;
+
+    const GET_MORE_POSTS = gql`
+        query posts($lastDate: Float!, $count: Int!){ 
+            posts(lastDate: $lastDate, count: $count) {
+                id, description, 
+                postedBy{
+                    id, firstName, lastName, profilePic, industry, occupation
+                },
+                created, industry, 
+                location{
+                    countryId, countryName, stateId, stateName, cityId, cityName
+                },
+                subTopic{
+                    id, description, topicId, topicName
+                },
+                approved, sameHere, sameHered
+            }
+        }
+    `;
+
+    useQuery(IS_USER_SIGNED_IN, {
+        onCompleted: data => {
+            setUserId(data.isLogin.id);
+            setIsSignedIn(data.isLogin.success);
+        }
+    });
+
+    useQuery(GET_POSTS, {
+        variables: {
+            count: 10
+        },
+        onCompleted: data => {
+            setFeedPosts(data.posts);
+        }
+    });
+
+    const [callGetMorePosts] = useLazyQuery(GET_MORE_POSTS, {
+        onCompleted: data => {
+            let tmpArray = feedPosts.concat(data.posts);
+            if (tmpArray.length === feedPosts.length) {
+                setHasMore(false);
+            } else {
+                setHasMore(true);
+            }
+            setFeedPosts(tmpArray);
+        }
+    });
+
+    function handleLoadMore() {
+        setTimeout(() => {
+            callGetMorePosts({
+                variables: {
+                    count: 5,
+                    lastDate: feedPosts && feedPosts[feedPosts.length - 1].created
+                }
+            });
+        }, 800);
     }
-    ];
 
     return (
         <>
@@ -49,15 +108,32 @@ export default function Home(props) {
                 <Container fluid="lg">
                     <Row>
                         <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} />
+                            <HeaderWeb currentPage={props.pageName}
+                                isSignedIn={isSignedIn}
+                                userId={userId} />
                         </Col>
                         <Col sm={8} md={9} className="main-comp">
-                            <div className="main">
-                                <div className="problems-div">
-                                    <WriteReport />
-                                    <div className="wr-feed-seperator"></div>
-                                    <ProblemFeed thisPosts={posts_tmp}/>
-                                </div>
+                            <div id="main-problems" className="problems-div">
+                                <PostExplaination />
+                                <WriteReport isLogin={isSignedIn} />
+                                <SeperatorLine thisValue="Reports feed" />
+                                <InfiniteScroll
+                                    scrollableTarget="main-problems"
+                                    scrollThreshold={1}
+                                    dataLength={feedPosts.length}
+                                    next={handleLoadMore}
+                                    hasMore={hasMore}
+                                    loader={
+                                        (feedPosts.length > 0 && <DynamicIcon type='loading' width={80} height={80} />)
+                                    }
+                                    endMessage={
+                                        <div className="end-message">Yay! You have seen it all</div>
+                                    }>
+                                    <ProblemFeed filter={false}
+                                        thisPosts={feedPosts}
+                                        isLogin={isSignedIn}
+                                        showEmpty={false} />
+                                </InfiniteScroll>
                             </div>
                         </Col>
                     </Row>

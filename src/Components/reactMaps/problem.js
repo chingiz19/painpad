@@ -1,33 +1,48 @@
-import React from 'react'
-import './problem.css'
+import React from 'react';
+import './Maps.css';
+import Moment from 'react-moment';
+import UserShortInfo from './UserShortInfo';
+import SameHere from '../SameHere';
+import ConfirmationModal from '../../Modals/ConfirmationModal';
 
-import UserProfPic from '../../images/users/profile-pictures/elnarsharifli.jpg'
-
-export default function Problems(props) {
-
+export default function Problem(props) {
     return (
-        <div className="problem-div">
-            <div className="problem-hdr">
-                <img src={UserProfPic} className="user-prof-pic" alt="User Profile" />
-                <ul>
-                    <li className="user-name-li">{props.problemObj.poster.firstName + " " + props.problemObj.poster.lastName}</li>
-                    <li className="user-industry-li">{props.problemObj.poster.industry}</li>
-                </ul>
-                <span>{props.problemObj.problem.location}</span>
-            </div>
-            <p className="problem-body">
-                {props.problemObj.problem.body}
-            </p>
-            <div className="problem-footer">
-                <button className="samehere">
-                    <span className="sh-cnt">{props.problemObj.problem.same_here_count}</span>
-                    <span className="sh-emoji" role="img" aria-label="Raising hands">🙌🏼</span>
-                    <span className="sh-txt">Same-Here</span>
-                </button>
-                <a className="problem-what" 
-                    href={'/topics/' + props.problemObj.problem.topic_id}>
-                        {props.problemObj.problem.problem_what} related</a>
-            </div>
-        </div>
+        <>
+            {
+                props.problemObj
+                    ? (
+                        <div className="problem-div">
+                            <ConfirmationModal showButton={true}
+                                editPosts={props.editPosts}
+                                postId={parseInt(props.problemObj.id)}
+                                header="Delete post"
+                                type="deletePost" />
+                            <div className="problem-hdr">
+                                <UserShortInfo key={props.problemObj.postedBy.id}
+                                    userInfo={props.problemObj.postedBy} />
+                                <ul className="ul-loc-date">
+                                    <li className="li-loc">{props.problemObj.location.cityName + ', ' + props.problemObj.location.countryName}</li>
+                                    <li className="li-date"><Moment date={props.problemObj.created} format="D MMM" withTitle /></li>
+                                </ul>
+                            </div>
+                            <p className="problem-body">
+                                {props.problemObj.description}
+                            </p>
+                            <div className="problem-footer">
+                                <SameHere count={props.problemObj.sameHere}
+                                    probelmId={props.problemObj.id}
+                                    sameHered={props.problemObj.sameHered}
+                                    isLogin={props.isLogin} />
+                                <a className="problem-topic"
+                                    href={'/topics/' + props.problemObj.subTopic.topicId}>
+                                    related to <span>{props.problemObj.subTopic.topicName}</span></a>
+                            </div>
+                        </div>
+                    )
+                    : (
+                        null
+                    )
+            }
+        </>
     );
 }

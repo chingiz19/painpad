@@ -1,13 +1,21 @@
 import React, { useRef, useState } from 'react';
 import './WriteReport.css';
 import Validate from 'validate.js';
-import Cities from './Lists/Cities'
+import Locations from './Lists/Locations'
 import Indsutries from './Lists/Industries'
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
+import DynamicIcon from '../Components/Helpers/DynamicIcon';
+import UserSignInUp from '../Modals/SignInUp/SignInUp';
 
-export default function WriteReport() {
+export default function WriteReport(props) {
     const reportText = useRef(null);
-    let industry = null;
-    let city = null;
+
+    const [showSignModal, setSignModal] = useState(false);
+    const [charCount, setCharCount] = useState(160);
+    const [postSent, setPostSent] = useState(false);
+    const [industry, setIndustry] = useState(null);
+    const [city, setCity] = useState(null);
 
     const [stateObj, setMessage] = useState({
         industryMessage: null,
@@ -24,12 +32,36 @@ export default function WriteReport() {
         },
         reportText: {
             format: {
-                pattern: "[a-zA-Z]+"
+                pattern: "[a-zA-Z0-9.:());+-?!# ]+"
             }
         }
     };
 
+    const USER_NEW_POST = gql`
+        mutation post($description: String!, $cityId: ID!, $industryId: ID!){
+            post(
+                description: $description,
+                cityId: $cityId,
+                industryId: $industryId
+            )
+        }
+    `;
+
+    const [callNewPost, { loading: loadingNewPost, error: errorNewPost }] = useMutation(USER_NEW_POST, {
+        onCompleted: data => {
+            setPostSent(true);
+        },
+        onError: ({ graphQLErrors }) => {
+            setSignModal(true);
+        }
+    });
+
     const sendReport = e => {
+        if(!props.isLogin){
+            setSignModal(true);
+            return;
+        }
+
         let check = Validate({
             industry: industry,
             city: city,
@@ -41,47 +73,90 @@ export default function WriteReport() {
                 ...prevState,
                 industryMessage: check && check.industry ? "Required" : null,
                 cityMessage: check && check.city ? "Required" : null,
-                reportTextMessage: check && check.reportText ? "Ups..Doesn't look like a valid report." : null
+                reportTextMessage: check && check.reportText ? "Ups..Doesn't look like a valid post. Characters can be used (.:;+-?!#)" : null
             }
         });
 
-        //This implemented as there is no error attribute for TextArea
-        if (check && check.reportText != null) {
-            alert("Ups..Doesn't look like a valid report.")
+        if (!check) {
+            callNewPost({
+                variables: {
+                    description: reportText.current.value,
+                    cityId: parseInt(city.locationId),
+                    industryId: parseInt(industry.industryId)
+                }
+            });
         }
 
-        //API call to BE goes here
+    }
 
+    function handleInputChange(event) {
+        setCharCount(160 - event.target.value.length);
     }
 
     function handleChangeIndustry(newValue) {
-        industry = newValue;
+        setIndustry(newValue[0]);
     }
 
     function handleChangeCity(newValue) {
-        city = newValue;
+        setCity(newValue[0]);
     }
+
+    function handleCloseModal() {
+        setSignModal(false);
+    }
+
+    function addAutoResize() {
+        document.querySelectorAll('[data-autoresize]').forEach(function (element) {
+            element.style.boxSizing = 'border-box';
+            var offset = element.offsetHeight - element.clientHeight;
+            element.addEventListener('input', function (event) {
+                event.target.style.height = 'auto';
+                event.target.style.height = event.target.scrollHeight + offset + 'px';
+            });
+            element.removeAttribute('data-autoresize');
+        });
+    }
+
+    addAutoResize();
 
     return (
         <>
             <div className="write-report-main">
-                <textarea className="wr-textarea" maxLength="160" cols="52" rows="3" placeholder="What needs a fix?" ref={reportText}></textarea>
+                <div className="wr-ln-1">
+                    <textarea data-autoresize
+                        className="wr-textarea"
+                        maxLength="160"
+                        cols="52"
+                        rows="2"
+                        placeholder="Share your 'pain'.."
+                        ref={reportText}
+                        onChange={handleInputChange}></textarea>
+                    <span className={stateObj.reportTextMessage ? 'show-error' : 'hide-error'}>{stateObj.reportTextMessage}</span>
+                    <span className={charCount > 99 ? 'none' : (charCount > 19 ? 'char-count cc-99' : 'char-count cc-19')}>{charCount}</span>
+                </div>
                 <div className="wr-ln-2">
                     <div className="wr-list-div">
                         <div className="combo-industry">
-                            <Indsutries thisVariant="outlined"
-                                thisWidth={200}
-                                errorMessage={stateObj.industryMessage} 
-                                onChange={handleChangeIndustry} />
+                            <Indsutries helperText={stateObj.industryMessage}
+                                onChange={handleChangeIndustry}
+                                thisClassName="autocomplete"
+                                thisPlaceholder="Industry" />
                         </div>
                         <div className="combo-city">
-                            <Cities thisVariant="outlined" 
-                                thisWidth={200}
-                                errorMessage={stateObj.cityMessage} 
-                                onChange={handleChangeCity} />
+                            <Locations helperText={stateObj.cityMessage}
+                                onChange={handleChangeCity}
+                                thisClassName="autocomplete"
+                                thisPlaceholder="Location" />
                         </div>
                     </div>
-                    <button className="btn-send-report" onClick={sendReport}>Report</button>
+                    <UserSignInUp withButton={false}
+                        showModal={showSignModal}
+                        handleCloseModal={handleCloseModal} />
+
+                    {(loadingNewPost || errorNewPost)
+                        ? <DynamicIcon type={loadingNewPost ? 'loading' : 'loadingError'} width='50' height='50' />
+                        : <button className="btn-report" onClick={sendReport} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
+
                 </div>
             </div>
         </>

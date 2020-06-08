@@ -1,0 +1,31 @@
+.main-404{
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8%;
+    color: rgb(101, 119, 134);
+}
+
+.main-404 h2{
+    margin: 20px 0 10px 0;
+}
+
+.main-404 p{
+    width: 50%;
+    text-align: center;
+    font-size: 17px;
+}
+
+.main-404 a{
+    transition: all 0.15s ease-in-out;
+}
+
+.main-404 a:hover{
+    border: none;
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+    color: rgb(67, 93, 114);
+}

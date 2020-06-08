@@ -1,0 +1,44 @@
+.FL-body{
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center !important;
+    flex-wrap: nowrap;
+    height: 250px;
+}
+
+.FL-body .user-short-info{
+    width: 50%;
+    padding: 10px 5px;
+    transition: all .15s ease-in-out;
+}
+
+.ul-follow:hover,
+.FL-body .user-short-info:hover{
+    cursor: pointer;
+    background-color: rgb(240,240,240);
+    border-radius: 5px;
+}
+
+.FL-body .user-name-li{
+    color: rgb(0,0,0);
+}
+
+.FL-body .div-icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.FL-body span{
+    position: relative;
+    top: 16px;
+    color: #414774;
+    width: 100%;
+    font-size: 17px;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: rgb(244,244,244);
+    padding: 10px 20px;
+    border-radius: 8px;
+}

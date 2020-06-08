@@ -1,0 +1,247 @@
+/* Admin Pending Posts */
+.main-apps{
+    padding: 2%;
+    height: 100vh;
+    overflow-y: auto;
+    animation: fadein 0.15s;
+}
+
+.main-apps .apps-header,
+.main-anl .header-anl{
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 15px 0;
+    text-align: center;
+    color: #3f4257;
+    transition: all 0.15s ease-in;
+}
+
+.apps-header .header-type{
+    display: flex;
+    flex-direction: row;
+}
+
+.apps-header .count{
+    margin-right: 10px;
+}
+
+.main-apps .arrow{
+    margin: 0 20px;
+    padding-top: 6px;
+}
+
+.main-apps .approve,
+.main-apps .reject{
+    font-size: 26px;
+    border-radius: 3px;
+    width: 150px;
+    padding: 5px 18px;
+    transition: all 0.15s ease-in;
+}
+
+.main-apps .approve{
+    border: 1px solid rgba(5, 172, 94, 0.9);
+    color: rgba(7, 133, 74, 0.9);
+}
+
+.main-apps .reject{
+    border: 1px solid rgba(201, 24, 24, 0.9);
+    color: rgba(185, 8, 8, 0.9);
+}
+
+
+/* Post Approval  && Post Rejection*/
+.main-AP,
+.main-RP{
+    padding: 50px 0;
+    animation: fadein 0.15s;
+}
+
+.main-AP .btn-back,
+.main-RP .btn-back{
+    outline: none !important;
+    padding: 2px 20px;
+    background-color: transparent;
+    color: #3f4257a4;
+    border: none;
+    border-radius: 4px;
+    transition: all 0.15s ease-in;
+}
+
+.main-AP .btn-back:hover,
+.main-RP .btn-back:hover{
+    color: #3f4257;
+    border-color: 1px solid #3f4257;
+    background-color: rgb(244,244,244);
+}
+
+.body-AP{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.body-AP .problem-div{
+    margin-bottom: 40px;
+}
+
+.main-RP .btn-submit,
+.main-AP .btn-submit{
+    outline: none !important;
+    height: 40px;
+    width: 250px;
+    margin-top: 15px;
+    border-radius: 7px;
+    font-weight: 600;
+    transition: all 0.15s;
+}
+
+.main-RP .btn-submit{
+    border: 1px solid rgba(228, 26, 26, 0.9);
+    color: rgba(165, 1, 1, 0.9);
+    background-color: rgb(255, 200, 200);
+}
+
+.main-AP .btn-submit{
+    border: 1px solid rgba(7, 133, 74, 0.9);
+    color: rgba(7, 133, 74, 0.9);
+    background-color: rgb(192, 245, 220);
+}
+
+.main-RP .btn-submit:hover{
+    background-color: rgb(230, 123, 123);
+    color: rgba(95, 16, 16, 0.9);
+}
+
+.main-AP .btn-submit:hover{
+    background-color: rgb(113, 173, 145);
+    color: rgba(21, 48, 35, 0.9);
+}
+
+/* Reject Post */
+.body-RP input::placeholder,
+.textarea::placeholder{
+    color: #b4b4b4;
+}
+
+.body-RP{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.body-RP .combo-box{
+    margin-top: 50px;
+}
+
+.body-RP .combo-box-lists{
+    width: 400px;
+}
+
+.div-textarea{
+    position: relative;
+    width: 400px;
+}
+
+.div-textarea.explaination{
+    margin-top: 30px;
+}
+
+.div-textarea .textarea{
+    outline: none;
+    display: flex;
+    border: none;
+    width: 100%;
+    display: block;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.div-textarea .textarea:focus{
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.pp-checkbox input:disabled,
+.textarea:disabled{
+    background-color: #e9ecef;
+}
+
+.div-textarea .label{
+    position: absolute;
+    top: -18px;
+    color: #959595;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.div-suggested-post{
+    width: 400px;
+    margin: 30px 0 15px 0;
+}
+
+.pp-checkbox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pp-checkbox span{
+    margin-left: 5px;
+    color: #3f4257;
+    user-select: none;
+}
+
+
+/* Analytics */
+.main-anl{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: fadein 0.15s;
+}
+
+.main-anl ul{
+    list-style: none;
+    margin: 30px 0 0 0;
+    padding: 0;
+    border: 1px solid rgb(190,190,190);
+}
+
+.main-anl li{
+    display: flex;
+    font-size: 23px;
+    color: #3f4257;
+}
+
+.main-anl .txt{
+    padding: 10px; 
+    width: 200px;
+    border: 1px solid rgb(190,190,190);
+}
+
+.main-anl .num{
+    padding: 10px; 
+    width: 90px;
+    text-align: center;
+    border: 1px solid rgb(190,190,190);
+}

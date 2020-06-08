@@ -9,6 +9,7 @@
 .user-info-container .user-prof-pic{
     height: 120px;
     width: auto;
+    background-color: #f5f3f4;
     border-radius: 60px;
 }
 
@@ -36,7 +37,7 @@
 .input-section{
     display: flex;
     flex-direction: column;
-    padding: 30px 0 50px 0;
+    padding: 35px 0 70px 0;
 }
 
 .user-points{
@@ -44,21 +45,22 @@
     top: 20px;
 }
 
-.user-prof-btn{
+.btn-user-prof{
     outline: none !important;
     height: 30px;
     width: 75px;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     background-color: rgb(198 , 241, 231);
     color: rgb(100,100,100);
-    font-weight: 700;
+    font-size: 16px;
+    font-weight: 600;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
 
-.pic-btn{
-    position: absolute;
-    top: 28%;
-    right: 4%;
+.btn-user-prof:hover{
+    background-color: rgb(126, 218, 196);
+    color: rgb(30,30,30);
 }
 
 .info-edit-btn{
@@ -66,16 +68,42 @@
     right: 0;
 }
 
-.info-update-btn{
+.btn-info-update{
     position: absolute;
     bottom: 0;
+    margin: 20px 0;
     width: calc(100% - 20px);
 }
 
-.user-prof-btn:hover{
-    background-color: rgb(126, 218, 196);
-    color: rgb(30,30,30);
-    transition: background-color 0.1s;
+.user-input{
+    position: relative;
+    height: 38px;
+    width: 250px;
+    margin-bottom: 12px;
+}
+
+.user-input input:disabled{
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+.user-input label{
+    position: absolute;
+    bottom: 29px;
+    color: #959595;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.user-input.lname{
+    margin-left: 5px;
+}
+
+.user-input.email{
+    top: 20px;
 }
 
 .user-names-div{
@@ -84,4 +112,10 @@
 
 .user-names-div .last-name{
     margin-left: 20px;
+}
+
+.loadding-user-info{
+    position: absolute;
+    bottom: -10px;
+    left: 40%;
 }

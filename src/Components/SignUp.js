@@ -1,19 +1,20 @@
 import React, { useRef, useState } from 'react';
 import './SignUp.css';
+import './UserInput.css';
+import DynamicIcon from '../Components/Helpers/DynamicIcon';
 import Validate from 'validate.js';
-import TextField from '@material-ui/core/TextField';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import Cities from './Lists/Cities'
-import Indsutries from './Lists/Industries'
+import Locations from './Lists/Locations';
+import Indsutries from './Lists/Industries';
 
 export default function SignUp() {
     const firstName = useRef(null);
     const lastName = useRef(null);
     const email = useRef(null);
-    const password = useRef(null);
-    let city = null;
-    let industry = null;
+    const pass = useRef(null);
+    const [industry, setIndustry] = useState(null);
+    const [city, setCity] = useState(null)
 
     const [stateObj, setMessage] = useState({
         firstNameMessage: null,
@@ -45,11 +46,10 @@ export default function SignUp() {
             presence: { allowEmpty: false }
         },
         email: {
-            email: {
-                message: "Please enter valid email"
-            }
+            email: true,
+            presence: { allowEmpty: false }
         },
-        password: {
+        pass: {
             length: {
                 minimum: 6
             }
@@ -57,30 +57,35 @@ export default function SignUp() {
     };
 
     function handleChangeIndustry(newValue) {
-        industry = newValue;
+        setIndustry(newValue[0]);
     }
 
     function handleChangeCity(newValue) {
-        city = newValue;
+        setCity(newValue[0]);
     }
 
     const USER_SIGN_UP = gql`
-        mutation SignUp($email: String!, $pwd: String!){
-            signup(email: $email, pwd: $pwd)
+        mutation SignUp($firstName: String!, $lastName: String!, $email: String!, $pwd: String!, $cityId: ID!, $industryId: ID!){
+            signup(firstName: $firstName, lastName: $lastName, email: $email, pwd: $pwd, cityId: $cityId, industryId: $industryId)
         }
     `;
 
-    const [callUserSignUp, { loading, error, data }] = useMutation(USER_SIGN_UP);
+    const [callUserSignUp, { loading, error, data: userSignUp }] = useMutation(USER_SIGN_UP);
+
+    if (userSignUp) {
+        setTimeout(() => {
+            window.location.reload();
+        }, 2000);
+    }
 
     const submitInput = e => {
-
         let check = Validate({
             firstName: firstName.current.value,
             lastName: lastName.current.value,
-            city: city,
-            industry: industry,
             email: email.current.value,
-            password: password.current.value
+            pass: pass.current.value,
+            city: city.location,
+            industry: industry.industry
         }, constraints);
 
         setMessage(prevState => {
@@ -88,18 +93,22 @@ export default function SignUp() {
                 ...prevState,
                 firstNameMessage: check && check.firstName ? "Can only contain letters" : null,
                 lastNameMessage: check && check.lastName ? "Can only contain letters" : null,
-                emailMessage: check && check.email ? "Please enter valid email" : null,
-                cityMessage: check && check.city ? "Can only contain letters" : null,
-                industryMessage: check && check.industry ? "Required" : null,
-                passMessage: check && check.password ? "Minimum 6 characters or more" : null
+                emailMessage: check && check.email && check.email[0] ? "Please enter valid email" : null,
+                passMessage: check && check.pass ? "Minimum 6 characters" : null,
+                cityMessage: check && check.city ? "Required" : null,
+                industryMessage: check && check.industry ? "Required" : null
             }
         });
 
         if (!check) {
             callUserSignUp({
                 variables: {
+                    firstName: firstName.current.value,
+                    lastName: lastName.current.value,
                     email: email.current.value,
-                    pwd: password.current.value
+                    pwd: pass.current.value,
+                    cityId: parseInt(city.locationId),
+                    industryId: parseInt(industry.industryId)
                 }
             });
         }
@@ -110,64 +119,53 @@ export default function SignUp() {
         <>
             <div className="signup-main">
 
-                <TextField required
-                    error={stateObj.firstNameMessage != null}
-                    label="First name"
-                    name="first-name"
-                    inputRef={firstName}
-                    helperText={stateObj.firstNameMessage}
-                    variant="outlined"
-                    size="small"
-                    type="text" />
+                <div className="names-div">
+                    <div className={(!stateObj.firstNameMessage ? 'user-input names-input' : 'user-input error names-input')}>
+                        <label>First Name</label>
+                        <input name="firstName"
+                            ref={firstName}
+                            type="text" />
+                        <span className="helper-txt">{stateObj.firstNameMessage}</span>
+                    </div>
 
-                <TextField required
-                    error={stateObj.lastNameMessage != null}
-                    label="Last name"
-                    name="last-name"
-                    inputRef={lastName}
-                    helperText={stateObj.lastNameMessage}
-                    variant="outlined"
-                    size="small"
-                    type="text" />
-
-                <TextField required
-                    error={stateObj.emailMessage != null}
-                    label="Email"
-                    name="email"
-                    inputRef={email}
-                    helperText={stateObj.emailMessage}
-                    variant="outlined"
-                    size="small"
-                    type="email" />
-
-                <Indsutries thisVariant="outlined" 
-                    thisWidth={194} 
-                    errorMessage={stateObj.industryMessage} 
-                    onChange={handleChangeIndustry}/>
-
-                <Cities thisVariant="outlined" 
-                    thisWidth={194} 
-                    errorMessage={stateObj.cityMessage} 
-                    onChange={handleChangeCity}/>
-
-                <TextField required
-                    error={stateObj.passMessage != null}
-                    id="signin-password"
-                    label="Password"
-                    name="password"
-                    inputRef={password}
-                    helperText={stateObj.passMessage}
-                    variant="outlined"
-                    size="small"
-                    type="password" />
-
-                <button onClick={submitInput}>Submit</button>
-
-                <div>
-                    {loading && <p>Loading...</p>}
-                    {error && <p>Error :( Please try again</p>}
-                    {data && <p>Data is here {JSON.stringify(data.signup)}</p>}
+                    <div className={(!stateObj.lastNameMessage ? 'user-input names-input' : 'user-input error names-input')}>
+                        <label>Last Name</label>
+                        <input name="lastName"
+                            ref={lastName}
+                            type="text" />
+                        <span className="helper-txt">{stateObj.lastNameMessage}</span>
+                    </div>
                 </div>
+
+                <div className={(!stateObj.emailMessage ? 'user-input' : 'user-input error')}>
+                    <label>Email</label>
+                    <input name="lastName"
+                        ref={email}
+                        type="email" />
+                    <span className="helper-txt">{stateObj.emailMessage}</span>
+                </div>
+
+                <Indsutries helperText={stateObj.industryMessage}
+                    onChange={handleChangeIndustry}
+                    thisClassName="autocomplete" />
+
+                <Locations helperText={stateObj.cityMessage}
+                    onChange={handleChangeCity}
+                    thisClassName="autocomplete" />
+
+                <div className={(!stateObj.passMessage ? 'user-input' : 'user-input error')}>
+                    <label>Password</label>
+                    <input name="password"
+                        ref={pass}
+                        type="password" />
+                    <span className="helper-txt">{stateObj.passMessage}</span>
+                </div>
+
+                {(loading || userSignUp || error)
+                    ? (userSignUp || error
+                        ? <DynamicIcon type={error ? 'loadingError' : 'loadingDone'} width='90' height='90' />
+                        : <DynamicIcon type='loading' width='90' height='90' />)
+                    : <button className="submit-btn" onClick={submitInput}>Sign Up</button>}
             </div>
         </>
     );

@@ -1,0 +1,64 @@
+.none{
+    display: none !important;
+    opacity: 0;
+    animation: fadeout 0.15s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+.combo-box{
+    position: relative;
+    margin: 20px 0 12px 0;
+}
+
+.combo-box .dropdown-item{
+    text-transform: capitalize;
+}
+
+.combo-box-lists.error input{
+    border-color: #e70000;
+}
+
+.combo-box .helper-txt-error{
+    position: absolute;
+    top: 32px;
+    color: #e70000;
+    float: left;
+    font-size: 11px;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.margin-10 .industry-span{
+    display: none;
+}
+
+.industry-span,
+.occupation-span,
+.location-span,
+.combo-box .label-list{
+    position: absolute;
+    bottom: 32px;
+    color: #959595;
+    float: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+.combo-box-lists{
+    width: 250px;
+}
+
+.topic .combo-box-lists{
+    width: 350px;
+}

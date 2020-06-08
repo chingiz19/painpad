@@ -5,11 +5,17 @@
 }
 
 .header-btn-div button{
+    padding: 2px 9px;
     background-color: transparent;
     border: none;
     font-size: 18px;
-    color: rgb(60,60,60);
-    transition: 0.2s;
+    color: rgb(180,180,180);
+    border-radius: 4px;
+    transition: all 0.15s ease-in-out;
+}
+
+.header-btn-div button:hover{
+    background-color: rgb(246, 246, 246);
 }
 
 .header-btn-div button:focus {
@@ -17,8 +23,8 @@
 }
 
 .header-btn-div .selected{
-    font-size: 19px;
-    font-weight: 800;
+    font-size: 20px;
+    padding: 2px 7px;
     color: rgb(0,0,0);
 }
 

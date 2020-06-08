@@ -1,51 +1,54 @@
 import React from 'react';
-import './Industries.css';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
+import './Lists.css';
+import gql from 'graphql-tag';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { Typeahead } from 'react-bootstrap-typeahead';
 
 export default function Industries(props) {
-    //TODO: find source for "Wold Job Title" list
-    // List of industries. https://www.ibisworld.com/canada/list-of-industries/
-    const industryList = [
-        { title: 'Coal Mining' },
-        { title: 'Candy & Chocolate Manufacturing' },
-        { title: 'Internet Service Providers' },
-        { title: 'Investment Management' }
-    ];
+    const GET_INDUSTRIES = gql`
+            query industries($text: String!, $limit: Int!) {
+                industries(
+                    text: $text, 
+                    limit: $limit)
+                {industryId: id, industry: value}
+            }
+        `;
 
-    let selectedIndustry = 0;
+    let [callGetIndustries, { data }] = useLazyQuery(GET_INDUSTRIES);
 
-    for (let i = 0; i < industryList.length; i++) {
-        if (industryList[i].title === props.thisValue) {
-            selectedIndustry = i;
-        }
+    function handleInputChange(value, event) {
+        callGetIndustries({
+            variables: {
+                text: event ? event.target.value : '',
+                limit: 5
+            }
+        });
     };
 
-    function handleChange(event) {
-        props.onChange(event.target.value);
+    function handleChange(value) {
+        props.onChange(value);
     }
 
     return (
-        <>
-            <Autocomplete
-                className={(props.thisValue ? props.thisClassName : 'none')}
-                value={industryList[selectedIndustry]}
-                disabled={props.thisDisabled}
-                options={industryList}
-                getOptionLabel={(option) => option.title}
-                style={{ width: props.thisWidth }}
-                size="small"
-                renderInput={(params) => <TextField {...params} error={props.errorMessage != null} onChange={handleChange} label="Industry" variant={props.thisVariant} />}
-            />
-            <Autocomplete
-                className={(!props.thisValue ? props.thisClassName : 'none')}
-                disabled={props.thisDisabled}
-                options={industryList}
-                getOptionLabel={(option) => option.title}
-                style={{ width: props.thisWidth }}
-                size="small"
-                renderInput={(params) => <TextField {...params} error={props.errorMessage != null} onChange={handleChange} label="Industry" variant={props.thisVariant} />}
-            />
-        </>
+
+        props.thisLoading ? '' :
+
+            (<div className="combo-box">
+                <span className={!props.thisPlaceholder ? 'industry-span' : 'none'}>Industry</span>
+                <Typeahead
+                    id="industries-list"
+                    labelKey="industry"
+                    emptyLabel="No such industry.."
+                    className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
+                    defaultSelected={props.thisValue ? [props.thisValue] : []}
+                    options={(data && data.industries) || (props.thisValue && [props.thisValue]) || []}
+                    onFocus={handleInputChange}
+                    onInputChange={handleInputChange}
+                    onChange={handleChange}
+                    placeholder={props.thisPlaceholder}
+                    disabled={props.thisDisabled}
+                />
+                <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
+            </div>)
     );
 }

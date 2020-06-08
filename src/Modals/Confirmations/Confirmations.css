@@ -1,0 +1,29 @@
+.div-remove-post{
+    width: 70%;
+    padding: 20px 0;
+}
+
+.div-remove-post button{
+    outline: none !important;
+    border: none;
+    display: flex;
+    height: 36px;
+    margin: 15px auto;
+    padding: 5px 40px;
+    background-color: #e81f6acf;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 30px;
+    transition: all .15s ease-in-out;
+}
+
+.div-remove-post button:hover{
+    background-color: #b61651cf;
+}
+
+.div-remove-post p{
+    text-align: center;
+    color: rgb(101, 119, 134);
+    font-size: 17px;
+}
