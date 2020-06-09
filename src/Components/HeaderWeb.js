@@ -69,19 +69,19 @@ export default function HeaderWeb(props) {
                         <a href="/" className="wh-li-a">
                             <div className="wh-li-a-div">
                                 <div className={(props.currentPage === 'Home' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
-                                    <i className="fas fa-home"></i>Home
+                                    <i className="fas fa-home"></i><span>Home</span>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li className="wh-li">
-                        <UserSignInUp name="Sign in / Sign up" withButton={true} />
+                        <UserSignInUp withButton={true} />
                     </li>
                     <li className="wh-li">
                         <a href="/about" className="wh-li-a">
                             <div className="wh-li-a-div">
                                 <div className={(props.currentPage === 'About' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
-                                    <i className="far fa-comment"></i>About
+                                    <i className="far fa-comment"></i><span>About</span>
                                 </div>
                             </div>
                         </a>
@@ -92,7 +92,7 @@ export default function HeaderWeb(props) {
                         <a href="/" className="wh-li-a">
                             <div className="wh-li-a-div">
                                 <div className={(props.currentPage === 'Home' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
-                                    <i className="fas fa-home"></i>Home
+                                    <i className="fas fa-home"></i><span>Home</span>
                                 </div>
                             </div>
                         </a>
@@ -101,7 +101,7 @@ export default function HeaderWeb(props) {
                         <a href={'/users/' + props.userId} className="wh-li-a">
                             <div className="wh-li-a-div">
                                 <div className={((props.currentPage === 'Profile' && props.isSelf) ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
-                                    <i className="far fa-user"></i>Profile
+                                    <i className="far fa-user"></i><span>Profile</span>
                                 </div>
                             </div>
                         </a>
@@ -110,26 +110,26 @@ export default function HeaderWeb(props) {
                         <a href={'/notifications'} className="wh-li-a">
                             <div className="wh-li-a-div">
                                 <div className={(props.currentPage === 'Notifications' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
-                                    <i className="far fa-bell"></i>Notifications
+                                    <i className="far fa-bell"></i><span>Notifications</span>
                                     <div className={notifCount > 10 ? 'div-notif-count plus-10' : (notifCount > 0 ? 'div-notif-count less-10' : 'none')}>{notifCount > 10 ? '10+' : notifCount}</div>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li className="wh-li">
-                        <div className="wh-li-div">
-                            <span className="wh-li-div-span">
-                                <div className="wh-li-div-span-div">
-                                    <i className="far fa-paper-plane"></i>Invite friend
+                        <a href={'/inviteFriend'} className="wh-li-a">
+                            <div className="wh-li-a-div">
+                                <div className={((props.currentPage === 'Profile' && props.isSelf) ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
+                                    <i className="far fa-paper-plane"></i><span>Invite friend</span>
                                 </div>
-                            </span>
-                        </div>
+                            </div>
+                        </a>
                     </li>
                     <li className="wh-li">
                         <a href="/about" className="wh-li-a">
                             <div className="wh-li-a-div">
                                 <div className={(props.currentPage === 'About' ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
-                                    <i className="far fa-comment"></i>About
+                                    <i className="far fa-comment"></i><span>About</span>
                                 </div>
                             </div>
                         </a>
@@ -138,8 +138,8 @@ export default function HeaderWeb(props) {
                     <li className="wh-li log-out" onClick={callUserSignOut}>
                         <div className="wh-li-div">
                             <span className="wh-li-div-span">
-                                <div className="wh-li-div-span-div">
-                                    <i className="fas fa-sign-out-alt"></i>Log out
+                                <div className="wh-li-a-div-div">
+                                    <i className="fas fa-sign-out-alt"></i><span>Log out</span>
                                 </div>
                             </span>
                         </div>

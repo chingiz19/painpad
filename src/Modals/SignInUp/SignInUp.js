@@ -17,8 +17,7 @@ export default function UserSignUpIn(props) {
 
     return (
         <>
-            <ActivateButton name={props.name} 
-                withButton={props.withButton} 
+            <ActivateButton withButton={props.withButton} 
                 handleActivateModal={activateModal}/>
             <Modal show={props.withButton ? showModal : props.showModal} onHide={props.withButton ? handleClose : props.handleCloseModal}>
                 <SignInUpBody/>

@@ -74,3 +74,36 @@
     font-size: 10px;
     color: rgb(101, 119, 134);
 }
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+ 
+  }
+  
+  @media (max-width: 999px){
+    /* PE - Post Explaination */
+    .sec-PE{
+      height: 90px;
+    }
+    .sec-PE .div-body{
+      display: none;
+    }
+  
+  }
+  
+  @media (max-width: 680px){
+  /* PE - Post Explaination */
+    .sec-PE{
+      height: 80px;
+    }
+    .sec-PE .header{
+      font-size: 19px;
+    }
+    .sec-PE .subheader{
+      font-size: 16px;
+      margin-bottom: 6px;
+      margin-top: 3px;
+    }
+  
+  }

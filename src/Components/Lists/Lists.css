@@ -62,3 +62,17 @@
 .topic .combo-box-lists{
     width: 350px;
 }
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+ 
+  }
+  
+  @media (max-width: 999px){
+  
+  }
+  
+  @media (max-width: 680px){
+  
+  }

@@ -102,7 +102,7 @@
     margin-bottom: 4px;
 }
 
-.wr-list-div .combo-box-lists{
+.wr-ln-2 .combo-box-lists{
     width: 200px;
 }
 
@@ -120,7 +120,7 @@
     position: relative;
     height: 38px;
     width: 85px;
-    margin-top: 10px;
+    margin-top: 8px;
     background-color: rgb(198 , 241, 231);
     color: rgb(100,100,100);
     font-size: 16px;
@@ -134,3 +134,30 @@
     background-color: rgb(126, 218, 196);
     color: rgb(30,30,30);
 }
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+
+  }
+  
+  @media (max-width: 999px){
+  
+  }
+  
+  @media (max-width: 680px){
+  /* WR - Write Report */
+    .write-report-main{
+      width: 480px;
+    }
+    .wr-textarea{
+      width: 460px;
+    }
+
+
+    /* Dropdown lists */
+    .wr-list-div .combo-box-lists{
+        width: 160px;
+    }
+  
+  }

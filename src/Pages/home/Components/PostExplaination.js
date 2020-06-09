@@ -11,7 +11,7 @@ export default function PostExplaination() {
         <Fade delay={400}>
             <div className="sec-PE">
                 <div className="header">Tell a problem that can't be solved on your own.</div>
-                <div className="subheader">Necessarily problem, not a suggestion...<a href="/about">Wonder why?!</a></div>
+                <div className="subheader">Necessarily problem, not a suggestion...<a href="/about">Why?!</a></div>
                 <div className="div-body">
                     <ul className="ul-icon">
                         <li className="li-body">It is nice to have someone to walk your dog.</li>

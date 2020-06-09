@@ -223,3 +223,21 @@
     background-color: rgb(230, 123, 123);
     color: rgba(95, 16, 16, 0.9);
 }
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+ 
+  }
+  
+@media (max-width: 999px){
+
+  }
+  
+@media (max-width: 680px){
+  /* Problem */
+    .problem-div{
+      width: 480px;
+    }
+  
+  }
