@@ -119,7 +119,7 @@ export default function HeaderWeb(props) {
                     <li className="wh-li">
                         <a href={'/inviteFriend'} className="wh-li-a">
                             <div className="wh-li-a-div">
-                                <div className={((props.currentPage === 'Profile' && props.isSelf) ? 'li-selected wh-li-a-div-div' : 'wh-li-a-div-div')}>
+                                <div className="wh-li-a-div-div">
                                     <i className="far fa-paper-plane"></i><span>Invite friend</span>
                                 </div>
                             </div>
