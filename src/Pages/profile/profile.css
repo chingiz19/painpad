@@ -31,33 +31,16 @@
 /* Page Resize */
 @media (max-width: 1199px){
   
-  }
+}
   
-  @media (max-width: 999px){
+@media (max-width: 999px){
+    .container-notif{
+        width: 90%;
+    }
+}
   
-  }
-  
-  @media (max-width: 680px){
-    .col-sm-3 {
-        margin: 0px auto 30px auto;
-        flex: 0 0 25% !important;
-        max-width: 100% !important;
+@media (max-width: 680px){
+    .container-notif{
+        width: 98%;
     }
-    .col-sm-9 {
-        margin: 0px auto;
-        flex: 0 0 75% !important;
-        max-width: 100% !important;
-    }
-
-    .comp-profile .posts-edit-btn{
-        right: 5px;
-        top: -3px;
-    }
-
-    
-    /* ProfileUserInfo */
-    .info-edit-btn{
-        right: -15px;
-        top: -5px;
-    }
-  }
+}
