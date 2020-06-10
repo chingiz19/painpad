@@ -261,3 +261,63 @@
     color: inherit;
     color: rgb(67, 93, 114);
 }
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+  
+}
+  
+@media (max-width: 999px){
+    .sec-EA .PG{
+        flex-direction: column;
+    }
+    .sec-EA .KS{
+        flex-direction: column-reverse;
+        margin-bottom: 10px;
+    }
+    .div-entrepreneur img{
+        margin-bottom: 10px;
+    }
+
+    .div-ASL{
+        margin-bottom: 20px;
+    }
+
+    .sec-PC .hacker-news{
+        display: none;
+    }
+
+    .sec-TS .ul-pp, 
+    .sec-TS .ul-e{
+        width: 90%;
+    }
+    .ul-pp .li-1 div{
+        line-height: 1.3em;
+    }
+    .ul-pp li i, 
+    .ul-e li i{
+        font-size: 30px;
+    }
+    .ul-pp .li-1 i{
+        padding-top: 5px;
+        padding-left: 7px;
+    }
+    .ul-pp .li-2 i{
+        padding-top: 3px;
+    }
+    .ul-e .li-1 i{
+        padding-top: 3px;
+    }
+    .ul-e .li-2 div{
+        line-height: 1.5em;
+    }
+
+    .div-lottie p{
+        width: 80%;
+    }
+}
+  
+@media (max-width: 680px){
+     
+}
