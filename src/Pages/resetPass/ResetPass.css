@@ -39,3 +39,19 @@
     background-color: rgb(126, 218, 196);
     color: rgb(30,30,30);
 }
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+  
+}
+  
+@media (max-width: 999px){
+
+}
+  
+@media (max-width: 680px){
+    .reset-pass-main .div-icon span{
+        width: 55%;
+    }
+}

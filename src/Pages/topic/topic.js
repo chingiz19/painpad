@@ -61,6 +61,9 @@ export default function Topic(props) {
         onCompleted: data => {
             setTopicName(data.topicStats.topicName);
             formatChartData(data.topicStats);
+        },
+        onError: ({ graphQLErrors }) => {
+            window.location.href = "/404";
         }
     });
 

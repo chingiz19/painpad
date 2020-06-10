@@ -19,7 +19,7 @@ export default function Choropleth(props) {
             unknownColor="rgb(220, 220, 243)"
             label="properties.name"
             valueFormat=".2s"
-            projectionScale={115}
+            projectionScale={100}
             projectionTranslation={[0.5, 0.5]}
             projectionRotation={[0, 0, 0]}
             enableGraticule={true}

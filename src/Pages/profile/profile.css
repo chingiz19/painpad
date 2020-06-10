@@ -37,10 +37,30 @@
     .container-notif{
         width: 90%;
     }
+    .col-sm-3{
+        flex: 0 0 25%;
+        max-width: 100%;
+        margin: 10px auto 20px auto;
+    }
+    .col-sm-9{
+        max-width: 100%;
+        margin: 10px auto;
+    }
+    .comp-profile .posts-edit-btn{
+        right: 10px;
+        top: -3px;
+    }
+    .comp-profile .div-posts{
+        padding-top: 25px;
+    }
+    .btn-remove-post{
+        top: -12px;
+        right: -9px;
+    }
 }
   
 @media (max-width: 680px){
-    .container-notif{
+    /* .container-notif{
         width: 98%;
-    }
+    } */
 }

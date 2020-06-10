@@ -51,7 +51,7 @@
 .section-chart .div-btn{
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: -10px;
     font-size: 15px;
     z-index: 1;
 }
@@ -133,22 +133,6 @@
     animation: shrinkExpBox 0.35s;
 }
 
-@keyframes growExpBox {
-    from { height: 0; }
-    to   { height: 105px; }
-}
-
-@keyframes shrinkExpBox {
-    from { 
-            height: 105px;
-            opacity: 0; 
-        }
-    to   { 
-            height: 0; 
-            opacity: 0;
-        }
-}
-
 .ul-expl-box{
     list-style: none;
     margin: 0;
@@ -202,4 +186,36 @@
 
 .section-posts .btn-clear:focus{
     outline: none !important;
+}
+
+@keyframes growExpBox {
+    from { height: 0; }
+    to   { height: 105px; }
+}
+
+@keyframes shrinkExpBox {
+    from { 
+            height: 105px;
+            opacity: 0; 
+        }
+    to   { 
+            height: 0; 
+            opacity: 0;
+        }
+}
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+  
+}
+  
+@media (max-width: 999px){
+
+}
+  
+@media (max-width: 680px){
+    .div-chart{
+        height: 300px;
+    }
 }
