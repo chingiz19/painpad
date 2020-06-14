@@ -1,14 +1,14 @@
 import React, { useRef, useState } from 'react';
-import './WriteReport.css';
-import Validate from 'validate.js';
-import Locations from './Lists/Locations'
-import Indsutries from './Lists/Industries'
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
-import DynamicIcon from '../Components/Helpers/DynamicIcon';
-import UserSignInUp from '../Modals/SignInUp/SignInUp';
+import Validate from 'validate.js';
+import './HomeComponents.css';
+import Locations from '../../../Components/Lists/Locations'
+import Indsutries from '../../../Components/Lists/Industries'
+import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
+import UserSignInUp from '../../../Modals/SignInUp/SignInUp';
 
-export default function WriteReport(props) {
+export default function Post(props) {
     const reportText = useRef(null);
 
     const [showSignModal, setSignModal] = useState(false);
@@ -155,7 +155,7 @@ export default function WriteReport(props) {
 
                     {(loadingNewPost || errorNewPost)
                         ? <DynamicIcon type={loadingNewPost ? 'loading' : 'loadingError'} width='50' height='50' />
-                        : <button className="btn-report" onClick={sendReport} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
+                        : <button className={reportText && reportText.current && reportText.current.value ? 'btn-report' : 'btn-report no-txt'} onClick={sendReport} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
 
                 </div>
             </div>

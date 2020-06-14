@@ -3,22 +3,32 @@ import './Home.css';
 import gql from 'graphql-tag';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import HeaderWeb from '../../Components/HeaderWeb';
-import WriteReport from '../../Components/WriteReport';
+import Header from '../../Components/Header/Header';
 import ProblemFeed from '../../Components/ProblemFeed';
 import SeperatorLine from '../../Components/SeperatorLine';
-import PostExplaination from './Components/PostExplaination';
+import WritePost from './Components/WritePost';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
 
 export default function Home(props) {
     const [isSignedIn, setIsSignedIn] = useState(false);
-    const [userId, setUserId] = useState(false);
+    const [userId, setUserId] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
     const [feedPosts, setFeedPosts] = useState([]);
     const [hasMore, setHasMore] = useState(true);
 
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
             isLogin {success, id}
+        }
+    `;
+
+    const GET_USER_INFO = gql`
+        query userProfile($userId: ID!) {
+            userProfile(userId: $userId) {
+                self, user{
+                    id, firstName, lastName, profilePic
+                }
+            }
         }
     `;
 
@@ -64,6 +74,7 @@ export default function Home(props) {
         onCompleted: data => {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
+            getUserInfo();
         }
     });
 
@@ -73,6 +84,15 @@ export default function Home(props) {
         },
         onCompleted: data => {
             setFeedPosts(data.posts);
+        }
+    });
+
+    const [getUserInfo] = useLazyQuery(GET_USER_INFO, {
+        variables: {
+            userId: parseInt(userId)
+        },
+        onCompleted: data => {
+            setUserInfo(data.userProfile.user);
         }
     });
 
@@ -103,13 +123,13 @@ export default function Home(props) {
         <>
             <div className="div-main">
                 <div className="col-left">
-                    <HeaderWeb currentPage={props.pageName}
+                    <Header currentPage={props.pageName}
                         isSignedIn={isSignedIn}
-                        userId={userId} />
+                        userId={userId} 
+                        userInfo={userInfo}/>
                 </div>
                 <div id="main-problems" className="col-right problems-div">
-                    <PostExplaination />
-                    <WriteReport isLogin={isSignedIn} />
+                    <WritePost isLogin={isSignedIn} />
                     <SeperatorLine thisValue="Reports feed" />
                     <InfiniteScroll
                         scrollableTarget="main-problems"

@@ -18,7 +18,8 @@ export default function UserSignUpIn(props) {
     return (
         <>
             <ActivateButton withButton={props.withButton} 
-                handleActivateModal={activateModal}/>
+                handleActivateModal={activateModal}
+                text={props.text}/>
             <Modal show={props.withButton ? showModal : props.showModal} onHide={props.withButton ? handleClose : props.handleCloseModal}>
                 <SignInUpBody/>
             </Modal>

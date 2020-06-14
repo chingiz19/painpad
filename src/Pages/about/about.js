@@ -3,8 +3,8 @@ import './About.css';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Fade from 'react-reveal/Fade';
-import HeaderWeb from '../../Components/HeaderWeb';
-import Header from './Components/AboutHeader';
+import Header from '../../Components/Header/Header';
+import AboutHeader from './Components/AboutHeader';
 import EntrepreneurAdvice from './Components/EntrepreneurAdvice';
 import SeperatorLineAbout from './Components/SeperatorLineAbout';
 import OurStory from './Components/OurStory';
@@ -33,59 +33,28 @@ export default function About(props) {
         <>
             <div className="div-main">
                 <div className="col-left">
-                    <HeaderWeb currentPage={props.pageName}
+                    <Header currentPage={props.pageName}
                         isSignedIn={isSignedIn}
                         userId={userId} />
                 </div>
                 <div className="col-right">
-                    {/* <div id="main-problems" className="problems-div"> */}
-                        <Header />
-                        <Fade>
-                            <SeperatorLineAbout label="Entrepreneur Advice" />
-                            <EntrepreneurAdvice />
-                            <SeperatorLineAbout label="Our Story" />
-                            <OurStory />
-                        </Fade>
-                        <Fade>
-                            <SeperatorLineAbout label="Problems are All Over Internet" />
-                        </Fade>
-                        <PeoplesChallenge />
-                        <Fade delay={1000}>
-                            <SeperatorLineAbout label="Here is Solution to Problem" />
-                        </Fade>
-                        <TheSolution />
-                    {/* </div> */}
+                    <AboutHeader />
+                    <Fade>
+                        <SeperatorLineAbout label="Entrepreneur Advice" />
+                        <EntrepreneurAdvice />
+                        <SeperatorLineAbout label="Our Story" />
+                        <OurStory />
+                    </Fade>
+                    <Fade>
+                        <SeperatorLineAbout label="Problems are All Over Internet" />
+                    </Fade>
+                    <PeoplesChallenge />
+                    <Fade delay={1000}>
+                        <SeperatorLineAbout label="Here is Solution to Problem" />
+                    </Fade>
+                    <TheSolution />
                 </div>
             </div>
-
-            {/* <Container className="view-port">
-                <Container fluid="lg">
-                    <Row>
-                        <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName}
-                                isSignedIn={isSignedIn}
-                                userId={userId} />
-                        </Col>
-                        <Col sm={8} md={9} className="main-comp about">
-                            <Header/>
-                            <Fade>
-                                <SeperatorLineAbout label="Entrepreneur Advice" />
-                                <EntrepreneurAdvice />
-                                <SeperatorLineAbout label="Our Story" />
-                                <OurStory />
-                            </Fade>
-                            <Fade>
-                                <SeperatorLineAbout label="Problems are All Over Internet" />
-                            </Fade>
-                            <PeoplesChallenge/>
-                            <Fade delay={1000}>
-                                <SeperatorLineAbout label="Here is Solution to Problem" />
-                            </Fade>
-                            <TheSolution/>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container> */}
         </>
     );
 }

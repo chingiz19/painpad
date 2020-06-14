@@ -1,7 +1,7 @@
 import React from 'react';
 import './404.css';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
-import HeaderWeb from '../../Components/HeaderWeb';
+import Header from '../../Components/Header/Header';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
@@ -19,7 +19,7 @@ export default function NotFound(props) {
         <>
             <div className="div-main">
                 <div className="col-left">
-                    <HeaderWeb currentPage={props.pageName}
+                    <Header currentPage={props.pageName}
                         isSignedIn={isSignedIn} />
                 </div>
                 <div className="col-right">

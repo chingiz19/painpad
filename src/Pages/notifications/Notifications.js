@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Notifications.css';
-import HeaderWeb from '../../Components/HeaderWeb';
+import Header from '../../Components/Header/Header';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import NotificationsList from '../../Components/NotificationsList';
@@ -50,7 +50,7 @@ export default function Topic(props) {
 
             <div className="div-main">
                 <div className="col-left">
-                    <HeaderWeb currentPage={props.pageName}
+                    <Header currentPage={props.pageName}
                         isSignedIn={isSignedIn}
                         userId={userId} />
                 </div>

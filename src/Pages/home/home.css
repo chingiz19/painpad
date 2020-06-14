@@ -11,3 +11,11 @@
     color: #414774;
     font-size: 17px;
 }
+
+.problems-div .line-seperator{
+    top: -14px;
+}
+
+.problems-div .line-seperator .txt{
+    border-radius: 4px;
+}

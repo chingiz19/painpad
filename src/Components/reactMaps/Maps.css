@@ -240,4 +240,41 @@
       width: 480px;
     }
   
-  }
+}
+
+
+@media only screen and (max-device-width: 600px) {
+    .problem-div{
+        width: 98%;
+    }
+
+    /* A Problem section */
+    .problem-body{
+        font-size: 15px;
+    }
+    .problem-hdr .user-short-info{
+        padding-right: 90px;
+    }
+    .problem-hdr .user-name-li,
+    .problem-hdr .li-loc{
+        font-size: 15px;
+    }
+    .problem-footer .sh-txt{
+        display: none;
+    }
+    .div-cnt {
+        font-size: 14px;
+    }
+    .problem-footer .samehere{
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+    .problem-topic{
+        padding: 3px 5px;
+        font-size: 12px;
+    }
+    .problem-topic span{
+        font-size: 14px;
+    }
+    
+}

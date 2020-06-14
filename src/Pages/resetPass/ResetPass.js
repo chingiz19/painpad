@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import './ResetPass.css';
-import HeaderWeb from '../../Components/HeaderWeb';
+import Header from '../../Components/Header/Header';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
@@ -101,7 +101,7 @@ export default function ResetPass(props) {
 
             <div className="div-main">
                 <div className="col-left">
-                    <HeaderWeb currentPage={props.pageName}
+                    <Header currentPage={props.pageName}
                         isSignedIn={false} />
                 </div>
                 <div className="col-right reset-pass-main">

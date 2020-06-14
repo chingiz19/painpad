@@ -3,7 +3,7 @@ import './Profile.css';
 import gql from 'graphql-tag';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import HeaderWeb from '../../Components/HeaderWeb';
+import Header from '../../Components/Header/Header';
 import ProfileUserInfo from '../../Components/ProfileUserInfo';
 import ProblemFeed from '../../Components/ProblemFeed';
 import SeperatorLine from '../../Components/SeperatorLine';
@@ -182,7 +182,7 @@ export default function Profile(props) {
 
             <div className="div-main">
                 <div className="col-left">
-                    <HeaderWeb currentPage={props.pageName}
+                    <Header currentPage={props.pageName}
                         pageTitle={pageTitle}
                         isSignedIn={isSignedIn}
                         userId={userId}

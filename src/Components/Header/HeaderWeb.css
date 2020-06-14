@@ -85,6 +85,10 @@
     transition: background-color, color, font-weight .3s;
 }
 
+.wh-li-div-span-div.sign span{
+    padding-left: 6px;
+}
+
 .wh-li-a-div-div{
     position: relative;
     display: flex;
@@ -147,4 +151,11 @@
   
   @media (max-width: 680px){
   
+  }
+
+
+  @media only screen and (max-device-width: 600px) {
+      .web-header{
+          display: none;
+      }
   }

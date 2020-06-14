@@ -76,3 +76,10 @@
   @media (max-width: 680px){
   
   }
+
+
+@media only screen and (max-device-width: 600px) {
+    .sec-wp .form-control{
+        border: 1px solid rgba(210, 210, 210,0.7);
+    }
+}
