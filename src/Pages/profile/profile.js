@@ -184,9 +184,10 @@ export default function Profile(props) {
                 <div className="col-left">
                     <Header currentPage={props.pageName}
                         pageTitle={pageTitle}
+                        isSelf={userInfo && userInfo.self}
                         isSignedIn={isSignedIn}
                         userId={userId}
-                        isSelf={userInfo && userInfo.self} />
+                        userInfo={userInfo && userInfo.user} />
                 </div>
                 <div id="mp-problem" className="col-right comp-profile">
                     <ProfileUserInfo isSignedIn={isSignedIn}

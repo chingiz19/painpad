@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './About.css';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import Fade from 'react-reveal/Fade';
 import Header from '../../Components/Header/Header';
 import AboutHeader from './Components/AboutHeader';
@@ -15,6 +15,7 @@ import TheSolution from './Components/TheSolution';
 export default function About(props) {
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [userId, setUserId] = useState(false);
+    const [userInfo, setUserInfo] = useState(null);
 
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
@@ -22,10 +23,30 @@ export default function About(props) {
         }
     `;
 
+    const GET_USER_INFO = gql`
+        query userProfile($userId: ID!) {
+            userProfile(userId: $userId) {
+                self, user{
+                    id, firstName, lastName, profilePic
+                }
+            }
+        }
+    `;
+
     useQuery(IS_USER_SIGNED_IN, {
         onCompleted: data => {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
+            getUserInfo();
+        }
+    });
+
+    const [getUserInfo] = useLazyQuery(GET_USER_INFO, {
+        variables: {
+            userId: parseInt(userId)
+        },
+        onCompleted: data => {
+            setUserInfo(data.userProfile.user);
         }
     });
 
@@ -35,9 +56,10 @@ export default function About(props) {
                 <div className="col-left">
                     <Header currentPage={props.pageName}
                         isSignedIn={isSignedIn}
-                        userId={userId} />
+                        userId={userId}
+                        userInfo={userInfo} />
                 </div>
-                <div className="col-right">
+                <div className="col-right about">
                     <AboutHeader />
                     <Fade>
                         <SeperatorLineAbout label="Entrepreneur Advice" />

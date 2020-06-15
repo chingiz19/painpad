@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Post.css';
 import Header from '../../Components/Header/Header';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import Problem from '../../Components/reactMaps/Problem';
 import PostRejected from './Components/PostRejected';
 
@@ -14,10 +14,21 @@ export default function Post(props) {
     const [post, setPost] = useState(null);
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [userId, setUserId] = useState(false);
+    const [userInfo, setUserInfo] = useState(null);
 
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
             isLogin {success, id}
+        }
+    `;
+
+    const GET_USER_INFO = gql`
+        query userProfile($userId: ID!) {
+            userProfile(userId: $userId) {
+                self, user{
+                    id, firstName, lastName, profilePic
+                }
+            }
         }
     `;
 
@@ -58,6 +69,16 @@ export default function Post(props) {
         onCompleted: data => {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
+            getUserInfo();
+        }
+    });
+
+    const [getUserInfo] = useLazyQuery(GET_USER_INFO, {
+        variables: {
+            userId: parseInt(userId)
+        },
+        onCompleted: data => {
+            setUserInfo(data.userProfile.user);
         }
     });
 
@@ -85,7 +106,8 @@ export default function Post(props) {
                 <div className="col-left">
                     <Header currentPage={props.pageName}
                         isSignedIn={isSignedIn}
-                        userId={userId} />
+                        userId={userId}
+                        userInfo={userInfo} />
                 </div>
                 <div className="col-right main-post">
                     <div className="main-header">Post page</div>

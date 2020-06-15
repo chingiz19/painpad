@@ -51,6 +51,7 @@
         width: 75px;
         height: 100%;
         padding-left: 40px;
+        padding-right: 0;
         font-size: 24px;
         color: rgb(103, 122, 138);
     }

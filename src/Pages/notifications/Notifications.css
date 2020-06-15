@@ -123,3 +123,30 @@
     color: #3f425765;
     margin: 15px 0 10px 0;
 }
+
+
+@media only screen and (max-device-width: 600px) {
+    .main-notif .main-header{
+        display: none;
+    }
+    .container-notif{
+        margin: 15px auto 25px auto;
+    }
+    .subbody-notif h4{
+        font-size: 17px;
+    }
+    .subbody-notif h5{
+        font-size: 15px;
+    }
+    .subbody-notif p{
+        margin: 10px 0 5px 0;
+        font-size: 14px;
+    }
+    .container-notif .div-unread{
+        right: -8px;
+    }
+    .div-unread span{
+        height: 16px;
+        width: 16px;
+    }
+}

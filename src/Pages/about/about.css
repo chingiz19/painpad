@@ -321,3 +321,52 @@
 @media (max-width: 680px){
      
 }
+
+
+@media only screen and (max-device-width: 600px) {
+    .col-right.about{
+        overflow-x: hidden;
+    }
+    .about .main-header{
+        display: none;
+    }
+    .div-entrepreneur p{
+        margin: 2%;
+        text-align: center;
+    }
+    .sec-PC .quora{
+        height: 145px;
+    }
+    .sec-PC .medium{
+        height: 260px;
+    }
+    .sec-PC .reddit{
+        height: 150px; 
+    }
+
+    .sec-TS .ul-pp, 
+    .sec-TS .ul-e{
+        width: 96%;
+    }
+    .ul-pp li i, 
+    .ul-e li i{
+        color: rgb(103, 122, 138);
+    }
+    .ul-pp .li-1 div,
+    .ul-pp .li-2 div,
+    .ul-pp .li-3 div{
+        line-height: 1.4em;
+    }
+    .ul-pp .li-1 i,
+    .ul-pp .li-3 i,
+    .ul-e .li-2 i{
+        padding-top: 7px;
+    }
+    .ul-pp .li-2 i{
+        padding-top: 5px;
+    }
+    .ul-e .li-3 i{
+        padding-top: 4px;
+    }
+
+}

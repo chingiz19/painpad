@@ -30,3 +30,15 @@
     background-color: #e81f6acf;
     color: rgb(253, 253, 253);
 }
+
+@media only screen and (max-device-width: 600px) {
+    .btn-remove-post{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: 0px !important;
+        font-size: 18px;
+        color: rgb(253, 253, 253);
+        background-color: #e81f6acf;
+    }
+}

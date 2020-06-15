@@ -246,6 +246,7 @@
 @media only screen and (max-device-width: 600px) {
     .problem-div{
         width: 98%;
+        margin: 20px auto;
     }
 
     /* A Problem section */

@@ -9,8 +9,7 @@ import Loading from '../../Components/Helpers/Loading';
 
 export default function ResetPass(props) {
     let token = window.location.href.split("resetPass/")[1];
-
-    console.log("token ", token);
+    const screenX = window.screen.width;
 
     let newPassword = useRef(null);
     let newPassword2 = useRef(null);
@@ -108,7 +107,7 @@ export default function ResetPass(props) {
                     <div className="div-icon">
                         {stateObj.errorMessage
                             ? <Loading error={stateObj.errorMessage} width="220" height="220" />
-                            : <DynamicIcon type="resetPass" width="220" height="220" />}
+                            : <DynamicIcon type="resetPass" width={screenX > 600 ? '220' : '180'} height={screenX > 600 ? '220' : '180'} />}
                         <span>{stateObj.errorMessage ? stateObj.errorMessage : 'Reset Password'}</span>
                     </div>
                     <div className="div-input">

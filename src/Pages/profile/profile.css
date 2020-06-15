@@ -60,7 +60,12 @@
 }
   
 @media (max-width: 680px){
-    /* .container-notif{
-        width: 98%;
-    } */
+
+}
+
+
+@media only screen and (max-device-width: 600px) {
+    .comp-profile .posts-edit-btn{
+        right: 4px;
+    }
 }

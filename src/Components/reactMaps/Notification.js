@@ -5,7 +5,7 @@ import DynamicIcon from '../Helpers/DynamicIcon';
 import FadeIn from 'react-fade-in';
 
 export default function Notification(props) {
-    let obj = props.notif;
+    const obj = props.notif;
 
     if (obj && obj.description.split('<span>').length > 0) {
         let tmp = obj.description.split('<span>');
@@ -15,6 +15,8 @@ export default function Notification(props) {
             'p3': tmp[2]
         }
     }
+
+    console.log("obj ", obj);
 
     return (
         <FadeIn>
