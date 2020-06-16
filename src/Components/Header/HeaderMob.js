@@ -25,7 +25,7 @@ export default function HeaderWeb(props) {
 
     useQuery(GET_NOTIFICATION_COUNT, {
         onCompleted: data => {
-            setNotifCount(data.newNotificationCount);
+            setNotifCount(data && data.newNotificationCount);
         }
     });
 
@@ -46,35 +46,68 @@ export default function HeaderWeb(props) {
                         <div className="page-name">{props.currentPage}</div>
                     </div>
                     <div className="right">
-                        <div className={props.isSignedIn ? 'none' : 'not-signed'}>
+                        {/* <div className={props.isSignedIn ? 'none' : 'not-signed'}>
                             <UserSignInUp withButton={true} 
                                 text="Sign In"
                                 notifCount={notifCount}/>
                         </div>
                         <Sidebar isSignedIn={props.isSignedIn}
                             userId={props.userId}
-                            userInfo={props.userInfo}/>
+                            userInfo={props.userInfo}/> */}
+                        {props.isSignedIn
+                            ? (<Sidebar isSignedIn={props.isSignedIn}
+                                userId={props.userId}
+                                userInfo={props.userInfo} />)
+                            : (<MobTabLink link="/about"
+                                linkedPage="About"
+                                icon="fas fa-question"
+                                currentPage={props.currentPage} />)}
                     </div>
                 </div>
                 <div className="bottom">
-                    <MobTabLink link="/"
-                        linkedPage="Home"
-                        icon="fas fa-home"
-                        currentPage={props.currentPage} />
-                    <MobTabLink link="/search"
-                        linkedPage="Search"
-                        icon="fas fa-search"
-                        currentPage={props.currentPage} />
-                    <MobTabLink link="/notifications"
-                        linkedPage="Notifications"
-                        icon="fas fa-bell"
-                        currentPage={props.currentPage}
-                        showCount={true}
-                        notifCount={notifCount} />
-                    <MobTabLink link="/about"
-                        linkedPage="About"
-                        icon="fas fa-question"
-                        currentPage={props.currentPage} />
+
+                    {
+                        props.isSignedIn
+                            ? <>
+                                <MobTabLink link="/"
+                                    linkedPage="Home"
+                                    icon="fas fa-home"
+                                    currentPage={props.currentPage} />
+                                <MobTabLink link="/search"
+                                    linkedPage="Search"
+                                    icon="fas fa-search"
+                                    currentPage={props.currentPage} />
+                                <MobTabLink link="/notifications"
+                                    linkedPage="Notifications"
+                                    icon="fas fa-bell"
+                                    currentPage={props.currentPage}
+                                    showCount={true}
+                                    notifCount={notifCount} />
+                                <MobTabLink link="/about"
+                                    linkedPage="About"
+                                    icon="fas fa-question"
+                                    currentPage={props.currentPage} />
+                                </>
+                            : (
+                                <div className="not-signed">
+                                    <div className="sign-in">
+                                        <UserSignInUp withButton={true} 
+                                            text="Sign In" 
+                                            showSingUp={false}/>
+                                    </div>
+                                    <div className="sign-up">
+                                        <UserSignInUp withButton={true} 
+                                            text="Sign Up" 
+                                            showSingUp={true}/>
+                                    </div>
+                                    
+                                </div>
+                            )
+                    }
+
+
+
+
                 </div>
             </div>
         </>

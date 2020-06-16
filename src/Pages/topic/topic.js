@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Topic.css';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import Header from '../../Components/Header/Header';
 import SeperatorLine from '../../Components/SeperatorLine';
 import ExplainationBox from './Components/ExplanationBox';
@@ -13,6 +13,8 @@ export default function Topic(props) {
 
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [userId, setUserId] = useState(false);
+    const [userInfo, setUserInfo] = useState(null);
+
     const [topicName, setTopicName] = useState(null);
     const [chartType, setChartType] = useState('pie');
     const [selectedData, setSelectedData] = useState(null);
@@ -22,6 +24,16 @@ export default function Topic(props) {
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
             isLogin {success, id}
+        }
+    `;
+
+    const GET_USER_INFO = gql`
+        query userProfile($userId: ID!) {
+            userProfile(userId: $userId) {
+                self, user{
+                    id, firstName, lastName, profilePic
+                }
+            }
         }
     `;
 
@@ -51,6 +63,16 @@ export default function Topic(props) {
         onCompleted: data => {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
+            getUserInfo();
+        }
+    });
+
+    const [getUserInfo] = useLazyQuery(GET_USER_INFO, {
+        variables: {
+            userId: parseInt(userId)
+        },
+        onCompleted: data => {
+            setUserInfo(data && data.userProfile.user);
         }
     });
 
@@ -119,7 +141,8 @@ export default function Topic(props) {
                 <div className="col-left">
                     <Header currentPage={props.pageName}
                         isSignedIn={isSignedIn}
-                        userId={userId} />
+                        userId={userId}
+                        userInfo={userInfo} />
                 </div>
                 <div className="col-right main-TP">
                     <div className="main-header">Analytics for <span>{topicName}</span></div>

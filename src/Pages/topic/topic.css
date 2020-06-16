@@ -219,3 +219,34 @@
         height: 300px;
     }
 }
+
+
+@media only screen and (max-device-width: 600px) {
+    .div-chart text{
+        font-size: 14px !important;
+        font-family: "Comic Sans MS", 'Muli', sans-serif !important;
+    }
+    .col-right .main-header{
+        font-size: 20px;
+        height: 54px;
+    }
+
+    .div-explaination{
+        flex-direction: column;
+        width: 90%;
+        height: 150px;
+        padding: 15px 10px;
+    }
+    .div-explaination .ul-expl-box{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .ul-expl-box li{
+        width: auto;
+    }
+    .div-explaination p{
+        margin-top: 7px;
+        font-size: 16px;
+    }
+}

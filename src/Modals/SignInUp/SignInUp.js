@@ -21,7 +21,7 @@ export default function UserSignUpIn(props) {
                 handleActivateModal={activateModal}
                 text={props.text}/>
             <Modal show={props.withButton ? showModal : props.showModal} onHide={props.withButton ? handleClose : props.handleCloseModal}>
-                <SignInUpBody/>
+                <SignInUpBody showSingUp={props.showSingUp}/>
             </Modal>
         </>
     );

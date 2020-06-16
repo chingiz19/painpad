@@ -67,12 +67,12 @@ export default function Sidebar(props) {
                     <ul className="sb-body">
                         <li>
                             <a href={'/users/' + props.userId}>
-                                <i className="fas fa-user"></i><span>Profile</span>
+                                <i className="fas fa-user"></i><span>My profile</span>
                             </a>
                         </li>
                         <li>
                             <a href="/about">
-                                <i className="fas fa-question"></i><span>About</span>
+                                <i className="fas fa-question"></i><span>About PainPad</span>
                             </a>
                         </li>
                         <br />

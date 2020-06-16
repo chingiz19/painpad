@@ -92,7 +92,7 @@ export default function Home(props) {
             userId: parseInt(userId)
         },
         onCompleted: data => {
-            setUserInfo(data.userProfile.user);
+            setUserInfo(data && data.userProfile.user);
         }
     });
 
