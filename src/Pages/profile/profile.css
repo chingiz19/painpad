@@ -64,6 +64,28 @@
 }
 
 
+/* iPad in landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape){ 
+    .comp-profile .posts-edit-btn{
+        right: 4px;
+    }
+}
+
+
+/* iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait){ 
+    .comp-profile .posts-edit-btn{
+        right: 4px;
+    }
+}
+
+
 @media only screen and (max-device-width: 600px) {
     .comp-profile .posts-edit-btn{
         right: 4px;

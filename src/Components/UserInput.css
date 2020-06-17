@@ -41,9 +41,32 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
+/* iPad in landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape){ 
+    .user-input label{
+        bottom: 30px !important;
+        font-weight: 500 !important;
+    }
+}
+
+
+/* iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait){ 
+    .user-input label{
+        bottom: 30px !important;
+        font-weight: 500 !important;
+    }
+}
 
 @media only screen and (max-device-width: 600px) {
     .user-input label{
         bottom: 30px !important;
+        font-weight: 500 !important;
     }
 }

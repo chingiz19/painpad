@@ -11,7 +11,7 @@ export default function WritePost(props) {
         // WP - Write Post
         <div className="sec-wp">
             <PostExplaination/>
-            <Post isLogin={props.isSignedIn} />
+            <Post isLogin={props.isLogin} />
         </div>
     );
 }

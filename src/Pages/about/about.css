@@ -173,7 +173,8 @@
 .ul-pp li i,
 .ul-e li i{
     font-size: 27px;
-    color: #3f4257;
+    color: #3f4257; 
+    color: rgb(103, 122, 138);
 }
 
 .ul-pp .li-1 i{

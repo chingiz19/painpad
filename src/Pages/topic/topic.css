@@ -119,7 +119,6 @@
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.15s ease-in-out;
-    animation: growExpBox 0.35s;
 }
 
 .div-explaination span{
@@ -188,10 +187,10 @@
     outline: none !important;
 }
 
-@keyframes growExpBox {
+/* @keyframes growExpBox {
     from { height: 0; }
-    to   { height: 105px; }
-}
+    to   { height: 105px !important; }
+} */
 
 @keyframes shrinkExpBox {
     from { 
@@ -207,7 +206,12 @@
 
 /* Page Resize */
 @media (max-width: 1199px){
-  
+    .div-chart text{
+        font-family: "Comic Sans MS", 'Muli', sans-serif !important;
+    }
+    /* .main-TP .div-explaination{
+        height: 105px !important;
+    } */
 }
   
 @media (max-width: 999px){

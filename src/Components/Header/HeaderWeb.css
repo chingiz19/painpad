@@ -113,6 +113,11 @@
 
 /* Page Resize */
 @media (max-width: 1199px){
+    .a-logo-hdr-web img{
+        width: 100px;
+        height: 71.64px;
+    }
+
     .wh-li-a-div-div span,
     .wh-li-div-span-div span{
         display: none;
@@ -134,6 +139,7 @@
     }
     .a-logo-hdr-web img{
       width: 90px;
+      height: 58.61px;
     }
     .wh-li-a-div,
     .wh-li-div-span{
@@ -153,6 +159,12 @@
   
   }
 
+  @media only screen and (max-device-width: 768px) {
+    .a-logo-hdr-web img{
+        width: 90px;
+        height: 58.61px;
+      }
+  }
 
   @media only screen and (max-device-width: 600px) {
       .web-header{
