@@ -80,8 +80,8 @@ export default function Profile(props) {
     `;
 
     const GET_MORE_POSTS = gql`
-        query posts($lastDate: Float!, $count: Int!){ 
-            posts(lastDate: $lastDate, count: $count) {
+        query posts($userId: ID!, $lastDate: Float!, $count: Int!){ 
+            posts(userId: $userId, lastDate: $lastDate, count: $count) {
                 id, description, 
                 postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
@@ -170,8 +170,9 @@ export default function Profile(props) {
         setTimeout(() => {
             getMorePosts({
                 variables: {
+                    userId: profileUserId,
                     count: 5,
-                    lastDate: allUserPosts && allUserPosts[allUserPosts.length - 1].created
+                    lastDate: allUserPosts.length && allUserPosts[allUserPosts.length - 1].created
                 }
             });
         }, 800);
@@ -206,7 +207,7 @@ export default function Profile(props) {
                                 (allUserPosts.length > 0 && <DynamicIcon type='loading' width={80} height={80} />)
                             }
                             endMessage={
-                                <div className="end-message">Yay! You have seen it all</div>
+                                (allUserPosts.length > 0 && <div className="end-message">Yay! You have seen it all</div>)
                             }>
                             <ProblemFeed filter={false}
                                 thisPosts={allUserPosts || []}

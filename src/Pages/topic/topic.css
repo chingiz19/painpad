@@ -187,11 +187,6 @@
     outline: none !important;
 }
 
-/* @keyframes growExpBox {
-    from { height: 0; }
-    to   { height: 105px !important; }
-} */
-
 @keyframes shrinkExpBox {
     from { 
             height: 105px;
@@ -209,9 +204,6 @@
     .div-chart text{
         font-family: "Comic Sans MS", 'Muli', sans-serif !important;
     }
-    /* .main-TP .div-explaination{
-        height: 105px !important;
-    } */
 }
   
 @media (max-width: 999px){
@@ -226,6 +218,9 @@
 
 
 @media only screen and (max-device-width: 600px) {
+    .section-chart{
+        margin-top: 20px;
+    }
     .div-chart text{
         font-size: 14px !important;
         font-family: "Comic Sans MS", 'Muli', sans-serif !important;

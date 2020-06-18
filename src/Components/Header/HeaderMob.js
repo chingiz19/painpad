@@ -46,14 +46,6 @@ export default function HeaderWeb(props) {
                         <div className="page-name">{props.currentPage}</div>
                     </div>
                     <div className="right">
-                        {/* <div className={props.isSignedIn ? 'none' : 'not-signed'}>
-                            <UserSignInUp withButton={true} 
-                                text="Sign In"
-                                notifCount={notifCount}/>
-                        </div>
-                        <Sidebar isSignedIn={props.isSignedIn}
-                            userId={props.userId}
-                            userInfo={props.userInfo}/> */}
                         {props.isSignedIn
                             ? (<Sidebar isSignedIn={props.isSignedIn}
                                 userId={props.userId}
