@@ -33,11 +33,13 @@
     color: rgb(101, 119, 134);
 }
 
-.sec-PE .subheader a{
+.sec-PE .subheader a,
+.post-message a{
     transition: all 0.15s ease-in-out;
 }
 
-.sec-PE .subheader a:hover{
+.sec-PE .subheader a:hover,
+.post-message a:hover{
     border: none;
     outline: none;
     text-decoration: none;
@@ -215,6 +217,35 @@
 .btn-report:disabled{
   background-color: rgb(126, 218, 196);
   color: rgb(30,30,30);
+}
+
+.post-message{
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  /* height: 70px; */
+  margin: 20px auto 00px auto;
+  background-color: rgb(198 , 241, 231);
+  color: rgba(50, 50, 50,1);
+  font-size: 17px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  padding: 10px 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  animation: expandBox 0.35s;
+  transition: all 0.15s ease-in-out;
+}
+
+@keyframes expandBox {
+  from { 
+          height: 0;
+          opacity: 0; 
+      }
+  to   { 
+          height: 70px; 
+          opacity: 1;
+      }
 }
 
 

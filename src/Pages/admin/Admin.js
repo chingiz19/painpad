@@ -8,6 +8,7 @@ import Analytics from './components/Analytics';
 
 export default function Admin(props) {
     const [selectedComp, setSelectedComp] = useState('post');
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const IS_USER_ADMIN = gql`
         query isAdmin{
@@ -15,7 +16,11 @@ export default function Admin(props) {
         }
     `;
 
-    const { data: isUserAdmin } = useQuery(IS_USER_ADMIN, {
+    useQuery(IS_USER_ADMIN, {
+        onCompleted: data => {
+            if(!data.isAdmin) window.location.href = "/404";
+            setIsAdmin(data.isAdmin);
+        },
         onError: ({ graphQLErrors }) => {
             window.location.href = "/404";
         }
@@ -27,7 +32,7 @@ export default function Admin(props) {
 
     return (
         <>
-            <div className={isUserAdmin && isUserAdmin.isAdmin ? "div-main" : "none"}>
+            <div className={isAdmin ? 'div-main' : 'none'}>
                 <div className="col-left">
                     <HeaderAdmin currentPage={props.pageName}
                         selectComp={handleSelectComp} />

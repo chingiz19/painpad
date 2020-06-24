@@ -78,7 +78,7 @@ export default function Home(props) {
         }
     });
 
-    useQuery(GET_POSTS, {
+    const { loading: loadingGetPosts } = useQuery(GET_POSTS, {
         variables: {
             count: 10
         },
@@ -129,7 +129,8 @@ export default function Home(props) {
                         userInfo={userInfo}/>
                 </div>
                 <div id="main-problems" className="col-right problems-div">
-                    <WritePost isLogin={isSignedIn} />
+                    <WritePost isLogin={isSignedIn}
+                        userId={userId}/>
                     <SeperatorLine thisValue="Reports feed" />
                     <InfiniteScroll
                         scrollableTarget="main-problems"
@@ -138,7 +139,7 @@ export default function Home(props) {
                         next={handleLoadMore}
                         hasMore={hasMore}
                         loader={
-                            (feedPosts.length > 0 && <DynamicIcon type='loading' width={80} height={80} />)
+                            ((feedPosts.length > 2 || loadingGetPosts) && <DynamicIcon type='loading' width={80} height={80} />)
                         }
                         endMessage={
                             <div className="end-message">Yay! You have seen it all</div>

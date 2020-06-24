@@ -5,13 +5,6 @@
     scroll-behavior: smooth ;
 }
 
-.problems-div .end-message{
-    text-align: center;
-    padding: 10px 0 15px 0;
-    color: #414774;
-    font-size: 17px;
-}
-
 .problems-div .line-seperator{
     top: -14px;
 }

@@ -57,7 +57,7 @@ export default function Post(props) {
     });
 
     const sendReport = e => {
-        if(!props.isLogin){
+        if (!props.isLogin) {
             setSignModal(true);
             return;
         }
@@ -158,6 +158,9 @@ export default function Post(props) {
                         : <button className={reportText && reportText.current && reportText.current.value ? 'btn-report' : 'btn-report no-txt'} onClick={sendReport} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
 
                 </div>
+            </div>
+            <div className={postSent ? 'post-message' : 'none'}>
+                <span>Yahoo! Now the post is on its way to moderators for review. It won't take long. <a href={'/users/' + props.userId}>See 'My profile'.</a></span>
             </div>
         </>
     );

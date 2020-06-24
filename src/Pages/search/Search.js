@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import Validate from 'validate.js';
-import './Search.css';
 import gql from 'graphql-tag';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import Validate from 'validate.js';
+import Fade from 'react-reveal/Fade';
+import './Search.css';
 import Header from '../../Components/Header/Header';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
 
@@ -71,7 +72,7 @@ export default function Search(props) {
         }
     }
 
-    function handleInputClear(){
+    function handleInputClear() {
         setSearch('');
         setShowClear(false);
         setSearchMessage(null);
@@ -90,21 +91,23 @@ export default function Search(props) {
                     <div className="main-header">Search</div>
                     <div className="body-search">
                         <DynamicIcon type="search" width="250" height="150" />
-                        <span>Search PainPad</span>
-                        <div className="div-search">
-                            <div className={(!searchMessage ? 'user-input search' : 'user-input search error')}>
-                                <i className="fas fa-search"></i>
-                                <input id="input-search"
-                                    name="search"
-                                    value={search}
-                                    onChange={e => hadnleInputChange(e.target.value)}
-                                    type="text" />
-                                <button className={showClear ? 'clear' : 'none'} onClick={handleInputClear}>
-                                    <i className="fas fa-times"></i>
-                                </button>
-                                <span className="helper-txt">{searchMessage}</span>
+                        <Fade>
+                            <span>Search PainPad</span>
+                            <div className="div-search">
+                                <div className={(!searchMessage ? 'user-input search' : 'user-input search error')}>
+                                    <i className="fas fa-search"></i>
+                                    <input id="input-search"
+                                        name="search"
+                                        value={search}
+                                        onChange={e => hadnleInputChange(e.target.value)}
+                                        type="text" />
+                                    <button className={showClear ? 'clear' : 'none'} onClick={handleInputClear}>
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                    <span className="helper-txt">{searchMessage}</span>
+                                </div>
                             </div>
-                        </div>
+                        </Fade>
                     </div>
                 </div>
             </div>
