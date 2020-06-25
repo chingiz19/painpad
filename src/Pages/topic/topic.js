@@ -17,6 +17,7 @@ export default function Topic(props) {
 
     const [topicPosts, setTopicPosts] = useState([]);
     const [subTopicPosts, setSubTopicPosts] = useState([]);
+    const [countryPosts, setCountryPosts] = useState([]);
     const [hasMore, setHasMore] = useState(true);
 
     const [topicName, setTopicName] = useState(null);
@@ -110,6 +111,22 @@ export default function Topic(props) {
         }
     `;
 
+    const GET_COUNTRY_POSTS = gql`
+        query posts ($count: Int!, $topicId: ID!, $countryId: ID!){ 
+            posts(count: $count, topicId: $topicId, countryId: $countryId){
+                ${postQuery}
+            }
+        }
+    `;
+
+    const GET_MORE_COUNTRY_POSTS = gql`
+        query posts ($count: Int!, $topicId: ID!, $countryId: ID!, $lastDate: Float!){ 
+            posts(count: $count, topicId: $topicId, countryId: $countryId, lastDate: $lastDate){
+                ${postQuery}
+            }
+        }
+    `;
+
     useQuery(IS_USER_SIGNED_IN, {
         onCompleted: data => {
             setUserId(data.isLogin.id);
@@ -180,6 +197,24 @@ export default function Topic(props) {
         }
     });
 
+    const [getCountryPosts] = useLazyQuery(GET_COUNTRY_POSTS, {
+        onCompleted: data => {
+            setCountryPosts(data.posts);
+        }
+    });
+
+    const [getMoreCountryPosts] = useLazyQuery(GET_MORE_COUNTRY_POSTS, {
+        onCompleted: data => {
+            let tmpArray = countryPosts.concat(data.posts);
+            if (tmpArray.length === countryPosts.length) {
+                setHasMore(false);
+            } else {
+                setHasMore(true);
+            }
+            setCountryPosts(tmpArray);
+        }
+    });
+
     function getMorePosts() {
         if (selectedData) {
             if (chartType === 'pie') {
@@ -194,7 +229,16 @@ export default function Topic(props) {
                     });
                 }, 400);
             } else if (chartType === 'map') {
-
+                setTimeout(() => {
+                    getMoreCountryPosts({
+                        variables: {
+                            count: 5,
+                            topicId: topicId,
+                            countryId: selectedData && selectedData.data.countryId,
+                            lastDate: countryPosts.length && countryPosts[countryPosts.length - 1].created
+                        }
+                    });
+                }, 400);
             }
         } else {
             setTimeout(() => {
@@ -226,7 +270,13 @@ export default function Topic(props) {
                     }
                 });
             } else if (chartType === 'map') {
-
+                getCountryPosts({
+                    variables: {
+                        count: 10,
+                        topicId: topicId,
+                        countryId: data && data.data.countryId
+                    }
+                });
             }
         }
         setHasMore(true);
@@ -240,6 +290,7 @@ export default function Topic(props) {
     function clearFilter() {
         setDisplayBox('hide');
         setSubTopicPosts([]);
+        setCountryPosts([]);
         setHasMore(true);
         setSelectedData(null);
     };
@@ -294,7 +345,7 @@ export default function Topic(props) {
                     <SectionPost isSignedIn={isSignedIn}
                         clearFilter={clearFilter}
                         selectedData={selectedData}
-                        posts={subTopicPosts.length > 0 ? subTopicPosts : topicPosts}
+                        posts={subTopicPosts.length > 0 ? subTopicPosts : (countryPosts.length > 0 ? countryPosts : topicPosts)}
                         hasMore={hasMore}
                         getMorePosts={getMorePosts} />
                 </div>
