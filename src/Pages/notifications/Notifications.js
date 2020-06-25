@@ -136,7 +136,7 @@ export default function Topic(props) {
                                         next={handleLoadMore}
                                         hasMore={hasMore}
                                         loader={
-                                            ((notifications.length > 2 || false) && <DynamicIcon type='loading' width={80} height={80} />)
+                                            (notifications.length > 2 && <DynamicIcon type='loading' width={80} height={80} />)
                                         }
                                         endMessage={
                                             <div className="end-message">Yay! You have seen it all</div>
@@ -145,19 +145,6 @@ export default function Topic(props) {
                                     </InfiniteScroll>
                                 )
                         )}
-
-
-                    {/* {!isSignedIn || !userId || !userInfo || notifLoading
-                        ? <DynamicIcon type="loading" width="150" height="150" />
-                        : (
-                            notifications.length === 0
-                                ? <div className="empty-notif">
-                                    <DynamicIcon type="noFollow" width="200" height="200" />
-                                    <h2>List is Empty</h2>
-                                    <p>Let's get active and <a href="/">tell</a> the serrounding a problem that can't be solved on your own.</p>
-                                </div>
-                                : <NotificationsList notifs={notifications} />
-                        )} */}
                 </div>
             </div>
         </>

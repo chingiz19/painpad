@@ -9,12 +9,6 @@ export default function ProblemFeed(props) {
 
     if (props.thisPosts.length > 0) {
         listProblems = props.thisPosts
-            .filter(function (problem) {
-                return !props.filter
-                    || (!props.subtopicId && !props.countryId)
-                    || (parseInt(problem.subTopic.id) === props.subtopicId)
-                    || (parseInt(problem.location.countryId) === props.countryId);
-            })
             .map((problem) =>
                 problem && problem.approved
                     ? <Problem key={problem.id}

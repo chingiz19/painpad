@@ -15,10 +15,14 @@ export default function Topic(props) {
     const [userId, setUserId] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
 
+    const [topicPosts, setTopicPosts] = useState([]);
+    const [subTopicPosts, setSubTopicPosts] = useState([]);
+    const [hasMore, setHasMore] = useState(true);
+
     const [topicName, setTopicName] = useState(null);
+    const [chartData, setChartData] = useState(null);
     const [chartType, setChartType] = useState('pie');
     const [selectedData, setSelectedData] = useState(null);
-    const [chartData, setChartData] = useState(null);
     const [displayBox, setDisplayBox] = useState('hide');
 
     const IS_USER_SIGNED_IN = gql`
@@ -59,6 +63,53 @@ export default function Topic(props) {
         }
     `;
 
+    let postQuery = `
+        id, description, 
+        postedBy{
+            id, firstName, lastName, profilePic, industry, occupation
+        },
+        created, industry, 
+        location{
+            countryId, countryName, stateId, stateName, cityId, cityName
+        },
+        subTopic{
+            id, description, topicId, topicName
+        },
+        approved, sameHere, sameHered
+    `;
+
+    const GET_TOPIC_POSTS = gql`
+        query posts ($count: Int!, $topicId: ID!){ 
+            posts(count: $count, topicId: $topicId){
+                ${postQuery}
+            }
+        }
+    `;
+
+    const GET_MORE_TOPIC_POSTS = gql`
+        query posts ($count: Int!, $topicId: ID!, $lastDate: Float!){ 
+            posts(count: $count, topicId: $topicId, lastDate: $lastDate){
+                ${postQuery}
+            }
+        }
+    `;
+
+    const GET_SUBTOPIC_POSTS = gql`
+        query posts ($count: Int!, $topicId: ID!, $subTopicId: ID!){ 
+            posts(count: $count, topicId: $topicId, subTopicId: $subTopicId){
+                ${postQuery}
+            }
+        }
+    `;
+
+    const GET_MORE_SUBTOPIC_POSTS = gql`
+        query posts ($count: Int!, $topicId: ID!, $subTopicId: ID!, $lastDate: Float!){ 
+            posts(count: $count, topicId: $topicId, subTopicId: $subTopicId, lastDate: $lastDate){
+                ${postQuery}
+            }
+        }
+    `;
+
     useQuery(IS_USER_SIGNED_IN, {
         onCompleted: data => {
             setUserId(data.isLogin.id);
@@ -89,6 +140,75 @@ export default function Topic(props) {
         }
     });
 
+    useQuery(GET_TOPIC_POSTS, {
+        variables: {
+            count: 10,
+            topicId: topicId
+        },
+        onCompleted: data => {
+            setTopicPosts(data.posts);
+        }
+    });
+
+    const [getMoreTopicPosts] = useLazyQuery(GET_MORE_TOPIC_POSTS, {
+        onCompleted: data => {
+            let tmpArray = topicPosts.concat(data.posts);
+            if (tmpArray.length === topicPosts.length) {
+                setHasMore(false);
+            } else {
+                setHasMore(true);
+            }
+            setTopicPosts(tmpArray);
+        }
+    });
+
+    const [getSubTopicPosts] = useLazyQuery(GET_SUBTOPIC_POSTS, {
+        onCompleted: data => {
+            setSubTopicPosts(data.posts);
+        }
+    });
+
+    const [getMoreSubTopicPosts] = useLazyQuery(GET_MORE_SUBTOPIC_POSTS, {
+        onCompleted: data => {
+            let tmpArray = subTopicPosts.concat(data.posts);
+            if (tmpArray.length === subTopicPosts.length) {
+                setHasMore(false);
+            } else {
+                setHasMore(true);
+            }
+            setSubTopicPosts(tmpArray);
+        }
+    });
+
+    function getMorePosts() {
+        if (selectedData) {
+            if (chartType === 'pie') {
+                setTimeout(() => {
+                    getMoreSubTopicPosts({
+                        variables: {
+                            count: 5,
+                            topicId: topicId,
+                            subTopicId: selectedData && selectedData.subtopicId,
+                            lastDate: subTopicPosts.length && subTopicPosts[subTopicPosts.length - 1].created
+                        }
+                    });
+                }, 400);
+            } else if (chartType === 'map') {
+
+            }
+        } else {
+            setTimeout(() => {
+                getMoreTopicPosts({
+                    variables: {
+                        count: 5,
+                        topicId: topicId,
+                        lastDate: topicPosts.length && topicPosts[topicPosts.length - 1].created
+                    }
+                });
+            }, 400);
+        }
+    };
+
     function handleChartClick(data) {
         if (selectedData && selectedData.label === data.label) {
             setSelectedData(null);
@@ -96,18 +216,33 @@ export default function Topic(props) {
         } else {
             setSelectedData(data);
             setDisplayBox('show');
+
+            if (chartType === 'pie') {
+                getSubTopicPosts({
+                    variables: {
+                        count: 10,
+                        topicId: topicId,
+                        subTopicId: data && data.subtopicId
+                    }
+                });
+            } else if (chartType === 'map') {
+
+            }
         }
-    }
+        setHasMore(true);
+    };
 
     function selectChartType(data) {
         setChartType(data);
         clearFilter();
-    }
+    };
 
     function clearFilter() {
-        setSelectedData(null);
         setDisplayBox('hide');
-    }
+        setSubTopicPosts([]);
+        setHasMore(true);
+        setSelectedData(null);
+    };
 
     function formatChartData(data) {
         let formatedObj = {};
@@ -133,7 +268,7 @@ export default function Topic(props) {
             };
         });
         setChartData(formatedObj);
-    }
+    };
 
     return (
         <>
@@ -144,23 +279,24 @@ export default function Topic(props) {
                         userId={userId}
                         userInfo={userInfo} />
                 </div>
-                <div className="col-right main-TP">
+                <div id="main-TP" className="col-right main-TP">
                     <div className="main-header">Analytics for <span>{topicName}</span></div>
                     <SectionChart handleChartClick={handleChartClick}
                         selectChartType={selectChartType}
                         chartData={chartData} />
+
                     <ExplainationBox selectedData={selectedData}
                         type={chartType}
                         displayBox={displayBox} />
+
                     <SeperatorLine thisValue="Related posts" />
+
                     <SectionPost isSignedIn={isSignedIn}
-                        selectedData={selectedData}
                         clearFilter={clearFilter}
-                        subtopicId={selectedData && selectedData.subtopicId}
-                        subtopicName={selectedData && selectedData.label}
-                        topicId={topicId}
-                        topicName={topicName}
-                        countryId={selectedData && selectedData.data && selectedData.data.countryId} />
+                        selectedData={selectedData}
+                        posts={subTopicPosts.length > 0 ? subTopicPosts : topicPosts}
+                        hasMore={hasMore}
+                        getMorePosts={getMorePosts} />
                 </div>
             </div>
         </>
