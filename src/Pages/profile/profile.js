@@ -48,21 +48,33 @@ export default function Profile(props) {
         }
     `;
 
+    let postQuery = `
+        id, description, 
+        postedBy{
+            id, firstName, lastName, profilePic, industry, occupation
+        },
+        created, industry, 
+        location{
+            countryId, countryName, stateId, stateName, cityId, cityName
+        },
+        subTopic{
+            id, description, topicId, topicName
+        },
+        approved, sameHere, sameHered
+    `;
+
     const GET_USER_POSTS = gql`
         query posts ($userId: ID!, $count: Int!) { 
             posts(userId: $userId, count: $count) {
-                id, description, 
-                postedBy{
-                    id, firstName, lastName, profilePic, industry, occupation
-                },
-                created, industry, 
-                location{
-                    countryId, countryName, stateId, stateName, cityId, cityName
-                },
-                subTopic{
-                    id, description, topicId, topicName
-                },
-                approved, sameHere, sameHered
+                ${postQuery}
+            }
+        }
+    `;
+
+    const GET_MORE_POSTS = gql`
+        query posts($userId: ID!, $lastDate: Float!, $count: Int!){ 
+            posts(userId: $userId, lastDate: $lastDate, count: $count) {
+                ${postQuery}
             }
         }
     `;
@@ -76,25 +88,6 @@ export default function Profile(props) {
                 }, 
                 created, industry, location
                 }
-        }
-    `;
-
-    const GET_MORE_POSTS = gql`
-        query posts($userId: ID!, $lastDate: Float!, $count: Int!){ 
-            posts(userId: $userId, lastDate: $lastDate, count: $count) {
-                id, description, 
-                postedBy{
-                    id, firstName, lastName, profilePic, industry, occupation
-                },
-                created, industry, 
-                location{
-                    countryId, countryName, stateId, stateName, cityId, cityName
-                },
-                subTopic{
-                    id, description, topicId, topicName
-                },
-                approved, sameHere, sameHered
-            }
         }
     `;
 

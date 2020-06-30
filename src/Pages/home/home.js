@@ -32,21 +32,25 @@ export default function Home(props) {
         }
     `;
 
+    let postQuery = `
+        id, description, 
+        postedBy{
+            id, firstName, lastName, profilePic, industry, occupation
+        },
+        created, industry, 
+        location{
+            countryId, countryName, stateId, stateName, cityId, cityName
+        },
+        subTopic{
+            id, description, topicId, topicName
+        },
+        approved, sameHere, sameHered
+    `;
+
     const GET_POSTS = gql`
         query posts($count: Int!){ 
             posts(count: $count) {
-                id, description, 
-                postedBy{
-                    id, firstName, lastName, profilePic, industry, occupation
-                },
-                created, industry, 
-                location{
-                    countryId, countryName, stateId, stateName, cityId, cityName
-                },
-                subTopic{
-                    id, description, topicId, topicName
-                },
-                approved, sameHere, sameHered
+                ${postQuery}
             }
         }
     `;
@@ -54,18 +58,7 @@ export default function Home(props) {
     const GET_MORE_POSTS = gql`
         query posts($lastDate: Float!, $count: Int!){ 
             posts(lastDate: $lastDate, count: $count) {
-                id, description, 
-                postedBy{
-                    id, firstName, lastName, profilePic, industry, occupation
-                },
-                created, industry, 
-                location{
-                    countryId, countryName, stateId, stateName, cityId, cityName
-                },
-                subTopic{
-                    id, description, topicId, topicName
-                },
-                approved, sameHere, sameHered
+                ${postQuery}
             }
         }
     `;
@@ -144,8 +137,7 @@ export default function Home(props) {
                         endMessage={
                             <div className="end-message">Yay! You have seen it all</div>
                         }>
-                        <ProblemFeed filter={false}
-                            thisPosts={feedPosts}
+                        <ProblemFeed thisPosts={feedPosts}
                             isLogin={isSignedIn}
                             showEmpty={false} />
                     </InfiniteScroll>

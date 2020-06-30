@@ -17,6 +17,7 @@ import * as networkIcon from "../../lottie/network-icon.json";
 import * as peSad from "../../lottie/post-explaination-sad.json";
 import * as peHappy from "../../lottie/post-explaination-happy.json";
 import * as search from "../../lottie/search.json";
+import * as emptySearch from "../../lottie/empty-search.json";
 
 export default function DynamicIcon(props) {
 
@@ -137,6 +138,14 @@ export default function DynamicIcon(props) {
             loop: true,
             autoplay: true,
             animationData: search.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        emptySearch: {
+            loop: true,
+            autoplay: true,
+            animationData: emptySearch.default,
             rendererSettings: {
                 preserveAspectRatio: "xMidYMid slice"
             }

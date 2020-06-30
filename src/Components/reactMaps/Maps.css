@@ -276,11 +276,23 @@ and (orientation : portrait){
         font-size: 15px;
     }
     .problem-hdr .user-short-info{
-        padding-right: 90px;
+        padding-right: 25px;
     }
-    .problem-hdr .user-name-li,
-    .problem-hdr .li-loc{
+    .problem-hdr .ul-loc-date{
+        padding-left: 0;
+        margin-right: 5px;
+    }
+    .problem-hdr .user-name-li{
         font-size: 15px;
+    }
+    .problem-hdr .li-loc{
+        font-size: 12px;
+    }
+    .problem-hdr .user-industry-li{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 170px;
     }
     .problem-footer .sh-txt{
         display: none;

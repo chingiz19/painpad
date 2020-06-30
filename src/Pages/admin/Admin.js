@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { gql } from 'apollo-boost';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import './Admin.css';
 import HeaderAdmin from './components/HeaderAdmin';
-import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
 import Posts from './components/Posts';
 import Analytics from './components/Analytics';
 
 export default function Admin(props) {
     const [selectedComp, setSelectedComp] = useState('post');
     const [isAdmin, setIsAdmin] = useState(false);
+    const [adminAnalytics, setAdminAnalytics] = useState({});
 
     const IS_USER_ADMIN = gql`
         query isAdmin{
@@ -16,13 +17,28 @@ export default function Admin(props) {
         }
     `;
 
+    const GET_ADMIN_ANALYTICS = gql`
+        query adminAnalytics{
+            adminAnalytics{
+                usersCnt, postsCnt, sameHereCnt, pendingPostsCnt
+            }
+        }
+    `;
+
     useQuery(IS_USER_ADMIN, {
         onCompleted: data => {
             if(!data.isAdmin) window.location.href = "/404";
             setIsAdmin(data.isAdmin);
+            getAdminAnalytics({});
         },
         onError: ({ graphQLErrors }) => {
             window.location.href = "/404";
+        }
+    });
+
+    const [getAdminAnalytics] = useLazyQuery(GET_ADMIN_ANALYTICS, {
+        onCompleted: data => {
+            setAdminAnalytics(data.adminAnalytics);
         }
     });
 
@@ -42,7 +58,7 @@ export default function Admin(props) {
                         <Posts />
                     </div>
                     <div className={selectedComp === 'analytics' ? '' : 'none'}>
-                        <Analytics />
+                        <Analytics data={adminAnalytics}/>
                     </div>
                 </div>
             </div>
