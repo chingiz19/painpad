@@ -1,8 +1,9 @@
 import React from 'react';
-import '../../Pages/notifications/Notifications.css';
-import Moment from 'react-moment';
-import DynamicIcon from '../Helpers/DynamicIcon';
 import FadeIn from 'react-fade-in';
+import Moment from 'react-moment';
+import '../Notifications.css';
+import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
+import GoogleAnalytics from '../../../Components/Helpers/GoogleAnalytics';
 
 export default function Notification(props) {
     const obj = props.notif;
@@ -15,9 +16,17 @@ export default function Notification(props) {
         }
     }
 
+    function analytics(){
+        let objGA={
+            category: "Notifications Action",
+            action: `${obj.header} clicked`
+        };
+        GoogleAnalytics('', objGA);
+    }
+
     return (
         <FadeIn>
-            <a className="container-notif" href={obj.action}>
+            <a className="container-notif" href={obj.action} onClick={analytics}>
                 <div className={obj.seen ? 'notif-none' : 'div-unread'}><span></span></div>
                 <div className="header-notif reward" style={{ backgroundColor: obj.type.backgroundColor, borderColor: obj.type.backgroundColor }}>
                     <span className="txt">{obj.header}</span>

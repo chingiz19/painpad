@@ -3,6 +3,7 @@ import './SignInUp.css';
 import Modal from 'react-bootstrap/Modal';
 import ActivateButton from './ActivateButton';
 import SignInUpBody from './SignInUpBody';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function UserSignUpIn(props) {
     const [showModal, setShow] = useState(false);
@@ -13,6 +14,12 @@ export default function UserSignUpIn(props) {
 
     const activateModal = () => {
         setShow(true);
+
+        let objGA={
+            category: "Sign Action",
+            action: "Sign In/Up clicked"
+        };
+        GoogleAnalytics('', objGA);
     }
 
     return (

@@ -8,6 +8,7 @@ import Header from '../../Components/Header/Header';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
 import UserList from '../../Components/Lists/UserFollowList';
 import ProblemFeed from '../../Components/ProblemFeed';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function Search(props) {
     const [search, setSearch] = useState('');
@@ -80,6 +81,8 @@ export default function Search(props) {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
             getUserInfo();
+
+            GoogleAnalytics('/search', {});
         }
     });
 
@@ -170,19 +173,21 @@ export default function Search(props) {
                                     <div className="result-search">
                                         <div className={searchResult && searchResult.users && searchResult.users.length ? 'users' : 'none'}>
                                             <h3>Found users for <span className="searched">'{search}'</span></h3>
-                                            <UserList userList={(searchResult && searchResult.users) || []} />
+                                            <UserList userList={(searchResult && searchResult.users) || []} origin="search"/>
                                         </div>
                                         <div className={searchResult && searchResult.topicPosts && searchResult.topicPosts.length ? 'topic' : 'none'}>
                                             <h3>Found posts are related to <span className="searched">'{search}'</span></h3>
                                             <ProblemFeed thisPosts={(searchResult && searchResult.topicPosts) || []}
                                                 isLogin={isSignedIn}
-                                                showEmpty={false} />
+                                                showEmpty={false} 
+                                                origin="Search Topic"/>
                                         </div>
                                         <div className={searchResult && searchResult.locationPosts && searchResult.locationPosts.length ? 'location' : 'none'}>
                                             <h3>Found posts are related to location <span className="searched">'{search}'</span> (i.e. city or country)</h3>
                                             <ProblemFeed thisPosts={(searchResult && searchResult.locationPosts) || []}
                                                 isLogin={isSignedIn}
-                                                showEmpty={false} />
+                                                showEmpty={false} 
+                                                origin="Search Location"/>
                                         </div>
                                     </div>
                                 )

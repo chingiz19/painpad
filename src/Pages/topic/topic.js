@@ -7,6 +7,7 @@ import SeperatorLine from '../../Components/SeperatorLine';
 import ExplainationBox from './Components/ExplanationBox';
 import SectionPost from './Components/SectionPost';
 import SectionChart from './Components/SectionChart';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function Topic(props) {
     let topicId = parseInt(window.location.href.split("topics/")[1]);
@@ -151,6 +152,8 @@ export default function Topic(props) {
         onCompleted: data => {
             setTopicName(data.topicStats.topicName);
             formatChartData(data.topicStats);
+
+            GoogleAnalytics('/topic/' + data.topicStats.topicName, {});
         },
         onError: ({ graphQLErrors }) => {
             window.location.href = "/404";
@@ -269,6 +272,7 @@ export default function Topic(props) {
                         subTopicId: data && data.subtopicId
                     }
                 });
+                analytics("Topic Page Action", `Pie Chart clicked - ${data.label}`);
             } else if (chartType === 'map') {
                 getCountryPosts({
                     variables: {
@@ -277,6 +281,7 @@ export default function Topic(props) {
                         countryId: data && data.data.countryId
                     }
                 });
+                analytics("Topic Page Action", `Map clicked - ${data.label}`);
             }
         }
         setHasMore(true);
@@ -285,6 +290,8 @@ export default function Topic(props) {
     function selectChartType(data) {
         setChartType(data);
         clearFilter();
+
+        analytics("Topic Page Action", `Select Chart clicked - ${data}`);
     };
 
     function clearFilter() {
@@ -320,6 +327,14 @@ export default function Topic(props) {
         });
         setChartData(formatedObj);
     };
+
+    function analytics(category, action){
+        let objGA={
+            category: category,
+            action: action
+        };
+        GoogleAnalytics('', objGA);
+    }
 
     return (
         <>

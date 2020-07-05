@@ -14,7 +14,8 @@ export default function ProblemFeed(props) {
                     ? <Problem key={problem.id}
                         problemObj={problem}
                         editPosts={props.editPosts}
-                        isLogin={props.isLogin} />
+                        isLogin={props.isLogin} 
+                        origin={props.origin}/>
                     : (
                         props.isAdmin
                             ? <AdminPendingProblem key={problem.id}

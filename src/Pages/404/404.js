@@ -4,6 +4,7 @@ import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import './404.css';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
 import Header from '../../Components/Header/Header';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 
 export default function NotFound(props) {
@@ -45,6 +46,8 @@ export default function NotFound(props) {
             setUserInfo(data.userProfile.user);
         }
     });
+
+    GoogleAnalytics('/404/', {});
 
     return (
         <>

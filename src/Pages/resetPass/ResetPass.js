@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/react-hooks';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
 import Validate from 'validate.js';
 import Loading from '../../Components/Helpers/Loading';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function ResetPass(props) {
     let token = window.location.href.split("resetPass/")[1];
@@ -94,6 +95,8 @@ export default function ResetPass(props) {
         }
 
     };
+
+    GoogleAnalytics('/resetPass/', {});
 
     return (
         <>

@@ -6,6 +6,7 @@ import Loading from '../Components/Helpers/Loading'
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Validate from 'validate.js';
+import GoogleAnalytics from '../Components/Helpers/GoogleAnalytics';
 
 export default function ChangePassword(props) {
     const [showModal, setShow] = useState(false);
@@ -59,10 +60,16 @@ export default function ChangePassword(props) {
         setShow(false);
     }
 
-    const handleYes = () => {
+    const showChangePwd = () => {
         if (props.showEdit) {
             setShow(true);
         }
+
+        let objGA={
+            category: "User Account",
+            action: "Show Change Password clicked"
+        };
+        GoogleAnalytics('', objGA);
     }
 
     const updatePassword = e => {
@@ -100,11 +107,16 @@ export default function ChangePassword(props) {
             });
         }
 
+        let objGA={
+            category: "User Account",
+            action: "Update Password clicked"
+        };
+        GoogleAnalytics('', objGA);
     };
 
     return (
         <>
-            <div onClick={handleYes} className={(props.isMyProfile ? (props.showEdit ? 'CP edit-false' : 'CP edit-true') : 'none')}>
+            <div onClick={showChangePwd} className={(props.isMyProfile ? (props.showEdit ? 'CP edit-false' : 'CP edit-true') : 'none')}>
                 <i className="fas fa-lock"></i>
                 <span>Change password</span>
             </div>
@@ -114,7 +126,6 @@ export default function ChangePassword(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <InputGroup className="CP-body">
-
                         <div className={(!stateObj.passMessage ? 'user-input password' : 'user-input error password')}>
                             <label>Old password</label>
                             <input name="user-email"
@@ -144,7 +155,6 @@ export default function ChangePassword(props) {
                             : <button className="submit-btn" onClick={updatePassword}>Update</button>}
 
                         {errorPostUserPwd && <Loading error={errorPostUserPwd} />}
-
                     </InputGroup>
                 </Modal.Body>
             </Modal>

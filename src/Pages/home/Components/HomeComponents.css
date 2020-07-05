@@ -33,17 +33,21 @@
     color: rgb(101, 119, 134);
 }
 
+.sec-PE .subheader span{
+  width: 60px;
+  color: #007bff;
+  transition: all 0.15s ease-in-out;
+}
+
+.sec-PE .subheader span:hover,
+.post-message span:hover{
+  cursor: pointer;
+  color: inherit;
+}
+
 .sec-PE .subheader a,
 .post-message a{
     transition: all 0.15s ease-in-out;
-}
-
-.sec-PE .subheader a:hover,
-.post-message a:hover{
-    border: none;
-    outline: none;
-    text-decoration: none;
-    color: inherit;
 }
 
 .sec-PE .div-body{
@@ -223,7 +227,6 @@
   display: flex;
   flex-direction: row;
   width: 60%;
-  /* height: 70px; */
   margin: 20px auto 00px auto;
   background-color: rgb(198 , 241, 231);
   color: rgba(50, 50, 50,1);
@@ -235,6 +238,16 @@
   overflow: hidden;
   animation: expandBox 0.35s;
   transition: all 0.15s ease-in-out;
+}
+
+.post-message div span{
+  margin: 0px;
+  color: #007bff;
+  transition: all 0.15s ease-in-out;
+}
+
+.post-message div span:hover{
+  color: inherit;
 }
 
 @keyframes expandBox {

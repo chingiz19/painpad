@@ -8,6 +8,7 @@ import ProblemFeed from '../../Components/ProblemFeed';
 import SeperatorLine from '../../Components/SeperatorLine';
 import WritePost from './Components/WritePost';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function Home(props) {
     const [isSignedIn, setIsSignedIn] = useState(false);
@@ -68,6 +69,8 @@ export default function Home(props) {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
             getUserInfo();
+
+            GoogleAnalytics('/home', {});
         }
     });
 
@@ -139,7 +142,8 @@ export default function Home(props) {
                         }>
                         <ProblemFeed thisPosts={feedPosts}
                             isLogin={isSignedIn}
-                            showEmpty={false} />
+                            showEmpty={false} 
+                            origin="Home"/>
                     </InfiniteScroll>
                 </div>
             </div>

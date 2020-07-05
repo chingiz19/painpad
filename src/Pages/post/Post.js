@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import Problem from '../../Components/reactMaps/Problem';
 import PostRejected from './Components/PostRejected';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function Post(props) {
     const isRejected = new URLSearchParams(props.location.search).get("rejected") && true;
@@ -70,6 +71,8 @@ export default function Post(props) {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
             getUserInfo();
+
+            GoogleAnalytics('/posts/' + postId + (isRejected ? ' - Rejected' : ''), {});
         }
     });
 
@@ -117,7 +120,7 @@ export default function Post(props) {
                                 ?
                                 <PostRejected problemObj={rejectedPost} />
                                 :
-                                <Problem problemObj={post} editPosts={false} isLogin={isSignedIn} />
+                                <Problem problemObj={post} editPosts={false} isLogin={isSignedIn} origin="Post Page"/>
                         }
                     </div>
                 </div>

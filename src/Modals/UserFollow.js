@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import gql from 'graphql-tag';
+import { useLazyQuery } from '@apollo/react-hooks';
 import './UserFollow.css';
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useLazyQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-import UserFollowList from '../Components/Lists/UserFollowList'
-import DynamicIcon from "../Components/Helpers/DynamicIcon"
+import UserFollowList from '../Components/Lists/UserFollowList';
+import DynamicIcon from '../Components/Helpers/DynamicIcon';
+import GoogleAnalytics from '../Components/Helpers/GoogleAnalytics';
 
 export default function FollowList(props) {
     const [showModal, setShow] = useState(false);
@@ -51,6 +52,12 @@ export default function FollowList(props) {
         } else{
             handleShowModal();
         }
+
+        let objGA={
+            category: "User Account",
+            action: "Show Followers List clicked"
+        };
+        GoogleAnalytics('', objGA);
     }
 
     const handleShowFollowing = () => {
@@ -66,6 +73,12 @@ export default function FollowList(props) {
         } else{
             handleShowModal();
         }
+
+        let objGA={
+            category: "User Account",
+            action: "Show Following List clicked"
+        };
+        GoogleAnalytics('', objGA);
     }
 
     function handleShowModal() {
@@ -108,7 +121,7 @@ export default function FollowList(props) {
                                                 <span >Following list empty..</span>
                                             </div>
                                         )
-                                        : <UserFollowList userList={showFollower ? followerList : followingList} />
+                                        : <UserFollowList userList={showFollower ? followerList : followingList} origin="User Stats"/>
                                 )
                         }
                     </InputGroup>

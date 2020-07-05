@@ -3,6 +3,7 @@ import '../Topic.css';
 import ProblemFeed from '../../../Components/ProblemFeed';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
+import GoogleAnalytics from '../../../Components/Helpers/GoogleAnalytics';
 
 
 export default function SectionPost(props) {
@@ -11,6 +12,12 @@ export default function SectionPost(props) {
 
     function handleClearFilter() {
         props.clearFilter();
+
+        let objGA={
+            category: "Topic Page Action",
+            action: "Clear Filter clicked"
+        };
+        GoogleAnalytics('', objGA);
     }
 
     function handleLoadMore() {
@@ -38,7 +45,8 @@ export default function SectionPost(props) {
                 <ProblemFeed isLogin={props.isSignedIn}
                     filter={true}
                     countryId={props.countryId}
-                    thisPosts={posts} />
+                    thisPosts={posts} 
+                    origin="Topic Page"/>
             </InfiniteScroll>
         </div>
     );

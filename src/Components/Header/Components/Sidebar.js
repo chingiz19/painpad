@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
+import GoogleAnalytics from '../../Helpers/GoogleAnalytics';
 
 export default function Sidebar(props) {
     const [showSideBar, setShowSideBar] = useState(false);
@@ -39,14 +40,24 @@ export default function Sidebar(props) {
         } else {
             showSB();
         }
+        analytics("Sidebar-Mob Action", `${showSideBar ? 'Close' : 'Open'} Sidebar clicked`);
         setShowSideBar(!showSideBar);
     }
 
     const [callUserSignOut] = useLazyQuery(USER_SIGN_OUT, {
         onCompleted: data => {
-            window.location.href = "/";
+            analytics('Sidebar-Mob Action', 'Log Out clicked');
+            window.location.href = '/';
         }
     });
+
+    function analytics(category, action){
+        let objGA={
+            category: category,
+            action: action
+        };
+        GoogleAnalytics('', objGA);
+    }
 
     return (
         <>
@@ -66,12 +77,12 @@ export default function Sidebar(props) {
                     </div>
                     <ul className="sb-body">
                         <li>
-                            <a href={'/users/' + props.userId}>
+                            <a href={'/users/' + props.userId} onClick={() => analytics('Sidebar-Mob Action', 'My Profile Link clicked')}>
                                 <i className="fas fa-user"></i><span>My profile</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/about">
+                            <a href="/about" onClick={() => analytics('Sidebar-Mob Action', 'About Page Link clicked')}>
                                 <i className="fas fa-question"></i><span>About PainPad</span>
                             </a>
                         </li>

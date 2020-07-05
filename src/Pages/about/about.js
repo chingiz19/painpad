@@ -10,7 +10,7 @@ import SeperatorLineAbout from './Components/SeperatorLineAbout';
 import OurStory from './Components/OurStory';
 import PeoplesChallenge from './Components/PeoplesChallenge';
 import TheSolution from './Components/TheSolution';
-
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function About(props) {
     const [isSignedIn, setIsSignedIn] = useState(false);
@@ -38,6 +38,8 @@ export default function About(props) {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
             getUserInfo();
+
+            GoogleAnalytics("/about", {});
         }
     });
 

@@ -4,7 +4,6 @@ import features from './WorldCountriesFeatures';
 
 export default function Choropleth(props) {
     const screenX = window.screen.width;
-    console.log("props.data ", props.data);
 
     function handleOnClick(data) {
         props.mapClicked(data);

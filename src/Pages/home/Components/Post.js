@@ -7,6 +7,7 @@ import Locations from '../../../Components/Lists/Locations'
 import Indsutries from '../../../Components/Lists/Industries'
 import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
 import UserSignInUp from '../../../Modals/SignInUp/SignInUp';
+import GoogleAnalytics from '../../../Components/Helpers/GoogleAnalytics';
 
 export default function Post(props) {
     const reportText = useRef(null);
@@ -52,11 +53,12 @@ export default function Post(props) {
             setPostSent(true);
         },
         onError: ({ graphQLErrors }) => {
+            console.log("graphQLErrors ", graphQLErrors);
             setSignModal(true);
         }
     });
 
-    const sendReport = e => {
+    const sendPost = e => {
         if (!props.isLogin) {
             setSignModal(true);
             return;
@@ -87,6 +89,11 @@ export default function Post(props) {
             });
         }
 
+        let objGA={
+            category: "Write Post Action",
+            action: "Send Post clicked"
+        };
+        GoogleAnalytics('', objGA);
     }
 
     function handleInputChange(event) {
@@ -115,6 +122,16 @@ export default function Post(props) {
             });
             element.removeAttribute('data-autoresize');
         });
+    }
+
+    function analytics(){
+        let objGA={
+            category: "Write Post Action",
+            action: "View My Profile clicked"
+        };
+        GoogleAnalytics('', objGA);
+        
+        window.location.href = '/users/' + props.userId;
     }
 
     addAutoResize();
@@ -155,12 +172,12 @@ export default function Post(props) {
 
                     {(loadingNewPost || errorNewPost)
                         ? <DynamicIcon type={loadingNewPost ? 'loading' : 'loadingError'} width='50' height='50' />
-                        : <button className={reportText && reportText.current && reportText.current.value ? 'btn-report' : 'btn-report no-txt'} onClick={sendReport} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
+                        : <button className={reportText && reportText.current && reportText.current.value ? 'btn-report' : 'btn-report no-txt'} onClick={sendPost} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
 
                 </div>
             </div>
             <div className={postSent ? 'post-message' : 'none'}>
-                <span>Yahoo! Now the post is on its way to moderators for review. It won't take long. <a href={'/users/' + props.userId}>See 'My profile'.</a></span>
+                <div>Yahoo! Now the post is on its way to moderators for review. It won't take long. See<span onClick={analytics}> 'My profile'.</span></div>
             </div>
         </>
     );

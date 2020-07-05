@@ -251,15 +251,13 @@
     color: rgb(101, 119, 134);
 }
 
-.div-lottie a{
+.div-lottie span{
+    color: #007bff;
     transition: all 0.15s ease-in-out;
 }
 
-.div-lottie a:hover{
-    border: none;
-    outline: none;
-    text-decoration: none;
-    color: inherit;
+.div-lottie span:hover{
+    cursor: pointer;
     color: rgb(67, 93, 114);
 }
 

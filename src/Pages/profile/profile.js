@@ -4,10 +4,11 @@ import gql from 'graphql-tag';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Header from '../../Components/Header/Header';
-import ProfileUserInfo from '../../Components/ProfileUserInfo';
+import ProfileUserInfo from './Components/ProfileUserInfo';
 import ProblemFeed from '../../Components/ProblemFeed';
 import SeperatorLine from '../../Components/SeperatorLine';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function Profile(props) {
     let profileUserId = parseInt(window.location.href.split("users/")[1]);
@@ -117,6 +118,8 @@ export default function Profile(props) {
                 setSepLineValue(data.userProfile.user.firstName + "'s reports");
                 setPageTitle(data.userProfile.user.firstName + "'s profile");
             }
+
+            GoogleAnalytics('/users/' + profileUserId + (data.userProfile.self ? '- self' : ''), {});
         }
     });
 
@@ -157,6 +160,12 @@ export default function Profile(props) {
 
     const handleEditPosts = () => {
         setEditPosts(!editPosts);
+
+        let obj={
+            category: "User Account",
+            action: `${editPosts ? 'Cancel Edit' : 'Edit'} Posts clicked`
+        };
+        GoogleAnalytics('', obj);
     }
 
     function handleLoadMore() {
@@ -188,7 +197,7 @@ export default function Profile(props) {
                         userId={userId} />
                     <SeperatorLine thisValue={sepLineValue} />
                     <div className="div-posts">
-                        <button className={dataGetPosts && dataGetPosts.posts.length && userInfo && userInfo.self ? 'btn-user-prof posts-edit-btn' : 'none'}
+                        <button className={allUserPosts && allUserPosts.length && userInfo && userInfo.self ? 'btn-user-prof posts-edit-btn' : 'none'}
                             onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
                         <InfiniteScroll
                             scrollableTarget="mp-problem"
@@ -197,7 +206,7 @@ export default function Profile(props) {
                             next={handleLoadMore}
                             hasMore={hasMore}
                             loader={
-                                (allUserPosts.length > 0 && <DynamicIcon type='loading' width={80} height={80} />)
+                                (allUserPosts.length > 4 && <DynamicIcon type='loading' width={80} height={80} />)
                             }
                             endMessage={
                                 (allUserPosts.length > 0 && <div className="end-message">Yay! You have seen it all</div>)
@@ -207,7 +216,8 @@ export default function Profile(props) {
                                 editPosts={editPosts}
                                 firstName={userInfo && userInfo.user.firstName}
                                 isLogin={isSignedIn}
-                                showEmpty={true} />
+                                showEmpty={true} 
+                                origin="Profile"/>
                         </InfiniteScroll>
                     </div>
                 </div>

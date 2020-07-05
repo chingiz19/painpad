@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
+import gql from 'graphql-tag';
+import { useLazyQuery, useMutation} from '@apollo/react-hooks';
 import Validate from 'validate.js';
 import './SignIn.css';
 import './UserInput.css';
 import DynamicIcon from '../Components/Helpers/DynamicIcon';
-import { gql } from 'apollo-boost';
-import { useLazyQuery } from '@apollo/react-hooks';
-import { useMutation } from '@apollo/react-hooks';
+import GoogleAnalytics from '../Components/Helpers/GoogleAnalytics';
 
 export default function SignIn() {
     const email = useRef(null);
@@ -50,6 +50,7 @@ export default function SignIn() {
             setTimeout(() => {
                 window.location.reload();
             }, 2000);
+            analytics("Sign Action", "User Logged In");
         },
         onError: ({ graphQLErrors }) => {
             setMessage({
@@ -89,7 +90,7 @@ export default function SignIn() {
         }
     }
 
-    const submitForgotPass = e => {
+    function submitForgotPass() {
         let check = Validate({
             email: email.current.value
         }, constraints);
@@ -107,8 +108,31 @@ export default function SignIn() {
                     email: email.current.value
                 }
             });
+
+            analytics("Sign Action", "Forgot password clicked");
         }
     };
+
+    function handleOnKeyPress(e){
+        if(e && e.charCode === 13){
+            submitSignIn();
+        } else{
+            setMessage({
+                ...stateObj,
+                emailMessage: null,
+                passMessage: null,
+                BEMessage: null
+            });
+        }
+    }
+
+    function analytics(category, action){
+        let objGA={
+            category: category,
+            action: action
+        };
+        GoogleAnalytics('', objGA);
+    }
 
     return (
         <>
@@ -117,7 +141,8 @@ export default function SignIn() {
                     <label>Email</label>
                     <input name="email"
                         ref={email}
-                        type="text" />
+                        type="text" 
+                        onKeyPress={handleOnKeyPress}/>
                     <span className="helper-txt">{stateObj.emailMessage}</span>
                 </div>
 
@@ -125,7 +150,8 @@ export default function SignIn() {
                     <label>Password</label>
                     <input name="password"
                         ref={password}
-                        type="password" />
+                        type="password" 
+                        onKeyPress={handleOnKeyPress}/>
                     <span className="helper-txt">{stateObj.passMessage}</span>
                 </div>
 
@@ -145,7 +171,7 @@ export default function SignIn() {
                 </div>
 
                 <div className={stateObj.BEMessage ? 'div-error-msg' : 'none'}>
-                    <DynamicIcon type='loadingError' width='50' height='50' />
+                    <DynamicIcon type='loadingError' loop={false} width='50' height='50' />
                     <span>{stateObj.BEMessage}</span>
                 </div>
             </div>

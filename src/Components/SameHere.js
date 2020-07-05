@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import './SameHere.css';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
+import './SameHere.css';
 import UserSignInUp from '../Modals/SignInUp/SignInUp';
+import GoogleAnalytics from '../Components/Helpers/GoogleAnalytics';
 
 export default function SameHere(props) {
     const [sameHered, setSameHered] = useState(props.sameHered);
@@ -25,6 +26,13 @@ export default function SameHere(props) {
             } else{
                 setSameHereCount(sameHereCount + 1);
             }
+            
+            let objGA={
+                category: `${props.origin}, Problem Action`,
+                action: `${sameHered ? "Un-Same-Hered" : "Same-Hered"} Clicked`
+            };
+            GoogleAnalytics('', objGA);
+            
             setSameHered(!sameHered);
         }
     });

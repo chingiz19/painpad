@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import './Notifications.css';
-import Header from '../../Components/Header/Header';
 import gql from 'graphql-tag';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import './Notifications.css';
+import Header from '../../Components/Header/Header';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import NotificationsList from '../../Components/NotificationsList';
+import NotificationsList from './Components/NotificationsList';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function Topic(props) {
     const [notifications, setNotifications] = useState(0);
@@ -61,6 +62,8 @@ export default function Topic(props) {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
             getUserInfo();
+
+            GoogleAnalytics('/notifications', {});
         }
     });
 
@@ -136,7 +139,7 @@ export default function Topic(props) {
                                         next={handleLoadMore}
                                         hasMore={hasMore}
                                         loader={
-                                            (notifications.length > 2 && <DynamicIcon type='loading' width={80} height={80} />)
+                                            (notifications.length > 5 && <DynamicIcon type='loading' width={80} height={80} />)
                                         }
                                         endMessage={
                                             <div className="end-message">Yay! You have seen it all</div>

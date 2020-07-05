@@ -5,6 +5,7 @@ import './HeaderWeb.css';
 import UserSignInUp from '../../Modals/SignInUp/SignInUp';
 import WebTabLink from './Components/WebTabLink';
 import WebTabOnClick from './Components/WebTabOnClick';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 import LogoTransperent from '../../images/logos/logo_transparent.png';
 
@@ -19,14 +20,28 @@ export default function HeaderWeb(props) {
 
     const [callUserSignOut] = useLazyQuery(USER_SIGN_OUT, {
         onCompleted: data => {
+            let objGA={
+                category: "Header-Web Action",
+                action: "Sign out clicked"
+            };
+            GoogleAnalytics('', objGA);
+
             window.location.href = "/";
         }
     });
 
+    function analytics(){
+        let objGA={
+            category: "Header-Web Action",
+            action: "PainPad Logo clicked"
+        };
+        GoogleAnalytics('', objGA);
+    }
+
     return (
         <>
             <div className="web-header">
-                <a href="/" className="a-logo-hdr-web">
+                <a href="/" onClick={analytics} className="a-logo-hdr-web">
                     <img src={LogoTransperent} className="header-logo" alt="Transperent Logo" />
                 </a>
                 <ul className="guest-user-ul" style={{ display: !props.isSignedIn ? '' : 'none' }}>

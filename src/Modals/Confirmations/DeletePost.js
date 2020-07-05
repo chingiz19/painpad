@@ -2,7 +2,8 @@ import React from 'react';
 import './Confirmations.css';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import Loading from '../../Components/Helpers/Loading'
+import Loading from '../../Components/Helpers/Loading';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function DeletePost(props) {
 
@@ -26,6 +27,8 @@ export default function DeletePost(props) {
                 postId: parseInt(props.postId)
             }
         });
+
+        GoogleAnalytics("Problem Action", "Delete Post clicked");
     };
 
     return (
