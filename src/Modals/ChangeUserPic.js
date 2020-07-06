@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import './ChangeUserPic.css';
 import Loading from '../Components/Helpers/Loading'
 import gql from 'graphql-tag';
-import { useLazyQuery } from '@apollo/react-hooks';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Cropper from 'react-easy-crop'
 import getCroppedImg from '../Components/Helpers/CropImage'
 import axios from 'axios';
 import imageCompression from 'browser-image-compression';
+import GoogleAnalytics from '../Components/Helpers/GoogleAnalytics';
 
 export default function ChangePassword(props) {
 
@@ -74,6 +74,12 @@ export default function ChangePassword(props) {
                             profilePic: data.signS3.fileUrl
                         }
                     });
+
+                    let objGA={
+                        category: "User Account",
+                        action: "User Photo updated"
+                    };
+                    GoogleAnalytics('', objGA);
                 })
                 .catch(error => {
                     if (Object.keys(error).length > 0)
@@ -88,6 +94,12 @@ export default function ChangePassword(props) {
 
     const handleYes = () => {
         setShow(true);
+
+        let objGA={
+            category: "User Account",
+            action: "Edit User Photo clicked"
+        };
+        GoogleAnalytics('', objGA);
     }
 
     const handleRemove = () => {
@@ -113,7 +125,6 @@ export default function ChangePassword(props) {
     };
 
     const uploadPhoto = async () => {
-        
         const compressOptions = {
             maxSizeMB: 0.05,
             maxWidthOrHeight: 150,

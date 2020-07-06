@@ -3,10 +3,21 @@ import '../About.css';
 import Tada from 'react-reveal/HeadShake';
 import Fade from 'react-reveal/Fade';
 import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
+import GoogleAnalytics from '../../../Components/Helpers/GoogleAnalytics';
 
 import Arrow from '../../../images/pages/solution_arrows.jpg';
 
 export default function TheSolution() {
+
+    function analytics(){
+        let obj={
+            category: "About Page Action",
+            action: "Tell the serrounding clicked"
+        };
+        GoogleAnalytics('', obj);
+        window.location.href = "/";
+    }
+
     return (
         // TS - TS
         <div className="sec-TS">
@@ -74,7 +85,7 @@ export default function TheSolution() {
                 <div className="div-lottie">
                     <DynamicIcon type="networkIcon" width='200' height='200' />
                     <h2>Share Your 'Pain'</h2>
-                    <p><a href="/">Tell</a> the serrounding a problem that can't be solved on your own.</p>
+                    <p><span onClick={analytics}>Tell</span> the serrounding a problem that can't be solved on your own.</p>
                 </div>
             </Fade>
         </div>

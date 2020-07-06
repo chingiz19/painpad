@@ -1,4 +1,4 @@
-.main-comp .div-mp-problem{
+.comp-profile{
     width: 100%;
     height: 100%;
     overflow-y: auto;
@@ -20,9 +20,74 @@
     margin-top: 0px !important;
 }
 
-.div-mp-problem .end-message{
+.comp-profile .end-message{
     text-align: center;
     padding: 10px 0 15px 0;
     color: #414774;
     font-size: 17px;
+}
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+  
+}
+  
+@media (max-width: 999px){
+    .container-notif{
+        width: 90%;
+    }
+    .col-sm-3{
+        flex: 0 0 25%;
+        max-width: 100%;
+        margin: 10px auto 20px auto;
+    }
+    .col-sm-9{
+        max-width: 100%;
+        margin: 10px auto;
+    }
+    .comp-profile .posts-edit-btn{
+        right: 10px;
+        top: -3px;
+    }
+    .comp-profile .div-posts{
+        padding-top: 25px;
+    }
+    .btn-remove-post{
+        top: -12px;
+        right: -9px;
+    }
+}
+  
+@media (max-width: 680px){
+
+}
+
+
+/* iPad in landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape){ 
+    .comp-profile .posts-edit-btn{
+        right: 4px;
+    }
+}
+
+
+/* iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait){ 
+    .comp-profile .posts-edit-btn{
+        right: 4px;
+    }
+}
+
+
+@media only screen and (max-device-width: 600px) {
+    .comp-profile .posts-edit-btn{
+        right: 4px;
+    }
 }

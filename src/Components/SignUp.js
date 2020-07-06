@@ -7,6 +7,8 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import Locations from './Lists/Locations';
 import Indsutries from './Lists/Industries';
+import GoogleAnalytics from '../Components/Helpers/GoogleAnalytics';
+
 
 export default function SignUp() {
     const firstName = useRef(null);
@@ -70,22 +72,28 @@ export default function SignUp() {
         }
     `;
 
-    const [callUserSignUp, { loading, error, data: userSignUp }] = useMutation(USER_SIGN_UP);
+    const [callUserSignUp, { loading, error, data: userSignUp }] = useMutation(USER_SIGN_UP, {
+        onCompleted: data => {
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
 
-    if (userSignUp) {
-        setTimeout(() => {
-            window.location.reload();
-        }, 2000);
-    }
+            let objGA={
+                category: "Sign Action",
+                action: "User Signed Up"
+            };
+            GoogleAnalytics('', objGA);
+        }
+    });
 
-    const submitInput = e => {
+    function submitInput() {
         let check = Validate({
             firstName: firstName.current.value,
             lastName: lastName.current.value,
             email: email.current.value,
             pass: pass.current.value,
-            city: city.location,
-            industry: industry.industry
+            city: city && city.location,
+            industry: industry && industry.industry
         }, constraints);
 
         setMessage(prevState => {
@@ -112,58 +120,73 @@ export default function SignUp() {
                 }
             });
         }
+    }
 
+    function handleOnKeyPress(e) {
+        if (e && e.charCode === 13) {
+            submitInput();
+        } else {
+            setMessage({
+                ...stateObj,
+                firstNameMessage: null,
+                lastNameMessage: null,
+                emailMessage: null,
+                cityMessage: null,
+                industryMessage: null,
+                passMessage: null,
+                signUpLoading: false,
+                signUpError: false,
+                signUpData: false
+            });
+        }
     }
 
     return (
         <>
             <div className="signup-main">
-
                 <div className="names-div">
                     <div className={(!stateObj.firstNameMessage ? 'user-input names-input' : 'user-input error names-input')}>
                         <label>First Name</label>
                         <input name="firstName"
                             ref={firstName}
-                            type="text" />
+                            type="text" 
+                            onKeyPress={handleOnKeyPress}/>
                         <span className="helper-txt">{stateObj.firstNameMessage}</span>
                     </div>
-
                     <div className={(!stateObj.lastNameMessage ? 'user-input names-input' : 'user-input error names-input')}>
                         <label>Last Name</label>
                         <input name="lastName"
                             ref={lastName}
-                            type="text" />
+                            type="text" 
+                            onKeyPress={handleOnKeyPress}/>
                         <span className="helper-txt">{stateObj.lastNameMessage}</span>
                     </div>
                 </div>
-
                 <div className={(!stateObj.emailMessage ? 'user-input' : 'user-input error')}>
                     <label>Email</label>
                     <input name="lastName"
                         ref={email}
-                        type="email" />
+                        type="email" 
+                        onKeyPress={handleOnKeyPress}/>
                     <span className="helper-txt">{stateObj.emailMessage}</span>
                 </div>
-
                 <Indsutries helperText={stateObj.industryMessage}
                     onChange={handleChangeIndustry}
                     thisClassName="autocomplete" />
-
                 <Locations helperText={stateObj.cityMessage}
                     onChange={handleChangeCity}
                     thisClassName="autocomplete" />
-
                 <div className={(!stateObj.passMessage ? 'user-input' : 'user-input error')}>
                     <label>Password</label>
                     <input name="password"
                         ref={pass}
-                        type="password" />
+                        type="password" 
+                        onKeyPress={handleOnKeyPress}/>
                     <span className="helper-txt">{stateObj.passMessage}</span>
                 </div>
-
                 {(loading || userSignUp || error)
                     ? (userSignUp || error
-                        ? <DynamicIcon type={error ? 'loadingError' : 'loadingDone'} width='90' height='90' />
+                        ? <DynamicIcon type={error ? 'loadingError' : 'loadingDone'} loop={!error} width='90' height='90' />
                         : <DynamicIcon type='loading' width='90' height='90' />)
                     : <button className="submit-btn" onClick={submitInput}>Sign Up</button>}
             </div>

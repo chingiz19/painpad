@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import './Admin.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import HeaderAdmin from './components/HeaderAdmin';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import './Admin.css';
+import HeaderAdmin from './components/HeaderAdmin';
 import Posts from './components/Posts';
 import Analytics from './components/Analytics';
 
 export default function Admin(props) {
     const [selectedComp, setSelectedComp] = useState('post');
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [adminAnalytics, setAdminAnalytics] = useState({});
 
     const IS_USER_ADMIN = gql`
         query isAdmin{
@@ -18,9 +17,28 @@ export default function Admin(props) {
         }
     `;
 
-    const { data: isUserAdmin } = useQuery(IS_USER_ADMIN, {
+    const GET_ADMIN_ANALYTICS = gql`
+        query adminAnalytics{
+            adminAnalytics{
+                usersCnt, postsCnt, sameHereCnt, pendingPostsCnt
+            }
+        }
+    `;
+
+    useQuery(IS_USER_ADMIN, {
+        onCompleted: data => {
+            if(!data.isAdmin) window.location.href = "/404";
+            setIsAdmin(data.isAdmin);
+            getAdminAnalytics({});
+        },
         onError: ({ graphQLErrors }) => {
             window.location.href = "/404";
+        }
+    });
+
+    const [getAdminAnalytics] = useLazyQuery(GET_ADMIN_ANALYTICS, {
+        onCompleted: data => {
+            setAdminAnalytics(data.adminAnalytics);
         }
     });
 
@@ -30,23 +48,20 @@ export default function Admin(props) {
 
     return (
         <>
-            <Container className={isUserAdmin && isUserAdmin.isAdmin ? "view-port" : "none"}>
-                <Container fluid="lg">
-                    <Row>
-                        <Col sm={4} md={3} className="comp-header">
-                            <HeaderAdmin currentPage={props.pageName} selectComp={handleSelectComp}/>
-                        </Col>
-                        <Col sm={8} md={9} className="comp-main">
-                            <div className={selectedComp === 'post' ? '' : 'none'}>
-                                <Posts/>
-                            </div>
-                            <div className={selectedComp === 'analytics' ? '' : 'none'}>
-                                <Analytics/>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container>
+            <div className={isAdmin ? 'div-main' : 'none'}>
+                <div className="col-left">
+                    <HeaderAdmin currentPage={props.pageName}
+                        selectComp={handleSelectComp} />
+                </div>
+                <div className="col-right">
+                    <div className={selectedComp === 'post' ? '' : 'none'}>
+                        <Posts />
+                    </div>
+                    <div className={selectedComp === 'analytics' ? '' : 'none'}>
+                        <Analytics data={adminAnalytics}/>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

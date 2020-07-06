@@ -20,7 +20,7 @@ export default function Occupations(props) {
     function handleInputChange(value, event) {
         callGetOccupations({
             variables: {
-                text: event.target.value,
+                text: event && event.target.value,
                 limit: 5
             }
         });

@@ -29,3 +29,26 @@
     color: inherit;
     color: rgb(67, 93, 114);
 }
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+  
+}
+  
+@media (max-width: 999px){
+    .main-404 p {
+        width: 70%;
+    }
+}
+  
+@media (max-width: 680px){
+    .main-404 p {
+        width: 80%;
+    }
+}
+
+
+@media only screen and (max-device-width: 600px) {
+    
+}

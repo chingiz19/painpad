@@ -1,46 +1,28 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../Topic.css';
 import ProblemFeed from '../../../Components/ProblemFeed';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
+import GoogleAnalytics from '../../../Components/Helpers/GoogleAnalytics';
 
 
 export default function SectionPost(props) {
     let data = props.selectedData;
-
-    const [topicPosts, setTopicPosts] = useState([]);
-
-    const GET_TOPIC_POSTS = gql`
-        query posts ($topicId: ID!){ 
-            posts(topicId: $topicId){
-                id, description, 
-                postedBy{
-                  id, firstName, lastName, profilePic, industry, occupation
-                },
-                created, industry, 
-                location{
-                  countryId, countryName, stateId, stateName, cityId, cityName
-                },
-                subTopic{
-                  id, description, topicId, topicName
-                },
-                approved, sameHere, sameHered
-            }
-        }
-    `;
-
-    useQuery(GET_TOPIC_POSTS, {
-        variables: {
-            topicId: props.topicId
-        },
-        onCompleted: data => {
-            setTopicPosts(data.posts);
-        }
-    });
+    let posts = props.posts;  
 
     function handleClearFilter() {
         props.clearFilter();
+
+        let objGA={
+            category: "Topic Page Action",
+            action: "Clear Filter clicked"
+        };
+        GoogleAnalytics('', objGA);
     }
+
+    function handleLoadMore() {
+        props.getMorePosts();
+    };
 
     return (
         <div className="section-posts">
@@ -48,15 +30,24 @@ export default function SectionPost(props) {
                 <div>Filtered for <span>{(data && data.label) || (data && data.selectedData.label)}</span></div>
                 <button onClick={handleClearFilter} className="btn-clear"><i className="fas fa-times"></i></button>
             </div>
-            <ProblemFeed page={'topic'}
-                isLogin={props.isSignedIn}
-                filter={true}
-                subtopicId={props.subtopicId}
-                subtopicName={props.subtopicName}
-                countryId={props.countryId}
-                topicId={props.topicId}
-                topicName={props.topicName}
-                thisPosts={topicPosts} />
+            <InfiniteScroll
+                scrollableTarget="main-TP"
+                scrollThreshold={1}
+                dataLength={posts.length}
+                next={handleLoadMore}
+                hasMore={props.hasMore}
+                loader={
+                    (posts.length > 2 && <DynamicIcon type='loading' width={80} height={80} />)
+                }
+                endMessage={
+                    <div className="end-message">Yay! You have seen it all</div>
+                }>
+                <ProblemFeed isLogin={props.isSignedIn}
+                    filter={true}
+                    countryId={props.countryId}
+                    thisPosts={posts} 
+                    origin="Topic Page"/>
+            </InfiniteScroll>
         </div>
     );
 }

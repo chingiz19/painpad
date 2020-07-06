@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import './Post.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import HeaderWeb from '../../Components/HeaderWeb'
+import Header from '../../Components/Header/Header';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import Problem from '../../Components/reactMaps/Problem';
 import PostRejected from './Components/PostRejected';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function Post(props) {
     const isRejected = new URLSearchParams(props.location.search).get("rejected") && true;
@@ -17,10 +15,21 @@ export default function Post(props) {
     const [post, setPost] = useState(null);
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [userId, setUserId] = useState(false);
+    const [userInfo, setUserInfo] = useState(null);
 
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
             isLogin {success, id}
+        }
+    `;
+
+    const GET_USER_INFO = gql`
+        query userProfile($userId: ID!) {
+            userProfile(userId: $userId) {
+                self, user{
+                    id, firstName, lastName, profilePic
+                }
+            }
         }
     `;
 
@@ -61,6 +70,18 @@ export default function Post(props) {
         onCompleted: data => {
             setUserId(data.isLogin.id);
             setIsSignedIn(data.isLogin.success);
+            getUserInfo();
+
+            GoogleAnalytics('/posts/' + postId + (isRejected ? ' - Rejected' : ''), {});
+        }
+    });
+
+    const [getUserInfo] = useLazyQuery(GET_USER_INFO, {
+        variables: {
+            userId: parseInt(userId)
+        },
+        onCompleted: data => {
+            setUserInfo(data.userProfile.user);
         }
     });
 
@@ -84,29 +105,26 @@ export default function Post(props) {
 
     return (
         <>
-            <Container className="view-port">
-                <Container fluid="lg">
-                    <Row>
-                        <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName}
-                                isSignedIn={isSignedIn}
-                                userId={userId} />
-                        </Col>
-                        <Col sm={8} md={9} className="main-comp main-post">
-                            <div className="main-header">Post page</div>
-                            <div className="main main-post">
-                                {
-                                    isRejected
-                                        ?
-                                        <PostRejected problemObj={rejectedPost} />
-                                        :
-                                        <Problem problemObj={post} editPosts={false} isLogin={isSignedIn} />
-                                }
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container>
+            <div className="div-main">
+                <div className="col-left">
+                    <Header currentPage={props.pageName}
+                        isSignedIn={isSignedIn}
+                        userId={userId}
+                        userInfo={userInfo} />
+                </div>
+                <div className="col-right main-post">
+                    <div className="main-header">Post page</div>
+                    <div className="main main-post">
+                        {
+                            isRejected
+                                ?
+                                <PostRejected problemObj={rejectedPost} />
+                                :
+                                <Problem problemObj={post} editPosts={false} isLogin={isSignedIn} origin="Post Page"/>
+                        }
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

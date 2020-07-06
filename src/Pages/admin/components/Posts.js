@@ -62,13 +62,11 @@ export default function Posts(props) {
 
             </h2>
 
-
             {adminPostAction
             ? (adminPostAction === 'approve'
                 ? <ApprovePost handleBack={handleBack} post={postAction}/>
                 : <RejectPost handleBack={handleBack} post={postAction}/>)
             : <ProblemFeed thisPosts={allUserPosts} isAdmin={true} handlePostAction={handlePostAction} />}
-            
             
         </div>
     );

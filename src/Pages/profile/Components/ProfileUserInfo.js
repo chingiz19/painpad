@@ -1,20 +1,21 @@
 import React, { useRef, useState } from 'react';
-import './ProfileUserInfo.css';
-import './UserInput.css';
-import Validate from 'validate.js';
-import DynamicIcon from '../Components/Helpers/DynamicIcon';
-import { useMutation } from '@apollo/react-hooks';
-import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import Validate from 'validate.js';
+import './ProfileUserInfo.css';
+import '../../../Components/UserInput.css';
+import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Occupations from './Lists/Occupations';
-import Indsutries from './Lists/Industries';
+import Occupations from '../../../Components/Lists/Occupations';
+import Indsutries from '../../../Components/Lists/Industries';
 import UserStats from './UserStats';
-import Locations from './Lists/Locations';
-import ChangePassword from '../Modals/ChangePassword';
-import ChangeUserPic from '../Modals/ChangeUserPic';
+import Locations from '../../../Components/Lists/Locations';
+import ChangePassword from '../../../Modals/ChangePassword';
+import ChangeUserPic from '../../../Modals/ChangeUserPic';
+import GoogleAnalytics from '../../../Components/Helpers/GoogleAnalytics';
+
 
 export default function ProfileUserInfo(props) {
     let pageUserId = parseInt(window.location.href.split("users/")[1]);
@@ -92,15 +93,14 @@ export default function ProfileUserInfo(props) {
         }
     });
 
-    const [callPostUserInfo, { data: dataPostUserInfo, loading: loadingPostUserInfo, error: errorPostUserInfo }] = useMutation(POST_USER_INFO);
+    const [callPostUserInfo, { data: dataPostUserInfo, loading: loadingPostUserInfo, error: errorPostUserInfo }] = useMutation(POST_USER_INFO, {
+        onCompleted: data => {
+            reloadApp(2000);
+        }
+    });
 
     let userInfoBE = dataGetUserInfo ? dataGetUserInfo.userProfile.user : {};
     let isMyProfile = dataGetUserInfo ? dataGetUserInfo.userProfile.self : false;
-
-
-    if (dataPostUserInfo) {
-        reloadApp(2000);
-    }
 
     function reloadApp(newValue) {
         setTimeout(() => {
@@ -125,10 +125,15 @@ export default function ProfileUserInfo(props) {
             reloadApp(0);
         }
         setEditInfo(!editInfo);
+        
+        let objGA={
+            category: "User Account",
+            action: "Info Edit clicked"
+        };
+        GoogleAnalytics('', objGA);
     }
 
     const updateUserInfo = e => {
-
         let check = Validate({
             firstName: (firstName.current.value || firstName.current.value === '') ? firstName.current.value : userInfoBE.firstName,
             lastName: (lastName.current.value || lastName.current.value === '') ? lastName.current.value : userInfoBE.lastName,
@@ -163,6 +168,11 @@ export default function ProfileUserInfo(props) {
             });
         }
 
+        let objGA={
+            category: "User Account",
+            action: "Info Update clicked"
+        };
+        GoogleAnalytics('', objGA);
     };
 
     return (

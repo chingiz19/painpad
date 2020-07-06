@@ -9,8 +9,8 @@ export default function ActivateButton(props) {
     return (
         <div onClick={activateModal} className={props.withButton ? 'wh-li-div' : 'none'}>
             <span className="wh-li-div-span">
-                <div className="wh-li-div-span-div">
-                    <i className="fas fa-user-plus"></i>{props.name}
+                <div className="wh-li-div-span-div sign">
+                    <i className="fas fa-user-plus"></i><span>{props.text}</span>
                 </div>
             </span>
         </div>

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import './UserStats.css';
-import { useQuery } from '@apollo/react-hooks';
-import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import UserFollow from '../Modals/UserFollow';
-import UserSignInUp from '../Modals/SignInUp/SignInUp';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import UserSignInUp from '../../../Modals/SignInUp/SignInUp';
+import UserFollow from '../../../Modals/UserFollow';
 
 export default function UserStats(props) {
     let pageUserId = parseInt(props.pageUserId);

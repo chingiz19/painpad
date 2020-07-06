@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import './ConfirmationModal.css';
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
-import DeletePost from './Confirmations/DeletePost'
+import DeletePost from './Confirmations/DeletePost';
+import GoogleAnalytics from '../Components/Helpers/GoogleAnalytics';
 
 export default function ConfirmationModal(props) {
     const [showModal, setShow] = useState(false);
 
     const handleYes = () => {
         setShow(true);
+
+        let objGA={
+            category: "Problem Action",
+            action: "Show Delete Post Modal clicked"
+        };
+        GoogleAnalytics('', objGA);
     }
 
     const handleClose = () => {

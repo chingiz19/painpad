@@ -11,6 +11,7 @@ import Topic from './Pages/topic/Topic';
 import ResetPass from './Pages/resetPass/ResetPass';
 import NotFound from './Pages/404/404';
 import Post from './Pages/post/Post';
+import Search from './Pages/search/Search';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from "apollo-client";
 import { WebSocketLink } from 'apollo-link-ws';
@@ -61,6 +62,7 @@ export default function App() {
         <Switch>
           <Route exact path="/about" render={(props) => <About {...props} pageName="About" />} />
           <Route exact path="/notifications" render={(props) => <Notifications {...props} pageName="Notifications" />} />
+          <Route exact path="/search" render={(props) => <Search {...props} pageName="Search" />} />
           <Route exact path="/admin" render={(props) => <Admin {...props} pageName="Admin" />} />
           <Route path="/topics/:topic" render={(props) => <Topic {...props} pageName="Topic" />} />
           <Route path="/users/:userId" render={(props) => <Profile {...props} pageName="Profile" />} />

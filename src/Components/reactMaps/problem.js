@@ -4,8 +4,19 @@ import Moment from 'react-moment';
 import UserShortInfo from './UserShortInfo';
 import SameHere from '../SameHere';
 import ConfirmationModal from '../../Modals/ConfirmationModal';
+import GoogleAnalytics from '../Helpers/GoogleAnalytics';
 
 export default function Problem(props) {
+
+    function analytics(){
+        let objGA={
+            category: `${props.origin}, Problem Action`,
+            action: "Topic Page Link clicked",
+            label: props.problemObj.subTopic.topicName
+        };
+        GoogleAnalytics('', objGA);
+    }
+    
     return (
         <>
             {
@@ -19,7 +30,8 @@ export default function Problem(props) {
                                 type="deletePost" />
                             <div className="problem-hdr">
                                 <UserShortInfo key={props.problemObj.postedBy.id}
-                                    userInfo={props.problemObj.postedBy} />
+                                    userInfo={props.problemObj.postedBy} 
+                                    origin={props.origin + ", Problem"}/>
                                 <ul className="ul-loc-date">
                                     <li className="li-loc">{props.problemObj.location.cityName + ', ' + props.problemObj.location.countryName}</li>
                                     <li className="li-date"><Moment date={props.problemObj.created} format="D MMM" withTitle /></li>
@@ -32,9 +44,11 @@ export default function Problem(props) {
                                 <SameHere count={props.problemObj.sameHere}
                                     probelmId={props.problemObj.id}
                                     sameHered={props.problemObj.sameHered}
-                                    isLogin={props.isLogin} />
+                                    isLogin={props.isLogin} 
+                                    origin={props.origin}/>
                                 <a className="problem-topic"
-                                    href={'/topics/' + props.problemObj.subTopic.topicId}>
+                                    href={'/topics/' + props.problemObj.subTopic.topicId}
+                                    onClick={analytics}>
                                     related to <span>{props.problemObj.subTopic.topicName}</span></a>
                             </div>
                         </div>

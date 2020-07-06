@@ -223,3 +223,93 @@
     background-color: rgb(230, 123, 123);
     color: rgba(95, 16, 16, 0.9);
 }
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+ 
+  }
+  
+@media (max-width: 999px){
+
+  }
+  
+@media (max-width: 680px){
+  /* Problem */
+    .problem-div{
+      width: 480px;
+    }
+  
+}
+
+
+/* iPad in landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape){ 
+    .problem-div{
+        margin: 20px auto;
+    }
+}
+
+
+/* iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait){ 
+    .problem-div{
+        margin: 20px auto;
+    }
+}
+
+
+@media only screen and (max-device-width: 600px) {
+    .problem-div{
+        width: 98%;
+        margin: 20px auto;
+    }
+
+    /* A Problem section */
+    .problem-body{
+        font-size: 15px;
+    }
+    .problem-hdr .user-short-info{
+        padding-right: 25px;
+    }
+    .problem-hdr .ul-loc-date{
+        padding-left: 0;
+        margin-right: 5px;
+    }
+    .problem-hdr .user-name-li{
+        font-size: 15px;
+    }
+    .problem-hdr .li-loc{
+        font-size: 12px;
+    }
+    .problem-hdr .user-industry-li{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 170px;
+    }
+    .problem-footer .sh-txt{
+        display: none;
+    }
+    .div-cnt {
+        font-size: 14px;
+    }
+    .problem-footer .samehere{
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+    .problem-topic{
+        padding: 3px 5px;
+        font-size: 12px;
+    }
+    .problem-topic span{
+        font-size: 14px;
+    }
+    
+}

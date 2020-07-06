@@ -1,23 +1,21 @@
-.main-comp.about{
-    padding-bottom: 30px !important;
+.col-right{
     letter-spacing: 0.015em;
-    overflow-y: scroll;
 }
 
-.about .main-header{
+.col-right .main-header{
     margin-bottom: 20px;
     color: #3f4257;
 }
 
-.main-comp.about .sec-EA, 
-.main-comp.about .sec-OS,
-.main-comp.about .sec-PC,
-.main-comp.about .sec-TS {
+.col-right .sec-EA, 
+.col-right .sec-OS,
+.col-right .sec-PC,
+.col-right .sec-TS {
     padding: 5px 3%;
 }
 
 /* Header */
-.about .div-header {
+.col-right .div-header {
     position: relative;
     top: 0;
     width: 100%;
@@ -26,7 +24,7 @@
     text-align: center;
 }
 
-.about .div-header img {
+.col-right .div-header img {
     height: 100%;
 }
 
@@ -175,7 +173,8 @@
 .ul-pp li i,
 .ul-e li i{
     font-size: 27px;
-    color: #3f4257;
+    color: #3f4257; 
+    color: rgb(103, 122, 138);
 }
 
 .ul-pp .li-1 i{
@@ -252,14 +251,121 @@
     color: rgb(101, 119, 134);
 }
 
-.div-lottie a{
+.div-lottie span{
+    color: #007bff;
     transition: all 0.15s ease-in-out;
 }
 
-.div-lottie a:hover{
-    border: none;
-    outline: none;
-    text-decoration: none;
-    color: inherit;
+.div-lottie span:hover{
+    cursor: pointer;
     color: rgb(67, 93, 114);
+}
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+  
+}
+  
+@media (max-width: 999px){
+    .sec-EA .PG{
+        flex-direction: column;
+    }
+    .sec-EA .KS{
+        flex-direction: column-reverse;
+        margin-bottom: 10px;
+    }
+    .div-entrepreneur img{
+        margin-bottom: 10px;
+    }
+
+    .div-ASL{
+        margin-bottom: 20px;
+    }
+
+    .sec-PC .hacker-news{
+        display: none;
+    }
+
+    .sec-TS .ul-pp, 
+    .sec-TS .ul-e{
+        width: 90%;
+    }
+    .ul-pp .li-1 div{
+        line-height: 1.3em;
+    }
+    .ul-pp li i, 
+    .ul-e li i{
+        font-size: 30px;
+    }
+    .ul-pp .li-1 i{
+        padding-top: 5px;
+        padding-left: 7px;
+    }
+    .ul-pp .li-2 i{
+        padding-top: 3px;
+    }
+    .ul-e .li-1 i{
+        padding-top: 3px;
+    }
+    .ul-e .li-2 div{
+        line-height: 1.5em;
+    }
+
+    .div-lottie p{
+        width: 80%;
+    }
+}
+  
+@media (max-width: 680px){
+     
+}
+
+
+@media only screen and (max-device-width: 600px) {
+    .col-right.about{
+        overflow-x: hidden;
+    }
+    .about .main-header{
+        display: none;
+    }
+    .div-entrepreneur p{
+        margin: 2%;
+        text-align: center;
+    }
+    .sec-PC .quora{
+        height: 145px;
+    }
+    .sec-PC .medium{
+        height: 260px;
+    }
+    .sec-PC .reddit{
+        height: 150px; 
+    }
+
+    .sec-TS .ul-pp, 
+    .sec-TS .ul-e{
+        width: 96%;
+    }
+    .ul-pp li i, 
+    .ul-e li i{
+        color: rgb(103, 122, 138);
+    }
+    .ul-pp .li-1 div,
+    .ul-pp .li-2 div,
+    .ul-pp .li-3 div{
+        line-height: 1.4em;
+    }
+    .ul-pp .li-1 i,
+    .ul-pp .li-3 i,
+    .ul-e .li-2 i{
+        padding-top: 7px;
+    }
+    .ul-pp .li-2 i{
+        padding-top: 5px;
+    }
+    .ul-e .li-3 i{
+        padding-top: 4px;
+    }
+
 }

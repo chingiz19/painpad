@@ -1,24 +1,32 @@
 import React from 'react';
-import '../../Pages/notifications/Notifications.css';
-import Moment from 'react-moment';
-import DynamicIcon from '../Helpers/DynamicIcon';
 import FadeIn from 'react-fade-in';
+import Moment from 'react-moment';
+import '../Notifications.css';
+import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
+import GoogleAnalytics from '../../../Components/Helpers/GoogleAnalytics';
 
 export default function Notification(props) {
-    let obj = props.notif;
+    const obj = props.notif;
 
-    if (obj && obj.description.split('<span>').length > 0) {
+    if (!Array.isArray(obj.description)) {
         let tmp = obj.description.split('<span>');
-        obj.description = {
-            'p1': tmp[0],
-            'p2': tmp[1],
-            'p3': tmp[2]
+        obj.description = [];
+        for (let i = 0; i < 3; i++) {
+            obj.description.push(tmp[i])
         }
+    }
+
+    function analytics(){
+        let objGA={
+            category: "Notifications Action",
+            action: `${obj.header} clicked`
+        };
+        GoogleAnalytics('', objGA);
     }
 
     return (
         <FadeIn>
-            <a className="container-notif" href={obj.action}>
+            <a className="container-notif" href={obj.action} onClick={analytics}>
                 <div className={obj.seen ? 'notif-none' : 'div-unread'}><span></span></div>
                 <div className="header-notif reward" style={{ backgroundColor: obj.type.backgroundColor, borderColor: obj.type.backgroundColor }}>
                     <span className="txt">{obj.header}</span>
@@ -33,7 +41,7 @@ export default function Notification(props) {
                     </div>
                     <div className="subbody-notif">
                         <h4>{obj.subheader}</h4>
-                        <h5>{obj.description.p1} <span className="span-reason">{obj.description.p2}</span> {obj.description.p3}</h5>
+                        <h5>{obj.description[0]} <span className="span-reason">{obj.description[1]}</span> {obj.description[2]}</h5>
                         <p>{obj.postText}</p>
                     </div>
                 </div>

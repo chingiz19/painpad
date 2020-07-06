@@ -48,3 +48,13 @@
     background-color: rgb(126, 218, 196);
     color: rgb(30,30,30);
 }
+
+
+@media only screen and (max-device-width: 600px) {
+    .user-stats-div ul{
+        padding: 5px 10px;
+    }
+    .user-stats-div .li-num{
+        font-size: 19px;
+    }
+}

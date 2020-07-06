@@ -4,8 +4,8 @@ import SignUp from '../../Components/SignUp'
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-export default function SignInUpBody() {
-    const [showSignIn, setShowSignIn] = useState(true);
+export default function SignInUpBody(props) {
+    const [showSignIn, setShowSignIn] = useState(props.showSingUp ? false : true);
 
     const handkeSignIn = () => {
         setShowSignIn(true);

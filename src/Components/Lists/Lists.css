@@ -62,3 +62,58 @@
 .topic .combo-box-lists{
     width: 350px;
 }
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+ 
+}
+
+@media (max-width: 999px){
+
+}
+
+@media (max-width: 680px){
+
+}
+
+
+/* iPad in landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape){ 
+    .industry-span,
+    .occupation-span,
+    .location-span,
+    .combo-box .label-list{
+        font-weight: 500;
+    }
+}
+
+
+/* iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait){ 
+    .industry-span,
+    .occupation-span,
+    .location-span,
+    .combo-box .label-list{
+        font-weight: 500;
+    }
+}
+
+
+@media only screen and (max-device-width: 600px) {
+    .sec-wp .form-control{
+        border: 1px solid rgba(210, 210, 210,0.7);
+    }
+    .industry-span,
+    .occupation-span,
+    .location-span,
+    .combo-box .label-list{
+        font-weight: 500;
+    }
+}

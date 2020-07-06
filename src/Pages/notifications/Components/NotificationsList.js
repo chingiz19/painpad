@@ -1,5 +1,5 @@
 import React from 'react';
-import Notification from './reactMaps/Notification';
+import Notification from './Notification';
 
 export default function NotificationsList(props) {
     let listNotifs = [];

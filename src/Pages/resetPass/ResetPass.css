@@ -39,3 +39,53 @@
     background-color: rgb(126, 218, 196);
     color: rgb(30,30,30);
 }
+
+
+/* Page Resize */
+@media (max-width: 1199px){
+  
+}
+  
+@media (max-width: 999px){
+
+}
+  
+@media (max-width: 680px){
+    .reset-pass-main .div-icon span{
+        width: 55%;
+    }
+}
+
+
+/* iPad in landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape){ 
+ 
+}
+
+
+/* iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait){ 
+    .reset-pass-main .div-icon{
+        margin-top: 20px;
+    }
+    .reset-pass-main .div-icon span{
+        width: 95%;
+    }
+}
+
+
+@media only screen and (max-device-width: 600px) {
+    .reset-pass-main .div-icon{
+        margin-top: 20px;
+    }
+    .reset-pass-main .div-icon span{
+        width: 95%;
+    }
+    
+}

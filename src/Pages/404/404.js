@@ -1,15 +1,18 @@
-import React from 'react';
-import './404.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import DynamicIcon from '../../Components/Helpers/DynamicIcon';
-import HeaderWeb from '../../Components/HeaderWeb';
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import './404.css';
+import DynamicIcon from '../../Components/Helpers/DynamicIcon';
+import Header from '../../Components/Header/Header';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 
 export default function NotFound(props) {
+    const screenX = window.screen.width;
+
+    const [isSignedIn, setIsSignedIn] = useState(false);
+    const [userId, setUserId] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
 
     const IS_USER_SIGNED_IN = gql`
         query isLogin{
@@ -17,26 +20,52 @@ export default function NotFound(props) {
         }
     `;
 
-    const { data: isSignedIn } = useQuery(IS_USER_SIGNED_IN);
+    const GET_USER_INFO = gql`
+        query userProfile($userId: ID!) {
+            userProfile(userId: $userId) {
+                self, user{
+                    id, firstName, lastName, profilePic
+                }
+            }
+        }
+    `;
+
+    useQuery(IS_USER_SIGNED_IN, {
+        onCompleted: data => {
+            setUserId(data.isLogin.id);
+            setIsSignedIn(data.isLogin.success);
+            getUserInfo();
+        }
+    });
+
+    const [getUserInfo] = useLazyQuery(GET_USER_INFO, {
+        variables: {
+            userId: parseInt(userId)
+        },
+        onCompleted: data => {
+            setUserInfo(data.userProfile.user);
+        }
+    });
+
+    GoogleAnalytics('/404/', {});
 
     return (
         <>
-            <Container className="view-port">
-                <Container fluid="lg">
-                    <Row>
-                        <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName} isSignedIn={isSignedIn} />
-                        </Col>
-                        <Col sm={8} md={9} className="main-comp">
-                            <div className="main main-404">
-                                <DynamicIcon type="notFound" width="400" height="280" />
-                                <h2>Page Not Found</h2>
-                                <p>Sorry, this page could not be found. You may want to check <a href="/">home page</a>.</p>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container>
+            <div className="div-main">
+                <div className="col-left">
+                    <Header currentPage={props.pageName}
+                        isSignedIn={isSignedIn}
+                        userId={userId} 
+                        userInfo={userInfo}/>
+                </div>
+                <div className="col-right">
+                    <div className="main main-404">
+                        <DynamicIcon type="notFound" width={screenX > 600 ? '400' : '300'} height={screenX > 600 ? '280' : '210'} />
+                        <h2>Page Not Found</h2>
+                        <p>Sorry, this page could not be found. You may want to check <a href="/">home page</a>.</p>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

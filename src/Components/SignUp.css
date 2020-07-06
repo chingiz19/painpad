@@ -16,8 +16,8 @@
     margin-top: 25px;
 }
 
-.names-input{
-    width: 180px !important;
+.names-div .names-input{
+    width: 180px;
     margin: 10px 5px 0 5px !important;
 }
 
@@ -40,4 +40,10 @@
 .signup-main .submit-btn:hover{
     background-color: rgb(126, 218, 196);
     color: rgb(30,30,30);
+}
+
+@media only screen and (max-device-width: 600px) {
+    .names-div .names-input{
+        width: 165px;
+    }
 }

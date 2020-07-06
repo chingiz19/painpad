@@ -30,3 +30,48 @@
     background-color: #e81f6acf;
     color: rgb(253, 253, 253);
 }
+
+
+/* iPad in landscape */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape){ 
+    .btn-remove-post{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: rgb(253, 253, 253);
+        background-color: #e81f6acf;
+    }
+}
+
+
+/* iPad in portrait */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait)
+{ 
+    .btn-remove-post{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: 0px !important;
+        color: rgb(253, 253, 253);
+        background-color: #e81f6acf;
+    }
+}
+
+
+@media only screen and (max-device-width: 600px) {
+    .btn-remove-post{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: 0px !important;
+        font-size: 18px;
+        color: rgb(253, 253, 253);
+        background-color: #e81f6acf;
+    }
+}

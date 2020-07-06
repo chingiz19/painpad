@@ -3,14 +3,12 @@ import './Profile.css';
 import gql from 'graphql-tag';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import HeaderWeb from '../../Components/HeaderWeb';
-import ProfileUserInfo from '../../Components/ProfileUserInfo';
+import Header from '../../Components/Header/Header';
+import ProfileUserInfo from './Components/ProfileUserInfo';
 import ProblemFeed from '../../Components/ProblemFeed';
 import SeperatorLine from '../../Components/SeperatorLine';
 import DynamicIcon from '../../Components/Helpers/DynamicIcon';
+import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
 export default function Profile(props) {
     let profileUserId = parseInt(window.location.href.split("users/")[1]);
@@ -51,21 +49,33 @@ export default function Profile(props) {
         }
     `;
 
+    let postQuery = `
+        id, description, 
+        postedBy{
+            id, firstName, lastName, profilePic, industry, occupation
+        },
+        created, industry, 
+        location{
+            countryId, countryName, stateId, stateName, cityId, cityName
+        },
+        subTopic{
+            id, description, topicId, topicName
+        },
+        approved, sameHere, sameHered
+    `;
+
     const GET_USER_POSTS = gql`
         query posts ($userId: ID!, $count: Int!) { 
             posts(userId: $userId, count: $count) {
-                id, description, 
-                postedBy{
-                    id, firstName, lastName, profilePic, industry, occupation
-                },
-                created, industry, 
-                location{
-                    countryId, countryName, stateId, stateName, cityId, cityName
-                },
-                subTopic{
-                    id, description, topicId, topicName
-                },
-                approved, sameHere, sameHered
+                ${postQuery}
+            }
+        }
+    `;
+
+    const GET_MORE_POSTS = gql`
+        query posts($userId: ID!, $lastDate: Float!, $count: Int!){ 
+            posts(userId: $userId, lastDate: $lastDate, count: $count) {
+                ${postQuery}
             }
         }
     `;
@@ -79,25 +89,6 @@ export default function Profile(props) {
                 }, 
                 created, industry, location
                 }
-        }
-    `;
-
-    const GET_MORE_POSTS = gql`
-        query posts($lastDate: Float!, $count: Int!){ 
-            posts(lastDate: $lastDate, count: $count) {
-                id, description, 
-                postedBy{
-                    id, firstName, lastName, profilePic, industry, occupation
-                },
-                created, industry, 
-                location{
-                    countryId, countryName, stateId, stateName, cityId, cityName
-                },
-                subTopic{
-                    id, description, topicId, topicName
-                },
-                approved, sameHere, sameHered
-            }
         }
     `;
 
@@ -127,6 +118,8 @@ export default function Profile(props) {
                 setSepLineValue(data.userProfile.user.firstName + "'s reports");
                 setPageTitle(data.userProfile.user.firstName + "'s profile");
             }
+
+            GoogleAnalytics('/users/' + profileUserId + (data.userProfile.self ? '- self' : ''), {});
         }
     });
 
@@ -167,14 +160,21 @@ export default function Profile(props) {
 
     const handleEditPosts = () => {
         setEditPosts(!editPosts);
+
+        let obj={
+            category: "User Account",
+            action: `${editPosts ? 'Cancel Edit' : 'Edit'} Posts clicked`
+        };
+        GoogleAnalytics('', obj);
     }
 
     function handleLoadMore() {
         setTimeout(() => {
             getMorePosts({
                 variables: {
+                    userId: profileUserId,
                     count: 5,
-                    lastDate: allUserPosts && allUserPosts[allUserPosts.length - 1].created
+                    lastDate: allUserPosts.length && allUserPosts[allUserPosts.length - 1].created
                 }
             });
         }, 800);
@@ -182,49 +182,46 @@ export default function Profile(props) {
 
     return (
         <>
-            <Container className="view-port ">
-                <Container fluid="lg">
-                    <Row>
-                        <Col sm={4} md={3} className="header-comp">
-                            <HeaderWeb currentPage={props.pageName}
-                                pageTitle={pageTitle}
-                                isSignedIn={isSignedIn}
-                                userId={userId}
-                                isSelf={userInfo && userInfo.self} />
-                        </Col>
-                        <Col sm={8} md={9} className="main-comp comp-profile">
-                            <div id="mp-problem" className="div-mp-problem">
-                                <ProfileUserInfo isSignedIn={isSignedIn}
-                                    userId={userId} />
-                                <SeperatorLine thisValue={sepLineValue} />
-                                <div className="div-posts">
-                                    <button className={dataGetPosts && dataGetPosts.posts.length && userInfo && userInfo.self ? 'btn-user-prof posts-edit-btn' : 'none'}
-                                        onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
-                                    <InfiniteScroll
-                                        scrollableTarget="mp-problem"
-                                        scrollThreshold={1}
-                                        dataLength={allUserPosts.length}
-                                        next={handleLoadMore}
-                                        hasMore={hasMore}
-                                        loader={
-                                            (allUserPosts.length > 0 && <DynamicIcon type='loading' width={80} height={80} />)
-                                        }
-                                        endMessage={
-                                            <div className="end-message">Yay! You have seen it all</div>
-                                        }>
-                                        <ProblemFeed filter={false}
-                                            thisPosts={allUserPosts || []}
-                                            editPosts={editPosts}
-                                            firstName={userInfo && userInfo.user.firstName}
-                                            isLogin={isSignedIn}
-                                            showEmpty={true} />
-                                    </InfiniteScroll>
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </Container>
+
+            <div className="div-main">
+                <div className="col-left">
+                    <Header currentPage={props.pageName}
+                        pageTitle={pageTitle}
+                        isSelf={userInfo && userInfo.self}
+                        isSignedIn={isSignedIn}
+                        userId={userId}
+                        userInfo={userInfo && userInfo.user} />
+                </div>
+                <div id="mp-problem" className="col-right comp-profile">
+                    <ProfileUserInfo isSignedIn={isSignedIn}
+                        userId={userId} />
+                    <SeperatorLine thisValue={sepLineValue} />
+                    <div className="div-posts">
+                        <button className={allUserPosts && allUserPosts.length && userInfo && userInfo.self ? 'btn-user-prof posts-edit-btn' : 'none'}
+                            onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
+                        <InfiniteScroll
+                            scrollableTarget="mp-problem"
+                            scrollThreshold={1}
+                            dataLength={allUserPosts.length}
+                            next={handleLoadMore}
+                            hasMore={hasMore}
+                            loader={
+                                (allUserPosts.length > 4 && <DynamicIcon type='loading' width={80} height={80} />)
+                            }
+                            endMessage={
+                                (allUserPosts.length > 0 && <div className="end-message">Yay! You have seen it all</div>)
+                            }>
+                            <ProblemFeed filter={false}
+                                thisPosts={allUserPosts || []}
+                                editPosts={editPosts}
+                                firstName={userInfo && userInfo.user.firstName}
+                                isLogin={isSignedIn}
+                                showEmpty={true} 
+                                origin="Profile"/>
+                        </InfiniteScroll>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

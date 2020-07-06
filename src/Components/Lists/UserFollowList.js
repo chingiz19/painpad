@@ -6,7 +6,8 @@ export default function UserFollowList(props) {
 
     const listUsers = props.userList.map((user) =>
         <UserShortInfo key={user.id}
-            userInfo={user}/>
+            userInfo={user}
+            origin={props.origin}/>
     );
 
     return (

@@ -3,3 +3,16 @@
     border-right: 1px solid rgba(180,180,180, 0.6);
     padding-right: 0;
 }
+
+.wh-li-div-span-div{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.wh-li-div-span-div i{
+    width: 26px;
+    height: 26px;
+    font-size: 24px;
+    margin-right: 5px;
+}
