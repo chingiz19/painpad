@@ -33,7 +33,7 @@ export default function Post(props) {
         },
         reportText: {
             format: {
-                pattern: "[a-zA-Z0-9.:());,'+-?!# ]+"
+                pattern: /[A-Za-z0-9 '’.,(-):;+-?!#]+/
             }
         }
     };
@@ -145,7 +145,7 @@ export default function Post(props) {
                         maxLength="160"
                         cols="52"
                         rows="2"
-                        placeholder="Share your 'pain'.."
+                        placeholder="Share your ’pain’.."
                         ref={reportText}
                         onChange={handleInputChange}></textarea>
                     <span className={stateObj.reportTextMessage ? 'show-error' : 'hide-error'}>{stateObj.reportTextMessage}</span>
