@@ -33,7 +33,7 @@ export default function Post(props) {
         },
         reportText: {
             format: {
-                pattern: "[a-zA-Z0-9.:());+-?!# ]+"
+                pattern: "[a-zA-Z0-9.:());,'+-?!# ]+"
             }
         }
     };
@@ -75,7 +75,7 @@ export default function Post(props) {
                 ...prevState,
                 industryMessage: check && check.industry ? "Required" : null,
                 cityMessage: check && check.city ? "Required" : null,
-                reportTextMessage: check && check.reportText ? "Ups..Doesn't look like a valid post. Characters can be used (.:;+-?!#)" : null
+                reportTextMessage: check && check.reportText ? "Ups..Doesn't look like a valid post. Characters can be used (.:;,'+-?!#)" : null
             }
         });
 
