@@ -33,7 +33,10 @@ export default function Post(props) {
         },
         reportText: {
             format: {
-                pattern: /[A-Za-z0-9 '’.,(-):;+-?!#]+/
+                pattern: /[A-Za-z0-9 '’.,():;+-?!#]+/
+            },
+            length: {
+                minimum: 20
             }
         }
     };
@@ -53,7 +56,6 @@ export default function Post(props) {
             setPostSent(true);
         },
         onError: ({ graphQLErrors }) => {
-            console.log("graphQLErrors ", graphQLErrors);
             setSignModal(true);
         }
     });
@@ -63,22 +65,24 @@ export default function Post(props) {
             setSignModal(true);
             return;
         }
-
         let check = Validate({
             industry: industry,
             city: city,
             reportText: reportText.current.value
         }, constraints);
-
         setMessage(prevState => {
             return {
                 ...prevState,
                 industryMessage: check && check.industry ? "Required" : null,
                 cityMessage: check && check.city ? "Required" : null,
-                reportTextMessage: check && check.reportText ? "Ups..Doesn't look like a valid post. Characters can be used (.:;,'+-?!#)" : null
+                reportTextMessage: check
+                    ? (
+                        check.reportText[0].includes('minimum')
+                            ? "Hmm..Looks like the post is too short"
+                            : "Ups..Doesn't look like a valid post. Characters can be used (.:;,'+-?!#)")
+                    : null
             }
         });
-
         if (!check) {
             callNewPost({
                 variables: {
@@ -89,7 +93,7 @@ export default function Post(props) {
             });
         }
 
-        let objGA={
+        let objGA = {
             category: "Write Post Action",
             action: "Send Post clicked"
         };
@@ -124,13 +128,13 @@ export default function Post(props) {
         });
     }
 
-    function analytics(){
-        let objGA={
+    function analytics() {
+        let objGA = {
             category: "Write Post Action",
             action: "View My Profile clicked"
         };
         GoogleAnalytics('', objGA);
-        
+
         window.location.href = '/users/' + props.userId;
     }
 
