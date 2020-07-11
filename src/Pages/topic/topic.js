@@ -161,6 +161,7 @@ export default function Topic(props) {
     });
 
     useQuery(GET_TOPIC_POSTS, {
+        fetchPolicy: 'network-only',
         variables: {
             count: 10,
             topicId: topicId
@@ -171,6 +172,7 @@ export default function Topic(props) {
     });
 
     const [getMoreTopicPosts] = useLazyQuery(GET_MORE_TOPIC_POSTS, {
+        fetchPolicy: 'network-only',
         onCompleted: data => {
             let tmpArray = topicPosts.concat(data.posts);
             if (tmpArray.length === topicPosts.length) {
@@ -183,12 +185,14 @@ export default function Topic(props) {
     });
 
     const [getSubTopicPosts] = useLazyQuery(GET_SUBTOPIC_POSTS, {
+        fetchPolicy: 'network-only',
         onCompleted: data => {
             setSubTopicPosts(data.posts);
         }
     });
 
     const [getMoreSubTopicPosts] = useLazyQuery(GET_MORE_SUBTOPIC_POSTS, {
+        fetchPolicy: 'network-only',
         onCompleted: data => {
             let tmpArray = subTopicPosts.concat(data.posts);
             if (tmpArray.length === subTopicPosts.length) {
@@ -201,12 +205,14 @@ export default function Topic(props) {
     });
 
     const [getCountryPosts] = useLazyQuery(GET_COUNTRY_POSTS, {
+        fetchPolicy: 'network-only',
         onCompleted: data => {
             setCountryPosts(data.posts);
         }
     });
 
     const [getMoreCountryPosts] = useLazyQuery(GET_MORE_COUNTRY_POSTS, {
+        fetchPolicy: 'network-only',
         onCompleted: data => {
             let tmpArray = countryPosts.concat(data.posts);
             if (tmpArray.length === countryPosts.length) {
@@ -258,12 +264,11 @@ export default function Topic(props) {
 
     function handleChartClick(data) {
         if (selectedData && selectedData.label === data.label) {
-            setSelectedData(null);
-            setDisplayBox('hide');
+            clearFilter()
         } else {
+            setSubTopicPosts([]);
             setSelectedData(data);
             setDisplayBox('show');
-
             if (chartType === 'pie') {
                 getSubTopicPosts({
                     variables: {
@@ -298,6 +303,7 @@ export default function Topic(props) {
         setDisplayBox('hide');
         setSubTopicPosts([]);
         setCountryPosts([]);
+        setTopicPosts(topicPosts)
         setHasMore(true);
         setSelectedData(null);
     };

@@ -36,8 +36,9 @@ export default function SectionPost(props) {
                 dataLength={posts.length}
                 next={handleLoadMore}
                 hasMore={props.hasMore}
+                key={Math.random()}
                 loader={
-                    (posts.length > 2 && <DynamicIcon type='loading' width={80} height={80} />)
+                    (<DynamicIcon type='loading' width={80} height={80} />)
                 }
                 endMessage={
                     <div className="end-message">Yay! You have seen it all</div>
