@@ -116,8 +116,11 @@
   border: none;
   box-sizing: border-box;
   resize: none;
-  min-height: 58px;
   height: 100%;
+  margin-top: 4px;
+  padding: 8px 15px;
+  background-color: rgba(0,0,0,0.03);
+  border-radius: 10px;
   font-size: 18px;
   transition: all 0.15s ease-in-out;
 }
@@ -325,7 +328,8 @@
         border: 1px solid rgba(210, 210, 210,0.7);
     }
     .wr-textarea{
-        width: 96%;
+        width: 100%;
+        background-color: rgba(0,0,0,0.05);
     }
     .wr-ln-2{
         flex-direction: column;

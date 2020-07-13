@@ -147,9 +147,9 @@ export default function Post(props) {
                     <textarea data-autoresize
                         className="wr-textarea"
                         maxLength="160"
-                        cols="52"
-                        rows="2"
-                        placeholder="Share your ’pain’.."
+                        cols="50"
+                        rows="1"
+                        placeholder='Have a "pain" to share?'
                         ref={reportText}
                         onChange={handleInputChange}></textarea>
                     <span className={stateObj.reportTextMessage ? 'show-error' : 'hide-error'}>{stateObj.reportTextMessage}</span>
@@ -176,7 +176,7 @@ export default function Post(props) {
 
                     {(loadingNewPost || errorNewPost)
                         ? <DynamicIcon type={loadingNewPost ? 'loading' : 'loadingError'} width='50' height='50' />
-                        : <button className={reportText && reportText.current && reportText.current.value ? 'btn-report' : 'btn-report no-txt'} onClick={sendPost} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
+                        : <button className={(reportText && reportText.current && reportText.current.value) || industry || city ? 'btn-report' : 'btn-report no-txt'} onClick={sendPost} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
 
                 </div>
             </div>
