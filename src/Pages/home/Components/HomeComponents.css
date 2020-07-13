@@ -177,7 +177,7 @@
 }
 
 .wr-ln-2{
-  width: 98%;
+  width: 99%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -333,6 +333,7 @@
     }
     .wr-ln-2{
         flex-direction: column;
+        width: 100%;
     }
     .btn-report{
         position: relative;
@@ -348,7 +349,13 @@
     }
 
     /* Dropdown lists */
+    .wr-list-div{
+      justify-content: space-around;
+    }
     .wr-list-div .combo-box-lists{
         width: 160px;
+    }
+    .wr-list-div .combo-industry{
+      margin-right: 0px;
     }
   }

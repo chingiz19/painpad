@@ -85,7 +85,7 @@ export default function TheSolution() {
                 <div className="div-lottie">
                     <DynamicIcon type="networkIcon" width='200' height='200' />
                     <h2>Share Your 'Pain'</h2>
-                    <p><span onClick={analytics}>Tell</span> the serrounding a problem that can't be solved on your own.</p>
+                    <p><span onClick={analytics}>Tell</span> the surrounding a problem that can't be solved on your own.</p>
                 </div>
             </Fade>
         </div>
