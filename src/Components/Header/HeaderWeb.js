@@ -52,7 +52,7 @@ export default function HeaderWeb(props) {
                         currentPage={props.currentPage} />
                     <li className="wh-li">
                         <UserSignInUp withButton={true} 
-                            text="Sign in / Sign up"/>
+                            text="Sign In / Sign Up"/>
                     </li>
                     <WebTabLink link="/about" 
                         linkedPage="About" 

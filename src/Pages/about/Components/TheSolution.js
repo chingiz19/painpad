@@ -23,13 +23,13 @@ export default function TheSolution() {
         <div className="sec-TS">
             <Fade delay={1200}>
                 <Tada count={3} delay={800}>
-                    <h1>PainPad - “Hello World” of a business!</h1>
+                    <h1>PainPad - “Hello World” of a Business!</h1>
                 </Tada>
             </Fade>
             <Fade delay={2000}>
                 <p>
                     In other words, PainPad is a platform where people share <span className="str">daily experiences</span> that
-                    drive them crazy or inject inefficiency or needless complication into their <span className="str">everyday
+                    drive them crazy or inject inefficiency and needless complication into their <span className="str">everyday
                     lives</span> that can’t be solved on their own. Consequently, problems will be exposed to a
                     crowd full of entrepreneurs looking for real problems worth solving!
                 </p>
@@ -41,7 +41,7 @@ export default function TheSolution() {
                 <img src={Arrow} alt='arrow' className="arrow" />
             </Fade>
             <Fade delay={1000}>
-                <h3 className="h3-pp">Problem poster</h3>
+                <h3 className="h3-pp">Problem Poster</h3>
             </Fade>
             <Fade delay={1000} cascade={true}>
                 <ul className="ul-pp">
@@ -55,7 +55,7 @@ export default function TheSolution() {
                     </li>
                     <li className="li-3">
                         <i className="far fa-laugh-beam"></i>
-                        <div>Solution to your problem in a long term</div>
+                        <div>Solution to your problem in the long term</div>
                     </li>
                 </ul>
             </Fade>

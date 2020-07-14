@@ -112,7 +112,7 @@ export default function Profile(props) {
         onCompleted: data => {
             setUserInfo(data.userProfile);
             if (data.userProfile.self) {
-                setSepLineValue('My reports');
+                setSepLineValue('My Reports');
                 setPageTitle('My profile');
             } else {
                 setSepLineValue(data.userProfile.user.firstName + "'s reports");
@@ -193,6 +193,9 @@ export default function Profile(props) {
                         userInfo={userInfo && userInfo.user} />
                 </div>
                 <div id="mp-problem" className="col-right comp-profile">
+
+                <div className="main-header">Profile</div>
+
                     <ProfileUserInfo isSignedIn={isSignedIn}
                         userId={userId} />
                     <SeperatorLine thisValue={sepLineValue} />
@@ -209,7 +212,7 @@ export default function Profile(props) {
                                 (allUserPosts.length > 4 && <DynamicIcon type='loading' width={80} height={80} />)
                             }
                             endMessage={
-                                (allUserPosts.length > 0 && <div className="end-message">Yay! You have seen it all</div>)
+                                (allUserPosts.length > 0 && <div className="end-message">Yay! You've seen it all.</div>)
                             }>
                             <ProblemFeed filter={false}
                                 thisPosts={allUserPosts || []}

@@ -70,7 +70,7 @@ export default function About(props) {
                         <OurStory />
                     </Fade>
                     <Fade>
-                        <SeperatorLineAbout label="Problems are All Over Internet" />
+                        <SeperatorLineAbout label="Problems Are All Over Internet" />
                     </Fade>
                     <PeoplesChallenge />
                     <Fade delay={1000}>

@@ -176,14 +176,14 @@ export default function Search(props) {
                                             <UserList userList={(searchResult && searchResult.users) || []} origin="search"/>
                                         </div>
                                         <div className={searchResult && searchResult.topicPosts && searchResult.topicPosts.length ? 'topic' : 'none'}>
-                                            <h3>Found posts are related to <span className="searched">'{search}'</span></h3>
+                                            <h3>Found posts related to <span className="searched">'{search}'</span></h3>
                                             <ProblemFeed thisPosts={(searchResult && searchResult.topicPosts) || []}
                                                 isLogin={isSignedIn}
                                                 showEmpty={false} 
                                                 origin="Search Topic"/>
                                         </div>
                                         <div className={searchResult && searchResult.locationPosts && searchResult.locationPosts.length ? 'location' : 'none'}>
-                                            <h3>Found posts are related to location <span className="searched">'{search}'</span> (i.e. city or country)</h3>
+                                            <h3>Found posts shared are in <span className="searched">'{search}'</span> (i.e. city or country)</h3>
                                             <ProblemFeed thisPosts={(searchResult && searchResult.locationPosts) || []}
                                                 isLogin={isSignedIn}
                                                 showEmpty={false} 

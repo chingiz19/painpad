@@ -127,7 +127,7 @@ export default function Home(props) {
                 <div id="main-problems" className="col-right problems-div">
                     <WritePost isLogin={isSignedIn}
                         userId={userId}/>
-                    <SeperatorLine thisValue="Reports feed" />
+                    <SeperatorLine thisValue="Reports Feed" />
                     <InfiniteScroll
                         scrollableTarget="main-problems"
                         scrollThreshold={1}
@@ -138,7 +138,7 @@ export default function Home(props) {
                             ((feedPosts.length > 2 || loadingGetPosts) && <DynamicIcon type='loading' width={80} height={80} />)
                         }
                         endMessage={
-                            <div className="end-message">Yay! You have seen it all</div>
+                            <div className="end-message">Yay! You've seen it all.</div>
                         }>
                         <ProblemFeed thisPosts={feedPosts}
                             isLogin={isSignedIn}

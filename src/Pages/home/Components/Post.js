@@ -149,7 +149,7 @@ export default function Post(props) {
                         maxLength="160"
                         cols="50"
                         rows="1"
-                        placeholder='Have a "pain" to share?'
+                        placeholder='Have painful experience to share?'
                         ref={reportText}
                         onChange={handleInputChange}></textarea>
                     <span className={stateObj.reportTextMessage ? 'show-error' : 'hide-error'}>{stateObj.reportTextMessage}</span>

@@ -42,3 +42,10 @@
     padding: 10px 20px;
     border-radius: 8px;
 }
+
+
+@media only screen and (max-device-width: 600px) {
+    .FL-body .user-short-info{
+        width: 80%;
+    }
+}

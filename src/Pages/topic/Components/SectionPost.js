@@ -41,7 +41,7 @@ export default function SectionPost(props) {
                     (<DynamicIcon type='loading' width={80} height={80} />)
                 }
                 endMessage={
-                    <div className="end-message">Yay! You have seen it all</div>
+                    <div className="end-message">Yay! You've seen it all.</div>
                 }>
                 <ProblemFeed isLogin={props.isSignedIn}
                     filter={true}

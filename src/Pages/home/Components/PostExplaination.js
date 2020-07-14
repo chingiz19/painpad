@@ -20,7 +20,7 @@ export default function PostExplaination() {
         // PE - Post Explaination
         <Fade delay={400}>
             <div className="sec-PE">
-                <div className="header">Tell a problem that can't be solved on your own.</div>
+                <div className="header">Share a problem that can't be solved on your own.</div>
                 <div className="subheader">Necessarily a problem, not a suggestion...<span onClick={analytics}>Why?!</span></div>
                 <div className="div-body">
                     <ul className="ul-icon">
@@ -31,7 +31,7 @@ export default function PostExplaination() {
                         <li className="txt">suggestion</li>
                     </ul>
                     <ul className="ul-icon">
-                        <li className="li-body">I have early morning meetings in weekdays, and can't walk my dog during that time.</li>
+                        <li className="li-body">I have early morning meetings during weekdays, and can't walk my dog at that time.</li>
                         <li className="icon happy">
                             <DynamicIcon type="peHappy" width={100} height={20}/>
                         </li>

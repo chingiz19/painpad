@@ -129,7 +129,7 @@ export default function Topic(props) {
                                 ? <div className="empty-notif">
                                     <DynamicIcon type="noFollow" width="200" height="200" />
                                     <h2>List is Empty</h2>
-                                    <p>Let's get active and <a href="/">tell</a> the serrounding a problem that can't be solved on your own.</p>
+                                    <p>Let's get active and <a href="/">tell</a> the surrounding a problem that can't be solved on your own.</p>
                                 </div>
                                 : (
                                     <InfiniteScroll
@@ -142,7 +142,7 @@ export default function Topic(props) {
                                             (notifications.length > 5 && <DynamicIcon type='loading' width={80} height={80} />)
                                         }
                                         endMessage={
-                                            <div className="end-message">Yay! You have seen it all</div>
+                                            <div className="end-message">Yay! You've seen it all.</div>
                                         }>
                                         <NotificationsList notifs={notifications} />
                                     </InfiniteScroll>
