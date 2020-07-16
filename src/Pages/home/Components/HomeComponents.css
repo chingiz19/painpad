@@ -127,6 +127,8 @@
   box-sizing: border-box;
   resize: none;
   height: 100%;
+  width: 99%;
+  margin-left: 0.5%;
   margin-top: 4px;
   padding: 8px 15px;
   background-color: rgba(0,0,0,0.03);
@@ -139,6 +141,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
   transition: all .15s ease-in-out;
 }
 
@@ -338,7 +341,8 @@
         border: 1px solid rgba(210, 210, 210,0.7);
     }
     .wr-textarea{
-        width: 100%;
+        width: 97%;
+        margin-left: 1.5%;
         background-color: rgba(0,0,0,0.05);
     }
     .wr-ln-2{

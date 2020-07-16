@@ -147,7 +147,7 @@ export default function Post(props) {
                     <textarea data-autoresize
                         className="wr-textarea"
                         maxLength="160"
-                        cols="50"
+                        // cols="50"
                         rows="1"
                         placeholder='Have painful experience to share?'
                         ref={reportText}
