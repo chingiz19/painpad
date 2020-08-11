@@ -19,7 +19,6 @@ export default function Topics(props) {
 
     useQuery(GET_TOPIC_LIST, {
         onCompleted: data => {
-            console.log("data: ", data);
             setTopicList(data.topicList);
         }
     });
