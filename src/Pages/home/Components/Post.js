@@ -3,11 +3,12 @@ import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
 import Validate from 'validate.js';
 import './HomeComponents.css';
-import Locations from '../../../Components/Lists/Locations'
-import Indsutries from '../../../Components/Lists/Industries'
+import Locations from '../../../Components/Lists/Locations';
 import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
 import UserSignInUp from '../../../Modals/SignInUp/SignInUp';
 import GoogleAnalytics from '../../../Components/Helpers/GoogleAnalytics';
+
+import Topics from '../../../Components/Lists/Topics';
 
 export default function Post(props) {
     const reportText = useRef(null);
@@ -15,17 +16,17 @@ export default function Post(props) {
     const [showSignModal, setSignModal] = useState(false);
     const [charCount, setCharCount] = useState(160);
     const [postSent, setPostSent] = useState(false);
-    const [industry, setIndustry] = useState(null);
+    const [topic, setTopic] = useState(null);
     const [city, setCity] = useState(null);
 
     const [stateObj, setMessage] = useState({
-        industryMessage: null,
+        topicMessage: null,
         cityMessage: null,
         reportTextMessage: null
     });
 
     const constraints = {
-        industry: {
+        topic: {
             presence: { allowEmpty: false }
         },
         city: {
@@ -42,11 +43,11 @@ export default function Post(props) {
     };
 
     const USER_NEW_POST = gql`
-        mutation post($description: String!, $cityId: ID!, $industryId: ID!){
+        mutation post($description: String!, $cityId: ID!, $topicId: ID!){
             post(
                 description: $description,
                 cityId: $cityId,
-                industryId: $industryId
+                topicId: $topicId
             )
         }
     `;
@@ -66,14 +67,14 @@ export default function Post(props) {
             return;
         }
         let check = Validate({
-            industry: industry,
+            topic: topic,
             city: city,
             reportText: reportText.current.value
         }, constraints);
         setMessage(prevState => {
             return {
                 ...prevState,
-                industryMessage: check && check.industry ? "Required" : null,
+                topicMessage: check && check.topic ? "Required" : null,
                 cityMessage: check && check.city ? "Required" : null,
                 reportTextMessage: check
                     ? (
@@ -88,7 +89,7 @@ export default function Post(props) {
                 variables: {
                     description: reportText.current.value,
                     cityId: parseInt(city.locationId),
-                    industryId: parseInt(industry.industryId)
+                    topicId: parseInt(topic.value)
                 }
             });
         }
@@ -104,8 +105,8 @@ export default function Post(props) {
         setCharCount(160 - event.target.value.length);
     }
 
-    function handleChangeIndustry(newValue) {
-        setIndustry(newValue[0]);
+    function handleChangeTopic(newValue) {
+        setTopic(newValue);
     }
 
     function handleChangeCity(newValue) {
@@ -147,7 +148,6 @@ export default function Post(props) {
                     <textarea data-autoresize
                         className="wr-textarea"
                         maxLength="160"
-                        // cols="50"
                         rows="1"
                         placeholder='Have painful experience to share?'
                         ref={reportText}
@@ -157,11 +157,9 @@ export default function Post(props) {
                 </div>
                 <div className="wr-ln-2">
                     <div className="wr-list-div">
-                        <div className="combo-industry">
-                            <Indsutries helperText={stateObj.industryMessage}
-                                onChange={handleChangeIndustry}
-                                thisClassName="autocomplete"
-                                thisPlaceholder="Industry" />
+                        <div className="combo-topic">
+                            <Topics onChange={handleChangeTopic}
+                                helperText={stateObj.topicMessage}/>
                         </div>
                         <div className="combo-city">
                             <Locations helperText={stateObj.cityMessage}
@@ -176,7 +174,7 @@ export default function Post(props) {
 
                     {(loadingNewPost || errorNewPost)
                         ? <DynamicIcon type={loadingNewPost ? 'loading' : 'loadingError'} width='50' height='50' />
-                        : <button className={(reportText && reportText.current && reportText.current.value) || industry || city ? 'btn-report' : 'btn-report no-txt'} onClick={sendPost} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
+                        : <button className={(reportText && reportText.current && reportText.current.value) || topic || city ? 'btn-report' : 'btn-report no-txt'} onClick={sendPost} disabled={postSent}>{postSent ? 'Posted' : 'Post'}</button>}
 
                 </div>
             </div>

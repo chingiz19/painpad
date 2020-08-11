@@ -18,6 +18,7 @@ export default function Occupations(props) {
     let [callGetOccupations, { data }] = useLazyQuery(GET_OCCUPATIONS);
 
     function handleInputChange(value, event) {
+        if(!(event && event.target.value)) return;
         callGetOccupations({
             variables: {
                 text: event && event.target.value,
@@ -40,6 +41,7 @@ export default function Occupations(props) {
                     id="occupations-list"
                     labelKey="occupation"
                     emptyLabel="No such occupation.."
+                    allowNew
                     className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
                     defaultSelected={props.thisValue ? [props.thisValue] : []}
                     options={(data && data.occupations) || (props.thisValue && [props.thisValue]) || []}
@@ -48,6 +50,7 @@ export default function Occupations(props) {
                     onChange={handleChange}
                     placeholder={props.thisPlaceholder}
                     disabled={props.thisDisabled}
+                    newSelectionPrefix="Add: "
                 />
                 <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
             </div>)

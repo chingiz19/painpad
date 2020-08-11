@@ -177,6 +177,7 @@
 
 .wr-ln-1 .show-error{
   height: 1.5em;
+  padding-left: 10px;
   color: #e70000;
   float: left;
   font-size: 13px;

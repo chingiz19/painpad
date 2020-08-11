@@ -40,7 +40,7 @@ export default function Post(props) {
                 postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
                 },
-                created, industry, 
+                created, 
                 location{
                     countryId, countryName, stateId, stateName, cityId, cityName
                 },
@@ -58,7 +58,7 @@ export default function Post(props) {
                 id, description, postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
                 },
-                created, industry, location, rejected, rejectedBy{
+                created, location, rejected, rejectedBy{
                     id, firstName, lastName, profilePic, industry, occupation
                 },
                 reason, explanation, suggestion

@@ -38,6 +38,7 @@ export default function AdminTopics(props) {
                 <Typeahead
                     id="topics-list"
                     allowNew
+                    defaultSelected = {[props.selected]}
                     className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
                     labelKey="name"
                     options={allTopics}

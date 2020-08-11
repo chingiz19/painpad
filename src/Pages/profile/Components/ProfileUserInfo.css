@@ -123,6 +123,10 @@
     left: 40%;
 }
 
+.info-col .dropdown-item{
+    padding-left: 0.75rem;
+}
+
 
 @media only screen and (max-device-width: 600px) {
     .user-info-container .col-sm-3{

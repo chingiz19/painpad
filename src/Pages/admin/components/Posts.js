@@ -18,8 +18,11 @@ export default function Posts(props) {
                 id, description, 
                 postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
-                }, 
-                created, industry, location
+                },
+                topic{
+                  id, name
+                },
+                created, location
                 }
         }
     `;
@@ -63,11 +66,11 @@ export default function Posts(props) {
             </h2>
 
             {adminPostAction
-            ? (adminPostAction === 'approve'
-                ? <ApprovePost handleBack={handleBack} post={postAction}/>
-                : <RejectPost handleBack={handleBack} post={postAction}/>)
-            : <ProblemFeed thisPosts={allUserPosts} isAdmin={true} handlePostAction={handlePostAction} />}
-            
+                ? (adminPostAction === 'approve'
+                    ? <ApprovePost handleBack={handleBack} post={postAction} />
+                    : <RejectPost handleBack={handleBack} post={postAction} />)
+                : <ProblemFeed thisPosts={allUserPosts} isAdmin={true} handlePostAction={handlePostAction} />}
+
         </div>
     );
 }

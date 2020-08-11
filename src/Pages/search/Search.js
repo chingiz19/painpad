@@ -42,7 +42,7 @@ export default function Search(props) {
         postedBy{
             id, firstName, lastName, profilePic, industry, occupation
         },
-        created, industry, 
+        created, 
         location{
             countryId, countryName, stateId, stateName, cityId, cityName
         },

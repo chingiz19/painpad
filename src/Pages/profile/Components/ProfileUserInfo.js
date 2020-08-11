@@ -22,11 +22,12 @@ export default function ProfileUserInfo(props) {
 
     let firstName = useRef(null);
     let lastName = useRef(null);
-    let occupation = null;
-    let industry = null;
     let location = null;
 
     const [editInfo, setEditInfo] = useState(false);
+
+    const [industry, setIndustry] = useState(null);
+    const [occupation, setOccupation] = useState(null);
 
     const [stateObj, setMessage] = useState({
         firstNameMessage: null,
@@ -87,9 +88,33 @@ export default function ProfileUserInfo(props) {
         }
     `;
 
+    const ADD_INDUSTRY = gql`
+        mutation addIndustry($name: String!){
+            addIndustry(name: $name)
+        }
+    `;
+
+    const ADD_OCCUPATION = gql`
+        mutation addOccupation($name: String!){
+            addOccupation(name: $name)
+        }
+    `;
+
     const { data: dataGetUserInfo, loading: loadingUserInfoBE } = useQuery(GET_USER_INFO, {
         variables: {
             userId: pageUserId
+        }
+    });
+
+    const [callAddIndustry] = useMutation(ADD_INDUSTRY, {
+        onCompleted: data => {
+            setIndustry({industryId: data.addIndustry});
+        }
+    });
+
+    const [callAddOccupation] = useMutation(ADD_OCCUPATION, {
+        onCompleted: data => {
+            setOccupation({occupationId: data.addOccupation});
         }
     });
 
@@ -108,12 +133,32 @@ export default function ProfileUserInfo(props) {
         }, newValue);
     }
 
-    function handleChangeJobTitle(newValue) {
-        occupation = newValue[0];
+    function handleChangeOccupation(newValue) {
+        let tmpObj = newValue[0];
+        if(tmpObj && tmpObj.customOption){
+            callAddOccupation({
+                variables: {
+                    name: tmpObj.occupation
+                }
+            });
+            setOccupation({name: tmpObj.occupation});
+        } else{
+            setOccupation(tmpObj)
+        }
     }
 
     function handleChangeIndustry(newValue) {
-        industry = newValue[0];
+        let tmpObj = newValue[0];
+        if(tmpObj && tmpObj.customOption){
+            callAddIndustry({
+                variables: {
+                    name: tmpObj.industry
+                }
+            });
+            setIndustry({name: tmpObj.industry});
+        } else{
+            setIndustry(tmpObj)
+        }
     }
 
     function handleChangeLocation(newValue) {
@@ -228,7 +273,7 @@ export default function ProfileUserInfo(props) {
                                 thisValue={userInfoBE.occupation}
                                 helperText={stateObj.jobTitleMessage}
                                 thisLoading={loadingUserInfoBE}
-                                onChange={handleChangeJobTitle}
+                                onChange={handleChangeOccupation}
                                 thisClassName="autocomplete" />
 
                             <Locations thisDisabled={!editInfo}

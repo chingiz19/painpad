@@ -17,9 +17,10 @@ export default function Industries(props) {
     let [callGetIndustries, { data }] = useLazyQuery(GET_INDUSTRIES);
 
     function handleInputChange(value, event) {
+        if(!(event && event.target.value)) return;
         callGetIndustries({
             variables: {
-                text: event ? event.target.value : '',
+                text: event && event.target.value,
                 limit: 5
             }
         });
@@ -39,6 +40,7 @@ export default function Industries(props) {
                     id="industries-list"
                     labelKey="industry"
                     emptyLabel="No such industry.."
+                    allowNew
                     className={!props.helperText ? 'combo-box-lists' : 'combo-box-lists error'}
                     defaultSelected={props.thisValue ? [props.thisValue] : []}
                     options={(data && data.industries) || (props.thisValue && [props.thisValue]) || []}
@@ -47,6 +49,7 @@ export default function Industries(props) {
                     onChange={handleChange}
                     placeholder={props.thisPlaceholder}
                     disabled={props.thisDisabled}
+                    newSelectionPrefix="Add: "
                 />
                 <span className={!props.helperText ? 'none' : 'helper-txt-error'}>{props.helperText}</span>
             </div>)

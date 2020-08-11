@@ -54,7 +54,7 @@ export default function Profile(props) {
         postedBy{
             id, firstName, lastName, profilePic, industry, occupation
         },
-        created, industry, 
+        created, 
         location{
             countryId, countryName, stateId, stateName, cityId, cityName
         },
@@ -87,7 +87,7 @@ export default function Profile(props) {
                 postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
                 }, 
-                created, industry, location
+                created, location
                 }
         }
     `;

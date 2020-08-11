@@ -29,7 +29,8 @@ import {
 const cache = new InMemoryCache();
 
 const httpLink = new HttpLink({
-  uri: 'https://api.painpad.co/graphql',
+  // uri: 'https://api.painpad.co/graphql',
+  uri: 'http://localhost:8080/graphql',
   credentials: 'include'
 });
 

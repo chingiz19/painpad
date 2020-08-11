@@ -141,7 +141,8 @@ export default function ApprovePost(props) {
             <div className="body-AP">
                 <PendingProblem problemObj={props.post} hideTag={true} />
                 <AdminTopics getTopic={getTopic}
-                    helperText={stateObj.topicMessage} />
+                    helperText={stateObj.topicMessage} 
+                    selected={props.post.topic}/>
                 <AdminSubtopics list={allSubtopics}
                     getSubtopic={getSubtopic}
                     thisDisabled={!topic}
