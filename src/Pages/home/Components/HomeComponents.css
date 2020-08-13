@@ -342,8 +342,8 @@
         border: 1px solid rgba(210, 210, 210,0.7);
     }
     .wr-textarea{
-        width: 97%;
-        margin-left: 1.5%;
+        width: 100%;
+        margin-left: 0%;
         background-color: rgba(0,0,0,0.05);
     }
     .wr-ln-2{
@@ -367,7 +367,8 @@
     .wr-list-div{
       justify-content: space-around;
     }
-    .wr-list-div .combo-box-lists{
+    .wr-list-div .combo-box-lists,
+    .combo-topic .Dropdown-control{
         width: 160px;
     }
     .wr-list-div .combo-industry{
