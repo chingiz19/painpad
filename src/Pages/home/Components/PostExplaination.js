@@ -2,40 +2,36 @@ import React from 'react';
 import './HomeComponents.css';
 import Fade from 'react-reveal/Fade';
 import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
-import GoogleAnalytics from '../../../Components/Helpers/GoogleAnalytics';
 
 export default function PostExplaination() {
-
-    function analytics(){
-        let objGA={
-            category: "Write Post Action",
-            action: "Post Explaination - Why clicked"
-        };
-        GoogleAnalytics('', objGA);
-        
-        window.location.href = '/about';
-    }
 
     return (
         // PE - Post Explaination
         <Fade delay={400}>
             <div className="sec-PE">
                 <div className="header">Share a problem that can't be solved on your own.</div>
-                <div className="subheader">Necessarily a problem, not a suggestion...<span onClick={analytics}>Why?!</span></div>
+                <div className="subheader">Entrepreneurs are ready to tackle them and we know they can.</div>
                 <div className="div-body">
                     <ul className="ul-icon">
-                        <li className="li-body">It is nice to have someone to walk your dog.</li>
-                        <li className="icon">
-                            <DynamicIcon type="peSad" width={30} height={30}/>
+                        <li className="icon happy">
+                            <DynamicIcon type="solution" width={50} height={50}/>
                         </li>
-                        <li className="txt">suggestion</li>
+                        <li className="li-hdr">Solution to Problem</li>
+                        <li className="li-body">Get a solution to your problem.</li>
                     </ul>
                     <ul className="ul-icon">
-                        <li className="li-body">I have early morning meetings during weekdays, and can't walk my dog at that time.</li>
                         <li className="icon happy">
-                            <DynamicIcon type="peHappy" width={100} height={20}/>
+                            <DynamicIcon type="makeMoney" width={50} height={50}/>
                         </li>
-                        <li className="txt">problem</li>
+                        <li className="li-hdr">Earn Money</li>
+                        <li className="li-body">Potential earnings provided by PainPad for active posts.</li>
+                    </ul>
+                    <ul className="ul-icon">
+                        <li className="icon happy">
+                            <DynamicIcon type="dreamBig" width={50} height={50}/>
+                        </li>
+                        <li className="li-hdr">Dream Big</li>
+                        <li className="li-body">Opportunity to be part of future unicord start-up.</li>
                     </ul>
                 </div>
             </div>

@@ -1,6 +1,5 @@
 .sec-wp{
   padding-bottom: 40px;
-  /* background-color: #e3e8ea; */
   background-color: #f5f8fa;
 }
 
@@ -10,7 +9,6 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 200px;
     letter-spacing: 0.015em;
 }
 
@@ -22,14 +20,15 @@
 }
 
 .sec-PE .header{
-    font-weight: 600;
-    font-size: 22px;
+  font-weight: 600;
+  font-size: 24px;
+  margin: 5px 0 1px 0;
 }
 
 .sec-PE .subheader{
     font-weight: 500;
     font-size: 18px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     color: rgb(101, 119, 134);
 }
 
@@ -53,29 +52,29 @@
 .sec-PE .div-body{
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     width: 100%;
 }
 
 .sec-PE .ul-icon{
     list-style: none;
-    width: 50%;
+    width: 30%;
     margin: 0;
-    padding: 0 10px;
+    padding: 6px 15px;
+    font-size: 16px;
+    background-color: #edf4f9;
+    color: #4b5981de;
+    border-radius: 4px;
 }
 
-.ul-icon .li-body{
-    text-align: center;
-    height: 70px;
-    padding: 10px 10px;
-    font-size: 17px;
-    background-color: #edf4f9;
-    color: rgba(50, 50, 50,1);
-    border-radius: 8px;
+.ul-icon .li-hdr{
+    font-weight: 700;
+    margin-bottom: 1px;
 }
 
 .ul-icon .icon.happy{
-    height: 30px;
-    padding-top: 8px;
+    height: 50px;
+    margin: 3px 0;
 }
 
 .ul-icon .txt{
@@ -329,10 +328,23 @@
   @media only screen and (max-device-width: 600px) {
     /* PE - Post Explaination */
     .sec-PE{
-      height: 110px;
+      height: auto;
     }
     .sec-PE .header{
       width: 96%;
+    }
+    .sec-PE .div-body{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .sec-PE .subheader,
+    .sec-PE .subheader{
+      width: 90%;
+    }
+    .sec-PE .ul-icon{
+      width: 80%;
+      margin: 10px;
     }
     
     /* Write a report */

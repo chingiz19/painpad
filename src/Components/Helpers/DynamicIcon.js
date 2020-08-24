@@ -19,6 +19,10 @@ import * as peHappy from "../../lottie/post-explaination-happy.json";
 import * as search from "../../lottie/search.json";
 import * as emptySearch from "../../lottie/empty-search.json";
 
+import * as solution from "../../lottie/solution.json";
+import * as makeMoney from "../../lottie/make-money.json";
+import * as dreamBig from "../../lottie/dream-big.json";
+
 export default function DynamicIcon(props) {
 
     var iconList = {
@@ -146,6 +150,30 @@ export default function DynamicIcon(props) {
             loop: true,
             autoplay: true,
             animationData: emptySearch.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        solution: {
+            loop: true,
+            autoplay: true,
+            animationData: solution.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        makeMoney: {
+            loop: true,
+            autoplay: true,
+            animationData: makeMoney.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        dreamBig: {
+            loop: true,
+            autoplay: true,
+            animationData: dreamBig.default,
             rendererSettings: {
                 preserveAspectRatio: "xMidYMid slice"
             }
