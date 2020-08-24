@@ -46,10 +46,11 @@ export default function Problem(props) {
                                     sameHered={props.problemObj.sameHered}
                                     isLogin={props.isLogin} 
                                     origin={props.origin}/>
+                                
                                 <a className="problem-topic"
                                     href={'/topics/' + props.problemObj.subTopic.topicId}
                                     onClick={analytics}>
-                                    related to <span>{props.problemObj.subTopic.topicName}</span></a>
+                                    <i className="fas fa-chart-pie"></i> View Analytics</a>
                             </div>
                         </div>
                     )

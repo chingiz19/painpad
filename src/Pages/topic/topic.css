@@ -226,6 +226,7 @@
         font-family: "Comic Sans MS", 'Muli', sans-serif !important;
     }
     .col-right .main-header{
+        display: flex;
         font-size: 20px;
         height: 54px;
     }

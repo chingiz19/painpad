@@ -93,12 +93,9 @@
     color: #3f425765;
 }
 
-.problem-topic span{
+.problem-topic{
     padding: 10px 15px;
     text-transform: capitalize;
-    background-color: rgba(198, 241, 231, 0.2);
-    color: #3f4257;
-    font-weight: 600;
     border-radius: 10px;
     transition: all 0.15s ease-in-out;
 }
@@ -111,8 +108,9 @@
     color: #3f425765;
 }
 
-.problem-topic:hover span{
+.problem-topic:hover{
     background-color: rgba(198, 241, 231, 1);
+    color: #3f4257;
 }
 
 .div-user-short{
@@ -305,11 +303,11 @@ and (orientation : portrait){
         margin-left: 0px;
     }
     .problem-topic{
-        padding: 3px 5px;
-        font-size: 12px;
-    }
-    .problem-topic span{
+        padding: 2px 5px;
         font-size: 14px;
     }
-    
+    .problem-topic:hover{
+        background-color: transparent;
+        color: #3f425765;
+    }
 }
