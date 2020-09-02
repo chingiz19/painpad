@@ -50,8 +50,11 @@ export default function Problem(props) {
                                 <a className="problem-topic"
                                     href={'/topics/' + props.problemObj.subTopic.topicId}
                                     onClick={analytics}>
-                                    <i className="fas fa-chart-pie"></i> View Analytics</a>
+                                    <i className="fas fa-chart-pie"></i> Analytics</a>
                             </div>
+
+                            <a href={'/posts/' + props.problemObj.id} className={props.origin === 'Post Page' ? 'none' : 'btn-solution'}>View Solution</a>
+
                         </div>
                     )
                     : (

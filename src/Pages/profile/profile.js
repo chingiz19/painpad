@@ -215,7 +215,8 @@ export default function Profile(props) {
                                 (allUserPosts.length > 0 && <div className="end-message">Yay! You've seen it all.</div>)
                             }>
                             <ProblemFeed filter={false}
-                                thisPosts={allUserPosts || []}
+                                // thisPosts={allUserPosts || []}
+                                thisPosts={[]}
                                 editPosts={editPosts}
                                 firstName={userInfo && userInfo.user.firstName}
                                 isLogin={isSignedIn}

@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 15px auto;
+    margin: 15px auto 40px auto;
     padding: 10px;
     width: 570px;
     background-color: rgb(255,255,255);
@@ -88,13 +88,9 @@
 }
 
 .problem-topic{
-    padding: 3px 10px;
+    padding: 10px;
     outline: none;
     color: #3f425765;
-}
-
-.problem-topic{
-    padding: 10px 15px;
     text-transform: capitalize;
     border-radius: 10px;
     transition: all 0.15s ease-in-out;
@@ -111,6 +107,26 @@
 .problem-topic:hover{
     background-color: rgba(198, 241, 231, 1);
     color: #3f4257;
+}
+
+.btn-solution{
+    position: absolute;
+    bottom: -31px;
+    right: 8px;
+    background-color: rgb(198 , 241, 231);
+    color: rgb(100,100,100);
+    font-size: 15px;
+    padding: 4px 30px;
+    font-weight: 600;
+    border-top: 1px solid rgba(180, 180, 180,0.7);
+    border-radius: 0 0 10px 10px;
+    transition: all .15s ease-in-out;
+}
+
+.btn-solution:hover{
+    background-color: rgb(126, 218, 196);
+    color: rgb(30,30,30);
+    text-decoration: none;
 }
 
 .div-user-short{
@@ -222,6 +238,90 @@
     color: rgba(95, 16, 16, 0.9);
 }
 
+.solution-div{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15px auto 20px auto;
+    padding: 10px;
+    width: 370px;
+    background-color: rgb(255,255,255);
+    border: 1px solid rgba(180, 180, 180,0.7);
+    border-radius: 6px;
+    letter-spacing: 0.015em;
+}
+
+.solution-div .header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.solution-div .sol-details{
+    display: flex;
+    flex-direction: row;
+}
+
+.sol-details img{
+    width: 40px;
+    height: 40px;
+}
+
+.sol-details .a-name,
+.sol-details .div-name{
+    padding-left: 5px;
+    margin-bottom: 2px;
+}
+
+.sol-details .a-name{
+    display: flex;
+    color: black;
+}
+
+.a-name i{
+    margin-left: 3px;
+}
+
+.sol-details .p-name{
+    margin-bottom: 0px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1em;
+    text-transform: capitalize;
+}
+
+.a-name i{
+    padding-top: 1px;
+    font-size: 12px;
+    color: rgb(130,130,130);
+}
+
+.sol-details .posted-by{
+    padding-left: 5px;
+    font-size: 13px;
+    color: rgb(150,150,150);
+    transition: all 0.15s ease-in-out;
+}
+
+.sol-details .posted-by:hover{
+    text-decoration: none;
+    color: rgb(50,50,50);
+}
+
+.sol-charac{
+    font-size: 14px;
+    line-height: 1em;
+    color: rgb(150,150,150);
+}
+
+.solution-div .body{
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    letter-spacing: 0.015em;
+}
 
 /* Page Resize */
 @media (max-width: 1199px){
