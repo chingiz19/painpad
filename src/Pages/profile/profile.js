@@ -61,7 +61,7 @@ export default function Profile(props) {
         subTopic{
             id, description, topicId, topicName
         },
-        approved, sameHere, sameHered
+        approved, sameHere, sameHered, solutionCnt
     `;
 
     const GET_USER_POSTS = gql`
@@ -215,8 +215,7 @@ export default function Profile(props) {
                                 (allUserPosts.length > 0 && <div className="end-message">Yay! You've seen it all.</div>)
                             }>
                             <ProblemFeed filter={false}
-                                // thisPosts={allUserPosts || []}
-                                thisPosts={[]}
+                                thisPosts={allUserPosts || []}
                                 editPosts={editPosts}
                                 firstName={userInfo && userInfo.user.firstName}
                                 isLogin={isSignedIn}

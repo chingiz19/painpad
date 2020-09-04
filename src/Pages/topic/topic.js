@@ -77,7 +77,7 @@ export default function Topic(props) {
         subTopic{
             id, description, topicId, topicName
         },
-        approved, sameHere, sameHered
+        approved, sameHere, sameHered, solutionCnt
     `;
 
     const GET_TOPIC_POSTS = gql`

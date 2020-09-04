@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Problem from '../../../Components/reactMaps/Problem';
 import NewSolution from '../../../Modals/NewSolution';
 import SolutionFeed from './SolutionFeed';
+import SeperatorLine from '../../../Components/SeperatorLine';
 
 export default function PostSolutions(props) {
     const [solutions, setSolutions] = useState([]);
@@ -33,6 +34,7 @@ export default function PostSolutions(props) {
         <div className="main-PD">
             <Problem problemObj={props.post} editPosts={false} isLogin={props.isSignedIn} origin="Post Page"/>
             <NewSolution post={props.post}/>
+            {solutions.length>0 && <SeperatorLine thisValue="Related Solutions" />}
             <SolutionFeed firstName={props.firstName} post={props.post} solutions={solutions} isLogin={props.isSignedIn}/>
         </div>
     );

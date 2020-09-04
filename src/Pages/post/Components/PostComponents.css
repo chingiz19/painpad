@@ -53,3 +53,7 @@
     display: flex;
     flex-direction: column;
 }
+
+.main-PD .line-seperator{
+    margin: 20px 0 10px 0 !important;
+}

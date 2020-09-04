@@ -120,7 +120,7 @@ export default function Topic(props) {
                         userInfo={userInfo} />
                 </div>
                 <div id="main-notif" className="col-right main-notif">
-                    <div className="main-header">Notifications</div>
+                    <div className="main-header notif">Notifications</div>
 
                     {!isSignedIn || !userId || !userInfo || notifLoading
                         ? <DynamicIcon type="loading" width="150" height="150" />

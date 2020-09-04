@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 15px auto 40px auto;
+    margin: 15px auto 45px auto;
     padding: 10px;
     width: 570px;
     background-color: rgb(255,255,255);
@@ -366,7 +366,7 @@ and (orientation : portrait){
 @media only screen and (max-device-width: 600px) {
     .problem-div{
         width: 98%;
-        margin: 20px auto;
+        margin: 10px auto 35px auto;
     }
 
     /* A Problem section */
@@ -409,5 +409,10 @@ and (orientation : portrait){
     .problem-topic:hover{
         background-color: transparent;
         color: #3f425765;
+    }
+    .btn-solution{
+        font-size: 14px;
+        padding: 3px 25px;
+        bottom: -28px;
     }
 }

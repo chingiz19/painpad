@@ -141,3 +141,32 @@
     width: 60%;
     margin: auto;
 }
+
+@media (max-width: 680px){
+    .main-PD{
+        width: 490px;
+        margin: 0 auto;
+    }
+    .main-PD .btn-ns{
+        margin-right: 5px;
+    }
+}
+
+@media only screen and (max-device-width: 600px) {
+    .main-PD{
+        width: 98%;
+        margin: 0 auto;
+    }
+    .main-PD .btn-ns{
+        margin-right: 5px;
+    }
+    .solution-div{
+        width: 98%;
+    }
+    .SF-body .noSolution{
+        margin-top: 0px;
+    }
+    .SF-body .noSolution p{
+        width: 75%;
+    }
+}

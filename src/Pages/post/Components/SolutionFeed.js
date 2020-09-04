@@ -18,7 +18,7 @@ export default function SolutionFeed(props) {
     return (
         // SF - Solution Feed
         <>
-            <div style={{ padding: (solutionCnt > 0) && '20px 0' }} className="SF-body">
+            <div style={{ paddingBottom: (solutionCnt > 0) && '20px 0' }} className="SF-body">
                 {
                     solutionCnt > 0
                         ? listSolutions

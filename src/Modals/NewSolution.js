@@ -29,18 +29,12 @@ export default function NewSolution(props) {
 
     const [stateObj, setMessage] = useState({
         nameMessage: null,
-        websiteMessage: null,
         descMessage: null
     });
 
     const constraints = {
         name: {
             presence: { allowEmpty: false }
-        },
-        website: {
-            url: {
-                schemes: [".+"]
-            }
         },
         desc: {
             format: {
@@ -121,20 +115,21 @@ export default function NewSolution(props) {
     const addSolution_1 = async () => {
         let check = Validate({
             name: name && name.current.value,
-            website: website && website.current.value,
             desc: desc && desc.current.value
         }, constraints);
+
+        const nameMessage = (check && check.name) ? "Required" : null;
+        const descMessage = !(desc && desc.current.value) ? null : (check && check.desc ? "Ups..Doesn't look like a valid description" : null);
 
         setMessage(prevState => {
             return {
                 ...prevState,
-                nameMessage: check && check.name ? "Required" : null,
-                websiteMessage: !(website && website.current.value) ? null : (check && check.website ? "Ups..Doesn't look like a valid website" : null),
-                descMessage: !(desc && desc.current.value) ? null : (check && check.desc ? "Ups..Doesn't look like a valid description" : null)
+                nameMessage: nameMessage,
+                descMessage: descMessage
             }
         });
 
-        if (!stateObj.nameMessage && !stateObj.websiteMessage && !stateObj.descMessage) {
+        if (!nameMessage && !descMessage) {
             setLoading(true);
             if (imageName && imageType) {
 
@@ -180,7 +175,7 @@ export default function NewSolution(props) {
                 logo: S3_URL,
                 name: name && name.current.value,
                 website: website && website.current.value,
-                desc: desc && desc.current.value
+                description: desc && desc.current.value
             }
         });
     }
