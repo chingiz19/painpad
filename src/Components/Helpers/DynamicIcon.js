@@ -18,6 +18,7 @@ import * as peSad from "../../lottie/post-explaination-sad.json";
 import * as peHappy from "../../lottie/post-explaination-happy.json";
 import * as search from "../../lottie/search.json";
 import * as emptySearch from "../../lottie/empty-search.json";
+import * as noSolution from "../../lottie/no-solution.json";
 
 import * as solution from "../../lottie/solution.json";
 import * as makeMoney from "../../lottie/make-money.json";
@@ -174,6 +175,14 @@ export default function DynamicIcon(props) {
             loop: true,
             autoplay: true,
             animationData: dreamBig.default,
+            rendererSettings: {
+                preserveAspectRatio: "xMidYMid slice"
+            }
+        },
+        noSolution: {
+            loop: true,
+            autoplay: true,
+            animationData: noSolution.default,
             rendererSettings: {
                 preserveAspectRatio: "xMidYMid slice"
             }

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import './Post.css';
 import Header from '../../Components/Header/Header';
 import gql from 'graphql-tag';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
-import Problem from '../../Components/reactMaps/Problem';
+import PostSolutions from './Components/PostSolutions';
 import PostRejected from './Components/PostRejected';
 import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
 
@@ -47,7 +47,7 @@ export default function Post(props) {
                 subTopic{
                     id, description, topicId, topicName
                 },
-                approved, sameHere, sameHered
+                approved, sameHere, sameHered, solutionCnt
             }
         }
     `;
@@ -113,14 +113,14 @@ export default function Post(props) {
                         userInfo={userInfo} />
                 </div>
                 <div className="col-right main-post">
-                    <div className="main-header">Post page</div>
+                    <div className="main-header post">{post && (post.postedBy.firstName + "'s Painful Experience")}</div>
                     <div className="main main-post">
                         {
                             isRejected
                                 ?
                                 <PostRejected problemObj={rejectedPost} />
                                 :
-                                <Problem problemObj={post} editPosts={false} isLogin={isSignedIn} origin="Post Page"/>
+                                <PostSolutions post={post} isSignedIn={isSignedIn} firstName={userInfo && userInfo.firstName}/>
                         }
                     </div>
                 </div>

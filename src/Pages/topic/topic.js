@@ -77,7 +77,7 @@ export default function Topic(props) {
         subTopic{
             id, description, topicId, topicName
         },
-        approved, sameHere, sameHered
+        approved, sameHere, sameHered, solutionCnt
     `;
 
     const GET_TOPIC_POSTS = gql`
@@ -137,6 +137,7 @@ export default function Topic(props) {
     });
 
     const [getUserInfo] = useLazyQuery(GET_USER_INFO, {
+        fetchPolicy: 'network-only',
         variables: {
             userId: parseInt(userId)
         },

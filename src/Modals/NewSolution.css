@@ -1,0 +1,172 @@
+.main-PD{
+    width: 570px;
+    margin: 0 auto;
+}
+
+.main-PD .problem-div{
+    margin: 10px auto 20px auto;
+}
+
+.main-PD .btn-ns,
+.body-NS .btn-add{
+    border: none;
+    outline: none;
+    height: 35px;
+    width: 175px;
+    margin-left: auto;
+    letter-spacing: 0.015em;
+    background-color: rgb(198 , 241, 231);
+    color: rgb(100,100,100);
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all .15s ease-in-out;
+}
+
+.body-NS .user-input.error .helper-txt{
+    top: 30px;
+}
+
+.body-NS .btn-add{
+    margin-left: unset;
+    margin-bottom: 15px;
+}
+
+.main-PD .btn-ns:hover,
+.body-NS .btn-add:hover{
+  background-color: rgb(126, 218, 196);
+  color: rgb(30,30,30);
+}
+
+.body-NS .div-main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    background-color: transparent;
+}
+
+.body-NS .user-input{
+    margin-top: 10px;
+}
+
+.slogan textarea{
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: all .15s ease-in-out;
+}
+
+.body-NS .desc{
+    width: 250px;
+    margin-bottom: 30px;
+}
+
+.body-NS .desc .div-textarea{
+    width: 250px;
+}
+
+.desc label{
+    margin-bottom: 0px;
+}
+
+.desc .pp-checkbox span{
+    color: #959595;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    z-index: 1;
+}
+
+
+/* Solution-Logo */
+.SL-body .div-current{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+    background-color: rgb(254, 254, 254);
+    border: 1px solid #e4ebf3;
+    border-radius: 0.25rem;
+}
+
+.SL-body .div-current:hover{
+    cursor: pointer;
+}
+
+.SL-body .div-current span{
+    color: #9aa4ad;
+}
+
+.SL-body .div-crop .css-1dkwqii{
+    position: relative;
+    height: 100px;
+    width: 250px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.SL-body .error-msg{
+    color: #e70000;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.SL-body .btn-remove{
+    right: 15%;
+}
+
+.SF-body .noSolution{
+    margin-top: 10%;
+    text-align: center;
+    font-size: 16px;
+    letter-spacing: 0.015em;
+    color: rgb(101, 119, 134);
+}
+
+.SF-body .noSolution p{
+    width: 60%;
+    margin: auto;
+}
+
+@media (max-width: 680px){
+    .main-PD{
+        width: 490px;
+        margin: 0 auto;
+    }
+    .main-PD .btn-ns{
+        margin-right: 5px;
+    }
+}
+
+@media only screen and (max-device-width: 600px) {
+    .main-PD{
+        width: 98%;
+        margin: 0 auto;
+    }
+    .main-PD .btn-ns{
+        margin-right: 5px;
+    }
+    .solution-div{
+        width: 98%;
+    }
+    .SF-body .noSolution{
+        margin-top: 0px;
+    }
+    .SF-body .noSolution p{
+        width: 75%;
+    }
+}

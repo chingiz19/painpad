@@ -43,3 +43,9 @@
     padding: 7px 0 0 5px;
     color: #3f425765;
 }
+
+.solution-div .samehere,
+.solution-div .samehered{
+    margin: 0px;
+    margin-right: auto;
+}

@@ -158,7 +158,7 @@
 
 
 @media only screen and (max-device-width: 600px) {
-    .main-notif .main-header{
+    .main-notif .main-header.notif{
         display: none;
     }
     .container-notif{

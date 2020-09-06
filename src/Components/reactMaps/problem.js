@@ -7,51 +7,57 @@ import ConfirmationModal from '../../Modals/ConfirmationModal';
 import GoogleAnalytics from '../Helpers/GoogleAnalytics';
 
 export default function Problem(props) {
+    let problemObj = props.problemObj;
+    let solutionCnt = problemObj && problemObj.solutionCnt;
 
     function analytics(){
         let objGA={
             category: `${props.origin}, Problem Action`,
             action: "Topic Page Link clicked",
-            label: props.problemObj.subTopic.topicName
+            label: problemObj.subTopic.topicName
         };
         GoogleAnalytics('', objGA);
     }
-    
+
     return (
         <>
             {
-                props.problemObj
+                problemObj
                     ? (
                         <div className="problem-div">
                             <ConfirmationModal showButton={true}
                                 editPosts={props.editPosts}
-                                postId={parseInt(props.problemObj.id)}
+                                postId={parseInt(problemObj.id)}
                                 header="Delete post"
                                 type="deletePost" />
                             <div className="problem-hdr">
-                                <UserShortInfo key={props.problemObj.postedBy.id}
-                                    userInfo={props.problemObj.postedBy} 
+                                <UserShortInfo key={problemObj.postedBy.id}
+                                    userInfo={problemObj.postedBy} 
                                     origin={props.origin + ", Problem"}/>
                                 <ul className="ul-loc-date">
-                                    <li className="li-loc">{props.problemObj.location.cityName + ', ' + props.problemObj.location.countryName}</li>
-                                    <li className="li-date"><Moment date={props.problemObj.created} format="D MMM" withTitle /></li>
+                                    <li className="li-loc">{problemObj.location.cityName + ', ' + problemObj.location.countryName}</li>
+                                    <li className="li-date"><Moment date={problemObj.created} format="D MMM" withTitle /></li>
                                 </ul>
                             </div>
                             <p className="problem-body">
-                                {props.problemObj.description}
+                                {problemObj.description}
                             </p>
                             <div className="problem-footer">
-                                <SameHere count={props.problemObj.sameHere}
-                                    probelmId={props.problemObj.id}
-                                    sameHered={props.problemObj.sameHered}
+                                <SameHere count={problemObj.sameHere}
+                                    probelmId={problemObj.id}
+                                    sameHered={problemObj.sameHered}
                                     isLogin={props.isLogin} 
                                     origin={props.origin}/>
                                 
                                 <a className="problem-topic"
-                                    href={'/topics/' + props.problemObj.subTopic.topicId}
+                                    href={'/topics/' + problemObj.subTopic.topicId}
                                     onClick={analytics}>
-                                    <i className="fas fa-chart-pie"></i> View Analytics</a>
+                                    <i className="fas fa-chart-pie"></i> Analytics</a>
                             </div>
+
+                            <a href={'/posts/' + problemObj.id} 
+                                className={props.origin === 'Post Page' ? 'none' : 'btn-solution'}>{solutionCnt === 0 ? 'Add Solution' : (solutionCnt > 1) ? 'View Solutions (' + solutionCnt + ')': 'View Solution'}</a>
+
                         </div>
                     )
                     : (

@@ -2,25 +2,23 @@ import React, { useState } from 'react';
 import './Profile.css';
 import gql from 'graphql-tag';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import Header from '../../Components/Header/Header';
 import ProfileUserInfo from './Components/ProfileUserInfo';
-import ProblemFeed from '../../Components/ProblemFeed';
-import SeperatorLine from '../../Components/SeperatorLine';
-import DynamicIcon from '../../Components/Helpers/DynamicIcon';
 import GoogleAnalytics from '../../Components/Helpers/GoogleAnalytics';
+import PostSection from './Components/PostSection';
+import SolutionSection from './Components/SolutionSection';
 
 export default function Profile(props) {
     let profileUserId = parseInt(window.location.href.split("users/")[1]);
 
     const [isSignedIn, setIsSignedIn] = useState(false);
     const [userId, setUserId] = useState(false);
-    const [sepLineValue, setSepLineValue] = useState('');
+    const [feedType, setFeedType] = useState('posts');
     const [pageTitle, setPageTitle] = useState('PainPad | Profile');
-    const [editPosts, setEditPosts] = useState(false);
 
     const [userInfo, setUserInfo] = useState();
     const [allUserPosts, setAllUserPosts] = useState([]);
+    const [allSols, setAllSols] = useState([]);
     const [hasMore, setHasMore] = useState(true);
 
     const IS_SIGNED_IN = gql`
@@ -61,7 +59,7 @@ export default function Profile(props) {
         subTopic{
             id, description, topicId, topicName
         },
-        approved, sameHere, sameHered
+        approved, sameHere, sameHered, solutionCnt
     `;
 
     const GET_USER_POSTS = gql`
@@ -92,6 +90,17 @@ export default function Profile(props) {
         }
     `;
 
+    const GET_USER_SOLUTIONS = gql`
+        query solutions($userId: ID!){
+            solutions(userId: $userId){
+                id, logo, name, website, description, likesCnt, liked,
+                postedBy{
+                    id, firstName, lastName, profilePic, industry, occupation
+                }
+            }
+        }
+    `;
+
     useQuery(IS_SIGNED_IN, {
         onCompleted: data => {
             setUserId(data.isLogin.id);
@@ -102,20 +111,24 @@ export default function Profile(props) {
                     count: 10
                 }
             });
+            getSolutions({
+                variables: {
+                    userId: profileUserId
+                }
+            });
         }
     });
 
     useQuery(GET_USER_INFO, {
+        fetchPolicy: 'network-only',
         variables: {
             userId: profileUserId
         },
         onCompleted: data => {
             setUserInfo(data.userProfile);
             if (data.userProfile.self) {
-                setSepLineValue('My Reports');
                 setPageTitle('My profile');
             } else {
-                setSepLineValue(data.userProfile.user.firstName + "'s reports");
                 setPageTitle(data.userProfile.user.firstName + "'s profile");
             }
 
@@ -130,6 +143,12 @@ export default function Profile(props) {
             } else {
                 setAllUserPosts(data.posts);
             }
+        }
+    });
+
+    const [getSolutions] = useLazyQuery(GET_USER_SOLUTIONS, {
+        onCompleted: data => {
+            setAllSols(data.solutions);
         }
     });
 
@@ -158,16 +177,6 @@ export default function Profile(props) {
         }
     });
 
-    const handleEditPosts = () => {
-        setEditPosts(!editPosts);
-
-        let obj={
-            category: "User Account",
-            action: `${editPosts ? 'Cancel Edit' : 'Edit'} Posts clicked`
-        };
-        GoogleAnalytics('', obj);
-    }
-
     function handleLoadMore() {
         setTimeout(() => {
             getMorePosts({
@@ -180,9 +189,12 @@ export default function Profile(props) {
         }, 800);
     }
 
+    function selectFeedType(value) {
+        setFeedType(value);
+    }
+
     return (
         <>
-
             <div className="div-main">
                 <div className="col-left">
                     <Header currentPage={props.pageName}
@@ -193,35 +205,29 @@ export default function Profile(props) {
                         userInfo={userInfo && userInfo.user} />
                 </div>
                 <div id="mp-problem" className="col-right comp-profile">
-
-                <div className="main-header">Profile</div>
-
+                    <div className="main-header profile">Profile</div>
                     <ProfileUserInfo isSignedIn={isSignedIn}
                         userId={userId} />
-                    <SeperatorLine thisValue={sepLineValue} />
+                    <div className="SP-switch">
+                        <div className="line"></div>
+                        <div className="btns">
+                            <button className={feedType === 'posts' ? 'selected left' : 'not-selected'} onClick={() => selectFeedType('posts')}>Problems</button>
+                            <button className={feedType === 'sols' ? 'selected right' : 'not-selected'} onClick={() => selectFeedType('sols')}>Posted Solutions</button>
+                        </div>
+                    </div>
+
                     <div className="div-posts">
-                        <button className={allUserPosts && allUserPosts.length && userInfo && userInfo.self ? 'btn-user-prof posts-edit-btn' : 'none'}
-                            onClick={handleEditPosts}>{editPosts ? 'Cancel' : 'Edit'}</button>
-                        <InfiniteScroll
-                            scrollableTarget="mp-problem"
-                            scrollThreshold={1}
-                            dataLength={allUserPosts.length}
-                            next={handleLoadMore}
-                            hasMore={hasMore}
-                            loader={
-                                (allUserPosts.length > 4 && <DynamicIcon type='loading' width={80} height={80} />)
-                            }
-                            endMessage={
-                                (allUserPosts.length > 0 && <div className="end-message">Yay! You've seen it all.</div>)
-                            }>
-                            <ProblemFeed filter={false}
-                                thisPosts={allUserPosts || []}
-                                editPosts={editPosts}
-                                firstName={userInfo && userInfo.user.firstName}
-                                isLogin={isSignedIn}
-                                showEmpty={true} 
-                                origin="Profile"/>
-                        </InfiniteScroll>
+                        {
+                            feedType === 'posts'
+                                ? <PostSection handleLoadMore={handleLoadMore}
+                                    userInfo={userInfo}
+                                    isLogin={isSignedIn}
+                                    allUserPosts={allUserPosts}
+                                    hasMore={hasMore} />
+                                : <SolutionSection userInfo={userInfo}
+                                    isLogin={isSignedIn}
+                                    solutions={allSols} />
+                        }
                     </div>
                 </div>
             </div>

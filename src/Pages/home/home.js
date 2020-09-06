@@ -45,7 +45,7 @@ export default function Home(props) {
         subTopic{
             id, description, topicId, topicName
         },
-        approved, sameHere, sameHered
+        approved, sameHere, sameHered, solutionCnt
     `;
 
     const GET_POSTS = gql`
@@ -75,6 +75,7 @@ export default function Home(props) {
     });
 
     const { loading: loadingGetPosts } = useQuery(GET_POSTS, {
+        fetchPolicy: 'network-only',
         variables: {
             count: 10
         },
@@ -84,6 +85,7 @@ export default function Home(props) {
     });
 
     const [getUserInfo] = useLazyQuery(GET_USER_INFO, {
+        fetchPolicy: 'network-only',
         variables: {
             userId: parseInt(userId)
         },

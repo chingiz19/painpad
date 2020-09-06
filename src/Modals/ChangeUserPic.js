@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ChangeUserPic.css';
-import Loading from '../Components/Helpers/Loading'
+import Loading from '../Components/Helpers/Loading';
 import gql from 'graphql-tag';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import Modal from 'react-bootstrap/Modal';
