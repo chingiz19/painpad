@@ -6,7 +6,7 @@
 
 @media only screen and (max-device-width: 600px) {
     .main-post .main-header{
-        display: none;
+        margin-bottom: 0px;
     }
     .main-post .div-explation{
         width: 80%;

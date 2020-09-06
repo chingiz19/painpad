@@ -2,6 +2,7 @@ import React from 'react';
 import './Maps.css';
 import Moment from 'react-moment';
 import SolutionLike from '../../Components/SolutionLike';
+import ConfirmationModal from '../../Modals/ConfirmationModal';
 
 export default function Solution(props) {
     let solution = props.solution || null;
@@ -12,6 +13,11 @@ export default function Solution(props) {
                 solution
                     ? (
                         <div className="solution-div">
+                            <ConfirmationModal showButton={true}
+                                editPosts={props.editSol}
+                                solutionId={parseInt(solution.id)}
+                                header="Delete solution"
+                                type="deleteSolution" />
                             <div className="header">
                                 <div className="sol-details">
                                     <img alt="logo" src={solution && solution.logo} />

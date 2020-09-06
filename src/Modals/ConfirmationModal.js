@@ -3,6 +3,7 @@ import './ConfirmationModal.css';
 import Modal from 'react-bootstrap/Modal';
 import InputGroup from 'react-bootstrap/InputGroup';
 import DeletePost from './Confirmations/DeletePost';
+import DeleteSolution from './Confirmations/DeleteSolution';
 import GoogleAnalytics from '../Components/Helpers/GoogleAnalytics';
 
 export default function ConfirmationModal(props) {
@@ -34,6 +35,7 @@ export default function ConfirmationModal(props) {
                 <Modal.Body>
                     <InputGroup className="CM-body">
                         <DeletePost show={props.type === 'deletePost'} postId={props.postId}/>
+                        <DeleteSolution show={props.type === 'deleteSolution'} solutionId={props.solutionId}/>
                     </InputGroup>
                 </Modal.Body>
             </Modal>

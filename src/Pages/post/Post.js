@@ -113,7 +113,7 @@ export default function Post(props) {
                         userInfo={userInfo} />
                 </div>
                 <div className="col-right main-post">
-                    <div className="main-header">{post ? post.postedBy.firstName + "'s Painful Experience" : 'Post'}</div>
+                    <div className="main-header post">{post && (post.postedBy.firstName + "'s Painful Experience")}</div>
                     <div className="main main-post">
                         {
                             isRejected
