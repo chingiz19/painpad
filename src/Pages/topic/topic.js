@@ -137,6 +137,7 @@ export default function Topic(props) {
     });
 
     const [getUserInfo] = useLazyQuery(GET_USER_INFO, {
+        fetchPolicy: 'network-only',
         variables: {
             userId: parseInt(userId)
         },

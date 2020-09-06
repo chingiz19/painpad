@@ -58,19 +58,23 @@ export default function SignUp() {
         }
     };
 
-    function handleChangeIndustry(newValue) {
-        setIndustry(newValue[0]);
-    }
-
-    function handleChangeCity(newValue) {
-        setCity(newValue[0]);
-    }
-
     const USER_SIGN_UP = gql`
         mutation SignUp($firstName: String!, $lastName: String!, $email: String!, $pwd: String!, $cityId: ID!, $industryId: ID!){
             signup(firstName: $firstName, lastName: $lastName, email: $email, pwd: $pwd, cityId: $cityId, industryId: $industryId)
         }
     `;
+
+    const ADD_INDUSTRY = gql`
+        mutation addIndustry($name: String!){
+            addIndustry(name: $name)
+        }
+    `;
+
+    const [callAddIndustry] = useMutation(ADD_INDUSTRY, {
+        onCompleted: data => {
+            setIndustry({ industryId: data.addIndustry });
+        }
+    });
 
     const [callUserSignUp, { loading, error, data: userSignUp }] = useMutation(USER_SIGN_UP, {
         onCompleted: data => {
@@ -78,13 +82,30 @@ export default function SignUp() {
                 window.location.reload();
             }, 2000);
 
-            let objGA={
+            let objGA = {
                 category: "Sign Action",
                 action: "User Signed Up"
             };
             GoogleAnalytics('', objGA);
         }
     });
+
+    function handleChangeIndustry(newValue) {
+        let tmpObj = newValue[0];
+        if (tmpObj && tmpObj.customOption) {
+            callAddIndustry({
+                variables: {
+                    name: tmpObj.industry
+                }
+            });
+        } else {
+            setIndustry(tmpObj)
+        }
+    }
+
+    function handleChangeCity(newValue) {
+        setCity(newValue[0]);
+    }
 
     function submitInput() {
         let check = Validate({
@@ -93,7 +114,7 @@ export default function SignUp() {
             email: email.current.value,
             pass: pass.current.value,
             city: city && city.location,
-            industry: industry && industry.industry
+            industry: industry
         }, constraints);
 
         setMessage(prevState => {
@@ -149,16 +170,16 @@ export default function SignUp() {
                         <label>First Name</label>
                         <input name="firstName"
                             ref={firstName}
-                            type="text" 
-                            onKeyPress={handleOnKeyPress}/>
+                            type="text"
+                            onKeyPress={handleOnKeyPress} />
                         <span className="helper-txt">{stateObj.firstNameMessage}</span>
                     </div>
                     <div className={(!stateObj.lastNameMessage ? 'user-input names-input' : 'user-input error names-input')}>
                         <label>Last Name</label>
                         <input name="lastName"
                             ref={lastName}
-                            type="text" 
-                            onKeyPress={handleOnKeyPress}/>
+                            type="text"
+                            onKeyPress={handleOnKeyPress} />
                         <span className="helper-txt">{stateObj.lastNameMessage}</span>
                     </div>
                 </div>
@@ -166,8 +187,8 @@ export default function SignUp() {
                     <label>Email</label>
                     <input name="lastName"
                         ref={email}
-                        type="email" 
-                        onKeyPress={handleOnKeyPress}/>
+                        type="email"
+                        onKeyPress={handleOnKeyPress} />
                     <span className="helper-txt">{stateObj.emailMessage}</span>
                 </div>
                 <Indsutries helperText={stateObj.industryMessage}
@@ -180,8 +201,8 @@ export default function SignUp() {
                     <label>Password</label>
                     <input name="password"
                         ref={pass}
-                        type="password" 
-                        onKeyPress={handleOnKeyPress}/>
+                        type="password"
+                        onKeyPress={handleOnKeyPress} />
                     <span className="helper-txt">{stateObj.passMessage}</span>
                 </div>
                 {(loading || userSignUp || error)

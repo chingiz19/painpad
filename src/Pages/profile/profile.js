@@ -120,6 +120,7 @@ export default function Profile(props) {
     });
 
     useQuery(GET_USER_INFO, {
+        fetchPolicy: 'network-only',
         variables: {
             userId: profileUserId
         },

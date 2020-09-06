@@ -5,8 +5,6 @@ import Post from './Post';
 
 
 export default function WritePost(props) {
-
-
     return (
         // WP - Write Post
         <div className="sec-wp">
