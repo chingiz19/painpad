@@ -29,7 +29,7 @@ export default function SolutionFeed(props) {
                                 <DynamicIcon type="noSolution" width={250} height={200} />
                                 {
                                     props.user
-                                    ? <>{props.post && props.post.postedBy.firstName && <p>{props.post.postedBy.firstName} hasn't posted a solution yet.</p>}</>
+                                    ? <>{props.firstName && <p>{props.firstName} hasn't posted a solution yet.</p>}</>
                                     : <>{props.post && props.post.postedBy.firstName && <p>{props.post.postedBy.firstName} has not received a solution to their problem. Be the first to help!</p>}</>
                                 }
                             </div>))
