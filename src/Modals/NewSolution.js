@@ -10,6 +10,7 @@ import axios from 'axios';
 import getCroppedImg from '../Components/Helpers/CropImage';
 import imageCompression from 'browser-image-compression';
 import Loading from '../Components/Helpers/Loading';
+import GoogleAnalytics from '../Components/Helpers/GoogleAnalytics';
 
 export default function NewSolution(props) {
     const [showModal, setShow] = useState(false);
@@ -90,6 +91,12 @@ export default function NewSolution(props) {
             setTimeout(() => {
                 window.location.reload();
             }, 2000);
+
+            let objGA = {
+                category: `Post Page Actione`,
+                action: `Solution Added`
+            };
+            GoogleAnalytics('', objGA);
         }
     });
 
@@ -99,6 +106,12 @@ export default function NewSolution(props) {
 
     const showAddSolution = () => {
         setShow(true);
+
+        let objGA = {
+            category: `Post Page Actione`,
+            action: `Add Solution clicked`
+        };
+        GoogleAnalytics('', objGA);
     }
 
     function handleShowDesc() {

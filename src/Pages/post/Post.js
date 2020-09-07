@@ -120,7 +120,7 @@ export default function Post(props) {
                                 ?
                                 <PostRejected problemObj={rejectedPost} />
                                 :
-                                <PostSolutions post={post} isSignedIn={isSignedIn} firstName={userInfo && userInfo.firstName}/>
+                                <PostSolutions post={post} isSignedIn={isSignedIn} firstName={userInfo && userInfo.firstName} origin={props.pageName}/>
                         }
                     </div>
                 </div>

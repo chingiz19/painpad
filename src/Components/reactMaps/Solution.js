@@ -48,7 +48,8 @@ export default function Solution(props) {
                             <SolutionLike isLogin={props.isLogin} 
                                 solutionId={solution && solution.id} 
                                 count={solution && solution.likesCnt} 
-                                liked={solution && solution.liked}/>
+                                liked={solution && solution.liked}
+                                origin={props.origin}/>
                         </div>
                     )
                     : (

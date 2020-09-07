@@ -10,9 +10,11 @@ export default function SolutionFeed(props) {
     if (solutionCnt > 0) {
         listSolutions = props.solutions
             .map((solution) =>
-                <Solution key={solution.id} solution={solution} isLogin={props.isLogin} editSol={props.editSol}/>
+                <Solution key={solution.id} solution={solution} isLogin={props.isLogin} editSol={props.editSol} origin={props.origin}/>
             );
     }
+
+    console.log("props.post: ", props.post);
 
     return (
         // SF - Solution Feed
@@ -27,8 +29,8 @@ export default function SolutionFeed(props) {
                                 <DynamicIcon type="noSolution" width={250} height={200} />
                                 {
                                     props.user
-                                    ? <>{props.firstName && <p>{props.firstName} hasn't posted a solution yet.</p>}</>
-                                    : <>{props.firstName && <p>{props.firstName} has not received a solution to their problem. Be the first to help!</p>}</>
+                                    ? <>{props.post && props.post.postedBy.firstName && <p>{props.post.postedBy.firstName} hasn't posted a solution yet.</p>}</>
+                                    : <>{props.post && props.post.postedBy.firstName && <p>{props.post.postedBy.firstName} has not received a solution to their problem. Be the first to help!</p>}</>
                                 }
                             </div>))
                 }

@@ -3,6 +3,7 @@ import './SameHere.css';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import UserSignInUp from '../Modals/SignInUp/SignInUp';
+import GoogleAnalytics from '../Components/Helpers/GoogleAnalytics';
 
 export default function SameHere(props) {
     const [liked, setLiked] = useState(props.liked);
@@ -45,6 +46,12 @@ export default function SameHere(props) {
         } else {
             setSignModal(true);
         }
+
+        let objGA = {
+            category: `${props.origin}, Solution Action`,
+            action: `${liked ? "Un-Like" : "Like"} Clicked`
+        };
+        GoogleAnalytics('', objGA);
     }
 
     return (

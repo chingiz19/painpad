@@ -35,7 +35,7 @@ export default function PostSolutions(props) {
             <Problem problemObj={props.post} editPosts={false} isLogin={props.isSignedIn} origin="Post Page"/>
             <NewSolution post={props.post}/>
             {solutions.length>0 && <SeperatorLine thisValue="Related Solutions" />}
-            <SolutionFeed firstName={props.firstName} post={props.post} solutions={solutions} isLogin={props.isSignedIn}/>
+            <SolutionFeed firstName={props.firstName} post={props.post} solutions={solutions} isLogin={props.isSignedIn} origin={props.origin}/>
         </div>
     );
 }
