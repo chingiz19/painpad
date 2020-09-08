@@ -41,9 +41,10 @@ export default function SolutionLogo(props) {
     };
 
     const handleImageUpload = e => {
+        const d = new Date();
         const [file] = e.target.files;
         const fileType = file.name.split('.')[1];
-        const fileName = (Math.floor((Math.random() * 10) + 1) * 583).toString();
+        const fileName = (d.getTime()).toString();
 
         //Step 1 - check if image size smaller than 2MB
         if (file.size > 2000000) {
