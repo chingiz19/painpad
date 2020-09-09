@@ -326,7 +326,7 @@
     .col-right.about{
         overflow-x: hidden;
     }
-    .about .main-header{
+    .about .main-header.about{
         display: none;
     }
     .div-entrepreneur p{
