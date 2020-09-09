@@ -50,10 +50,15 @@ export default function HeaderWeb(props) {
                             ? (<Sidebar isSignedIn={props.isSignedIn}
                                 userId={props.userId}
                                 userInfo={props.userInfo} />)
-                            : (<MobTabLink link="/about"
-                                linkedPage="About"
-                                icon="fas fa-question"
-                                currentPage={props.currentPage} />)}
+                            : (props.currentPage === 'About'
+                                ? <MobTabLink link="/"
+                                    linkedPage="Home"
+                                    icon="fas fa-home"
+                                    currentPage={props.currentPage} />
+                                : <MobTabLink link="/about"
+                                    linkedPage="About"
+                                    icon="fas fa-question"
+                                    currentPage={props.currentPage} />)}
                     </div>
                 </div>
                 <div className="bottom">
@@ -79,20 +84,20 @@ export default function HeaderWeb(props) {
                                     linkedPage="About"
                                     icon="fas fa-question"
                                     currentPage={props.currentPage} />
-                                </>
+                            </>
                             : (
                                 <div className="not-signed">
                                     <div className="sign-in">
-                                        <UserSignInUp withButton={true} 
-                                            text="Sign In" 
-                                            showSingUp={false}/>
+                                        <UserSignInUp withButton={true}
+                                            text="Sign In"
+                                            showSingUp={false} />
                                     </div>
                                     <div className="sign-up">
-                                        <UserSignInUp withButton={true} 
-                                            text="Sign Up" 
-                                            showSingUp={true}/>
+                                        <UserSignInUp withButton={true}
+                                            text="Sign Up"
+                                            showSingUp={true} />
                                     </div>
-                                    
+
                                 </div>
                             )
                     }

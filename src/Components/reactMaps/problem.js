@@ -21,7 +21,7 @@ export default function Problem(props) {
         } else if (value === 'viewSolution') {
             let objGA = {
                 category: `${props.origin}, Problem Action`,
-                action: 'View Colutions clicked',
+                action: 'View Solutions clicked',
                 label: problemObj.subTopic.topicName
             };
             GoogleAnalytics('', objGA);
