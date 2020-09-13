@@ -66,7 +66,7 @@ export default function Problem(props) {
 
                             <a href={'/posts/' + problemObj.id}
                                 className={props.origin === 'Post Page' ? 'none' : 'btn-solution'}
-                                onClick={() => analytics('viewSolution')}>{solutionCnt === 0 ? 'Add Solution' : (solutionCnt > 1) ? 'View Solutions (' + solutionCnt + ')' : 'View Solution'}</a>
+                                onClick={() => analytics('viewSolution')}>{solutionCnt === 0 ? 'Add Solution' : (solutionCnt > 1) ? 'View Solutions (' + solutionCnt + ')' : 'View Solution (1)'}</a>
 
                         </div>
                     )
