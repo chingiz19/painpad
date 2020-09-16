@@ -13,7 +13,7 @@ export default function PostSolutions(props) {
     const GET_PROBLEM_SOLUTIONS = gql`
         query solutions($postId: ID!){
             solutions(postId: $postId){
-                id, logo, name, website, description, likesCnt, liked,
+                id, logo, name, website, description, likesCnt, liked, created,
                 postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
                 }

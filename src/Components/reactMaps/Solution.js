@@ -7,6 +7,8 @@ import ConfirmationModal from '../../Modals/ConfirmationModal';
 export default function Solution(props) {
     let solution = props.solution || null;
 
+    console.log("solution: ", solution);
+
     return (
         <>
             {
@@ -39,7 +41,7 @@ export default function Solution(props) {
                                     </div>
                                 </div>
                                 <div className="sol-charac">
-                                    <Moment date={solution && solution.created} format="D MMM" withTitle />
+                                    <Moment date={solution.created} format="D MMM" withTitle />
                                 </div>
                             </div>
                             <p className="body">
