@@ -212,7 +212,7 @@ export default function Profile(props) {
                         <div className="line"></div>
                         <div className="btns">
                             <button className={feedType === 'posts' ? 'selected left' : 'not-selected'} onClick={() => selectFeedType('posts')}>Problems</button>
-                            <button className={feedType === 'sols' ? 'selected right' : 'not-selected'} onClick={() => selectFeedType('sols')}>Posted Solutions</button>
+                            <button className={feedType === 'sols' ? 'selected right' : 'not-selected'} onClick={() => selectFeedType('sols')}>Solutions</button>
                         </div>
                     </div>
 
