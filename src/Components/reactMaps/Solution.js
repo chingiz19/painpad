@@ -7,8 +7,6 @@ import ConfirmationModal from '../../Modals/ConfirmationModal';
 export default function Solution(props) {
     let solution = props.solution || null;
 
-    console.log("solution: ", solution);
-
     return (
         <>
             {

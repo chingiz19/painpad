@@ -1,7 +1,7 @@
 import React from 'react';
 import './HomeComponents.css';
 import Fade from 'react-reveal/Fade';
-import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
+// import DynamicIcon from '../../../Components/Helpers/DynamicIcon';
 
 export default function PostExplaination() {
 
@@ -11,7 +11,7 @@ export default function PostExplaination() {
             <div className="sec-PE">
                 <div className="header">Share a problem that can't be solved on your own.</div>
                 <div className="subheader">Entrepreneurs are ready to tackle them and we know they can.</div>
-                <div className="div-body">
+                {/* <div className="div-body">
                     <ul className="ul-icon">
                         <li className="icon happy">
                             <DynamicIcon type="solution" width={50} height={50}/>
@@ -33,7 +33,7 @@ export default function PostExplaination() {
                         <li className="li-hdr">Dream Big</li>
                         <li className="li-body">Opportunity to be part of future unicord start-up.</li>
                     </ul>
-                </div>
+                </div> */}
             </div>
         </Fade>
     );

@@ -14,8 +14,6 @@ export default function SolutionFeed(props) {
             );
     }
 
-    console.log("props.post: ", props.post);
-
     return (
         // SF - Solution Feed
         <>
