@@ -9,8 +9,8 @@
     padding: 10px;
     width: 570px;
     background-color: rgb(255,255,255);
-    border: 1px solid rgba(180, 180, 180,0.7);
-    border-radius: 10px;
+    border: 1px solid rgba(180, 180, 180,0.4);
+    border-radius: 7px;
 }
 
 .problem-hdr{
@@ -368,8 +368,8 @@ and (orientation : portrait){
 
 @media only screen and (max-device-width: 600px) {
     .problem-div{
-        width: 98%;
-        margin: 10px auto 35px auto;
+        width: 96%;
+        margin: 10px auto 45px auto;
     }
 
     /* A Problem section */
@@ -415,7 +415,10 @@ and (orientation : portrait){
     }
     .btn-solution{
         font-size: 14px;
-        padding: 3px 25px;
-        bottom: -28px;
+        padding: 4px 25px;
+        bottom: -30px;
+    }
+    .btn-solution:hover{
+        background-color: rgb(198 , 241, 231);
     }
 }

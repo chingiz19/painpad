@@ -46,10 +46,9 @@
     right: 4%;
     width: 75px;
     height: 30px;
-    border-radius: 12px;
+    border-radius: 6px;
     background-color: rgb(198 , 241, 231);
     color: rgb(100,100,100);
-    font-weight: 600;
 }
 
 .btn-remove{

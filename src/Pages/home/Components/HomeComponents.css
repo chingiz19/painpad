@@ -349,17 +349,14 @@
     .sec-PE{
       height: auto;
     }
-    .sec-PE .header{
-      width: 96%;
-    }
     .sec-PE .div-body{
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .sec-PE .subheader,
+    .sec-PE .header,
     .sec-PE .subheader{
-      width: 90%;
+      width: 80%;
     }
     .sec-PE .ul-icon{
       width: 80%;
@@ -392,6 +389,10 @@
         height: 0px;
         overflow-x: hidden;
         padding: 0;
+    }
+    .post-message{
+        width: 90%;
+        margin: 15px auto 00px auto;
     }
 
     /* Dropdown lists */

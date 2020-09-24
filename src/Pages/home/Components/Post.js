@@ -102,7 +102,12 @@ export default function Post(props) {
     }
 
     function handleInputChange(event) {
-        setCharCount(160 - event.target.value.length);
+        if (!props.isLogin) {
+            setSignModal(true);
+            return;
+        } else{
+            setCharCount(160 - event.target.value.length);
+        }
     }
 
     function handleChangeTopic(newValue) {

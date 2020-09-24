@@ -93,7 +93,7 @@ export default function Profile(props) {
     const GET_USER_SOLUTIONS = gql`
         query solutions($userId: ID!){
             solutions(userId: $userId){
-                id, logo, name, website, description, likesCnt, liked,
+                id, logo, name, website, description, likesCnt, liked, created,
                 postedBy{
                     id, firstName, lastName, profilePic, industry, occupation
                 }

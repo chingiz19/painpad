@@ -48,7 +48,10 @@
 .SP-switch .btns{
     background-color: rgb(254,254,254);
     z-index: 8;
-    padding: 0px 10px;
+}
+
+.SP-switch .not-selected:hover{
+    background-color: rgb(250, 250, 250);
 }
 
 .SP-switch .selected,
@@ -64,22 +67,22 @@
 
 .SP-switch .selected{
     color: #101116e8;
-    border-radius: 3px;
-    background-color: rgb(250,250,250);
-    border: 1px solid #9da2c265;
+    border-radius: 5px;
+    background-color: rgb(198 , 241, 231);
 }
 
 .selected.left{
     border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
 }
 
 .selected.right{
     border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
 }
 
 .SP-switch .not-selected{
     color: #3f425765;
-    border-bottom: 1px solid #9da2c265;
 }
 
 #mp-problem .noSolution{
@@ -148,11 +151,11 @@ and (orientation : portrait){
 
 @media only screen and (max-device-width: 600px) {
     .comp-profile .div-posts{
-        padding-top: 35px;
+        padding-top: 45px;
     }
     .comp-profile .posts-edit-btn{
         right: 4px;
-        top: 8px;
+        top: 12px;
     }
     .main-header.profile{
         display: none !important;
