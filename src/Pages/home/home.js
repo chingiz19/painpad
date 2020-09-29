@@ -129,7 +129,7 @@ export default function Home(props) {
                 <div id="main-problems" className="col-right problems-div">
                     <WritePost isLogin={isSignedIn}
                         userId={userId}/>
-                    <SeperatorLine thisValue="Reports Feed" />
+                    <SeperatorLine thisValue="Shared Pains" />
                     <InfiniteScroll
                         scrollableTarget="main-problems"
                         scrollThreshold={1}

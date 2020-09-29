@@ -10,5 +10,7 @@
 }
 
 .problems-div .line-seperator .txt{
-    border-radius: 4px;
+    border-radius: 2px;
+    font-size: 15px;
+    padding: 2px 10px;
 }
