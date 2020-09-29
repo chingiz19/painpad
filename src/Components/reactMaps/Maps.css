@@ -9,7 +9,7 @@
     padding: 10px;
     width: 570px;
     background-color: rgb(255,255,255);
-    border: 1px solid rgba(180, 180, 180,0.4);
+    border: 1px solid rgba(180, 180, 180,0.45);
     border-radius: 7px;
 }
 
@@ -120,7 +120,7 @@
     padding: 4px 0px;
     text-align: center;
     font-weight: 600;
-    border-top: 1px solid rgba(180, 180, 180,0.7);
+    border-top: 1px solid rgba(180, 180, 180,0.45);
     border-radius: 0 0 10px 10px;
     transition: all .15s ease-in-out;
 }

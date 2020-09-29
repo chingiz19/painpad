@@ -24,7 +24,7 @@ body {
 .div-main .col-left{
   width: 285px;
   height: 100vh;
-  border-right: 1px solid rgba(180,180,180, 0.6);
+  border-right: 1px solid rgba(180,180,180, 0.45);
   padding-right: 0;
   transition: all 0.15s ease-in-out;
 }
