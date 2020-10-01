@@ -20,7 +20,7 @@ export default function HeaderWeb(props) {
 
     const [callUserSignOut] = useLazyQuery(USER_SIGN_OUT, {
         onCompleted: data => {
-            let objGA={
+            let objGA = {
                 category: "Header-Web Action",
                 action: "Sign out clicked"
             };
@@ -30,8 +30,8 @@ export default function HeaderWeb(props) {
         }
     });
 
-    function analytics(){
-        let objGA={
+    function analytics() {
+        let objGA = {
             category: "Header-Web Action",
             action: "PainPad Logo clicked"
         };
@@ -45,19 +45,24 @@ export default function HeaderWeb(props) {
                     <img src={LogoTransperent} className="header-logo" alt="Transperent Logo" />
                 </a>
                 <ul className="guest-user-ul" style={{ display: !props.isSignedIn ? '' : 'none' }}>
-                    <WebTabLink link="/" 
-                        linkedPage="Home" 
-                        icon="fas fa-home" 
-                        text="Home" 
+                    <WebTabLink link="/"
+                        linkedPage="Home"
+                        icon="fas fa-home"
+                        text="Home"
                         currentPage={props.currentPage} />
                     <li className="wh-li">
-                        <UserSignInUp withButton={true} 
-                            text="Sign In / Sign Up"/>
+                        <UserSignInUp withButton={true}
+                            text="Sign In / Sign Up" />
                     </li>
-                    <WebTabLink link="/about" 
-                        linkedPage="About" 
-                        icon="fas fa-question" 
-                        text="About" 
+                    <WebTabLink link="/search"
+                        linkedPage="Search"
+                        icon="fas fa-search"
+                        text="Search"
+                        currentPage={props.currentPage} />
+                    <WebTabLink link="/about"
+                        linkedPage="About"
+                        icon="fas fa-question"
+                        text="About"
                         currentPage={props.currentPage} />
                 </ul>
                 <ul className="user-ul" style={{ display: props.isSignedIn ? '' : 'none' }}>
