@@ -74,7 +74,7 @@ export default function About(props) {
                     </Fade>
                     <PeoplesChallenge />
                     <Fade delay={1000}>
-                        <SeperatorLineAbout label="Here is Solution to Problem" />
+                        <SeperatorLineAbout label="The Solution" />
                     </Fade>
                     <TheSolution />
                 </div>

@@ -22,14 +22,14 @@ export default function TheSolution() {
         <div className="sec-TS">
             <Fade delay={1200}>
                 <Tada count={3} delay={800}>
-                    <h1>PainPad - “Hello World” of a Business!</h1>
+                    <h1>PainPad is the first platform to offer a solution as a product to any existing problem!</h1>
                 </Tada>
             </Fade>
             <Fade delay={2000}>
                 <p>
-                    In other words, PainPad is a platform where people share <span className="str">daily experiences</span> that
-                    drive them crazy or inject inefficiency and needless complication into their <span className="str">everyday
-                    lives</span> that can’t be solved on their own. Consequently, problems will be exposed to a
+                    In other words, PainPad is a platform where people share daily experiences that
+                    drive them crazy or inject inefficiency and needless complication into their everyday
+                    lives that can’t be solved on their own. Consequently, problems are exposed to a
                     crowd full of entrepreneurs looking for real problems worth solving!
                 </p>
             </Fade>
