@@ -10,7 +10,8 @@ export default function WritePost(props) {
         <div className="sec-wp">
             <PostExplaination/>
             <Post isLogin={props.isLogin}
-                userId={props.userId}/>
+                userId={props.userId}
+                userInfo={props.userInfo}/>
         </div>
     );
 }

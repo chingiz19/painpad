@@ -224,14 +224,15 @@ export default function NewSolution(props) {
                                 <label className="pp-checkbox">
                                     <input type="checkbox"
                                         checked={showDesc}
-                                        onChange={handleShowDesc} />
-                                    <span>Description</span>
+                                        onChange={handleShowDesc}/>
+                                    <span>Text</span>
                                 </label>
                                 <div className={showDesc ? 'div-textarea post' : 'none'}>
                                     <textarea className="textarea"
                                         maxLength="160"
                                         rows="3"
-                                        ref={desc}></textarea>
+                                        ref={desc}
+                                        placeholder="Describe this product.."></textarea>
                                     <span className={stateObj.descMessage ? 'show-error' : 'hide-error'}>{stateObj.descMessage}</span>
                                 </div>
                             </div>

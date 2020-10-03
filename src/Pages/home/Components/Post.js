@@ -11,6 +11,7 @@ import GoogleAnalytics from '../../../Components/Helpers/GoogleAnalytics';
 import Topics from '../../../Components/Lists/Topics';
 
 export default function Post(props) {
+    let placeholder = props.userId && (props.userInfo && props.userInfo.firstName ? 'Have painful experience, ' + props.userInfo.firstName + '?': 'Have painful experience to share?');
     const reportText = useRef(null);
 
     const [showSignModal, setSignModal] = useState(false);
@@ -154,7 +155,8 @@ export default function Post(props) {
                         className="wr-textarea"
                         maxLength="160"
                         rows="1"
-                        placeholder='Have painful experience to share?'
+                        // placeholder='Have painful experience to share?'
+                        placeholder={placeholder}
                         ref={reportText}
                         onChange={handleInputChange}></textarea>
                     <span className={stateObj.reportTextMessage ? 'show-error' : 'hide-error'}>{stateObj.reportTextMessage}</span>
