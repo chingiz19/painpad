@@ -10,7 +10,8 @@ export default function PostExplaination() {
         <Fade delay={400}>
             <div className="sec-PE">
                 <div className="header">Share any problem that can't be solved on your own.</div>
-                <div className="subheader">Entrepreneurs want to solve them and we know they can.</div>
+                <div className="subheader">Entrepreneurs will always have a solution for you.</div>
+                {/* <div className="subheader">Entrepreneurs want to solve them and we know they can.</div> */}
                 {/* <div className="div-body">
                     <ul className="ul-icon">
                         <li className="icon happy">
