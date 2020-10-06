@@ -22,7 +22,7 @@ export default function TheSolution() {
         <div className="sec-TS">
             <Fade delay={1200}>
                 <Tada count={3} delay={800}>
-                    <h1>PainPad is the first platform to offer a solution as a product to any existing problem!</h1>
+                    <h1>PainPad is the first platform to offer solution as crowdsourced product to any existing problem.</h1>
                 </Tada>
             </Fade>
             <Fade delay={2000}>
