@@ -33,12 +33,12 @@ export default function SignUp() {
     const constraints = {
         firstName: {
             format: {
-                pattern: "[a-zA-Z]+"
+                pattern: "[a-zA-Z ]+"
             }
         },
         lastName: {
             format: {
-                pattern: "[a-zA-Z]+"
+                pattern: "[a-zA-Z ]+"
             }
         },
         city: {
