@@ -6,6 +6,8 @@ import Problem from '../../../Components/reactMaps/Problem';
 import NewSolution from '../../../Modals/NewSolution';
 import SolutionFeed from './SolutionFeed';
 import SeperatorLine from '../../../Components/SeperatorLine';
+import MetaTags from 'react-meta-tags';
+import LogoTransperent from '../../../images/logos/logo_transparent.png';
 
 export default function PostSolutions(props) {
     const [solutions, setSolutions] = useState([]);
@@ -31,11 +33,18 @@ export default function PostSolutions(props) {
     });
 
     return (
-        <div className="main-PD">
-            <Problem problemObj={props.post} editPosts={false} isLogin={props.isSignedIn} origin="Post Page"/>
-            <NewSolution post={props.post}/>
-            {solutions.length>0 && <SeperatorLine thisValue="Related Solutions" />}
-            <SolutionFeed firstName={props.firstName} post={props.post} solutions={solutions} isLogin={props.isSignedIn} origin={props.origin}/>
-        </div>
+        <>
+            <MetaTags>
+                <meta name="description" content={props.post && props.post.description} />
+                <meta property="og:title" content={props.post && (props.post.postedBy.firstName + ' ' + props.post.postedBy.lastName + "'s Painful Experience")} />
+                <meta property="og:image" content={LogoTransperent} />
+            </MetaTags>
+            <div className="main-PD">
+                <Problem problemObj={props.post} editPosts={false} isLogin={props.isSignedIn} origin="Post Page"/>
+                <NewSolution post={props.post}/>
+                {solutions.length>0 && <SeperatorLine thisValue="Related Solutions" />}
+                <SolutionFeed firstName={props.firstName} post={props.post} solutions={solutions} isLogin={props.isSignedIn} origin={props.origin}/>
+            </div>
+        </>
     );
 }
